@@ -3,7 +3,7 @@
   <img src="./img/LiburBanner.jpg" alt="anime banner">
 </p>
 
-<h1 align="left"> I'm <b>Nursultan</b></h1>
+<h1 align="left"> I'm <b>Nurasik12</b></h1>
 
 <p align="center">
   <i>"Every man has two lives, and the second starts when he realizes he has just one." — Confucius</i>
