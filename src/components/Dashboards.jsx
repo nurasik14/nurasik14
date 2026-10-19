@@ -14,10 +14,11 @@ import {
   ReferenceLine,
 } from 'recharts';
 import {
+  RANGES,
   SCRAPER_JOBS,
   LOG_LINES,
-  RANGES,
   SOURCE_MIX,
+  SOURCE_MIX as FALLBACK_MIX,
   RAW_JSON,
   RAW_CSV,
   RAW_SCHEMA,
@@ -26,6 +27,7 @@ import {
 import { ANALYTICS } from '../lib/series';
 import { Panel, Chip, StatusDot, Sparkline, cx, CopyBtn } from './ui';
 import { useInterval } from '../lib/hooks';
+import TelemetryProvider, { useTelemetry } from './TelemetryProvider';
 
 const SERIES = [
   { id: 'ingested', label: 'INGESTED', color: '#22c55e', kind: 'area' },
@@ -54,14 +56,29 @@ const axis = { tick: { fill: '#666', fontSize: 9 }, tickLine: false };
 /* Panel A — pipeline monitor                                          */
 /* ------------------------------------------------------------------ */
 function PipelineMonitor() {
+  /* real scraper output when available, simulator otherwise */
+  const t = useTelemetry();
   const [jobs, setJobs] = React.useState(() =>
-    SCRAPER_JOBS.map((j, i) => ({ ...j, lastSync: Date.now() - i * 37_000 - 4_000, delta: 0 })),
+    t.jobs.map((j, i) => ({ ...j, lastSync: Date.now() - i * 37_000 - 4_000, delta: 0 })),
   );
-  const [logs, setLogs] = React.useState(() => LOG_LINES.slice(0, 8).map((l) => `${ts(Date.now() - 4000)} ${l}`));
+  const [logs, setLogs] = React.useState(() =>
+    (t.logs ?? []).slice(0, 8).map((l) => `${ts(Date.now() - 4000)} ${l}`),
+  );
   const [paused, setPaused] = React.useState(false);
 
+  /* adopt new scraper data when the file changes */
+  React.useEffect(() => {
+    if (!t.jobs) return;
+    setJobs(t.jobs.map((j, i) => ({ ...j, lastSync: Date.now() - i * 37_000 - 4_000, delta: 0 })));
+    setLogs((t.logs ?? []).slice(0, 8).map((l) => `${ts(Date.now() - 4000)} ${l}`));
+  }, [t.jobs, t.logs]);
+
+  /* In 'file' mode the numbers are already real — mutating them with
+     random ticks would be a lie. Only the simulator animates. */
+  const liveSim = !t.isLive && !t.loading;
+
   useInterval(() => {
-    if (paused) return;
+    if (paused || !liveSim) return;
     setJobs((js) =>
       js.map((j) => {
         const roll = Math.random();
@@ -224,13 +241,25 @@ function ago(d) {
 /* Panel B — analytics                                                 */
 /* ------------------------------------------------------------------ */
 function Analytics() {
+  const t = useTelemetry();
   const [range, setRange] = React.useState('6H');
   const [on, setOn] = React.useState({ ingested: true, p95: true, errors: true, queue: false });
 
+  const all = t.series ?? ANALYTICS;
+  const mix = t.sourceMix?.length ? t.sourceMix : FALLBACK_MIX;
   const data = React.useMemo(() => {
-    const n = RANGES.find((r) => r.id === range).n;
-    return ANALYTICS.slice(-n);
-  }, [range]);
+    /* Slice by real elapsed time, not a fixed bucket count, so the
+       range selectors stay correct when a scraper emits a different
+       sampling interval than the simulator's 5-minute buckets.
+       RANGES.n is the fallback for rows without a usable timestamp. */
+    const r = RANGES.find((x) => x.id === range);
+    if (all === ANALYTICS) return all.slice(-r.n);
+    const newest = all[all.length - 1]?.t;
+    if (!Number.isFinite(newest)) return all.slice(-r.n);
+    const cutoff = newest - r.windowMs;
+    const inWindow = all.filter((d) => d.t >= cutoff);
+    return inWindow.length ? inWindow : all.slice(-r.n);
+  }, [all, range]);
 
   const sum = data.reduce((s, d) => s + d.ingested, 0);
   const errs = data.reduce((s, d) => s + d.errors, 0);
@@ -353,11 +382,11 @@ function Analytics() {
         <div className="min-w-0 bg-black p-2">
           <div className="mb-1 flex items-center justify-between">
             <span className="label">records by source</span>
-            <span className="font-mono text-[9px] text-neutral-600">n={SOURCE_MIX.reduce((s, x) => s + x.n, 0).toLocaleString()}</span>
+            <span className="font-mono text-[9px] text-neutral-600">n={mix.reduce((s, x) => s + x.n, 0).toLocaleString()}</span>
           </div>
           <div className="h-[140px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={SOURCE_MIX} layout="vertical" margin={{ top: 0, right: 8, bottom: 0, left: 8 }}>
+              <BarChart data={mix} layout="vertical" margin={{ top: 0, right: 8, bottom: 0, left: 8 }}>
                 <CartesianGrid stroke="#1c1c1c" strokeDasharray="2 3" horizontal={false} />
                 <XAxis type="number" {...axis} stroke="#333" />
                 <YAxis type="category" dataKey="src" width={92} {...axis} stroke="#333" />
@@ -374,7 +403,7 @@ function Analytics() {
                   }
                 />
                 <Bar dataKey="n" isAnimationActive={false} barSize={9}>
-                  {SOURCE_MIX.map((s, i) => (
+                  {mix.map((s, i) => (
                     <Cell key={s.src} fill={['#22c55e', '#06b6d4', '#f59e0b', '#a78bfa', '#22c55e', '#ef4444'][i]} />
                   ))}
                 </Bar>
@@ -398,7 +427,7 @@ function Analytics() {
               </tr>
             </thead>
             <tbody>
-              {SOURCE_MIX.map((s) => (
+              {mix.map((s) => (
                 <tr key={s.src}>
                   <td className="truncate text-neutral-300">{s.src}</td>
                   <td className="text-neutral-500">{s.lang}</td>
@@ -423,8 +452,19 @@ function Analytics() {
 /* Panel C — raw inspector                                             */
 /* ------------------------------------------------------------------ */
 function RawInspector() {
+  const tel = useTelemetry();
+  /* When the scraper is wired up, the JSON tab shows the actual bytes
+     that were scraped — not a fixture. CSV/SQL stay hand-written
+     examples because they document the warehouse, not the live run. */
+  const liveJson = tel.isLive && tel.raw
+    ? JSON.stringify(tel.raw, null, 2)
+    : null;
   const tabs = [
-    { id: 'json', label: 'run_manifest.json', text: RAW_JSON },
+    {
+      id: 'json',
+      label: liveJson ? 'telemetry.json' : 'run_manifest.json',
+      text: liveJson ?? RAW_JSON,
+    },
     { id: 'csv', label: 'pipeline_runs.csv', text: RAW_CSV },
     { id: 'sql', label: 'schema.sql', text: RAW_SCHEMA },
   ];
@@ -525,25 +565,60 @@ function ColorLine({ line, kind }) {
   return <span className="text-neutral-400">{line}</span>;
 }
 
+/* SourceBadge — tells the visitor (and you) whether the numbers below
+   came from a real scraper or from the built-in simulator. Honesty here
+   matters: a dashboard that fakes numbers is worse than no dashboard. */
+function SourceBadge() {
+  const t = useTelemetry();
+  if (t.loading) {
+    return (
+      <Chip tone="default">
+        <StatusDot tone="amber" /> loading telemetry
+      </Chip>
+    );
+  }
+  return t.isLive ? (
+    <Chip tone="green" title={t.reason}>
+      <StatusDot tone="green" /> live · {t.reason}
+    </Chip>
+  ) : (
+    <Chip tone="amber" title={t.reason}>
+      <StatusDot tone="amber" /> simulated · {t.reason}
+    </Chip>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 
 export default function Dashboards() {
+  /* what the panels see before/without a scraper file */
+  const fallback = React.useMemo(
+    () => ({
+      jobs: SCRAPER_JOBS,
+      logs: LOG_LINES,
+      series: ANALYTICS,
+      sourceMix: SOURCE_MIX,
+    }),
+    [],
+  );
+
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-wrap items-center gap-2 border border-neutral-800 bg-[#0a0a0a] px-2.5 py-1.5">
-        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-400">
-          dashboards // live scraper fleet + analysis
-        </span>
-        <Chip tone="green">
-          <StatusDot tone="green" /> streaming
-        </Chip>
-        <span className="ml-auto font-mono text-[9.5px] text-neutral-600">
-          refresh {(REFRESH_MS / 1000).toFixed(1)}s · retention 30d · duckdb warehouse · grafana-compatible json
-        </span>
+    <TelemetryProvider fallback={fallback}>
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap items-center gap-2 border border-neutral-800 bg-[#0a0a0a] px-2.5 py-1.5">
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-neutral-400">
+            dashboards // live scraper fleet + analysis
+          </span>
+          <SourceBadge />
+          <span className="ml-auto font-mono text-[9.5px] text-neutral-600">
+            refresh {(REFRESH_MS / 1000).toFixed(1)}s · retention 30d · duckdb warehouse ·
+            grafana-compatible json
+          </span>
+        </div>
+        <PipelineMonitor />
+        <Analytics />
+        <RawInspector />
       </div>
-      <PipelineMonitor />
-      <Analytics />
-      <RawInspector />
-    </div>
+    </TelemetryProvider>
   );
 }

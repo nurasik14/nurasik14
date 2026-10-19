@@ -97,11 +97,14 @@ export const LOG_LINES = [
   'parse_error: kaznews.kz item 118 missing <pubDate>',
 ];
 
-/* chart window selectors — n = number of 5-minute buckets */
+/* Chart window selectors.
+   `windowMs` is what the chart actually slices by when real scraper data is
+   loaded — keep these three consistent with each other (1h / 6h / 24h).
+   `n` is the fallback bucket count for the simulator's 5-minute series. */
 export const RANGES = [
-  { id: '1H', n: 12 },
-  { id: '6H', n: 72 },
-  { id: '24H', n: 288 },
+  { id: '1H', n: 12, windowMs: 60 * 60 * 1000 },
+  { id: '6H', n: 72, windowMs: 6 * 60 * 60 * 1000 },
+  { id: '24H', n: 288, windowMs: 24 * 60 * 60 * 1000 },
 ];
 
 /* shape of the generated 24h analytics series */

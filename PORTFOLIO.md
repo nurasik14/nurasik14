@@ -15,6 +15,27 @@ pnpm build      # -> dist/
 
 Stack: React 19 · Vite · Tailwind CSS 3 · Recharts · framer-motion.
 
+## Maintaining the site
+
+**→ Full guide: [MAINTAINING.md](./MAINTAINING.md)**
+
+Quick map:
+
+| I want to… | Do this |
+|---|---|
+| add a blog post | append to `POSTS` in `src/config/blog.config.js` |
+| add a project | append to `PROJECTS` in `src/config/projects.config.js` |
+| change dashboard numbers | edit `src/config/dashboards.config.js`, or switch `MODE` in `src/config/live.config.js` to `'file'` |
+| **plug in my own scraper** | `python3 scripts/scraper.py --out public/data/telemetry.json`, set `MODE = 'file'`, commit |
+| change bio / stats / links | `src/config/about.config.js`, `src/config/site.config.js` |
+| redeploy | `git push` — Actions publishes in ~90s |
+
+The dashboard reads a real scraper's output when one exists. With
+`MODE = 'sim'` every curve is generated from a seed; with `MODE = 'file'` it is
+read from `public/data/telemetry.json`, and the header badge turns green and
+shows the scrape timestamp. If that file is missing or malformed the site falls
+back to the simulator and says so — it never renders an empty panel.
+
 ## Editing content — everything lives in `src/config/`
 
 No JSX changes are ever needed to update the site. Each file is plain data:

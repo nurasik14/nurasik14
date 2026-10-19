@@ -103,13 +103,22 @@ export default function Projects() {
               <div className="flex min-w-0 flex-col">
                 <div className="flex h-7 items-center gap-2 border-b border-neutral-800 bg-[#0c0c0c] px-2.5">
                   <span className="font-mono text-[9.5px] uppercase tracking-[0.14em] text-neutral-500">
-                    {w.label}
+                    {w?.label ?? 'module.unregistered'}
                   </span>
-                  <Chip tone="green" className="ml-auto">
-                    <StatusDot tone="green" /> live
+                  <Chip tone={w ? 'green' : 'amber'} className="ml-auto">
+                    <StatusDot tone={w ? 'green' : 'amber'} />
+                    {w ? 'live' : 'no widget'}
                   </Chip>
                 </div>
-                {w.el}
+                {w?.el ?? (
+                  <div className="px-2.5 py-2 font-mono text-[10px] leading-4 text-neutral-500">
+                    <span className="text-term-amber">slug &ldquo;{p.slug}&rdquo;</span> has no entry in{' '}
+                    <span className="text-neutral-300">WIDGET</span> in{' '}
+                    <span className="text-neutral-300">src/components/Projects.jsx</span>. Add one there
+                    (or reuse an existing slug) to give this module an interactive panel — the rest of
+                    this module renders normally.
+                  </div>
+                )}
               </div>
             )}
           </Panel>
