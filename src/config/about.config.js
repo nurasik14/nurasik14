@@ -7,7 +7,7 @@
 export const README = {
   headline: 'Nurassyl Serikov',
   headlineRole: 'BSc Computer Science @ CityU HK',
-  programLine: 'Full Scholar, Tiger / Talents Program',
+  programLine: 'Full Tuition Scholar, Tiger / Talents Program',
   availabilityLine: 'Hong Kong SAR · UTC+8 · available for internships',
   focus: [
     'LLM systems & retrieval-augmented generation',
@@ -41,7 +41,7 @@ export const SYSTEM_PROFILE = [
 /* quick_stats metric cards (rendered as a 2/3/6-col grid) */
 export const STATS = [
   { k: 'DEGREE', v: 'BSc CS', sub: 'CityU HK · 2023—2027' },
-  { k: 'SCHOLARSHIP', v: 'FULL', sub: 'Tiger / Talents Program' },
+  { k: 'SCHOLARSHIP', v: 'FULL TUITION', sub: 'Tiger / Talents Program' },
   { k: 'COMPETITIONS', v: '2 MEDALS', sub: 'FAIO Bronze · StemCo Gold' },
   { k: 'DOMAIN', v: 'ML SYS', sub: 'NLP · RL · Retrieval' },
   { k: 'CORPORA SHIPPED', v: '3', sub: '12k+ documents' },
@@ -50,16 +50,15 @@ export const STATS = [
 
 /* skill bars — group: 'core' (green) or 'aux' (cyan) */
 export const STACK = [
-  { name: 'PyTorch', lvl: 92, group: 'core' },
-  { name: 'Hugging Face', lvl: 88, group: 'core' },
-  { name: 'C++', lvl: 79, group: 'core' },
-  { name: 'Docker', lvl: 74, group: 'core' },
-  { name: 'Linux', lvl: 86, group: 'core' },
+  { name: 'PyTorch', lvl: 50, group: 'core' },
+  { name: 'Hugging Face', lvl: 50, group: 'core' },
+  { name: 'C++', lvl: 30, group: 'core' },
+  { name: 'Docker', lvl: 14, group: 'core' },
+  { name: 'Linux', lvl: 23, group: 'core' },
   { name: 'Python', lvl: 95, group: 'aux' },
-  { name: 'FAISS / BM25', lvl: 81, group: 'aux' },
-  { name: 'CUDA / Triton', lvl: 58, group: 'aux' },
-  { name: 'SQL / DuckDB', lvl: 70, group: 'aux' },
-  { name: 'Ray / Dask', lvl: 52, group: 'aux' },
+  { name: 'CUDA / Triton', lvl: 12, group: 'aux' },
+  { name: 'SQL / DuckDB', lvl: 13, group: 'aux' },
+  { name: 'Ray / Dask', lvl: 1, group: 'aux' },
 ];
 
 /* competitions table — clicking a row shows `note`; tone: 'green'|'amber' */
@@ -79,19 +78,19 @@ export const COMPETITIONS = [
     award: 'GOLD',
     year: '2024',
     track: 'Algorithms / systems',
-    note: 'Gold-tier placement; solved constraint-optimisation and graph traversal problems under a hard time budget in C++.',
+    note: 'Gold-tier placement',
     tone: 'green',
   },
 ];
 
 /* event_log rows — tone: 'green'|'amber'|'cyan'|'neutral' */
 export const TIMELINE = [
-  { t: '2023.09', e: 'enrolled · BSc CS, CityU HK', tone: 'cyan' },
   { t: '2024.03', e: 'StemCo Olympiad — GOLD', tone: 'amber' },
-  { t: '2024.11', e: 'first scraper fleet deployed (6 jobs)', tone: 'neutral' },
+  // { t: '2024.11', e: 'first scraper fleet deployed (6 jobs)', tone: 'neutral' },
   { t: '2025.04', e: 'FAIO — BRONZE', tone: 'amber' },
-  { t: '2025.08', e: 'trilingual RAG corpus published on HF', tone: 'green' },
-  { t: '2025.11', e: 'hybrid retrieval ablation → Recall@5 0.812', tone: 'green' },
+  { t: '2026.09', e: 'enrolled · BSc CS, CityU HK', tone: 'cyan' },
+  { t: '2026.10', e: 'trilingual RAG corpus published on HF', tone: 'green' },
+  { t: '2026.10', e: 'hybrid retrieval ablation → Recall@5 0.812', tone: 'green' },
 ];
 
 /* --contact view: availability cards + pitch paragraph */
