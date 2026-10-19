@@ -38,6 +38,8 @@
 
 ## Portfolio — `nurasik@cityu-node-01 :: systems console`
 
+**Live site → https://nurasik14.github.io/nurasik14/**
+
 This repository also hosts my interactive portfolio site (React 19 · Vite · Tailwind · Recharts):
 a live developer telemetry console — RAG eval harness, DQN training replay, scraper fleet
 dashboards and a git-log style research blog.
@@ -49,3 +51,5 @@ pnpm install && pnpm dev
 ```
 
 All content (stats, blog posts, dashboards, bio) is editable from `src/config/` — see [PORTFOLIO.md](./PORTFOLIO.md) for the full config map.
+
+Pushing to `main` redeploys the site automatically via GitHub Actions.
