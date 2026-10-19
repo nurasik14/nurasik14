@@ -33,3 +33,19 @@
   <a href="https://t.me/taton4i"><img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white"></a>
   <a href="https://www.linkedin.com/in/nursu1tans/"><img src="https://img.shields.io/badge/LinkedIn-0077b5?style=for-the-badge&logo=linkedin"></a>
 </p>
+
+---
+
+## Portfolio — `nurasik@cityu-node-01 :: systems console`
+
+This repository also hosts my interactive portfolio site (React 19 · Vite · Tailwind · Recharts):
+a live developer telemetry console — RAG eval harness, DQN training replay, scraper fleet
+dashboards and a git-log style research blog.
+
+<img src="./screenshots/shot-projects.png" alt="portfolio — projects view">
+
+```bash
+pnpm install && pnpm dev
+```
+
+All content (stats, blog posts, dashboards, bio) is editable from `src/config/` — see [PORTFOLIO.md](./PORTFOLIO.md) for the full config map.
