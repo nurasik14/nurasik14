@@ -1,56 +1,55 @@
 <!-- Cosmic Banner -->
 <p align="center">
-  <img src="./img/LiburBanner.jpg" width="600" height="800" alt="anime banner">
+  <img src="./img/LiburBanner.jpg" alt="anime banner">
 </p>
 
-<h1 align="left">Welcome, Traveler — I'm <b>Nurasik12</b></h1>
+<h1 align="left"> I'm <b>Nurasik12</b></h1>
 
 <p align="center">
-  <i>"Somewhere between the stars and lines of code, I build things..."</i>
+  <i>"Every man has two lives, and the second starts when he realizes he has just one." — Confucius</i>
 </p>
 
 ---
 
 ## About Me
 
-- I explore **AI, ML, mathematics, and engineering**
-- Currently working on my Leetcode that mix **DP + algorithms**
-- Tech stack: Python, JS/React, C++, ML/DL, CV, NLP, C++  
+- I explore **AI, ML, RL, mathematics, and engineering**
 - I want to build things that stay, inspire, and evolve.
 
 ---
 
-## Tech Constellation
+## Tech
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=python,cpp,js,ts,react,html,css,php,git,tensorflow,pytorch" />
+  <img src="https://skillicons.dev/icons?i=python,js,react,php,tensorflow,pytorch" />
 </p>
 
 ---
 
-## Featured Projects
-
-| Project | Description |
-|-----------|---------------|
-| **AuaLine** | Eco-startup that turns smog into printer ink |
-| **Lipza – Lip-Reading App** | AI-powered lip-reading learning app for children with hearing impairments |
-| **AI Psychotherapist Agent** | Long-term memory AI agent built to provide emotional support and companionship |
-
----
-
-## Connect With Me
+## Contacts
 
 <p align="center">
   <a href="https://github.com/nurik125"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github"></a>
-  <a href="https://t.me/Nurasik12"><img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white"></a>
-  <a href="https://www.linkedin.com/in/nurasik12"><img src="https://img.shields.io/badge/LinkedIn-0077b5?style=for-the-badge&logo=linkedin"></a>
+  <a href="https://t.me/taton4i"><img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white"></a>
+  <a href="https://www.linkedin.com/in/nursu1tans/"><img src="https://img.shields.io/badge/LinkedIn-0077b5?style=for-the-badge&logo=linkedin"></a>
 </p>
 
 ---
 
-<p align="center">
-  <img src="https://i.imgur.com/7wsMvC8.gif" width="300">
-  <br>
-  <i>“The universe is expanding… and so am I.”</i>
-</p>
+## Portfolio — `nurasik@cityu-node-01 :: systems console`
 
+**Live site → https://nurasik14.github.io/nurasik14/**
+
+This repository also hosts my interactive portfolio site (React 19 · Vite · Tailwind · Recharts):
+a live developer telemetry console — RAG eval harness, DQN training replay, scraper fleet
+dashboards and a git-log style research blog.
+
+<img src="./screenshots/shot-projects.png" alt="portfolio — projects view">
+
+```bash
+pnpm install && pnpm dev
+```
+
+All content (stats, blog posts, dashboards, bio) is editable from `src/config/` — see [PORTFOLIO.md](./PORTFOLIO.md) for the full config map.
+
+Pushing to `main` redeploys the site automatically via GitHub Actions.

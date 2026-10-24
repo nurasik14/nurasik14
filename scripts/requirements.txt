@@ -1,0 +1,26 @@
+# Python deps for scripts/scraper.py
+
+The site itself needs no Python — only the scraper does. Install what you
+actually use; the reference collectors degrade gracefully without extras.
+
+```bash
+pip install requests feedparser
+```
+
+| Package | Needed for |
+|---|---|
+| `requests` | HTTP fetching (`collect_arxiv`). Without it that job reports `WARN`. |
+| `feedparser` | RSS/Atom parsing, if you add an RSS collector. |
+
+`scripts/scraper.py` runs with the standard library alone if you supply your own
+measurements via `--series-from my_metrics.csv` — no install required.
+
+Typical use:
+
+```bash
+python3 scripts/scraper.py --out public/data/telemetry.json
+python3 scripts/scraper.py --out public/data/telemetry.json --series-from metrics.csv
+```
+
+Then set `MODE = 'file'` in `src/config/live.config.js` and commit the JSON.
+See [../MAINTAINING.md](../MAINTAINING.md) for the full JSON contract.

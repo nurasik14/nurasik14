@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #000000;
+  --panel: #0a0a0a;
+  --line: #262626;
+  --line-soft: #1a1a1a;
+  --fg: #e5e5e5;
+  --fg-dim: #8a8a8a;
+  --fg-faint: #525252;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    background: #000;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background: #000;
+    color: var(--fg);
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+    font-feature-settings: 'liga' 1, 'calt' 1;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior-y: none;
+  }
+  ::selection {
+    background: #22c55e;
+    color: #000;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2e2e2e #000;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border: 2px solid #000;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f3f;
+  }
+  ::-webkit-scrollbar-corner {
+    background: #000;
+  }
+  button {
+    font: inherit;
+    color: inherit;
+  }
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+@layer components {
+  /* ---- structural chrome ---------------------------------------------- */
+  .panel {
+    @apply border border-neutral-800 bg-[#0a0a0a];
+  }
+  .panel-hd {
+    @apply flex h-8 shrink-0 items-center gap-2 border-b border-neutral-800 bg-[#0d0d0d] px-2.5;
+  }
+  .panel-title {
+    @apply font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-neutral-300;
+  }
+  .hairline {
+    @apply border-neutral-800;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(38, 38, 38, 0.55) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(38, 38, 38, 0.55) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .hatch {
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(245, 158, 11, 0.14) 0,
+      rgba(245, 158, 11, 0.14) 1px,
+      transparent 1px,
+      transparent 6px
+    );
+  }
+
+  /* ---- atoms ----------------------------------------------------------- */
+  .chip {
+    @apply inline-flex items-center gap-1 border border-neutral-800 bg-black px-1.5 py-[1px] font-mono text-[10px] uppercase tracking-wider text-neutral-400;
+  }
+  .chip-on {
+    @apply border-term-green/40 text-term-green;
+  }
+  .chip-warn {
+    @apply border-term-amber/40 text-term-amber;
+  }
+  .chip-err {
+    @apply border-term-red/40 text-term-red;
+  }
+  .chip-cyan {
+    @apply border-term-cyan/40 text-term-cyan;
+  }
+  .kv {
+    @apply font-mono text-[11px] leading-5;
+  }
+  .label {
+    @apply font-mono text-[10px] uppercase tracking-[0.12em] text-neutral-500;
+  }
+  .link {
+    @apply text-term-cyan underline decoration-term-cyan/30 underline-offset-2 transition-colors duration-75 hover:decoration-term-cyan;
+  }
+  .btn {
+    @apply inline-flex select-none items-center gap-1.5 border border-neutral-800 bg-[#111] px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-neutral-300 transition-colors duration-75 hover:border-neutral-600 hover:bg-[#171717] hover:text-neutral-100 active:bg-[#1c1c1c];
+  }
+  .btn-on {
+    @apply border-term-green/50 bg-term-green/10 text-term-green hover:border-term-green hover:bg-term-green/15 hover:text-term-green;
+  }
+  .btn-k {
+    @apply border-neutral-700 bg-[#141414];
+  }
+  .focus-ring {
+    @apply outline-none focus-visible:ring-1 focus-visible:ring-term-cyan/70;
+  }
+  .prose-tech {
+    @apply font-sans text-[12.5px] leading-[1.65] text-neutral-400;
+  }
+  .row-hover {
+    @apply transition-colors duration-75 hover:bg-[#121212];
+  }
+
+  /* ---- data tables ------------------------------------------------------ */
+  .tbl {
+    @apply w-full border-collapse font-mono text-[11px];
+  }
+  .tbl thead th {
+    @apply sticky top-0 z-10 border-b border-neutral-800 bg-[#0d0d0d] px-2 py-1.5 text-left text-[9.5px] font-medium uppercase tracking-[0.12em] text-neutral-500;
+  }
+  .tbl tbody td {
+    @apply border-b border-neutral-900 px-2 py-[5px] align-middle text-neutral-300;
+  }
+  .tbl tbody tr {
+    @apply transition-colors duration-75 hover:bg-[#131313];
+  }
+  .num {
+    @apply tabular-nums;
+  }
+}
+
+/* caret for terminal prompt */
+.caret {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  background: #22c55e;
+  animation: blink 1.05s steps(1, end) infinite;
+  vertical-align: -2px;
+}
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* pulse for live status dot */
+.dot-live {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* thin sweeping scan used on the header ticker */
+.ticker-mask {
+  mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12px,
+    #000 calc(100% - 12px),
+    transparent
+  );
+}
+
+/* recharts overrides: kill every default transition/animation */
+.recharts-wrapper svg {
+  overflow: visible;
+}
+.recharts-cartesian-axis-tick text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  fill: #6b6b6b;
+}
+.recharts-tooltip-wrapper {
+  outline: none !important;
+}
+.recharts-surface {
+  overflow: visible;
+}
+.recharts-legend-item-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #a3a3a3 !important;
+}
+.recharts-default-legend {
+  padding-top: 0 !important;
+}
