@@ -29,27 +29,34 @@
 ## Contacts
 
 <p align="center">
-  <a href="https://github.com/nurik125"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github"></a>
-  <a href="https://t.me/taton4i"><img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white"></a>
-  <a href="https://www.linkedin.com/in/nursu1tans/"><img src="https://img.shields.io/badge/LinkedIn-0077b5?style=for-the-badge&logo=linkedin"></a>
+  <a href="mailto:nurasik.s@my.cityu.edu.hk"><img src="https://img.shields.io/badge/Email-nurasik.s%40my.cityu.edu.hk-22c55e?style=for-the-badge&logo=gmail&logoColor=white"></a>
+  <a href="https://github.com/nurasik14"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github"></a>
+  <a href="https://t.me/nurasik12"><img src="https://img.shields.io/badge/Telegram-26A5E4?style=for-the-badge&logo=telegram&logoColor=white"></a>
+  <a href="https://linkedin.com/in/nurasik12"><img src="https://img.shields.io/badge/LinkedIn-0077b5?style=for-the-badge&logo=linkedin"></a>
+  <a href="https://huggingface.co/Nurasik12"><img src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black"></a>
 </p>
 
 ---
 
-## Portfolio — `nurasik@cityu-node-01 :: systems console`
+## Portfolio
 
 **Live site → https://nurasik14.github.io/nurasik14/**
 
-This repository also hosts my interactive portfolio site (React 19 · Vite · Tailwind · Recharts):
-a live developer telemetry console — RAG eval harness, DQN training replay, scraper fleet
-dashboards and a git-log style research blog.
+This repository also hosts my portfolio site (React 19, Vite, Tailwind). The page is laid out as an
+agent run: the hero answers "who is this?" with real tool calls, and every project is an expandable
+tool-call card with its input config on the left and measured results (e.g. DQN training curves) on the right.
 
-<img src="./screenshots/shot-projects.png" alt="portfolio — projects view">
+<img src="./screenshots/hero.png" alt="Portfolio hero: name and a live agent run that summarizes my work">
+
+<p>
+  <img src="./screenshots/projects.png" alt="Projects as expandable tool-call cards, with DQN training curves" width="72%">
+  <img src="./screenshots/mobile.png" alt="The site on a phone" width="25%">
+</p>
 
 ```bash
 pnpm install && pnpm dev
 ```
 
-All content (stats, blog posts, dashboards, bio) is editable from `src/config/` — see [PORTFOLIO.md](./PORTFOLIO.md) for the full config map.
+All content lives in `src/config/portfolio.config.js`. See [MAINTAINING.md](./MAINTAINING.md).
 
 Pushing to `main` redeploys the site automatically via GitHub Actions.
