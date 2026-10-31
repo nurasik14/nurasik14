@@ -31,7 +31,9 @@ export async function loadGoogleEvents() {
     const body = await res.json();
     if (body?.version !== 1 || !body.pulledAt || !Array.isArray(body.events)) return null;
     return { pulledAt: body.pulledAt, events: body.events.map(clean).filter(Boolean) };
-  } catch {
+  } catch (err) {
+    // Not silent: an unreadable snapshot (e.g. HTML instead of JSON) is a bug to see.
+    console.warn(`planner.cal: could not read ${EVENTS}:`, err);
     return null;
   }
 }

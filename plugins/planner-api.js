@@ -18,6 +18,31 @@ import { assertStore, sealPlan, serializeStore, toggleTask, validatePlanInput, v
 export const DATA_FILE = 'public/data/plans.json';
 export const EVENTS_FILE = 'public/data/google-events.json';
 const ROUTE_RE = /\/api\/plans(?:\/([^/]+))?\/?$/;
+const DATA_RE = /\/data\/(plans|google-events)\.json$/;
+
+/**
+ * Serves public/data/*.json straight from disk in dev and preview.
+ * Vite's own public-file serving keeps an in-memory list updated by the file
+ * watcher; an atomic rewrite (tmp + rename) can drop the file from that list,
+ * after which Vite answers with the HTML page instead. Reading from disk on
+ * every request removes that dependency. The static Pages build is unaffected.
+ */
+export function createDataHandler(files) {
+  return function plannerDataMiddleware(req, res, next) {
+    if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+    const match = DATA_RE.exec((req.url || '').split('?')[0]);
+    if (!match) return next();
+    readFile(files[match[1]], 'utf8').then(
+      (text) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.setHeader('Cache-Control', 'no-store');
+        res.end(req.method === 'HEAD' ? undefined : text);
+      },
+      (err) => (err.code === 'ENOENT' ? send(res, 404, { error: `${match[0].slice(1)} not found` }) : next(err)),
+    );
+  };
+}
 
 /**
  * File-backed store. Every read-modify-write runs through one promise queue.
@@ -142,11 +167,15 @@ export default function plannerApi() {
     const store = createStore(file);
     // Refuses to start when PLANNER_CAL_HOME points inside the repository.
     const home = resolveHome({ root });
+    server.middlewares.use(createDataHandler({ plans: file, 'google-events': resolve(root, EVENTS_FILE) }));
     server.middlewares.use(createHandler(file, store));
     server.middlewares.use(createGoogleHandler({ home, store, eventsFile: resolve(root, EVENTS_FILE) }));
   };
   return {
     name: 'planner-api',
+    // Our own writes to public/data/ are not source changes: keep them out of
+    // the watcher, so they never reload the page or touch Vite's public-file list.
+    config: () => ({ server: { watch: { ignored: ['**/public/data/**'] } } }),
     configResolved(config) {
       root = config.root;
       file = resolve(root, DATA_FILE);
