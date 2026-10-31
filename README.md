@@ -47,6 +47,9 @@ an editor session with two open buffers: `index.md`, the portfolio, and `planner
 `/planner/`. A vim-like statusline at the bottom shows the real mode, buffer, section and scroll
 position, and `:` opens a command line. The hero shows real DQN training curves (fig. 1). Projects
 are an experiments ledger: each row expands to show its config as YAML and its measured results.
+The planner can also sync with Google Calendar on localhost: sealed plans are pushed to a dedicated
+`planner.cal` calendar, and event titles and times are published as a dashed overlay
+(see [docs/PLANNER.md#google](./docs/PLANNER.md#google)).
 
 <img src="./screenshots/hero.png" alt="Portfolio hero: YAML frontmatter, name, and fig. 1 with DQN training curves">
 

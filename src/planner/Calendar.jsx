@@ -15,6 +15,7 @@ import {
 } from './dates.js';
 import { layoutWeeks, plansOn, progressState } from './lanes.js';
 import { doneCount } from '../../plugins/planner-core.js';
+import { continues, eventLabel, eventsOn, SLOT_BORDER, timeOf } from './google.js';
 
 const WEEKDAY_SHORT = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 const COLS = 'grid grid-cols-[2rem_repeat(7,minmax(0,1fr))] sm:grid-cols-[2.75rem_repeat(7,minmax(0,1fr))]';
@@ -26,13 +27,34 @@ const TINT = {
 };
 
 const inRange = (day, a, b) => a && b && compareDates(day, a) >= 0 && compareDates(day, b) <= 0;
+const TIMED_ROWS = 3;
+const NO_EVENTS = [];
+
+/** One Google event in the day list: "10:00–11:00 title · calendar". */
+function AgendaEvent({ e, day }) {
+  const when = e.allDay ? 'all day' : continues(e, day) ? `→ ${timeOf(e.end)}` : `${timeOf(e.start)}–${timeOf(e.end)}`;
+  return (
+    <li className={`grid grid-cols-[6.5rem_minmax(0,1fr)] gap-x-3 border-l border-dashed py-1 pl-2 ${SLOT_BORDER[e.color]}`}>
+      <span className="font-mono text-[12px] text-fg-dim">{when}</span>
+      <span className="min-w-0 break-words text-[14px] text-fg-dim">
+        {e.title}
+        {e.calendar && <span className="font-mono text-[12px] text-fg-faint"> · {e.calendar}</span>}
+      </span>
+    </li>
+  );
+}
 
 /**
  * Month grid with ISO week gutter, plan lane bars and range selection.
  * `range` is { start, end } of "YYYY-MM-DD" strings (either may be '').
+ * `google` is the published Google overlay (null when never pulled);
+ * `googleOn` shows it, `onGoogleToggle` flips it.
  */
-export default function Calendar({ month, onMonth, plans, today, editable, range, onRange, selectedId, onSelectPlan }) {
+export default function Calendar({ month, onMonth, plans, today, editable, range, onRange, selectedId, onSelectPlan, google = null, googleOn = true, onGoogleToggle }) {
+  const gEvents = google && googleOn ? google.events : NO_EVENTS;
   const weeks = React.useMemo(() => layoutWeeks(monthGrid(month), plans), [month, plans]);
+  // All-day Google events get their own lane group below the plans in each row.
+  const gWeeks = React.useMemo(() => layoutWeeks(monthGrid(month), gEvents.filter((e) => e.allDay)), [month, gEvents]);
   const [focusDay, setFocusDay] = React.useState(() => (monthOf(today) === month ? today : `${month}-01`));
   const [hover, setHover] = React.useState('');
   const gridRef = React.useRef(null);
@@ -163,12 +185,15 @@ export default function Calendar({ month, onMonth, plans, today, editable, range
           ))}
         </div>
 
-        {weeks.map((row, ri) => (
+        {weeks.map((row, ri) => {
+          const gRow = gWeeks[ri];
+          const lanes = row.lanes + gRow.lanes;
+          return (
           <div
             key={row.days[0]}
             role="row"
             className={`relative ${COLS} ${ri < weeks.length - 1 ? 'border-b border-line-soft' : ''}`}
-            style={{ '--lanes': row.lanes }}
+            style={{ '--lanes': lanes }}
           >
             <div role="rowheader" className="pt-1.5 text-center font-mono text-[11px] text-fg-faint">
               <span aria-hidden="true">w{row.week}</span>
@@ -181,10 +206,13 @@ export default function Calendar({ month, onMonth, plans, today, editable, range
               const selected = inRange(day, selA, selB);
               const edge = selected && (day === selA || day === selB);
               const here = plansOn(plans, day);
+              const gHere = gEvents.length ? eventsOn(gEvents, day) : NO_EVENTS;
+              const timed = gHere.filter((e) => !e.allDay);
               const label = [
                 longDate(day),
                 isToday ? 'today' : '',
                 here.length ? `plans: ${here.map((p) => p.title).join(', ')}` : '',
+                gHere.map((e) => eventLabel(e, day)).join(', '),
                 edge && day === selA ? 'range start' : '',
                 edge && day === selB ? 'range end' : '',
               ]
@@ -232,6 +260,24 @@ export default function Calendar({ month, onMonth, plans, today, editable, range
                       today
                     </span>
                   )}
+                  {timed.length > 0 && (
+                    // Timed Google events flow below every lane, so the cell grows instead of overlapping.
+                    <div aria-hidden="true" className="pb-1 pl-1 pr-0.5 pt-[calc(var(--date-h)+var(--lanes)*var(--lane)+2px)] sm:pl-1.5 sm:pr-1">
+                      <span className="font-mono text-[10px] leading-none text-fg-dim sm:hidden">┆{timed.length}</span>
+                      <ul className="hidden space-y-px sm:block">
+                        {timed.slice(0, timed.length > TIMED_ROWS ? TIMED_ROWS - 1 : TIMED_ROWS).map((e) => (
+                          <li
+                            key={e.id}
+                            title={`${e.title} · ${timeOf(e.start)}–${timeOf(e.end)}${e.calendar ? ` · ${e.calendar}` : ''}`}
+                            className={`truncate border-l border-dashed pl-1 font-mono text-[11px] leading-[1.45] text-fg-dim ${SLOT_BORDER[e.color]}`}
+                          >
+                            <span className="text-fg-faint">{continues(e, day) ? '↳' : timeOf(e.start)}</span> <span className="font-sans text-[12px]">{e.title}</span>
+                          </li>
+                        ))}
+                        {timed.length > TIMED_ROWS && <li className="pl-1 font-mono text-[11px] leading-[1.45] text-fg-faint">+{timed.length - TIMED_ROWS + 1} more</li>}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -240,7 +286,7 @@ export default function Calendar({ month, onMonth, plans, today, editable, range
             <div
               aria-hidden="true"
               className={`pointer-events-none absolute inset-0 ${COLS} content-start gap-y-0 pt-[var(--date-h)]`}
-              style={{ gridTemplateRows: `repeat(${Math.max(row.lanes, 1)}, var(--lane))` }}
+              style={{ gridTemplateRows: `repeat(${Math.max(lanes, 1)}, var(--lane))` }}
             >
               {row.segments.map((s) => {
                 const state = progressState(s.plan);
@@ -269,9 +315,24 @@ export default function Calendar({ month, onMonth, plans, today, editable, range
                   </div>
                 );
               })}
+              {gRow.segments.map((s) => (
+                <div
+                  key={`g-${s.plan.id}`}
+                  style={{ gridColumn: `${s.from + 2} / ${s.to + 3}`, gridRow: row.lanes + s.lane + 1 }}
+                  className={[
+                    'mb-[2px] flex min-w-0 items-center overflow-hidden border border-dashed font-mono text-[11px] leading-none text-fg-dim sm:mb-[3px] sm:px-1.5',
+                    s.startsHere ? 'ml-0.5 rounded-l-[3px]' : 'border-l-0',
+                    s.endsHere ? 'mr-0.5 rounded-r-[3px]' : 'border-r-0',
+                    SLOT_BORDER[s.plan.color],
+                  ].join(' ')}
+                >
+                  {s.label && <span className="hidden min-w-0 truncate font-sans text-[12px] sm:inline">{s.plan.title}</span>}
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       <p className="mt-2 font-mono text-[12px] text-fg-faint">
@@ -293,6 +354,62 @@ export default function Calendar({ month, onMonth, plans, today, editable, range
           <>select a plan on the calendar or in the log</>
         )}
       </p>
+
+      {google && (
+        <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[12px] text-fg-faint">
+          <span>
+            <span aria-hidden="true" className="text-fg-dim">
+              ▬
+            </span>{' '}
+            sealed plan ·{' '}
+            <span aria-hidden="true" className="text-info">
+              ┆
+            </span>{' '}
+            google event
+          </span>
+          <button type="button" aria-pressed={googleOn} onClick={onGoogleToggle} className="rounded px-1 py-0.5 hover:bg-surface-2 hover:text-fg-dim">
+            google events: <span className="text-fg">{googleOn ? 'on' : 'off'}</span>
+          </button>
+        </div>
+      )}
+
+      {google && googleOn && (
+        <section aria-labelledby="day-agenda" className="mt-4 border-t border-line-soft pt-3">
+          <h4 id="day-agenda" className="label mb-1.5">
+            day · <span className="normal-case tracking-normal text-fg-dim">{longDate(tabDay)}</span>
+          </h4>
+          {(() => {
+            const dayPlans = plansOn(plans, tabDay);
+            const dayEvents = eventsOn(gEvents, tabDay);
+            if (!dayPlans.length && !dayEvents.length) return <p className="font-mono text-[12px] text-fg-faint">nothing on this day</p>;
+            return (
+              <ul className="space-y-0.5">
+                {dayPlans.map((p) => (
+                  <li key={p.id}>
+                    <button
+                      type="button"
+                      onClick={() => onSelectPlan(p.id)}
+                      aria-pressed={p.id === selectedId}
+                      className={`grid w-full grid-cols-[6.5rem_minmax(0,1fr)] gap-x-3 rounded py-1 pl-2 text-left ${p.id === selectedId ? 'bg-surface-2' : 'hover:bg-surface'}`}
+                    >
+                      <span className="font-mono text-[12px] text-fg-faint">
+                        <span aria-hidden="true">▬ </span>
+                        {p.hash.slice(0, 7)}
+                      </span>
+                      <span className="min-w-0 break-words text-[14px] text-fg">
+                        {p.title} <span className="font-mono text-[12px] text-fg-faint">· {doneCount(p)}/{p.tasks.length}</span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+                {dayEvents.map((e) => (
+                  <AgendaEvent key={e.id} e={e} day={tabDay} />
+                ))}
+              </ul>
+            );
+          })()}
+        </section>
+      )}
 
       {/* Below 640px bars shrink to lane strips, so name them here. */}
       {visiblePlans.length > 0 && (

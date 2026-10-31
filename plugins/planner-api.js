@@ -6,60 +6,24 @@
 //   POST   …/api/plans        -> 201 sealed plan
 //   PATCH  …/api/plans/:id    -> 200 plan (task done-state only)
 //   DELETE …/api/plans/:id    -> 204 (break seal)
+//
+// The same plugin mounts Google Calendar sync (…/api/google/*, see
+// plugins/google-sync.js) behind the same loopback-only guard.
 import { readFile, rename, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
+import { createGoogleHandler, resolveHome } from './google-sync.js';
+import { HttpError, isLoopbackClient, readJsonBody, send } from './http.js';
 import { assertStore, sealPlan, serializeStore, toggleTask, validatePlanInput, validateToggle } from './planner-core.js';
 
 export const DATA_FILE = 'public/data/plans.json';
-const BODY_LIMIT = 64 * 1024;
+export const EVENTS_FILE = 'public/data/google-events.json';
 const ROUTE_RE = /\/api\/plans(?:\/([^/]+))?\/?$/;
-const LOOPBACK = new Set(['127.0.0.1', '::1', '::ffff:127.0.0.1']);
 
-class HttpError extends Error {
-  constructor(status, message, field) {
-    super(message);
-    this.status = status;
-    this.field = field;
-  }
-}
-
-function send(res, status, body, headers = {}) {
-  res.statusCode = status;
-  res.setHeader('Cache-Control', 'no-store');
-  for (const [k, v] of Object.entries(headers)) res.setHeader(k, v);
-  if (body === undefined) return res.end();
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  res.end(JSON.stringify(body));
-}
-
-function readJsonBody(req) {
-  const type = String(req.headers['content-type'] || '').split(';')[0].trim().toLowerCase();
-  if (type !== 'application/json') return Promise.reject(new HttpError(415, 'Content-Type must be application/json'));
-  if (Number(req.headers['content-length']) > BODY_LIMIT) return Promise.reject(new HttpError(413, 'body over 64 KB'));
-  return new Promise((ok, fail) => {
-    const chunks = [];
-    let size = 0;
-    req.on('data', (chunk) => {
-      size += chunk.length;
-      if (size > BODY_LIMIT) {
-        fail(new HttpError(413, 'body over 64 KB'));
-        req.destroy();
-        return;
-      }
-      chunks.push(chunk);
-    });
-    req.on('error', fail);
-    req.on('end', () => {
-      try {
-        ok(JSON.parse(Buffer.concat(chunks).toString('utf8') || 'null'));
-      } catch {
-        fail(new HttpError(400, 'body is not valid JSON'));
-      }
-    });
-  });
-}
-
-/** File-backed store. Every read-modify-write runs through one promise queue. */
+/**
+ * File-backed store. Every read-modify-write runs through one promise queue.
+ * `exclusive(fn)` runs fn({ read }) in that queue too, so Google sync never
+ * interleaves with a plan write.
+ */
 export function createStore(file) {
   let queue = Promise.resolve();
   const serial = (fn) => {
@@ -94,6 +58,7 @@ export function createStore(file) {
 
   return {
     list: () => serial(read),
+    exclusive: (fn) => serial(() => fn({ read })),
     update: (fn) =>
       serial(async () => {
         const plans = await read();
@@ -105,9 +70,7 @@ export function createStore(file) {
 }
 
 /** Connect-style middleware. Calls next() for anything that is not the API. */
-export function createHandler(file) {
-  const store = createStore(file);
-
+export function createHandler(file, store = createStore(file)) {
   async function route(req, res, id) {
     const method = req.method;
     if (!id) {
@@ -158,7 +121,7 @@ export function createHandler(file) {
     const path = (req.url || '').split('?')[0];
     const match = ROUTE_RE.exec(path);
     if (!match) return next();
-    if (!LOOPBACK.has(req.socket?.remoteAddress)) {
+    if (!isLoopbackClient(req)) {
       return send(res, 403, { error: 'the planner API only answers loopback clients' });
     }
     // Plan ids are hex, so the raw path segment is compared as-is.
@@ -172,17 +135,23 @@ export function createHandler(file) {
 }
 
 export default function plannerApi() {
+  let root;
   let file;
+  // One store per server, shared with Google sync so their writes queue together.
+  const install = (server) => {
+    const store = createStore(file);
+    // Refuses to start when PLANNER_CAL_HOME points inside the repository.
+    const home = resolveHome({ root });
+    server.middlewares.use(createHandler(file, store));
+    server.middlewares.use(createGoogleHandler({ home, store, eventsFile: resolve(root, EVENTS_FILE) }));
+  };
   return {
     name: 'planner-api',
     configResolved(config) {
-      file = resolve(config.root, DATA_FILE);
+      root = config.root;
+      file = resolve(root, DATA_FILE);
     },
-    configureServer(server) {
-      server.middlewares.use(createHandler(file));
-    },
-    configurePreviewServer(server) {
-      server.middlewares.use(createHandler(file));
-    },
+    configureServer: install,
+    configurePreviewServer: install,
   };
 }

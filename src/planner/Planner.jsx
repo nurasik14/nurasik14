@@ -3,12 +3,40 @@ import AppShell, { useShell } from '../shell/AppShell';
 import { sortPlans } from '../../plugins/planner-core.js';
 import Calendar from './Calendar.jsx';
 import Composer from './Composer.jsx';
+import GooglePanel from './GooglePanel.jsx';
 import PlanDetail from './PlanDetail.jsx';
 import PlanLog from './PlanLog.jsx';
-import { compareDates, monthGrid, monthOf, parseMonth, today as localToday } from './dates.js';
+import { compareDates, monthGrid, monthOf, parseMonth, shortDate, today as localToday } from './dates.js';
+import { connectMessage, loadGoogleEvents } from './google.js';
 import { deletePlan, loadPlans, setTaskDone } from './store.js';
 
-const PUBLISH_CMD = 'git add public/data/plans.json && git commit -m "plans: update" && git push';
+const PUBLISH_CMD = 'git add public/data/plans.json public/data/google-events.json && git commit -m "plans: update" && git push';
+const GOOGLE_PREF = 'planner.googleEvents';
+
+function readGooglePref() {
+  try {
+    return window.localStorage.getItem(GOOGLE_PREF) !== 'off';
+  } catch {
+    return true;
+  }
+}
+
+/** ?google=connected|error&reason=… from the OAuth callback; removed once read. */
+function takeGoogleParam() {
+  const url = new URL(window.location.href);
+  const result = url.searchParams.get('google');
+  if (!result) return null;
+  const reason = url.searchParams.get('reason');
+  url.searchParams.delete('google');
+  url.searchParams.delete('reason');
+  window.history.replaceState(window.history.state, '', `${url.pathname}${url.search}${url.hash}`);
+  return { result, reason };
+}
+
+const pulledLabel = (iso) => {
+  const dt = new Date(iso);
+  return Number.isNaN(dt.getTime()) ? iso : shortDate(localToday(dt), dt.getFullYear() !== new Date().getFullYear());
+};
 
 function readUrl() {
   const url = new URL(window.location.href);
@@ -96,7 +124,7 @@ function PublishCommand() {
   );
 }
 
-function PlannerPage({ data, setPlans, reload }) {
+function PlannerPage({ data, setPlans, reload, refresh }) {
   const shell = useShell();
   const { flash } = shell;
   const shellRef = React.useRef(shell);
@@ -117,6 +145,34 @@ function PlannerPage({ data, setPlans, reload }) {
   const { status, mode, plans } = data;
   const local = status === 'ready' && mode === 'local';
   const selected = plans.find((p) => p.id === selectedId) ?? null;
+
+  // Google overlay: a static file, so Pages shows it too. null = never pulled.
+  const [google, setGoogle] = React.useState(null);
+  const [googleOn, setGoogleOn] = React.useState(readGooglePref);
+  const reloadGoogle = React.useCallback(() => loadGoogleEvents().then(setGoogle), []);
+  React.useEffect(() => {
+    reloadGoogle();
+  }, [reloadGoogle]);
+  function toggleGoogle() {
+    const next = !googleOn;
+    setGoogleOn(next);
+    try {
+      window.localStorage.setItem(GOOGLE_PREF, next ? 'on' : 'off');
+    } catch {
+      // Private mode: the toggle still works for this visit.
+    }
+  }
+  const onSynced = React.useCallback(() => {
+    reloadGoogle();
+    refresh();
+  }, [reloadGoogle, refresh]);
+
+  React.useEffect(() => {
+    const param = takeGoogleParam();
+    if (!param) return;
+    const [text, tone] = connectMessage(param.result, param.reason);
+    shellRef.current.flash(text, tone);
+  }, []);
 
   // Let the shell pick up READONLY / NORMAL once the mode is known.
   React.useEffect(() => {
@@ -245,9 +301,20 @@ function PlannerPage({ data, setPlans, reload }) {
               Sealed plans are written to <code className="font-mono text-[14px] text-fg">public/data/plans.json</code>. Commit and push to publish.
             </>
           )}
-          {status === 'ready' && mode === 'readonly' && 'Read-only snapshot, published from my machine.'}
+          {status === 'ready' && mode === 'readonly' && (
+            <>
+              Read-only snapshot, published from my machine.
+              {google && (
+                <span className="font-mono text-[13px] text-fg-faint">
+                  {' '}
+                  google events · pulled <time dateTime={google.pulledAt}>{pulledLabel(google.pulledAt)}</time>
+                </span>
+              )}
+            </>
+          )}
         </p>
         {local && <PublishCommand />}
+        {local && <GooglePanel onSynced={onSynced} />}
       </header>
 
       <div
@@ -267,6 +334,9 @@ function PlannerPage({ data, setPlans, reload }) {
             onRange={onRange}
             selectedId={selectedId}
             onSelectPlan={selectPlan}
+            google={google}
+            googleOn={googleOn}
+            onGoogleToggle={toggleGoogle}
           />
         </section>
 
@@ -346,9 +416,17 @@ export default function PlannerApp() {
 
   const setPlans = React.useCallback((fn) => setData((d) => ({ ...d, plans: fn(d.plans) })), []);
 
+  // Re-read plans without the loading state (after a sync); errors keep the current view.
+  const refresh = React.useCallback(() => {
+    loadPlans().then(
+      (r) => setData((d) => ({ ...d, mode: r.mode, plans: r.plans })),
+      () => {},
+    );
+  }, []);
+
   return (
     <AppShell page="planner" defaultMode={data.mode === 'readonly' ? 'READONLY' : 'NORMAL'}>
-      <PlannerPage data={data} setPlans={setPlans} reload={load} />
+      <PlannerPage data={data} setPlans={setPlans} reload={load} refresh={refresh} />
     </AppShell>
   );
 }

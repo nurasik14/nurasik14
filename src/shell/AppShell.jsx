@@ -1,7 +1,8 @@
 /* The workbench shell shared by index.md (portfolio) and planner.cal.
  * Contract: docs/DESIGN.md "Shell". Public API (keep stable):
  *   <AppShell page="index"|"planner" sections={[{ id, label, key }]} defaultMode="NORMAL">
- *   useShell() -> { mode, setMode(name|null), flash(text, tone?) }
+ *   useShell() -> { mode, setMode(name|null), flash(text, tone?), registerCommands(list) -> unregister }
+ *   useCommands([{ name, desc, keys?, run }]) adds page commands to the command line
  * Layout: with `sections`, the shell wraps children in the page column (.wrap)
  * next to the outline rail; without them, children own their width. */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -16,7 +17,7 @@ import TopBar from './TopBar';
 
 // Part of the public API (pages import useShell from here).
 // oxlint-disable-next-line react/only-export-components
-export { useShell } from './context';
+export { useCommands, useShell } from './context';
 
 const FLASH_MS = 4000;
 
@@ -98,7 +99,15 @@ export default function AppShell({ page = 'index', sections = [], defaultMode = 
 
   const setMode = useCallback((m) => setOverride(m ?? null), []);
   const flash = useCallback((text, tone = 'info') => setMsg({ text, tone, id: Math.random() }), []);
-  const ctx = useMemo(() => ({ mode, setMode, flash }), [mode, setMode, flash]);
+  // Page commands registered through useCommands(); each registration is removed on unmount.
+  const [registered, setRegistered] = useState([]);
+  const registerCommands = useCallback((commands) => {
+    const entry = { commands };
+    setRegistered((xs) => [...xs, entry]);
+    return () => setRegistered((xs) => xs.filter((x) => x !== entry));
+  }, []);
+  const pageCommands = useMemo(() => registered.flatMap((x) => x.commands), [registered]);
+  const ctx = useMemo(() => ({ mode, setMode, flash, registerCommands }), [mode, setMode, flash, registerCommands]);
 
   useEffect(() => {
     if (!msg) return undefined;
@@ -193,6 +202,7 @@ export default function AppShell({ page = 'index', sections = [], defaultMode = 
           prefix={cmd}
           page={page}
           sections={sections}
+          extra={pageCommands}
           go={go}
           flash={flash}
           onClose={() => setCmd(null)}

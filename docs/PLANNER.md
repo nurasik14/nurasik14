@@ -50,7 +50,7 @@ no server; on Pages the hostname alone tells the page it is read-only.
 5. To publish:
 
    ```sh
-   git add public/data/plans.json && git commit -m "plans: update" && git push
+   git add public/data/plans.json public/data/google-events.json && git commit -m "plans: update" && git push
    ```
 
 Calendar keys (the grid uses a roving tab stop, so Tab enters it once):
@@ -132,6 +132,155 @@ Everything you push is **public**: titles, notes, tasks, tags, timestamps. The
 repository and the Pages site are world-readable, and git history keeps a
 plan even after you break its seal. Keep anything private out of plans you
 intend to push, or don't push `plans.json`.
+
+<a id="google"></a>
+
+## Google Calendar
+
+Two-way sync with Google Calendar, for the owner on localhost only. It is
+**manual**: nothing talks to Google until you press `sync` (or run `:sync` in
+the command line). One sync does a pull and then a push and reports
+`synced · pulled 37 · pushed +2 ~1 −0` in the statusline (`~` counts updated
+and restored events).
+
+- **Pull.** For each calendar ticked under "pull from", events from 60 days ago
+  to 365 days ahead are written to `public/data/google-events.json`. That file
+  is committed and pushed with the plans, so Pages draws the same events,
+  dashed and muted, next to the sealed plans.
+- **Push.** Every sealed plan becomes an all-day, free (transparent) event on a
+  dedicated secondary calendar named **planner.cal**, created on the first
+  sync. Sync never writes to any other calendar. The event id is the plan's
+  sha256, so a sync is idempotent. A broken seal deletes its event. If an
+  event was edited or deleted in Google, the next sync puts it back, because
+  sealed plans are the source of truth. Events you add to planner.cal by hand
+  are left alone and counted.
+
+```
+ your machine                                      Google                     GitHub Pages
+ ───────────────────────────────────────────       ───────────────────        ──────────────
+ planner page ── sync ──► …/api/google/sync
+                           │ pull: events.list ◄─── your calendars (read-only)
+                           ▼
+           public/data/google-events.json  (minimal, see below)
+                           │ push: insert/update/delete ──► planner.cal (app-created)
+                           ▲
+           public/data/plans.json (read only)
+ git add/commit/push ───────────────────────────────────────────────────────► data/*.json
+```
+
+### What is published
+
+Each pulled event becomes exactly this record:
+
+```json
+{ "id": "3f2a9c1d04ab", "title": "CS1102 lecture", "calendar": "Lectures", "color": 0,
+  "allDay": false, "start": "2026-11-02T10:00:00+08:00", "end": "2026-11-02T11:50:00+08:00",
+  "days": ["2026-11-02"] }
+```
+
+- `title` is the full title. Events marked **private** or **confidential** in
+  Google are published as `busy`.
+- `start`/`end` are `YYYY-MM-DD` with an inclusive end for all-day events, or
+  date-times with your offset. `days` lists the local days a timed event
+  touches (in the server's time zone, so Pages shows the same days).
+- `calendar` is the calendar's display name. A name that looks like an email
+  address (Google names your primary calendar after your address) is
+  published as `primary` (or `calendar N`).
+- `id` is the first 12 hex characters of sha256(calendarId + eventId), which
+  reveals neither of them.
+- Cancelled events, events you declined and working-location entries are
+  skipped.
+
+**Never published:** descriptions, locations, attendees, organizer and creator
+emails, conference/Meet links, `htmlLink` and calendar ids. Sync asks Google
+only for the fields it needs, so most of these never even reach your machine.
+The account email and the calendar list are shown on the local page only.
+
+If a selected calendar fails to load, the file is **not** rewritten. A partial
+pull would quietly drop a calendar from the site.
+
+### Secrets
+
+Secrets live outside the repo, in `~/.config/planner-cal/`. Set
+`PLANNER_CAL_HOME` to use a different directory. The dev server refuses to
+start if that directory is inside the project.
+
+| file | written by | contents |
+|---|---|---|
+| `client_secret.json` | you | the OAuth client (Desktop app) |
+| `token.json` | connect | refresh and access token (mode 0600) |
+| `settings.json` | the page | selected calendar ids, planner.cal id, last sync (mode 0600) |
+
+The directory is kept at mode 0700. Tokens never appear in a URL, a response
+or a log line.
+
+Scopes are least privilege, and the list lives in `SCOPES` in
+`plugins/google-core.js`:
+
+- `calendar.app.created`: create planner.cal and manage events on calendars
+  this app created, and only those.
+- `calendar.calendarlist.readonly`: list your calendars for "pull from".
+- `calendar.events.readonly`: read events from the calendars you tick.
+
+### One-time setup
+
+1. In the [Google Cloud console](https://console.cloud.google.com/), create a
+   project (e.g. `planner-cal`).
+2. **APIs & Services → Library**: enable **Google Calendar API**.
+3. **OAuth consent screen** (Google Auth Platform): user type **External**,
+   publishing status **Testing**. Add yourself under **Test users**, and add
+   the three scopes above under **Data access**.
+4. **Credentials → Create credentials → OAuth client ID**, application type
+   **Desktop app**. Download the JSON.
+5. Save it with tight permissions:
+
+   ```sh
+   mkdir -p -m 700 ~/.config/planner-cal
+   mv ~/Downloads/client_secret_*.json ~/.config/planner-cal/client_secret.json
+   chmod 600 ~/.config/planner-cal/client_secret.json
+   ```
+
+### Connect, sync, publish
+
+1. `bun run dev` and open `http://localhost:5173/planner/`. The google panel
+   under the publish command says `not connected`.
+2. Press **connect google**, sign in, and tick every permission. You come
+   back to the planner with `google connected` in the statusline.
+3. Open **pull from** and tick the calendars to publish. Then press **sync**.
+4. Publish the snapshot with the plans:
+
+   ```sh
+   git add public/data/plans.json public/data/google-events.json && git commit -m "plans: update" && git push
+   ```
+
+The `google events: on/off` toggle under the calendar hides the overlay on this
+browser only. It is stored in localStorage.
+
+### Revoke
+
+Press **disconnect**. It revokes the token at Google (best effort) and deletes
+`token.json`, but keeps your settings. You can also remove access at
+<https://myaccount.google.com/permissions>. Delete
+`~/.config/planner-cal/` to forget everything. planner.cal stays in your
+Google account until you delete it there.
+
+### Troubleshooting
+
+- **`access_denied` / "app has not completed verification".** The app is in
+  Testing and your account is not a test user. Add it under OAuth consent
+  screen → Test users.
+- **`redirect_uri_mismatch`.** The client is not a Desktop app (a Web client
+  only accepts registered URIs). Create a Desktop app client. Sync sends
+  `http://<host you opened>/api/google/callback`, so open the planner on
+  `localhost`, `127.0.0.1` or `[::1]`.
+- **`scopes`.** You unticked a permission on the consent screen. Connect
+  again and leave all three ticked.
+- **"access expired or revoked" / reconnect.** The refresh token stopped
+  working. You revoked it, changed the client, or the app is still in
+  Testing, where Google expires refresh tokens after 7 days. Press
+  **reconnect google**.
+- **The dev server refuses to start: "PLANNER_CAL_HOME … is inside the
+  project".** Point it somewhere outside the repo.
 
 ## Troubleshooting
 

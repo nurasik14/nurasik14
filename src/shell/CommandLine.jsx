@@ -7,7 +7,7 @@ import { copyText, CV_HREF, pad2, PAGES, scrollToId } from '../lib/nav';
 
 const openTab = (href) => window.open(href, '_blank', 'noopener,noreferrer');
 
-function buildCommands({ page, sections, go, flash }) {
+function buildCommands({ page, sections, extra, go, flash }) {
   const here = (p) => (p === page ? ' (here, scrolls to top)' : '');
   return [
     ...sections.map((s, i) => ({
@@ -16,6 +16,7 @@ function buildCommands({ page, sections, go, flash }) {
       keys: [s.key ?? String(i + 1)],
       run: () => scrollToId(s.id),
     })),
+    ...extra,
     { name: 'index', desc: `open ${PAGES.index.buffer}, the portfolio${here('index')}`, keys: ['g', 'i'], run: () => go('index') },
     { name: 'planner', desc: `open ${PAGES.planner.buffer}${here('planner')}`, keys: ['g', 'p'], run: () => go('planner') },
     { name: 'cv', desc: `open ${PROFILE.cv}`, run: () => openTab(CV_HREF) },
@@ -38,7 +39,9 @@ function buildCommands({ page, sections, go, flash }) {
 
 const FOCUSABLE = 'input, button, [href], [tabindex]:not([tabindex="-1"])';
 
-export default function CommandLine({ prefix = ':', page, sections, go, flash, onClose }) {
+const NO_EXTRA = [];
+
+export default function CommandLine({ prefix = ':', page, sections, extra = NO_EXTRA, go, flash, onClose }) {
   const [value, setValue] = useState(prefix);
   const [sel, setSel] = useState(0);
   const sheetRef = useRef(null);
@@ -46,7 +49,7 @@ export default function CommandLine({ prefix = ':', page, sections, go, flash, o
   const listRef = useRef(null);
   const pendingRef = useRef(null);
 
-  const commands = useMemo(() => buildCommands({ page, sections, go, flash }), [page, sections, go, flash]);
+  const commands = useMemo(() => buildCommands({ page, sections, extra, go, flash }), [page, sections, extra, go, flash]);
   const query = value.replace(/^[:/]/, '').trim().toLowerCase();
   const shown = useMemo(() => {
     if (!query) return commands;
