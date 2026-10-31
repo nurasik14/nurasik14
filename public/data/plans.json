@@ -1,4 +1,71 @@
 {
   "version": 1,
-  "plans": []
+  "plans": [
+    {
+      "id": "5dac5d6401",
+      "hash": "5dac5d6401f138a36d6ca154a562f07b6a90b2c1577110ed3c0c4bd1b72df749",
+      "title": "Sik Sik Yuen Wong Tai Sin Temple",
+      "notes": "",
+      "tag": "temple",
+      "start": "2026-11-08",
+      "end": "2026-11-08",
+      "sealedAt": "2026-10-31T16:55:07.054Z",
+      "tasks": [
+        {
+          "text": "Visit",
+          "done": false,
+          "doneAt": null
+        },
+        {
+          "text": "Invite someone",
+          "done": false,
+          "doneAt": null
+        },
+        {
+          "text": "Take good photos",
+          "done": false,
+          "doneAt": null
+        }
+      ]
+    },
+    {
+      "id": "80f9871ce0",
+      "hash": "80f9871ce0899cae58f15c432cde6b44c7e35b9265ecb0f3dd06ace6a57115fe",
+      "title": "Tian Tan Buddha",
+      "notes": "Ask for people that went how much they spent",
+      "tag": "",
+      "start": "2026-11-21",
+      "end": "2026-11-21",
+      "sealedAt": "2026-10-31T16:59:38.495Z",
+      "tasks": [
+        {
+          "text": "Good photos",
+          "done": false,
+          "doneAt": null
+        }
+      ]
+    },
+    {
+      "id": "e91348aa61",
+      "hash": "e91348aa6125c90c946b5c5594eb6717558f8c573ae79dd2c520285092cdc2ca",
+      "title": "Jumbo Kingdom",
+      "notes": "",
+      "tag": "",
+      "start": "2026-11-28",
+      "end": "2026-11-28",
+      "sealedAt": "2026-10-31T17:02:56.592Z",
+      "tasks": [
+        {
+          "text": "Good pictures",
+          "done": false,
+          "doneAt": null
+        },
+        {
+          "text": "Eat local",
+          "done": false,
+          "doneAt": null
+        }
+      ]
+    }
+  ]
 }
