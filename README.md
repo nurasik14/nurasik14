@@ -42,19 +42,25 @@
 
 **Live site → https://nurasik14.github.io/nurasik14/**
 
-This repository also hosts my portfolio site (React 19, Vite, Tailwind). The page is laid out as an
-agent run: the hero answers "who is this?" with real tool calls, and every project is an expandable
-tool-call card with its input config on the left and measured results (e.g. DQN training curves) on the right.
+This repository also hosts my portfolio site (React 19, Vite, Tailwind, run with bun). It is styled as
+an editor session with two open buffers: `index.md`, the portfolio, and `planner.cal`, my planner at
+`/planner/`. A vim-like statusline at the bottom shows the real mode, buffer, section and scroll
+position, and `:` opens a command line. The hero shows real DQN training curves (fig. 1). Projects
+are an experiments ledger: each row expands to show its config as YAML and its measured results.
 
-<img src="./screenshots/hero.png" alt="Portfolio hero: name and a live agent run that summarizes my work">
+<img src="./screenshots/hero.png" alt="Portfolio hero: YAML frontmatter, name, and fig. 1 with DQN training curves">
 
 <p>
-  <img src="./screenshots/projects.png" alt="Projects as expandable tool-call cards, with DQN training curves" width="72%">
-  <img src="./screenshots/mobile.png" alt="The site on a phone" width="25%">
+  <img src="./screenshots/projects.png" alt="Projects as an experiments ledger with config and measured results" width="72%">
+  <img src="./screenshots/mobile.png" alt="planner.cal on a phone" width="25%">
 </p>
 
+<img src="./screenshots/planner.png" alt="planner.cal: month calendar with a sealed plan, its sha256 and task checklist">
+
 ```bash
-pnpm install && pnpm dev
+bun install
+bun run dev     # http://localhost:5173/  (planner: http://localhost:5173/planner/)
+bun run build   # static site in dist/
 ```
 
 All content lives in `src/config/portfolio.config.js`. See [MAINTAINING.md](./MAINTAINING.md).

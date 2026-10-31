@@ -90,7 +90,7 @@
     @apply mx-auto w-full max-w-page px-4 sm:px-6;
   }
   .btn {
-    @apply inline-flex h-10 items-center gap-2 rounded border border-line-strong bg-surface px-3.5 font-mono text-[13px] font-medium text-fg no-underline transition-colors hover:border-fg-dim hover:bg-surface-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex h-10 max-w-full items-center gap-2 rounded border border-line-strong bg-surface px-3.5 font-mono text-[13px] font-medium text-fg no-underline transition-colors hover:border-fg-dim hover:bg-surface-2 disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
     @apply border-signal bg-signal text-signal-ink hover:border-signal hover:bg-signal hover:brightness-110;
@@ -106,5 +106,49 @@
   }
   .label {
     @apply font-mono text-[12px] uppercase tracking-[0.08em] text-fg-faint;
+  }
+}
+
+/* ---- Shell + portfolio additions (v3) --------------------------------- */
+@layer base {
+  html {
+    /* the fixed 28px statusline must never cover a focused element */
+    scroll-padding-bottom: 2.5rem;
+  }
+}
+
+@layer components {
+  /* Sheet rising from the statusline; disclosure panels. Reduced motion is
+   * handled by the global rule above (durations collapse to ~0). */
+  .anim-rise {
+    animation: sheet-rise 160ms ease-out both;
+  }
+  .anim-disclose {
+    animation: disclose 150ms ease-out both;
+  }
+  /* Inline text links in prose: dim underline that brightens on hover. */
+  .link {
+    @apply underline decoration-line-strong decoration-1 underline-offset-[3px] transition-colors hover:text-fg hover:decoration-fg;
+  }
+}
+
+@keyframes sheet-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes disclose {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }

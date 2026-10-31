@@ -1,19 +1,22 @@
-export function SectionHeader({ name, aside }) {
-  return (
-    <div className="flex flex-wrap items-baseline gap-x-5 gap-y-2 border-b border-line pb-3.5">
-      <h2 className="font-mono text-[30px] font-bold leading-tight tracking-[-0.03em]">
-        <span className="font-normal text-neutral-600">./</span>
-        {name}
-      </h2>
-      {aside && <span className="ml-auto font-mono text-[13px] text-fg-dim">{aside}</span>}
-    </div>
-  );
-}
+// "## 01 projects": markdown-style heading; the number is the shortcut key.
+import { pad2 } from '../lib/nav';
 
-export function Section({ id, className = 'pt-[88px]', children }) {
+export default function Section({ id, n, title, aside, children }) {
   return (
-    <section id={id} className={`scroll-mt-16 ${className}`}>
-      <div className="wrap">{children}</div>
+    <section
+      id={id}
+      tabIndex={-1}
+      aria-labelledby={`${id}-title`}
+      className="mt-16 scroll-mt-16 border-t border-line pt-16 focus:outline-none"
+    >
+      <div className="mb-8 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+        <h2 id={`${id}-title`} className="font-mono text-[22px] font-medium leading-tight tracking-[-0.01em] text-fg">
+          <span aria-hidden className="text-fg-faint">## </span>
+          <span className="text-signal">{pad2(n)}</span> {title}
+        </h2>
+        {aside && <p className="font-mono text-[12px] text-fg-faint">{aside}</p>}
+      </div>
+      {children}
     </section>
   );
 }

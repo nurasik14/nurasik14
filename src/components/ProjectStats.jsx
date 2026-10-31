@@ -1,77 +1,78 @@
-/* The "stats" panel for each project card. Keyed by `stats` in
- * portfolio.config.js; an { empty, note } object renders a placeholder. */
+/* The results panel inside an open project row. Keyed by `stats` in
+ * portfolio.config.js; an { empty, note } object renders an honest
+ * placeholder instead of a number nobody measured. */
 import { DQN_RUNS } from '../config/portfolio.config';
 import { valueAt } from '../lib/chart';
-import StepChart from './StepChart';
 
-const GREEN = '#22c55e';
-const CYAN = '#06b6d4';
+const n = (v) => v.toLocaleString('en-US');
 
 function Empty({ title, children, className = '' }) {
   return (
-    <div className={`rounded-lg border border-dashed border-line p-[18px] font-sans text-sm leading-relaxed text-fg-dim ${className}`}>
-      <b className="mb-1 block font-mono text-[13px] font-medium text-neutral-200">{title}</b>
-      {children}
+    <div className={`rounded border border-dashed border-line-strong/60 px-4 py-3 text-[14px] leading-relaxed text-fg-dim ${className}`}>
+      <p className="font-mono text-[13px] text-fg">
+        <span aria-hidden className="text-fg-faint">∅ </span>
+        {title}
+      </p>
+      <p className="mt-1 max-w-[60ch]">{children}</p>
     </div>
   );
 }
 
-function Fig({ value, label, tone = 'text-neutral-200' }) {
+function Fig({ value, children }) {
   return (
-    <div className="rounded-md border border-line-soft bg-black px-3 py-2.5">
-      <b className={`block font-mono text-2xl font-bold leading-tight tracking-tight tabular-nums ${tone}`}>{value}</b>
-      <span className="mt-1.5 block font-sans text-[12.5px] leading-snug text-fg-dim">{label}</span>
+    // dt first in the DOM, value shown on top
+    <div className="flex flex-col-reverse justify-end rounded border border-line-soft bg-bg px-3 py-2.5">
+      <dt className="mt-1 text-[13px] leading-snug text-fg-dim">{children}</dt>
+      <dd className="font-mono text-[22px] font-medium leading-tight tracking-[-0.02em] text-fg">{value}</dd>
     </div>
   );
 }
 
 function DqnStats() {
   const { double, dueling } = DQN_RUNS;
-  const duelEnd = dueling.at(-1)[0];
+  const [dx, dy] = double.at(-1);
+  const [ux, uy] = dueling.at(-1);
   const episodes = [...new Set([...double, ...dueling].map((p) => p[0]))].sort((a, b) => a - b);
   return (
     <>
-      <div className="mb-[18px] grid gap-2.5 sm:grid-cols-3">
-        <Fig value={double.at(-1)[1]} tone="text-term-green" label={`best reward, Double DQN, ${double.at(-1)[0].toLocaleString('en-US')} episodes`} />
-        <Fig value={dueling.at(-1)[1]} tone="text-term-cyan" label={`Dueling DQN best after ${duelEnd.toLocaleString('en-US')} episodes`} />
-        <Fig value={valueAt(double, duelEnd)} label="Double DQN best at that same point" />
-      </div>
-      <div className="mb-1.5 flex flex-wrap gap-4 font-mono text-xs text-fg-dim">
-        <span><i className="mr-1.5 inline-block w-[18px] border-t-2 border-term-green align-middle" />double_dqn</span>
-        <span><i className="mr-1.5 inline-block w-[18px] border-t-2 border-dashed border-term-cyan align-middle" />dueling_dqn</span>
-      </div>
-      <StepChart
-        label="Best reward by training episode. Double DQN rises from minus 8.7 to 53.1 over 168,126 episodes. Dueling DQN reaches 15.2 by episode 34,422, when its run stopped."
-        xDomain={[0, 170000]}
-        yDomain={[-10, 60]}
-        xTicks={[0, 50000, 100000, 150000]}
-        yTicks={[0, 20, 40, 60]}
-        series={[
-          { key: 'double', name: 'double_dqn', points: double, color: GREEN, label: `double ${double.at(-1)[1]}` },
-          { key: 'dueling', name: 'dueling_dqn', points: dueling, color: CYAN, dashed: true, label: `dueling ${dueling.at(-1)[1]}`, labelDy: -8 },
-        ]}
-      />
-      <p className="mt-3 max-w-[46em] font-sans text-sm leading-relaxed text-fg-dim">
-        <b className="font-medium text-neutral-200">Dueling learned faster early on</b>, ahead of Double DQN at 34k
-        episodes. I stopped the Dueling run there, so the long-run comparison is still open.
+      <dl className="grid gap-2 sm:grid-cols-3">
+        <Fig value={dy}>Double DQN best, {n(dx)} episodes</Fig>
+        <Fig value={uy}>Dueling DQN best, {n(ux)} episodes</Fig>
+        <Fig value={valueAt(double, ux)}>Double DQN best at episode {n(ux)}</Fig>
+      </dl>
+      <p className="mt-3 max-w-[62ch] text-[14px] leading-relaxed text-fg-dim">
+        <span className="text-fg">Dueling learned faster early on</span>: it was ahead of Double DQN when I stopped its run at{' '}
+        {n(ux)} episodes, so the long-run comparison is still open. The curves are{' '}
+        <a href="#fig-1" className="link font-mono text-[13px]">
+          fig. 1 ↑
+        </a>
+        .
       </p>
-      <details className="mt-2.5 font-mono text-xs text-fg-dim">
-        <summary className="w-fit cursor-pointer hover:text-neutral-200">show data as a table</summary>
-        <div className="mt-2 overflow-x-auto">
+      <details className="group mt-3 font-mono text-[12px] text-fg-dim">
+        <summary className="w-fit cursor-pointer list-none rounded px-1 -mx-1 hover:text-fg [&::-webkit-details-marker]:hidden">
+          <span aria-hidden className="inline-block w-[2ch] transition-transform duration-150 group-open:rotate-90">▸</span>
+          data as a table
+        </summary>
+        <div className="mt-2 overflow-x-auto" role="region" aria-label="DQN checkpoints table" tabIndex={0}>
           <table className="border-collapse tabular-nums">
+            <caption className="sr-only">Best reward so far at each checkpoint</caption>
             <thead>
-              <tr>
-                {['episode', 'double best', 'dueling best'].map((h) => (
-                  <th key={h} className="border-b border-line-soft py-1 pr-[18px] text-right font-medium">{h}</th>
+              <tr className="text-fg-faint">
+                {['episode', 'double', 'dueling'].map((h) => (
+                  <th key={h} scope="col" className="border-b border-line py-1 pr-5 text-right font-normal">
+                    {h}
+                  </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="text-neutral-200">
+            <tbody className="text-fg">
               {episodes.map((e) => (
                 <tr key={e}>
-                  <td className="border-b border-line-soft py-1 pr-[18px] text-right">{e.toLocaleString('en-US')}</td>
-                  <td className="border-b border-line-soft py-1 pr-[18px] text-right">{valueAt(double, e)}</td>
-                  <td className="border-b border-line-soft py-1 pr-[18px] text-right">{e <= duelEnd ? valueAt(dueling, e) : '–'}</td>
+                  <th scope="row" className="border-b border-line-soft py-1 pr-5 text-right font-normal text-fg-dim">
+                    {n(e)}
+                  </th>
+                  <td className="border-b border-line-soft py-1 pr-5 text-right">{valueAt(double, e)}</td>
+                  <td className="border-b border-line-soft py-1 pr-5 text-right">{e <= ux ? valueAt(dueling, e) : '–'}</td>
                 </tr>
               ))}
             </tbody>
@@ -84,57 +85,80 @@ function DqnStats() {
 
 function Node({ children, sub, hl }) {
   return (
-    <div className={`rounded-md border bg-black px-2.5 py-2 ${hl ? 'border-term-cyan/50' : 'border-line'}`}>
-      {children}
-      {sub && <small className="mt-0.5 block text-[11.5px] text-fg-dim">{sub}</small>}
+    <div className={`rounded border bg-bg px-2.5 py-2 ${hl ? 'border-info/70' : 'border-line'}`}>
+      <span className={hl ? 'text-info' : 'text-fg'}>{children}</span>
+      {sub && <small className="mt-0.5 block text-[12px] text-fg-faint">{sub}</small>}
     </div>
   );
 }
 
 function SearchStats() {
-  const wire = <span aria-hidden className="text-center text-neutral-600 max-sm:w-5 max-sm:rotate-90">→</span>;
+  const wire = (
+    <span aria-hidden className="text-center text-fg-faint max-sm:w-5 max-sm:rotate-90">
+      →
+    </span>
+  );
   return (
     <>
       <div
         role="img"
         aria-label="A question goes to a local model, which calls either the native search tool or my SearXNG tool, then answers."
-        className="grid items-center gap-2.5 font-mono text-[12.5px] sm:grid-cols-[auto_20px_minmax(0,1fr)_20px_auto]"
+        className="grid items-center gap-2 font-mono text-[13px] sm:grid-cols-[auto_1.25rem_minmax(0,1fr)_1.25rem_auto]"
       >
         <Node>question</Node>
         {wire}
         <div className="grid gap-2">
           <Node sub="provider picked by the model">native tool call</Node>
-          <Node sub="self-hosted, I pick the sources" hl>searxng_search()</Node>
+          <Node sub="self-hosted, I pick the sources" hl>
+            searxng_search()
+          </Node>
         </div>
         {wire}
         <Node>answer</Node>
       </div>
-      <Empty title="no benchmark yet" className="mt-4">
-        Next I'll score both modes on one fixed question set and chart task success and seconds per answer here.
+      <Empty title="no benchmark yet" className="mt-3">
+        Next I&apos;ll score both modes on one fixed question set and report task success and seconds per answer here.
       </Empty>
     </>
   );
 }
 
 function RagStats() {
-  const cols = ['kk dense', 'kk hybrid', 'ru dense', 'ru hybrid', 'en dense', 'en hybrid'];
-  const heights = [40, 55, 35, 60, 45, 70];
+  const langs = ['kk', 'ru', 'en'];
   return (
     <>
-      <div aria-hidden className="grid h-[120px] grid-cols-6 items-end gap-2.5 border-b border-line px-3 pt-3">
-        {heights.map((h, i) => (
-          <i
-            key={i}
-            className="block rounded-t-[3px] border border-b-0 border-dashed border-line"
-            style={{ height: `${h}%`, background: 'repeating-linear-gradient(135deg, #1a1a1a 0 4px, transparent 4px 8px)' }}
-          />
-        ))}
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse font-mono text-[13px] tabular-nums">
+          <caption className="sr-only">recall@5 by language and retrieval method: not measured yet</caption>
+          <thead>
+            <tr className="text-fg-faint">
+              <th scope="col" className="border-b border-line py-1 pr-4 text-left font-normal">recall@5</th>
+              {langs.map((l) => (
+                <th key={l} scope="col" className="border-b border-line py-1 pr-4 text-right font-normal">
+                  {l}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {['dense', 'hybrid'].map((m) => (
+              <tr key={m}>
+                <th scope="row" className="border-b border-line-soft py-1.5 pr-4 text-left font-normal text-fg">
+                  {m}
+                </th>
+                {langs.map((l) => (
+                  <td key={l} className="border-b border-line-soft py-1.5 pr-4 text-right text-fg-faint">
+                    <span aria-hidden>—</span>
+                    <span className="sr-only">not measured</span>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <div aria-hidden className="grid grid-cols-6 gap-2.5 px-3 pt-1.5 text-center font-mono text-[11px] text-neutral-600">
-        {cols.map((c) => <span key={c}>{c}</span>)}
-      </div>
-      <Empty title="waiting for the first benchmark" className="mt-4">
-        Recall@5 per language and retrieval method goes here once it's measured. The bars above are placeholders, not results.
+      <Empty title="waiting for the first benchmark" className="mt-3">
+        Recall@5 per language and retrieval method goes in this table once it&apos;s measured. Every cell is empty until then.
       </Empty>
     </>
   );

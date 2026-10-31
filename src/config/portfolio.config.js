@@ -9,6 +9,9 @@
 export const PROFILE = {
   name: 'Nurassyl Serikov',
   handle: 'nurassyl',
+  // Not shown on the page (the lede says it); kept as the one-line role.
+  role: 'first-year CS student, City University of Hong Kong',
+  location: 'Hong Kong',
   status: 'open to AI/ML internships in Hong Kong',
   focus: ['LLM agents', 'reinforcement learning', 'retrieval'],
   lede:
@@ -16,6 +19,8 @@ export const PROFILE = {
   // Put the PDF at public/Nurassyl_Serikov_CV.pdf and it is served from here.
   cv: 'Nurassyl_Serikov_CV.pdf',
   email: 'nurasik.s@my.cityu.edu.hk',
+  contactNote: 'Email is the fastest way to reach me.',
+  // `prefix` without the slash is also the command-line name (:gh, :hf, :in).
   links: [
     { prefix: 'gh/', label: 'nurasik14', href: 'https://github.com/nurasik14' },
     { prefix: 'hf/', label: 'Nurasik12', href: 'https://huggingface.co/Nurasik12' },
@@ -25,7 +30,8 @@ export const PROFILE = {
 
 /* ---- DQN training logs (FlappyBird-RL/runs/graphs/*.log) ----------
  * [episode, best reward so far]. Copied from the "new best reward"
- * lines. flappybird2 = Double DQN, flappybird3 = Dueling DQN.        */
+ * lines. flappybird2 = Double DQN, flappybird3 = Dueling DQN.
+ * Drawn as fig. 1 in the hero and summarised in the train_dqn row.   */
 export const DQN_RUNS = {
   double: [
     [0, -8.7], [11969, 4.3], [22279, 9.1], [66065, 12.9], [76205, 22.4], [93710, 29.5],
@@ -36,21 +42,9 @@ export const DQN_RUNS = {
   ],
 };
 
-/* ---- hero: the agent run that introduces me ----------------------
- * `out` is rendered as a JSON-ish line; `spark: true` adds the DQN curve. */
-export const AGENT_RUN = {
-  prompt: "Summarize Nurassyl Serikov's work.",
-  steps: [
-    { fn: 'read_profile', arg: '"nurasik14"', out: { school: 'CityU', degree: 'BSc CS', years: '2026-2030', scholarship: 'full' } },
-    { fn: 'read_log', arg: '"FlappyBird-RL/runs/flappybird2.log"', out: 'best_reward -8.7 → 53.1 over 168,126 episodes', spark: true },
-    { fn: 'list_repos', arg: 'topic="agents"', out: ['OllamaSearch', 'Visual-UI-for-an-AI-agent'] },
-    { fn: 'list_awards', arg: 'limit=3', out: ['FAIO 2025 bronze', 'StemCo 2025 gold', 'BestYs scholarship'] },
-  ],
-  answer:
-    'A CityU CS student who ships small, measurable ML projects: a DQN agent that reached a best reward of 53.1, and local LLM agents with their own search tool. Medals in AI and science olympiads. Looking for an internship.',
-};
-
-/* ---- tech stack (LogoLoop) ---------------------------------------- */
+/* ---- tech stack: [name, group] ------------------------------------
+ * Rendered as a package manifest in "## 04 stack", grouped by the
+ * second field in order of first appearance.                         */
 export const TOOLS = [
   ['python', 'lang'], ['pytorch', 'ml'], ['hugging face', 'ml'], ['scikit-learn', 'ml'],
   ['numpy', 'data'], ['pandas', 'data'], ['ollama', 'llm'], ['claude api', 'llm'],
@@ -59,9 +53,14 @@ export const TOOLS = [
   ['docker', 'ops'], ['linux', 'ops'], ['git', 'ops'], ['playwright', 'test'],
 ];
 
-/* ---- projects (ToolCallVisualizer) --------------------------------
+/* ---- projects: the experiments ledger in "## 01 projects" ----------
+ * id: unique; the row is deep-linkable as #project-<id>
  * status: 'complete' | 'running' | 'archived'
- * The first `input` entry becomes the signature: name(key=value).
+ * result: one line on the collapsed row. Only measured numbers; if
+ *         nothing is measured yet, say so.
+ * stack: optional; falls back to input.stack
+ * input: rendered as YAML (inputFile names the block); a `repo` value
+ *        ("owner/name") also becomes the row's repo link.
  * stats: 'dqn' | 'search' | 'rag' | { empty: title, note }          */
 export const PROJECTS = [
   {
@@ -69,6 +68,8 @@ export const PROJECTS = [
     name: 'train_dqn',
     status: 'complete',
     defaultOpen: true,
+    // Same numbers as the last DQN_RUNS.double point; keep them in sync.
+    result: 'Double DQN: best reward 53.1 after 168,126 episodes',
     description:
       'A PyTorch agent that learns to play Flappy Bird from reward alone. I trained Double and Dueling DQN and compared them.',
     inputFile: 'config.yaml',
@@ -91,9 +92,11 @@ export const PROJECTS = [
     id: 'search',
     name: 'ollama_search',
     status: 'complete',
+    result: 'both search modes built; not benchmarked yet',
+    stack: ['ollama', 'searxng'],
     description:
       "Two ways to give a local LLM web search, built and compared: the model's native tool calling, and my own tool on a self-hosted SearXNG engine.",
-    inputFile: 'tools.json',
+    inputFile: 'tools.yaml',
     input: {
       mode: ['native', 'searxng'],
       runtime: 'ollama (local)',
@@ -107,9 +110,10 @@ export const PROJECTS = [
     id: 'rag',
     name: 'trilingual_rag',
     status: 'running',
+    result: 'in progress; recall@5 not measured yet',
     description:
       'Question answering over Kazakh, Russian and English documents, comparing dense and hybrid retrieval.',
-    inputFile: 'eval.json',
+    inputFile: 'eval.yaml',
     input: {
       langs: ['kk', 'ru', 'en'],
       retrieval: ['dense', 'hybrid'],
@@ -124,14 +128,16 @@ export const PROJECTS = [
     id: 'memory',
     name: 'character_memory',
     status: 'archived',
+    result: 'prototype; code not published',
     description: 'LLM characters that remember earlier conversations through an embedding store.',
     input: { store: 'embeddings', stack: ['python', 'llm', 'embeddings'], memory: 'retrieve past turns by similarity' },
-    stats: { empty: 'prototype, code not published', note: "I'm rebuilding it in public. This card will link the repo when it's up." },
+    stats: { empty: 'prototype, code not published', note: "I'm rebuilding it in public. This row will link the repo when it's up." },
   },
   {
     id: 'cursor',
     name: 'handsfree_cursor',
     status: 'archived',
+    result: 'experiment; code not published',
     description: 'Moving the mouse with body landmarks from MediaPipe, for people with limited mobility.',
     input: { input: 'pose', stack: ['opencv', 'mediapipe'], maps: 'body landmarks -> cursor position' },
     stats: { empty: 'experiment, code not published', note: 'Next version will measure cursor smoothing and latency.' },
@@ -162,7 +168,8 @@ export const EXPERIENCE = [
   },
 ];
 
-/* ---- awards: medal is 'gold' | 'bronze' | 'merit' ----------------- */
+/* ---- awards: medal is 'gold' | 'bronze' | 'merit' -----------------
+ * `label` is the word shown (e.g. '2× gold'); `medal` picks the glyph. */
 export const AWARDS = [
   { medal: 'bronze', label: 'bronze', title: 'International AI Olympiad (FAIO)', note: 'Top 7.1% of 291+ participants', year: 2025 },
   { medal: 'gold', label: 'gold', title: 'StemCo Global Sciences, Singapore', note: 'Plus two bronze. Top 0.1% of 12,000+', year: 2025 },
@@ -171,7 +178,9 @@ export const AWARDS = [
   { medal: 'bronze', label: 'bronze', title: 'Iranian Geometry Olympiad, and AIMO', note: '1,245 in the geometry olympiad', year: 2024 },
 ];
 
-/* ---- education: rendered as a YAML block -------------------------- */
+/* ---- education: rendered as a YAML block --------------------------
+ * fields: [key, value, optional # comment]. Values may be strings,
+ * numbers, arrays (flow list) or flat objects (flow mapping).        */
 export const EDUCATION = [
   {
     key: 'cityu',
@@ -180,8 +189,7 @@ export const EDUCATION = [
       ['years', '2026-2030'],
       ['funding', 'full scholarship'],
       ['program', 'Tiger/Talents'],
-      // \n + spaces continues a long value on the next line, aligned under the "["
-      ['taking', '[linear algebra, probability,\n           data structures, algorithms]'],
+      ['taking', ['linear algebra', 'probability', 'data structures', 'algorithms']],
     ],
   },
   {
@@ -191,7 +199,7 @@ export const EDUCATION = [
       ['gpa', '4.78/5'],
       ['sat', '1520', 'math 800'],
       ['ielts', '7.0'],
-      ['a_levels', '{physics: A*, cs: A*, math: A}'],
+      ['a_levels', { physics: 'A*', cs: 'A*', math: 'A' }],
     ],
   },
 ];

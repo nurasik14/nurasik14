@@ -1,53 +1,47 @@
-import { useRef, useState } from 'react';
+// ## 05 contact: a real mailto, a copy button that reports in the statusline.
+import { useRef } from 'react';
 import { PROFILE } from '../config/portfolio.config';
-import { copyEmail } from '../lib/nav';
-import { ProfileLinks } from './Hero';
-import { Section, SectionHeader } from './Section';
+import { copyText } from '../lib/nav';
+import { useShell } from '../shell/AppShell';
+import ProfileLinks from './ProfileLinks';
+import Section from './Section';
 
-export default function Contact() {
-  const [label, setLabel] = useState('copy address');
+export default function Contact({ n }) {
+  const { flash } = useShell();
   const mailRef = useRef(null);
 
   const onCopy = () =>
-    copyEmail()
-      .then(() => {
-        setLabel('copied');
-        setTimeout(() => setLabel('copy address'), 1600);
-      })
-      .catch(() => {
+    copyText(PROFILE.email).then(
+      () => flash('yanked email', 'ok'),
+      () => {
+        // Clipboard blocked: select the address so Ctrl/Cmd+C works.
         const range = document.createRange();
         range.selectNodeContents(mailRef.current);
         const sel = window.getSelection();
         sel.removeAllRanges();
         sel.addRange(range);
-        setLabel('selected, press Ctrl C');
-      });
+        flash('copy blocked; address selected, press Ctrl+C', 'warn');
+      },
+    );
 
   return (
-    <Section id="contact" className="pb-14 pt-[104px]">
-      <SectionHeader name="contact" />
-      <div className="mt-7 rounded-[10px] border border-line bg-panel p-[22px]">
-        <p className="font-mono text-sm text-fg-dim">
-          <span className="mr-2 text-term-green">$</span>email is the fastest way to reach me
-        </p>
-        <div className="mt-2.5 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <a
-            ref={mailRef}
-            href={`mailto:${PROFILE.email}`}
-            className="break-all font-mono text-[clamp(1.4rem,4.6vw,3.25rem)] font-bold leading-tight tracking-[-0.04em] no-underline hover:text-term-green"
-          >
-            {PROFILE.email}
-          </a>
-          <button
-            type="button"
-            onClick={onCopy}
-            className="rounded-md border border-line px-2.5 py-1.5 font-mono text-[13px] text-fg-dim hover:border-neutral-600 hover:text-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-term-green"
-          >
-            {label}
-          </button>
-        </div>
-        <ProfileLinks className="mt-6" />
+    <Section id="contact" n={n} title="contact">
+      <p className="max-w-[60ch] text-fg-dim">
+        {PROFILE.contactNote} I&apos;m {PROFILE.status}.
+      </p>
+      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3">
+        <a
+          ref={mailRef}
+          href={`mailto:${PROFILE.email}`}
+          className="font-mono text-[clamp(1.05rem,3.6vw,1.75rem)] font-medium tracking-[-0.02em] text-fg underline decoration-line-strong decoration-1 underline-offset-[6px] transition-colors [overflow-wrap:anywhere] hover:decoration-fg"
+        >
+          {PROFILE.email}
+        </a>
+        <button type="button" onClick={onCopy} className="btn h-8 px-2.5 text-[12px]">
+          copy<span className="sr-only"> email address</span>
+        </button>
       </div>
+      <ProfileLinks className="mt-6" />
     </Section>
   );
 }

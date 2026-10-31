@@ -5,5 +5,11 @@ export const valueAt = (points, x) => {
   return v;
 };
 
-export const stepPath = (points, sx, sy) =>
-  points.reduce((d, [x, y], i) => (i ? `${d}H${sx(x)}V${sy(y)}` : `M${sx(x)},${sy(y)}`), '');
+// Drawn from the last point back to the first, so a dash pattern starts
+// exactly at the endpoint dot instead of possibly ending in a gap.
+export const stepPath = (points, sx, sy) => {
+  const [lx, ly] = points.at(-1);
+  let d = `M${sx(lx)},${sy(ly)}`;
+  for (let i = points.length - 1; i > 0; i--) d += `V${sy(points[i - 1][1])}H${sx(points[i - 1][0])}`;
+  return d;
+};

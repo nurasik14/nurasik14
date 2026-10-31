@@ -103,3 +103,38 @@ Nothing may scroll horizontally except an explicitly labelled code block.
 - Every control works. Remove a control rather than fake it.
 - Build info in the footer comes from real values: the git short sha and
   build date, injected at build time.
+
+## Shipped notes
+
+Notes from the first build of the shell and the portfolio page (agent A):
+
+- **Shell layout.** With `sections`, AppShell puts children in the `.wrap`
+  page column next to the outline rail (rail 10.5rem + 48px gap at ≥1100px).
+  Without `sections`, as on the planner, children control their own width.
+  `useShell` is re-exported from `src/shell/context.js`.
+- **Modes.** The displayed mode is `SEALED` if a page set it. Otherwise it is
+  `INSERT` while a text control (not a checkbox, button or read-only field)
+  has focus, and otherwise the page mode (`setMode`, falling back to
+  `defaultMode`). The command line's own input does not count as INSERT.
+- **Current section.** An IntersectionObserver with a `-56px 0 -40% 0` root
+  margin picks the last section in that band. The rail (`▌` and
+  `aria-current="location"`) and the statusline (`## 01 projects`) both read it.
+- **Command line.** The list sits above the input, so the input stays next to
+  the statusline, as in vim. Enter on an unknown command closes the sheet and
+  flashes `E492: not an editor command` in warn. Focus goes back to the opener
+  first, and then the command runs, so section jumps can take focus.
+- **Sections** have `tabIndex=-1`. Number keys and commands scroll to them
+  and move focus there, so the next Tab continues from the new position.
+- **fig. 1.** The viewBox follows the rendered width, so axis text stays at
+  11–12px. Below 420px the direct labels split onto two lines. Double DQN is a
+  solid `fg` line and Dueling a dashed `info` line. There is no legend: each
+  direct label starts with a solid or dashed swatch, so colour is not needed.
+  The y axis runs from -10 so the first checkpoint (-8.7) sits above a
+  labelled tick, and the x-axis title has its own row under the tick labels.
+  Focus the chart and use ←/→ to step through
+  checkpoints, with the readout in an `aria-live` line.
+- **Projects ledger.** Column layout from `lg`; below that, id and stack
+  move under the name. The rag panel shows an empty recall@5 table (every
+  cell "not measured") in place of v2's placeholder bars.
+- **Build stamp.** `src/shell/build.js` reads `VITE_COMMIT` and
+  `VITE_BUILT_AT`. They still need to be defined in vite.config.js or CI.
