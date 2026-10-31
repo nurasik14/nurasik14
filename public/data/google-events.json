@@ -1,10 +1,7584 @@
 {
   "version": 1,
-  "pulledAt": null,
+  "pulledAt": "2026-10-31T17:03:03.911Z",
   "window": {
-    "start": null,
-    "end": null
+    "start": "2026-09-02",
+    "end": "2027-11-01"
   },
-  "calendars": [],
-  "events": []
+  "calendars": [
+    {
+      "name": "primary",
+      "color": 0
+    },
+    {
+      "name": "Holidays in Hong Kong",
+      "color": 1
+    },
+    {
+      "name": "Muslim Holidays",
+      "color": 2
+    },
+    {
+      "name": "Phases of the Moon",
+      "color": 0
+    },
+    {
+      "name": "Праздники Казахстана",
+      "color": 1
+    }
+  ],
+  "events": [
+    {
+      "id": "16e54aa220a4",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-02T09:00:00+08:00",
+      "end": "2026-09-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-02"
+      ]
+    },
+    {
+      "id": "d279d74f0340",
+      "title": "Last quarter 3:51pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-09-04",
+      "end": "2026-09-04",
+      "allDay": true
+    },
+    {
+      "id": "baf9104de728",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-07T12:00:00+08:00",
+      "end": "2026-09-07T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-07"
+      ]
+    },
+    {
+      "id": "f0759a55e290",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-08T09:00:00+08:00",
+      "end": "2026-09-08T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-08"
+      ]
+    },
+    {
+      "id": "83d35b373da2",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-08T12:00:00+08:00",
+      "end": "2026-09-08T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-08"
+      ]
+    },
+    {
+      "id": "6bba5b53611d",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-08T16:00:00+08:00",
+      "end": "2026-09-08T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-08"
+      ]
+    },
+    {
+      "id": "5ec0aa5dee39",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-09T09:00:00+08:00",
+      "end": "2026-09-09T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-09"
+      ]
+    },
+    {
+      "id": "9149d2dd8154",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-09T12:00:00+08:00",
+      "end": "2026-09-09T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-09"
+      ]
+    },
+    {
+      "id": "b044b0000efa",
+      "title": "Welcome Night",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-09T20:00:00+08:00",
+      "end": "2026-09-09T22:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-09"
+      ]
+    },
+    {
+      "id": "e3432d8c937d",
+      "title": "House of Impact",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-10T12:00:00+08:00",
+      "end": "2026-09-10T14:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-10"
+      ]
+    },
+    {
+      "id": "90b56de12869",
+      "title": "New moon 11:27am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-09-11",
+      "end": "2026-09-11",
+      "allDay": true
+    },
+    {
+      "id": "614daa1916de",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-11T09:00:00+08:00",
+      "end": "2026-09-11T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-11"
+      ]
+    },
+    {
+      "id": "100def9f7f68",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-14T12:00:00+08:00",
+      "end": "2026-09-14T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-14"
+      ]
+    },
+    {
+      "id": "5a921532003c",
+      "title": "Basketball",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-14T15:00:00+08:00",
+      "end": "2026-09-14T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-14"
+      ]
+    },
+    {
+      "id": "dc359756340c",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-15T09:00:00+08:00",
+      "end": "2026-09-15T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-15"
+      ]
+    },
+    {
+      "id": "811117c18b0c",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-15T12:00:00+08:00",
+      "end": "2026-09-15T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-15"
+      ]
+    },
+    {
+      "id": "aa6ec92dd969",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-15T16:00:00+08:00",
+      "end": "2026-09-15T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-15"
+      ]
+    },
+    {
+      "id": "4f4599e6d465",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-16T09:00:00+08:00",
+      "end": "2026-09-16T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-16"
+      ]
+    },
+    {
+      "id": "f37f9e620b9f",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-16T12:00:00+08:00",
+      "end": "2026-09-16T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-16"
+      ]
+    },
+    {
+      "id": "524ca0ff5553",
+      "title": "Physical Education(T) PED1305",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-17T09:00:00+08:00",
+      "end": "2026-09-17T10:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-17"
+      ]
+    },
+    {
+      "id": "572d3198ff71",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-18T09:00:00+08:00",
+      "end": "2026-09-18T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-18"
+      ]
+    },
+    {
+      "id": "e7807a45a892",
+      "title": "Kazakh welcome Cityu",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-18T16:00:00+08:00",
+      "end": "2026-09-18T18:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-18"
+      ]
+    },
+    {
+      "id": "ee0dff247bc2",
+      "title": "First quarter 4:44am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-09-19",
+      "end": "2026-09-19",
+      "allDay": true
+    },
+    {
+      "id": "ea77f126c260",
+      "title": "Launch day Gen AI",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-19T00:00:00+08:00",
+      "end": "2026-09-19T18:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-19"
+      ]
+    },
+    {
+      "id": "0f250f30aefb",
+      "title": "Computer Organization(C) CS2115 Quiz Closed Book",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-21T12:00:00+08:00",
+      "end": "2026-09-21T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-21"
+      ]
+    },
+    {
+      "id": "ffcc59d6a641",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-21T16:00:00+08:00",
+      "end": "2026-09-21T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-21"
+      ]
+    },
+    {
+      "id": "f6806100a47f",
+      "title": "Robocon Interview",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-21T16:30:00+08:00",
+      "end": "2026-09-21T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-21"
+      ]
+    },
+    {
+      "id": "c206c4d819f6",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-22T09:00:00+08:00",
+      "end": "2026-09-22T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-22"
+      ]
+    },
+    {
+      "id": "40fca0315b65",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-22T12:00:00+08:00",
+      "end": "2026-09-22T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-22"
+      ]
+    },
+    {
+      "id": "a544548614c1",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-22T16:00:00+08:00",
+      "end": "2026-09-22T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-22"
+      ]
+    },
+    {
+      "id": "5fdb6e1aeb55",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-23T09:00:00+08:00",
+      "end": "2026-09-23T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-23"
+      ]
+    },
+    {
+      "id": "b8996f3caa3b",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-23T12:00:00+08:00",
+      "end": "2026-09-23T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-23"
+      ]
+    },
+    {
+      "id": "c9b87b909cdc",
+      "title": "Mid Autumn Festival Helper",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-24T19:00:00+08:00",
+      "end": "2026-09-24T22:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-24"
+      ]
+    },
+    {
+      "id": "949cd4428b62",
+      "title": "Mid-Autumn Festival",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2026-09-25",
+      "end": "2026-09-25",
+      "allDay": true
+    },
+    {
+      "id": "5a5537eee0af",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-25T09:00:00+08:00",
+      "end": "2026-09-25T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-25"
+      ]
+    },
+    {
+      "id": "2fe264b478dd",
+      "title": "Seminars on Contemporary Technology (S) CS2613",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-25T17:00:00+08:00",
+      "end": "2026-09-25T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-25"
+      ]
+    },
+    {
+      "id": "ef559bb2711e",
+      "title": "Day after Mid-Autumn Festival",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2026-09-26",
+      "end": "2026-09-26",
+      "allDay": true
+    },
+    {
+      "id": "f6f939306370",
+      "title": "Full moon 12:49am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-09-27",
+      "end": "2026-09-27",
+      "allDay": true
+    },
+    {
+      "id": "4cfed4d93f09",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-28T12:00:00+08:00",
+      "end": "2026-09-28T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-28"
+      ]
+    },
+    {
+      "id": "d06bf98b6f92",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-28T16:00:00+08:00",
+      "end": "2026-09-28T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-28"
+      ]
+    },
+    {
+      "id": "09b688421d3c",
+      "title": "HKID appointment",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-28T16:00:00+08:00",
+      "end": "2026-09-28T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-28"
+      ]
+    },
+    {
+      "id": "2e385b41b0e4",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-29T09:00:00+08:00",
+      "end": "2026-09-29T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-29"
+      ]
+    },
+    {
+      "id": "0ea67de6231f",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-29T12:00:00+08:00",
+      "end": "2026-09-29T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-29"
+      ]
+    },
+    {
+      "id": "a8d1730a2954",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-29T16:00:00+08:00",
+      "end": "2026-09-29T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-29"
+      ]
+    },
+    {
+      "id": "8960d50457dd",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-30T09:00:00+08:00",
+      "end": "2026-09-30T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-30"
+      ]
+    },
+    {
+      "id": "20b43ccaf6d5",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-09-30T12:00:00+08:00",
+      "end": "2026-09-30T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-09-30"
+      ]
+    },
+    {
+      "id": "e51ec0aaaffd",
+      "title": "National Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2026-10-01",
+      "end": "2026-10-01",
+      "allDay": true
+    },
+    {
+      "id": "da13fa993248",
+      "title": "Free Ticket Reservation of CityUHK Student ArtFest 2026 Starts NOW 香港城市大學學生藝術節 2026 現正開始接受預訂免費節目門票",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-02T00:00:00+08:00",
+      "end": "2026-10-24T00:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-02",
+        "2026-10-03",
+        "2026-10-04",
+        "2026-10-05",
+        "2026-10-06",
+        "2026-10-07",
+        "2026-10-08",
+        "2026-10-09",
+        "2026-10-10",
+        "2026-10-11",
+        "2026-10-12",
+        "2026-10-13",
+        "2026-10-14",
+        "2026-10-15",
+        "2026-10-16",
+        "2026-10-17",
+        "2026-10-18",
+        "2026-10-19",
+        "2026-10-20",
+        "2026-10-21",
+        "2026-10-22",
+        "2026-10-23"
+      ]
+    },
+    {
+      "id": "d5e34bb1d382",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-02T09:00:00+08:00",
+      "end": "2026-10-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-02"
+      ]
+    },
+    {
+      "id": "4d3f9d66cce7",
+      "title": "Last quarter 9:25pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-10-03",
+      "end": "2026-10-03",
+      "allDay": true
+    },
+    {
+      "id": "781586e9bfee",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-05T12:00:00+08:00",
+      "end": "2026-10-05T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-05"
+      ]
+    },
+    {
+      "id": "afe2351620f4",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-05T16:00:00+08:00",
+      "end": "2026-10-05T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-05"
+      ]
+    },
+    {
+      "id": "8cdb5c71d87d",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-06T09:00:00+08:00",
+      "end": "2026-10-06T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-06"
+      ]
+    },
+    {
+      "id": "417316d6ec07",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-06T12:00:00+08:00",
+      "end": "2026-10-06T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-06"
+      ]
+    },
+    {
+      "id": "b614928fc081",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-06T16:00:00+08:00",
+      "end": "2026-10-06T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-06"
+      ]
+    },
+    {
+      "id": "2d5a1d905574",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-07T09:00:00+08:00",
+      "end": "2026-10-07T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-07"
+      ]
+    },
+    {
+      "id": "91dd42b03f89",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-07T12:00:00+08:00",
+      "end": "2026-10-07T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-07"
+      ]
+    },
+    {
+      "id": "aa55bb7e51e2",
+      "title": "The Tiger Welcome Ceremony 26/27",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-08T14:00:00+08:00",
+      "end": "2026-10-08T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-08"
+      ]
+    },
+    {
+      "id": "d73be47c43b2",
+      "title": "Adviser Zoom Call",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-08T15:00:00+08:00",
+      "end": "2026-10-08T16:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-08"
+      ]
+    },
+    {
+      "id": "3d5e6d29ab2b",
+      "title": "Executive Mentoring Programme Welcoming Session",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-08T18:30:00+08:00",
+      "end": "2026-10-08T20:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-08"
+      ]
+    },
+    {
+      "id": "1ef6953fa78f",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-09T09:00:00+08:00",
+      "end": "2026-10-09T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-09"
+      ]
+    },
+    {
+      "id": "02ecf0f955e3",
+      "title": "New moon 11:50pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-10-10",
+      "end": "2026-10-10",
+      "allDay": true
+    },
+    {
+      "id": "2b8696896737",
+      "title": "NIS Alumni - Networking Kesh",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-10T15:00:00+08:00",
+      "end": "2026-10-10T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-10"
+      ]
+    },
+    {
+      "id": "e2eb4c30bab3",
+      "title": "The Algorithms & Analytics Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-12",
+      "end": "2026-10-12",
+      "allDay": true
+    },
+    {
+      "id": "824a10516f29",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-12T12:00:00+08:00",
+      "end": "2026-10-12T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-12"
+      ]
+    },
+    {
+      "id": "935b5daa998e",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-12T16:00:00+08:00",
+      "end": "2026-10-12T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-12"
+      ]
+    },
+    {
+      "id": "6d639dc7c024",
+      "title": "The Algorithms & Analytics Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-13",
+      "end": "2026-10-13",
+      "allDay": true
+    },
+    {
+      "id": "c484a0b1dd41",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-13T09:00:00+08:00",
+      "end": "2026-10-13T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-13"
+      ]
+    },
+    {
+      "id": "14e799a48c84",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-13T12:00:00+08:00",
+      "end": "2026-10-13T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-13"
+      ]
+    },
+    {
+      "id": "ee84f718be4f",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-13T16:00:00+08:00",
+      "end": "2026-10-13T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-13"
+      ]
+    },
+    {
+      "id": "36a02ae8b03a",
+      "title": "The Algorithms & Analytics Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-14",
+      "end": "2026-10-14",
+      "allDay": true
+    },
+    {
+      "id": "ef212183d365",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-14T09:00:00+08:00",
+      "end": "2026-10-14T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-14"
+      ]
+    },
+    {
+      "id": "91cb4e0ac702",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-14T12:00:00+08:00",
+      "end": "2026-10-14T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-14"
+      ]
+    },
+    {
+      "id": "d6628652b2bc",
+      "title": "Tennis Table uni",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-14T12:00:00+08:00",
+      "end": "2026-10-14T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-14"
+      ]
+    },
+    {
+      "id": "e4391b98741b",
+      "title": "Open Bank account Appointment HSBC",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-14T14:00:00+08:00",
+      "end": "2026-10-14T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-14"
+      ]
+    },
+    {
+      "id": "a875281880d6",
+      "title": "Basketball Student helper",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-14T18:00:00+08:00",
+      "end": "2026-10-14T22:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-14"
+      ]
+    },
+    {
+      "id": "76a481aec21b",
+      "title": "The Algorithms & Analytics Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-15",
+      "end": "2026-10-15",
+      "allDay": true
+    },
+    {
+      "id": "afee92d39f74",
+      "title": "Imperial Hackathon 2026 Online",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-15T19:00:00+08:00",
+      "end": "2026-10-15T20:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-15"
+      ]
+    },
+    {
+      "id": "22e5126ce3cd",
+      "title": "The Algorithms & Analytics Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-16",
+      "end": "2026-10-16",
+      "allDay": true
+    },
+    {
+      "id": "a298fbeff6fe",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-16T09:00:00+08:00",
+      "end": "2026-10-16T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-16"
+      ]
+    },
+    {
+      "id": "0f3d92d17972",
+      "title": "The Algorithms & Analytics Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-17",
+      "end": "2026-10-17",
+      "allDay": true
+    },
+    {
+      "id": "3da92b3ff275",
+      "title": "Basketball Student helper",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-17T11:00:00+08:00",
+      "end": "2026-10-17T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-17"
+      ]
+    },
+    {
+      "id": "2e5469caa4b8",
+      "title": "Chung Yeung Festival",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2026-10-18",
+      "end": "2026-10-18",
+      "allDay": true
+    },
+    {
+      "id": "e0b456ab5fe8",
+      "title": "The Algorithms & Analytics Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-18",
+      "end": "2026-10-18",
+      "allDay": true
+    },
+    {
+      "id": "230f9860fa19",
+      "title": "Day off for Chung Yeung Festival",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2026-10-19",
+      "end": "2026-10-19",
+      "allDay": true
+    },
+    {
+      "id": "f54267113d7c",
+      "title": "First quarter 12:13am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-10-19",
+      "end": "2026-10-19",
+      "allDay": true
+    },
+    {
+      "id": "24b1858c6100",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-19T12:00:00+08:00",
+      "end": "2026-10-19T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-19"
+      ]
+    },
+    {
+      "id": "4cca0da7825f",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-19T16:00:00+08:00",
+      "end": "2026-10-19T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-19"
+      ]
+    },
+    {
+      "id": "d870e506d730",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-20T09:00:00+08:00",
+      "end": "2026-10-20T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-20"
+      ]
+    },
+    {
+      "id": "d7a4c90ca162",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-20T12:00:00+08:00",
+      "end": "2026-10-20T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-20"
+      ]
+    },
+    {
+      "id": "686629722339",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-20T16:00:00+08:00",
+      "end": "2026-10-20T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-20"
+      ]
+    },
+    {
+      "id": "25f3243369bc",
+      "title": "Columbia info session",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-21T08:00:00+08:00",
+      "end": "2026-10-21T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-21"
+      ]
+    },
+    {
+      "id": "2a6bad7d5d94",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-21T09:00:00+08:00",
+      "end": "2026-10-21T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-21"
+      ]
+    },
+    {
+      "id": "bcb69625c232",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-21T12:00:00+08:00",
+      "end": "2026-10-21T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-21"
+      ]
+    },
+    {
+      "id": "0df789858901",
+      "title": "Tennis Table uni",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-22T16:30:00+08:00",
+      "end": "2026-10-22T18:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-22"
+      ]
+    },
+    {
+      "id": "babeaa7c19cb",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-23",
+      "end": "2026-10-23",
+      "allDay": true
+    },
+    {
+      "id": "c2981de21300",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-23T09:00:00+08:00",
+      "end": "2026-10-23T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-23"
+      ]
+    },
+    {
+      "id": "ce395806c97c",
+      "title": "(Reminder) IT Forum - From Strategy to Agents: How Enterprises in Asia Are Really Adopting AI",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-23T17:00:00+08:00",
+      "end": "2026-10-23T18:15:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-23"
+      ]
+    },
+    {
+      "id": "35dde41cac8e",
+      "title": "Opening Concert",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-23T19:30:00+08:00",
+      "end": "2026-10-23T21:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-23"
+      ]
+    },
+    {
+      "id": "98c9773624e3",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-24",
+      "end": "2026-10-24",
+      "allDay": true
+    },
+    {
+      "id": "62cb0f2f4c47",
+      "title": "Canoe",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-24T08:00:00+08:00",
+      "end": "2026-10-24T09:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-24"
+      ]
+    },
+    {
+      "id": "fcc74a7b16e3",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-25",
+      "end": "2026-10-25",
+      "allDay": true
+    },
+    {
+      "id": "7bb109196f0e",
+      "title": "День Республики",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2026-10-25",
+      "end": "2026-10-25",
+      "allDay": true
+    },
+    {
+      "id": "2dc5e3ff74c5",
+      "title": "Full moon 12:12pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-10-26",
+      "end": "2026-10-26",
+      "allDay": true
+    },
+    {
+      "id": "b5a64a804301",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-26",
+      "end": "2026-10-26",
+      "allDay": true
+    },
+    {
+      "id": "81bd0f187f60",
+      "title": "День Республики перенесенный выходной день",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2026-10-26",
+      "end": "2026-10-26",
+      "allDay": true
+    },
+    {
+      "id": "742513f0c700",
+      "title": "Analysis on high dim dhort course",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-26T10:00:00+08:00",
+      "end": "2026-10-26T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-26"
+      ]
+    },
+    {
+      "id": "b477c84844b6",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-26T12:00:00+08:00",
+      "end": "2026-10-26T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-26"
+      ]
+    },
+    {
+      "id": "557fe0a32e3a",
+      "title": "Info session CityUHK x GCSP",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-26T14:00:00+08:00",
+      "end": "2026-10-26T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-26"
+      ]
+    },
+    {
+      "id": "d813c86ae5a9",
+      "title": "Professional image and personal brand building",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-26T14:00:00+08:00",
+      "end": "2026-10-26T15:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-26"
+      ]
+    },
+    {
+      "id": "c572eed123aa",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-26T16:00:00+08:00",
+      "end": "2026-10-26T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-26"
+      ]
+    },
+    {
+      "id": "9441805e0a59",
+      "title": "Cv Writing EMP Virtual",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-26T18:30:00+08:00",
+      "end": "2026-10-26T20:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-26"
+      ]
+    },
+    {
+      "id": "ef9612109717",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-27",
+      "end": "2026-10-27",
+      "allDay": true
+    },
+    {
+      "id": "b0e759525a2d",
+      "title": "Calculus(C) MA1508 MidTerm",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-27T09:00:00+08:00",
+      "end": "2026-10-27T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-27"
+      ]
+    },
+    {
+      "id": "c9ac5d197864",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-27T12:00:00+08:00",
+      "end": "2026-10-27T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-27"
+      ]
+    },
+    {
+      "id": "1fa8398ec56b",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-27T16:00:00+08:00",
+      "end": "2026-10-27T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-27"
+      ]
+    },
+    {
+      "id": "1e10344cc08d",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-28",
+      "end": "2026-10-28",
+      "allDay": true
+    },
+    {
+      "id": "a806e74ae29c",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-28T09:00:00+08:00",
+      "end": "2026-10-28T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-28"
+      ]
+    },
+    {
+      "id": "aab8396d4586",
+      "title": "Analysis on high dim dhort course",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-28T10:00:00+08:00",
+      "end": "2026-10-28T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-28"
+      ]
+    },
+    {
+      "id": "826a0a0b6594",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-28T12:00:00+08:00",
+      "end": "2026-10-28T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-28"
+      ]
+    },
+    {
+      "id": "acc0d06d6667",
+      "title": "The Emerging Need for New Legislation and Venture Capital Opportunities in a Fast-Evolving High-Tech World",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-28T15:15:00+08:00",
+      "end": "2026-10-28T16:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-28"
+      ]
+    },
+    {
+      "id": "26ab254126eb",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-29",
+      "end": "2026-10-29",
+      "allDay": true
+    },
+    {
+      "id": "1b29f4dd3920",
+      "title": "Tiger",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-29T12:00:00+08:00",
+      "end": "2026-10-29T14:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-29"
+      ]
+    },
+    {
+      "id": "d1a77342d7df",
+      "title": "Halloween Party",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-29T19:00:00+08:00",
+      "end": "2026-10-29T22:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-29"
+      ]
+    },
+    {
+      "id": "9ee8a20b12db",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-30",
+      "end": "2026-10-30",
+      "allDay": true
+    },
+    {
+      "id": "5cc65a73d121",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-30T09:00:00+08:00",
+      "end": "2026-10-30T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-30"
+      ]
+    },
+    {
+      "id": "7b1905594a97",
+      "title": "Analysis on high dim dhort course",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-30T10:00:00+08:00",
+      "end": "2026-10-30T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-30"
+      ]
+    },
+    {
+      "id": "fd9f60f5c35f",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-31",
+      "end": "2026-10-31",
+      "allDay": true
+    },
+    {
+      "id": "dcd70f0cf2ec",
+      "title": "Midterm Intro to Prog",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-10-31T18:30:00+08:00",
+      "end": "2026-10-31T19:45:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-10-31"
+      ]
+    },
+    {
+      "id": "6e744f965d57",
+      "title": "Machine Learning Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-01",
+      "end": "2026-11-01",
+      "allDay": true
+    },
+    {
+      "id": "0f9431236cb9",
+      "title": "The Algorithms & Analytics Yandex Contest",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-01",
+      "end": "2026-11-01",
+      "allDay": true
+    },
+    {
+      "id": "0ecc2a8af806",
+      "title": "Last quarter 4:28am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-11-02",
+      "end": "2026-11-02",
+      "allDay": true
+    },
+    {
+      "id": "839659cf4738",
+      "title": "Analysis on high dim dhort course",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-02T10:00:00+08:00",
+      "end": "2026-11-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-02"
+      ]
+    },
+    {
+      "id": "6f05b38dcce1",
+      "title": "Rice and Shine bootcamp",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-02T10:00:00+08:00",
+      "end": "2026-11-02T13:15:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-02"
+      ]
+    },
+    {
+      "id": "00792bfb157a",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-02T12:00:00+08:00",
+      "end": "2026-11-02T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-02"
+      ]
+    },
+    {
+      "id": "fe80ca5fa1a9",
+      "title": "Rise and Shine Bootcamp MBTI",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-02T14:30:00+08:00",
+      "end": "2026-11-02T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-02"
+      ]
+    },
+    {
+      "id": "094953df3205",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-02T16:00:00+08:00",
+      "end": "2026-11-02T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-02"
+      ]
+    },
+    {
+      "id": "60e613651df3",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-03T09:00:00+08:00",
+      "end": "2026-11-03T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-03"
+      ]
+    },
+    {
+      "id": "bdd69090e4c2",
+      "title": "Analysis on high dim dhort course",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-03T10:00:00+08:00",
+      "end": "2026-11-03T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-03"
+      ]
+    },
+    {
+      "id": "23f1d2c8f277",
+      "title": "(Reminder) Life Education Campaign 2026 - Bon Voyage (3 - 6 Nov 2026)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-03T11:30:00+08:00",
+      "end": "2026-11-06T14:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06"
+      ]
+    },
+    {
+      "id": "f2e976ec338a",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-03T12:00:00+08:00",
+      "end": "2026-11-03T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-03"
+      ]
+    },
+    {
+      "id": "b5808b9a8667",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-03T16:00:00+08:00",
+      "end": "2026-11-03T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-03"
+      ]
+    },
+    {
+      "id": "08650b5726c0",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-04T09:00:00+08:00",
+      "end": "2026-11-04T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-04"
+      ]
+    },
+    {
+      "id": "deaa2b07991d",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-04T12:00:00+08:00",
+      "end": "2026-11-04T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-04"
+      ]
+    },
+    {
+      "id": "c1b300f202aa",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-06T09:00:00+08:00",
+      "end": "2026-11-06T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-06"
+      ]
+    },
+    {
+      "id": "858f33742e2e",
+      "title": "Forest Therapy Experience",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-07T13:15:00+08:00",
+      "end": "2026-11-07T16:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-07"
+      ]
+    },
+    {
+      "id": "b5b6320ca156",
+      "title": "New moon 3:02pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-11-09",
+      "end": "2026-11-09",
+      "allDay": true
+    },
+    {
+      "id": "14154b22c1c4",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-09T12:00:00+08:00",
+      "end": "2026-11-09T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-09"
+      ]
+    },
+    {
+      "id": "ebdc04f46530",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-09T16:00:00+08:00",
+      "end": "2026-11-09T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-09"
+      ]
+    },
+    {
+      "id": "271efe8610d2",
+      "title": "CityUHK Cares for YOU - Gear Up With Courage. Take Action! (10 - 13 November 2026)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-10T00:00:00+08:00",
+      "end": "2026-11-13T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-10",
+        "2026-11-11",
+        "2026-11-12",
+        "2026-11-13"
+      ]
+    },
+    {
+      "id": "611059bf40e6",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-10T09:00:00+08:00",
+      "end": "2026-11-10T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-10"
+      ]
+    },
+    {
+      "id": "9223a5330f3a",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-10T12:00:00+08:00",
+      "end": "2026-11-10T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-10"
+      ]
+    },
+    {
+      "id": "98cbdf2e9d23",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-10T16:00:00+08:00",
+      "end": "2026-11-10T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-10"
+      ]
+    },
+    {
+      "id": "272cc332dbdb",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-11T09:00:00+08:00",
+      "end": "2026-11-11T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-11"
+      ]
+    },
+    {
+      "id": "47ffe2a9b9bc",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-11T12:00:00+08:00",
+      "end": "2026-11-11T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-11"
+      ]
+    },
+    {
+      "id": "8f32f059ce58",
+      "title": "CityUHK Cares for YOU - Breakdance Experiential Workshop (11 November 2026)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-11T14:00:00+08:00",
+      "end": "2026-11-11T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-11"
+      ]
+    },
+    {
+      "id": "f78378094686",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-13T09:00:00+08:00",
+      "end": "2026-11-13T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-13"
+      ]
+    },
+    {
+      "id": "fd1aecc55336",
+      "title": "PyCon HK 2026",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-14T09:30:00+08:00",
+      "end": "2026-11-15T18:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-14",
+        "2026-11-15"
+      ]
+    },
+    {
+      "id": "0f5ce9df3c11",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-16T12:00:00+08:00",
+      "end": "2026-11-16T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-16"
+      ]
+    },
+    {
+      "id": "b0e71b40eb93",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-16T16:00:00+08:00",
+      "end": "2026-11-16T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-16"
+      ]
+    },
+    {
+      "id": "d4beff3ade35",
+      "title": "First quarter 7:48pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-11-17",
+      "end": "2026-11-17",
+      "allDay": true
+    },
+    {
+      "id": "81b9bc54159a",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-17T09:00:00+08:00",
+      "end": "2026-11-17T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-17"
+      ]
+    },
+    {
+      "id": "a4dc91b815ca",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-17T12:00:00+08:00",
+      "end": "2026-11-17T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-17"
+      ]
+    },
+    {
+      "id": "4d622263f87a",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-17T16:00:00+08:00",
+      "end": "2026-11-17T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-17"
+      ]
+    },
+    {
+      "id": "2a132cdd7d73",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-18T09:00:00+08:00",
+      "end": "2026-11-18T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-18"
+      ]
+    },
+    {
+      "id": "1cf32804971a",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-18T12:00:00+08:00",
+      "end": "2026-11-18T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-18"
+      ]
+    },
+    {
+      "id": "44b0f9580b51",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-20T09:00:00+08:00",
+      "end": "2026-11-20T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-20"
+      ]
+    },
+    {
+      "id": "0b143bb69a98",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-23T12:00:00+08:00",
+      "end": "2026-11-23T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-23"
+      ]
+    },
+    {
+      "id": "4140d3389241",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-23T16:00:00+08:00",
+      "end": "2026-11-23T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-23"
+      ]
+    },
+    {
+      "id": "25a4b1b5a341",
+      "title": "Full moon 10:53pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-11-24",
+      "end": "2026-11-24",
+      "allDay": true
+    },
+    {
+      "id": "8843c5260dac",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-24T09:00:00+08:00",
+      "end": "2026-11-24T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-24"
+      ]
+    },
+    {
+      "id": "d0ba0c641b99",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-24T12:00:00+08:00",
+      "end": "2026-11-24T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-24"
+      ]
+    },
+    {
+      "id": "c427fe93870c",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-24T16:00:00+08:00",
+      "end": "2026-11-24T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-24"
+      ]
+    },
+    {
+      "id": "0476c7c0171b",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-25T09:00:00+08:00",
+      "end": "2026-11-25T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-25"
+      ]
+    },
+    {
+      "id": "b98b1e7f3909",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-25T12:00:00+08:00",
+      "end": "2026-11-25T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-25"
+      ]
+    },
+    {
+      "id": "12ce62513cc5",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-27T09:00:00+08:00",
+      "end": "2026-11-27T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-27"
+      ]
+    },
+    {
+      "id": "a859a81b75f5",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-30T12:00:00+08:00",
+      "end": "2026-11-30T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-30"
+      ]
+    },
+    {
+      "id": "ea705071f73c",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-30T16:00:00+08:00",
+      "end": "2026-11-30T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-30"
+      ]
+    },
+    {
+      "id": "ee31c6e70d7f",
+      "title": "Last quarter 2:09pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-12-01",
+      "end": "2026-12-01",
+      "allDay": true
+    },
+    {
+      "id": "9bab06e21767",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-01T09:00:00+08:00",
+      "end": "2026-12-01T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-01"
+      ]
+    },
+    {
+      "id": "93981832f827",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-01T12:00:00+08:00",
+      "end": "2026-12-01T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-01"
+      ]
+    },
+    {
+      "id": "7717f6e27b90",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-01T16:00:00+08:00",
+      "end": "2026-12-01T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-01"
+      ]
+    },
+    {
+      "id": "96e5e993f3bc",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-02T09:00:00+08:00",
+      "end": "2026-12-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-02"
+      ]
+    },
+    {
+      "id": "41e474f3641a",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-02T12:00:00+08:00",
+      "end": "2026-12-02T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-02"
+      ]
+    },
+    {
+      "id": "c88fe9df5fa5",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-04T09:00:00+08:00",
+      "end": "2026-12-04T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-04"
+      ]
+    },
+    {
+      "id": "491a5d727859",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-07T12:00:00+08:00",
+      "end": "2026-12-07T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-07"
+      ]
+    },
+    {
+      "id": "5d8177f3e489",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-07T16:00:00+08:00",
+      "end": "2026-12-07T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-07"
+      ]
+    },
+    {
+      "id": "9f6245b627a8",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-08T09:00:00+08:00",
+      "end": "2026-12-08T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "25bfee392132",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-08T12:00:00+08:00",
+      "end": "2026-12-08T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "5aec5b1e655f",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-08T16:00:00+08:00",
+      "end": "2026-12-08T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-08"
+      ]
+    },
+    {
+      "id": "7f426605a729",
+      "title": "New moon 8:52am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-12-09",
+      "end": "2026-12-09",
+      "allDay": true
+    },
+    {
+      "id": "de7445769cdc",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-09T09:00:00+08:00",
+      "end": "2026-12-09T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-09"
+      ]
+    },
+    {
+      "id": "6304351103fe",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-09T12:00:00+08:00",
+      "end": "2026-12-09T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-09"
+      ]
+    },
+    {
+      "id": "d01c51a9749b",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-11T09:00:00+08:00",
+      "end": "2026-12-11T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-11"
+      ]
+    },
+    {
+      "id": "2e924a78f91d",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-14T12:00:00+08:00",
+      "end": "2026-12-14T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-14"
+      ]
+    },
+    {
+      "id": "fab8b1e78aef",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-14T16:00:00+08:00",
+      "end": "2026-12-14T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-14"
+      ]
+    },
+    {
+      "id": "c853e899b7cf",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-15T09:00:00+08:00",
+      "end": "2026-12-15T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-15"
+      ]
+    },
+    {
+      "id": "34141d0332ed",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-15T12:00:00+08:00",
+      "end": "2026-12-15T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-15"
+      ]
+    },
+    {
+      "id": "2bb3d14b955b",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-15T16:00:00+08:00",
+      "end": "2026-12-15T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-15"
+      ]
+    },
+    {
+      "id": "f55d1654759c",
+      "title": "День Независимости",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2026-12-16",
+      "end": "2026-12-16",
+      "allDay": true
+    },
+    {
+      "id": "f4e1ec9b8e5c",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-16T09:00:00+08:00",
+      "end": "2026-12-16T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-16"
+      ]
+    },
+    {
+      "id": "3481bd6e43ed",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-16T12:00:00+08:00",
+      "end": "2026-12-16T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-16"
+      ]
+    },
+    {
+      "id": "ac16f09a2190",
+      "title": "First quarter 1:43pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-12-17",
+      "end": "2026-12-17",
+      "allDay": true
+    },
+    {
+      "id": "632af7b38a74",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-18T09:00:00+08:00",
+      "end": "2026-12-18T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-18"
+      ]
+    },
+    {
+      "id": "c05632a3a47e",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-21T12:00:00+08:00",
+      "end": "2026-12-21T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-21"
+      ]
+    },
+    {
+      "id": "ca42f43620e6",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-21T16:00:00+08:00",
+      "end": "2026-12-21T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-21"
+      ]
+    },
+    {
+      "id": "ea519823d492",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-22T09:00:00+08:00",
+      "end": "2026-12-22T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-22"
+      ]
+    },
+    {
+      "id": "61db311407f6",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-22T12:00:00+08:00",
+      "end": "2026-12-22T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-22"
+      ]
+    },
+    {
+      "id": "905f831219a6",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-22T16:00:00+08:00",
+      "end": "2026-12-22T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-22"
+      ]
+    },
+    {
+      "id": "9ee84a6b23e0",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-23T09:00:00+08:00",
+      "end": "2026-12-23T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-23"
+      ]
+    },
+    {
+      "id": "4976fd758541",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-23T12:00:00+08:00",
+      "end": "2026-12-23T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-23"
+      ]
+    },
+    {
+      "id": "e47e4f2faba1",
+      "title": "Full moon 9:28am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-12-24",
+      "end": "2026-12-24",
+      "allDay": true
+    },
+    {
+      "id": "4fabd30ec8a1",
+      "title": "Christmas Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2026-12-25",
+      "end": "2026-12-25",
+      "allDay": true
+    },
+    {
+      "id": "45f3fbeb3957",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-25T09:00:00+08:00",
+      "end": "2026-12-25T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-25"
+      ]
+    },
+    {
+      "id": "b8a6e9f6b2e5",
+      "title": "First Weekday After Christmas Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2026-12-26",
+      "end": "2026-12-26",
+      "allDay": true
+    },
+    {
+      "id": "2c13f34e7de9",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-28T12:00:00+08:00",
+      "end": "2026-12-28T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-28"
+      ]
+    },
+    {
+      "id": "1c0239b35440",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-28T16:00:00+08:00",
+      "end": "2026-12-28T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-28"
+      ]
+    },
+    {
+      "id": "f90e55b61a0d",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-29T09:00:00+08:00",
+      "end": "2026-12-29T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-29"
+      ]
+    },
+    {
+      "id": "f81d30554470",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-29T12:00:00+08:00",
+      "end": "2026-12-29T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-29"
+      ]
+    },
+    {
+      "id": "12f611beed50",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-29T16:00:00+08:00",
+      "end": "2026-12-29T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-29"
+      ]
+    },
+    {
+      "id": "ce1ab4f320aa",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-30T09:00:00+08:00",
+      "end": "2026-12-30T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-30"
+      ]
+    },
+    {
+      "id": "78035403e140",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-30T12:00:00+08:00",
+      "end": "2026-12-30T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-30"
+      ]
+    },
+    {
+      "id": "a5d29c14d15c",
+      "title": "Last quarter 2:59am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2026-12-31",
+      "end": "2026-12-31",
+      "allDay": true
+    },
+    {
+      "id": "422050682c60",
+      "title": "New Year’s Eve",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2026-12-31",
+      "end": "2026-12-31",
+      "allDay": true
+    },
+    {
+      "id": "b19e95296d05",
+      "title": "канун Нового года",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2026-12-31",
+      "end": "2026-12-31",
+      "allDay": true
+    },
+    {
+      "id": "b82d4eb494b5",
+      "title": "New Year's Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-01-01",
+      "end": "2027-01-01",
+      "allDay": true
+    },
+    {
+      "id": "2d419f13e517",
+      "title": "Новый год",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-01-01",
+      "end": "2027-01-01",
+      "allDay": true
+    },
+    {
+      "id": "45b159c9e8d4",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-01T09:00:00+08:00",
+      "end": "2027-01-01T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-01"
+      ]
+    },
+    {
+      "id": "632a0545a731",
+      "title": "Новый год (2-й день)",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-01-02",
+      "end": "2027-01-02",
+      "allDay": true
+    },
+    {
+      "id": "5c06a183e868",
+      "title": "Новый год (2-й день) перенесенный выходной день",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-01-04",
+      "end": "2027-01-04",
+      "allDay": true
+    },
+    {
+      "id": "5bef329ec441",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-04T12:00:00+08:00",
+      "end": "2027-01-04T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-04"
+      ]
+    },
+    {
+      "id": "34242ac0ced9",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-04T16:00:00+08:00",
+      "end": "2027-01-04T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-04"
+      ]
+    },
+    {
+      "id": "7bc1a82c8195",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-05T09:00:00+08:00",
+      "end": "2027-01-05T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-05"
+      ]
+    },
+    {
+      "id": "6b6a9ffbe4e1",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-05T12:00:00+08:00",
+      "end": "2027-01-05T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-05"
+      ]
+    },
+    {
+      "id": "658b9834c588",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-05T16:00:00+08:00",
+      "end": "2027-01-05T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-05"
+      ]
+    },
+    {
+      "id": "b8f75c44f7fa",
+      "title": "Isra and Mi'raj (tentative)",
+      "calendar": "Muslim Holidays",
+      "color": 2,
+      "start": "2027-01-06",
+      "end": "2027-01-06",
+      "allDay": true
+    },
+    {
+      "id": "ba692dfabc06",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-06T09:00:00+08:00",
+      "end": "2027-01-06T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-06"
+      ]
+    },
+    {
+      "id": "b74aa117a709",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-06T12:00:00+08:00",
+      "end": "2027-01-06T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-06"
+      ]
+    },
+    {
+      "id": "f9ea8c8d8f65",
+      "title": "рождество",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-01-07",
+      "end": "2027-01-07",
+      "allDay": true
+    },
+    {
+      "id": "401ee60016d6",
+      "title": "New moon 4:24am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-01-08",
+      "end": "2027-01-08",
+      "allDay": true
+    },
+    {
+      "id": "8cbaa5e169dc",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-08T09:00:00+08:00",
+      "end": "2027-01-08T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-08"
+      ]
+    },
+    {
+      "id": "0ae98a4e7b84",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-11T12:00:00+08:00",
+      "end": "2027-01-11T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-11"
+      ]
+    },
+    {
+      "id": "e7ef53af67de",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-11T16:00:00+08:00",
+      "end": "2027-01-11T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-11"
+      ]
+    },
+    {
+      "id": "d7d77232fd00",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-12T09:00:00+08:00",
+      "end": "2027-01-12T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-12"
+      ]
+    },
+    {
+      "id": "e2ae99301aae",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-12T12:00:00+08:00",
+      "end": "2027-01-12T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-12"
+      ]
+    },
+    {
+      "id": "474edb576c4f",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-12T16:00:00+08:00",
+      "end": "2027-01-12T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-12"
+      ]
+    },
+    {
+      "id": "8cb101aa7580",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-13T09:00:00+08:00",
+      "end": "2027-01-13T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-13"
+      ]
+    },
+    {
+      "id": "afc605c4abd6",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-13T12:00:00+08:00",
+      "end": "2027-01-13T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-13"
+      ]
+    },
+    {
+      "id": "4c85a9d9c24e",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-15T09:00:00+08:00",
+      "end": "2027-01-15T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-15"
+      ]
+    },
+    {
+      "id": "f4b681a547d5",
+      "title": "First quarter 4:34am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-01-16",
+      "end": "2027-01-16",
+      "allDay": true
+    },
+    {
+      "id": "6e2fcffba5ae",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-18T12:00:00+08:00",
+      "end": "2027-01-18T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-18"
+      ]
+    },
+    {
+      "id": "a0447d1269a5",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-18T16:00:00+08:00",
+      "end": "2027-01-18T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-18"
+      ]
+    },
+    {
+      "id": "0519638c204c",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-19T09:00:00+08:00",
+      "end": "2027-01-19T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-19"
+      ]
+    },
+    {
+      "id": "aae3c1f683ba",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-19T12:00:00+08:00",
+      "end": "2027-01-19T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-19"
+      ]
+    },
+    {
+      "id": "6e65793bdac6",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-19T16:00:00+08:00",
+      "end": "2027-01-19T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-19"
+      ]
+    },
+    {
+      "id": "8bcda445afb2",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-20T09:00:00+08:00",
+      "end": "2027-01-20T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-20"
+      ]
+    },
+    {
+      "id": "7aac339a72c7",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-20T12:00:00+08:00",
+      "end": "2027-01-20T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-20"
+      ]
+    },
+    {
+      "id": "fa1beac49293",
+      "title": "Full moon 8:17pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-01-22",
+      "end": "2027-01-22",
+      "allDay": true
+    },
+    {
+      "id": "75426df9dc21",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-22T09:00:00+08:00",
+      "end": "2027-01-22T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-22"
+      ]
+    },
+    {
+      "id": "73e97ba0e45c",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-25T12:00:00+08:00",
+      "end": "2027-01-25T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-25"
+      ]
+    },
+    {
+      "id": "7c7603f5eb1e",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-25T16:00:00+08:00",
+      "end": "2027-01-25T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-25"
+      ]
+    },
+    {
+      "id": "545588a5bfcf",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-26T09:00:00+08:00",
+      "end": "2027-01-26T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-26"
+      ]
+    },
+    {
+      "id": "d6002a8d4852",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-26T12:00:00+08:00",
+      "end": "2027-01-26T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-26"
+      ]
+    },
+    {
+      "id": "eb36caa6f7ba",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-26T16:00:00+08:00",
+      "end": "2027-01-26T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-26"
+      ]
+    },
+    {
+      "id": "0036684f22da",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-27T09:00:00+08:00",
+      "end": "2027-01-27T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-27"
+      ]
+    },
+    {
+      "id": "267a14827cb5",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-27T12:00:00+08:00",
+      "end": "2027-01-27T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-27"
+      ]
+    },
+    {
+      "id": "f275af48adf4",
+      "title": "Last quarter 6:55pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-01-29",
+      "end": "2027-01-29",
+      "allDay": true
+    },
+    {
+      "id": "4b0be89f5775",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-29T09:00:00+08:00",
+      "end": "2027-01-29T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-29"
+      ]
+    },
+    {
+      "id": "eca3eaf480fd",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-01T12:00:00+08:00",
+      "end": "2027-02-01T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-01"
+      ]
+    },
+    {
+      "id": "a8d6d12f6602",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-01T16:00:00+08:00",
+      "end": "2027-02-01T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-01"
+      ]
+    },
+    {
+      "id": "588e1f59d2d5",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-02T09:00:00+08:00",
+      "end": "2027-02-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-02"
+      ]
+    },
+    {
+      "id": "8b5e1bd966a7",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-02T12:00:00+08:00",
+      "end": "2027-02-02T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-02"
+      ]
+    },
+    {
+      "id": "35df57052eff",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-02T16:00:00+08:00",
+      "end": "2027-02-02T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-02"
+      ]
+    },
+    {
+      "id": "c9cb7e07c58b",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-03T09:00:00+08:00",
+      "end": "2027-02-03T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-03"
+      ]
+    },
+    {
+      "id": "5d095f565fea",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-03T12:00:00+08:00",
+      "end": "2027-02-03T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-03"
+      ]
+    },
+    {
+      "id": "6cc8889186b5",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-05T09:00:00+08:00",
+      "end": "2027-02-05T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-05"
+      ]
+    },
+    {
+      "id": "8a9573a47f21",
+      "title": "Lunar New Year's Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-02-06",
+      "end": "2027-02-06",
+      "allDay": true
+    },
+    {
+      "id": "b9c5b7cb544a",
+      "title": "New moon 11:56pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-02-06",
+      "end": "2027-02-06",
+      "allDay": true
+    },
+    {
+      "id": "f90db448a027",
+      "title": "Second Day of Lunar New Year",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-02-07",
+      "end": "2027-02-07",
+      "allDay": true
+    },
+    {
+      "id": "bc6cd49f527f",
+      "title": "Ramadan Starts (tentative)",
+      "calendar": "Muslim Holidays",
+      "color": 2,
+      "start": "2027-02-08",
+      "end": "2027-02-08",
+      "allDay": true
+    },
+    {
+      "id": "411fcd114081",
+      "title": "Third Day of Lunar New Year",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-02-08",
+      "end": "2027-02-08",
+      "allDay": true
+    },
+    {
+      "id": "840ad4787917",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-08T12:00:00+08:00",
+      "end": "2027-02-08T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-08"
+      ]
+    },
+    {
+      "id": "5482eba61e52",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-08T16:00:00+08:00",
+      "end": "2027-02-08T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-08"
+      ]
+    },
+    {
+      "id": "44502aa3d316",
+      "title": "Fourth Day of Lunar New Year",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-02-09",
+      "end": "2027-02-09",
+      "allDay": true
+    },
+    {
+      "id": "46a58c3f4c08",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-09T09:00:00+08:00",
+      "end": "2027-02-09T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-09"
+      ]
+    },
+    {
+      "id": "edc3d7b0e056",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-09T12:00:00+08:00",
+      "end": "2027-02-09T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-09"
+      ]
+    },
+    {
+      "id": "7619c147b5bd",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-09T16:00:00+08:00",
+      "end": "2027-02-09T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-09"
+      ]
+    },
+    {
+      "id": "3d0df3a7d81d",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-10T09:00:00+08:00",
+      "end": "2027-02-10T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-10"
+      ]
+    },
+    {
+      "id": "ad07b920b390",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-10T12:00:00+08:00",
+      "end": "2027-02-10T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-10"
+      ]
+    },
+    {
+      "id": "e464e881c039",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-12T09:00:00+08:00",
+      "end": "2027-02-12T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-12"
+      ]
+    },
+    {
+      "id": "b9f2798baee8",
+      "title": "First quarter 3:58pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-02-14",
+      "end": "2027-02-14",
+      "allDay": true
+    },
+    {
+      "id": "84088955abc9",
+      "title": "Valentine's Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-02-14",
+      "end": "2027-02-14",
+      "allDay": true
+    },
+    {
+      "id": "e6ff32b39a33",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-15T12:00:00+08:00",
+      "end": "2027-02-15T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-15"
+      ]
+    },
+    {
+      "id": "34bae62b90d9",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-15T16:00:00+08:00",
+      "end": "2027-02-15T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-15"
+      ]
+    },
+    {
+      "id": "d5c616f63a55",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-16T09:00:00+08:00",
+      "end": "2027-02-16T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-16"
+      ]
+    },
+    {
+      "id": "a155c72391f3",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-16T12:00:00+08:00",
+      "end": "2027-02-16T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-16"
+      ]
+    },
+    {
+      "id": "1f1a2cc093e4",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-16T16:00:00+08:00",
+      "end": "2027-02-16T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-16"
+      ]
+    },
+    {
+      "id": "cb7f035a88f1",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-17T09:00:00+08:00",
+      "end": "2027-02-17T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-17"
+      ]
+    },
+    {
+      "id": "86dc23a9bea8",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-17T12:00:00+08:00",
+      "end": "2027-02-17T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-17"
+      ]
+    },
+    {
+      "id": "3554e394f915",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-19T09:00:00+08:00",
+      "end": "2027-02-19T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-19"
+      ]
+    },
+    {
+      "id": "c73c20efca74",
+      "title": "Full moon 7:23am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-02-21",
+      "end": "2027-02-21",
+      "allDay": true
+    },
+    {
+      "id": "bf27859d2a3c",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-22T12:00:00+08:00",
+      "end": "2027-02-22T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-22"
+      ]
+    },
+    {
+      "id": "cef5688d7406",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-22T16:00:00+08:00",
+      "end": "2027-02-22T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-22"
+      ]
+    },
+    {
+      "id": "9db60aa2e3f2",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-23T09:00:00+08:00",
+      "end": "2027-02-23T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-23"
+      ]
+    },
+    {
+      "id": "bd43d8b09a4e",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-23T12:00:00+08:00",
+      "end": "2027-02-23T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-23"
+      ]
+    },
+    {
+      "id": "11f8a3b2f961",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-23T16:00:00+08:00",
+      "end": "2027-02-23T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-23"
+      ]
+    },
+    {
+      "id": "75845829c98d",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-24T09:00:00+08:00",
+      "end": "2027-02-24T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-24"
+      ]
+    },
+    {
+      "id": "860c2c1220af",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-24T12:00:00+08:00",
+      "end": "2027-02-24T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-24"
+      ]
+    },
+    {
+      "id": "578a62f311d8",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-26T09:00:00+08:00",
+      "end": "2027-02-26T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-26"
+      ]
+    },
+    {
+      "id": "44dc9a1ff827",
+      "title": "Last quarter 1:16pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-02-28",
+      "end": "2027-02-28",
+      "allDay": true
+    },
+    {
+      "id": "1bf9231fb941",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-01T12:00:00+08:00",
+      "end": "2027-03-01T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-01"
+      ]
+    },
+    {
+      "id": "913326050ed7",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-01T16:00:00+08:00",
+      "end": "2027-03-01T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-01"
+      ]
+    },
+    {
+      "id": "1641def6efb5",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-02T09:00:00+08:00",
+      "end": "2027-03-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-02"
+      ]
+    },
+    {
+      "id": "52c7aced9685",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-02T12:00:00+08:00",
+      "end": "2027-03-02T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-02"
+      ]
+    },
+    {
+      "id": "16035db20a4f",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-02T16:00:00+08:00",
+      "end": "2027-03-02T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-02"
+      ]
+    },
+    {
+      "id": "36ff27c270a5",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-03T09:00:00+08:00",
+      "end": "2027-03-03T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-03"
+      ]
+    },
+    {
+      "id": "c0b59d9ff4b2",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-03T12:00:00+08:00",
+      "end": "2027-03-03T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-03"
+      ]
+    },
+    {
+      "id": "c5662d490236",
+      "title": "Lailat al-Qadr",
+      "calendar": "Muslim Holidays",
+      "color": 2,
+      "start": "2027-03-05",
+      "end": "2027-03-05",
+      "allDay": true
+    },
+    {
+      "id": "96821dbad415",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-05T09:00:00+08:00",
+      "end": "2027-03-05T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-05"
+      ]
+    },
+    {
+      "id": "e3b906873798",
+      "title": "New moon 5:29pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-03-08",
+      "end": "2027-03-08",
+      "allDay": true
+    },
+    {
+      "id": "3553b41cc4e9",
+      "title": "Международный женский день",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-03-08",
+      "end": "2027-03-08",
+      "allDay": true
+    },
+    {
+      "id": "6be1d2d1fdf2",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-08T12:00:00+08:00",
+      "end": "2027-03-08T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-08"
+      ]
+    },
+    {
+      "id": "39a3e7d1bf33",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-08T16:00:00+08:00",
+      "end": "2027-03-08T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-08"
+      ]
+    },
+    {
+      "id": "ab01c804c203",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-09T09:00:00+08:00",
+      "end": "2027-03-09T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-09"
+      ]
+    },
+    {
+      "id": "50e0b0e30525",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-09T12:00:00+08:00",
+      "end": "2027-03-09T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-09"
+      ]
+    },
+    {
+      "id": "20248a89ad31",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-09T16:00:00+08:00",
+      "end": "2027-03-09T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-09"
+      ]
+    },
+    {
+      "id": "9d9e45f3fae9",
+      "title": "Eid al-Fitr (tentative)",
+      "calendar": "Muslim Holidays",
+      "color": 2,
+      "start": "2027-03-10",
+      "end": "2027-03-10",
+      "allDay": true
+    },
+    {
+      "id": "6baac6fa0a4b",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-10T09:00:00+08:00",
+      "end": "2027-03-10T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-10"
+      ]
+    },
+    {
+      "id": "a5fcac341ea5",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-10T12:00:00+08:00",
+      "end": "2027-03-10T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-10"
+      ]
+    },
+    {
+      "id": "763109581c7b",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-12T09:00:00+08:00",
+      "end": "2027-03-12T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-12"
+      ]
+    },
+    {
+      "id": "0a7338dc5d93",
+      "title": "День Конституции Республики Казахстан",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-03-15",
+      "end": "2027-03-15",
+      "allDay": true
+    },
+    {
+      "id": "2033dd6cc270",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-15T12:00:00+08:00",
+      "end": "2027-03-15T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-15"
+      ]
+    },
+    {
+      "id": "aa84cc6cebfc",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-15T16:00:00+08:00",
+      "end": "2027-03-15T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-15"
+      ]
+    },
+    {
+      "id": "c6452e87d827",
+      "title": "First quarter 12:25am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-03-16",
+      "end": "2027-03-16",
+      "allDay": true
+    },
+    {
+      "id": "9f1e8ac9357c",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-16T09:00:00+08:00",
+      "end": "2027-03-16T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-16"
+      ]
+    },
+    {
+      "id": "dca378845bb6",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-16T12:00:00+08:00",
+      "end": "2027-03-16T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-16"
+      ]
+    },
+    {
+      "id": "f4d8e6ef5e1c",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-16T16:00:00+08:00",
+      "end": "2027-03-16T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-16"
+      ]
+    },
+    {
+      "id": "de0ae73c2d19",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-17T09:00:00+08:00",
+      "end": "2027-03-17T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-17"
+      ]
+    },
+    {
+      "id": "e1fba77f9c92",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-17T12:00:00+08:00",
+      "end": "2027-03-17T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-17"
+      ]
+    },
+    {
+      "id": "07815b52045e",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-19T09:00:00+08:00",
+      "end": "2027-03-19T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-19"
+      ]
+    },
+    {
+      "id": "4e23186407cf",
+      "title": "Наурыз мейрамы",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-03-21",
+      "end": "2027-03-21",
+      "allDay": true
+    },
+    {
+      "id": "dca837d3c3b0",
+      "title": "Full moon 6:44pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-03-22",
+      "end": "2027-03-22",
+      "allDay": true
+    },
+    {
+      "id": "818b2616893d",
+      "title": "Наурыз мейрамы (2-й день)",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-03-22",
+      "end": "2027-03-22",
+      "allDay": true
+    },
+    {
+      "id": "673ff5c58893",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-22T12:00:00+08:00",
+      "end": "2027-03-22T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-22"
+      ]
+    },
+    {
+      "id": "87d0f260f884",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-22T16:00:00+08:00",
+      "end": "2027-03-22T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-22"
+      ]
+    },
+    {
+      "id": "81de0ccf386c",
+      "title": "Наурыз мейрамы (3-й день)",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-03-23",
+      "end": "2027-03-23",
+      "allDay": true
+    },
+    {
+      "id": "1bdee255b433",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-23T09:00:00+08:00",
+      "end": "2027-03-23T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-23"
+      ]
+    },
+    {
+      "id": "15f07bf64e60",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-23T12:00:00+08:00",
+      "end": "2027-03-23T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-23"
+      ]
+    },
+    {
+      "id": "058016f372bf",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-23T16:00:00+08:00",
+      "end": "2027-03-23T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-23"
+      ]
+    },
+    {
+      "id": "40ede7272160",
+      "title": "Наурыз мейрамы перенесенный выходной день",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-03-24",
+      "end": "2027-03-24",
+      "allDay": true
+    },
+    {
+      "id": "8778f0cc7a1f",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-24T09:00:00+08:00",
+      "end": "2027-03-24T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-24"
+      ]
+    },
+    {
+      "id": "d5c801a691ec",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-24T12:00:00+08:00",
+      "end": "2027-03-24T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-24"
+      ]
+    },
+    {
+      "id": "8a88dd35513f",
+      "title": "Good Friday",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-03-26",
+      "end": "2027-03-26",
+      "allDay": true
+    },
+    {
+      "id": "6d0285ed2f53",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-26T09:00:00+08:00",
+      "end": "2027-03-26T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-26"
+      ]
+    },
+    {
+      "id": "07dbc719f0bd",
+      "title": "Holy Saturday",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-03-27",
+      "end": "2027-03-27",
+      "allDay": true
+    },
+    {
+      "id": "99a89d15f225",
+      "title": "Easter Sunday",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-03-28",
+      "end": "2027-03-28",
+      "allDay": true
+    },
+    {
+      "id": "218c6d39e165",
+      "title": "Easter Monday",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-03-29",
+      "end": "2027-03-29",
+      "allDay": true
+    },
+    {
+      "id": "4567feded629",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-29T12:00:00+08:00",
+      "end": "2027-03-29T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-29"
+      ]
+    },
+    {
+      "id": "eedd457b149a",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-29T16:00:00+08:00",
+      "end": "2027-03-29T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-29"
+      ]
+    },
+    {
+      "id": "67cf5ec022b3",
+      "title": "Last quarter 8:54am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-03-30",
+      "end": "2027-03-30",
+      "allDay": true
+    },
+    {
+      "id": "fa7f2bfdcb02",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-30T09:00:00+08:00",
+      "end": "2027-03-30T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-30"
+      ]
+    },
+    {
+      "id": "19bf73263109",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-30T12:00:00+08:00",
+      "end": "2027-03-30T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-30"
+      ]
+    },
+    {
+      "id": "bc66bf8a24d4",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-30T16:00:00+08:00",
+      "end": "2027-03-30T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-30"
+      ]
+    },
+    {
+      "id": "240222a9598b",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-31T09:00:00+08:00",
+      "end": "2027-03-31T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-31"
+      ]
+    },
+    {
+      "id": "c04649d9c707",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-31T12:00:00+08:00",
+      "end": "2027-03-31T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-31"
+      ]
+    },
+    {
+      "id": "5bcccfe5746e",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-02T09:00:00+08:00",
+      "end": "2027-04-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-02"
+      ]
+    },
+    {
+      "id": "251f6bd459d1",
+      "title": "Tomb Sweeping Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-04-05",
+      "end": "2027-04-05",
+      "allDay": true
+    },
+    {
+      "id": "e81d24969242",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-05T12:00:00+08:00",
+      "end": "2027-04-05T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-05"
+      ]
+    },
+    {
+      "id": "4456de631812",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-05T16:00:00+08:00",
+      "end": "2027-04-05T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-05"
+      ]
+    },
+    {
+      "id": "9d3ba93af05c",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-06T09:00:00+08:00",
+      "end": "2027-04-06T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-06"
+      ]
+    },
+    {
+      "id": "02c629f0c000",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-06T12:00:00+08:00",
+      "end": "2027-04-06T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-06"
+      ]
+    },
+    {
+      "id": "c2ecccb77e31",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-06T16:00:00+08:00",
+      "end": "2027-04-06T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-06"
+      ]
+    },
+    {
+      "id": "b34612e2b106",
+      "title": "New moon 7:51am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-04-07",
+      "end": "2027-04-07",
+      "allDay": true
+    },
+    {
+      "id": "6b25e521ae66",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-07T09:00:00+08:00",
+      "end": "2027-04-07T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-07"
+      ]
+    },
+    {
+      "id": "eb337863626e",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-07T12:00:00+08:00",
+      "end": "2027-04-07T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-07"
+      ]
+    },
+    {
+      "id": "b02e5fc507e0",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-09T09:00:00+08:00",
+      "end": "2027-04-09T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-09"
+      ]
+    },
+    {
+      "id": "e69b92f6ece4",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-12T12:00:00+08:00",
+      "end": "2027-04-12T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-12"
+      ]
+    },
+    {
+      "id": "9151168f1357",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-12T16:00:00+08:00",
+      "end": "2027-04-12T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-12"
+      ]
+    },
+    {
+      "id": "db0644a98439",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-13T09:00:00+08:00",
+      "end": "2027-04-13T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-13"
+      ]
+    },
+    {
+      "id": "19ba760943eb",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-13T12:00:00+08:00",
+      "end": "2027-04-13T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-13"
+      ]
+    },
+    {
+      "id": "2ea9ba236b5a",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-13T16:00:00+08:00",
+      "end": "2027-04-13T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-13"
+      ]
+    },
+    {
+      "id": "36d28c44f0fd",
+      "title": "First quarter 6:57am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-04-14",
+      "end": "2027-04-14",
+      "allDay": true
+    },
+    {
+      "id": "924684afe8c1",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-14T09:00:00+08:00",
+      "end": "2027-04-14T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-14"
+      ]
+    },
+    {
+      "id": "1991e51f3124",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-14T12:00:00+08:00",
+      "end": "2027-04-14T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-14"
+      ]
+    },
+    {
+      "id": "15153c69bc31",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-16T09:00:00+08:00",
+      "end": "2027-04-16T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-16"
+      ]
+    },
+    {
+      "id": "4512b24408c0",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-19T12:00:00+08:00",
+      "end": "2027-04-19T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-19"
+      ]
+    },
+    {
+      "id": "b09331ce63f1",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-19T16:00:00+08:00",
+      "end": "2027-04-19T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-19"
+      ]
+    },
+    {
+      "id": "6bffbeb1f1cd",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-20T09:00:00+08:00",
+      "end": "2027-04-20T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-20"
+      ]
+    },
+    {
+      "id": "7a82dd4e74a2",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-20T12:00:00+08:00",
+      "end": "2027-04-20T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-20"
+      ]
+    },
+    {
+      "id": "a832ea3c5d8e",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-20T16:00:00+08:00",
+      "end": "2027-04-20T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-20"
+      ]
+    },
+    {
+      "id": "4b3656a4fdaf",
+      "title": "Full moon 6:27am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-04-21",
+      "end": "2027-04-21",
+      "allDay": true
+    },
+    {
+      "id": "152589071274",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-21T09:00:00+08:00",
+      "end": "2027-04-21T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-21"
+      ]
+    },
+    {
+      "id": "933f7c47e926",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-21T12:00:00+08:00",
+      "end": "2027-04-21T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-21"
+      ]
+    },
+    {
+      "id": "b30e2687a953",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-23T09:00:00+08:00",
+      "end": "2027-04-23T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-23"
+      ]
+    },
+    {
+      "id": "70aed867f379",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-26T12:00:00+08:00",
+      "end": "2027-04-26T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-26"
+      ]
+    },
+    {
+      "id": "95eb5ccdb916",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-26T16:00:00+08:00",
+      "end": "2027-04-26T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-26"
+      ]
+    },
+    {
+      "id": "b695f4a849b2",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-27T09:00:00+08:00",
+      "end": "2027-04-27T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-27"
+      ]
+    },
+    {
+      "id": "dc4d48655d47",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-27T12:00:00+08:00",
+      "end": "2027-04-27T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-27"
+      ]
+    },
+    {
+      "id": "13003c88e7eb",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-27T16:00:00+08:00",
+      "end": "2027-04-27T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-27"
+      ]
+    },
+    {
+      "id": "469d8b8d027f",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-28T09:00:00+08:00",
+      "end": "2027-04-28T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-28"
+      ]
+    },
+    {
+      "id": "8a1a4fc9acaa",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-28T12:00:00+08:00",
+      "end": "2027-04-28T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-28"
+      ]
+    },
+    {
+      "id": "553be75cdc4b",
+      "title": "Last quarter 4:18am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-04-29",
+      "end": "2027-04-29",
+      "allDay": true
+    },
+    {
+      "id": "82167d82ead0",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-30T09:00:00+08:00",
+      "end": "2027-04-30T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-30"
+      ]
+    },
+    {
+      "id": "3341ae6fedd0",
+      "title": "Labour Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-05-01",
+      "end": "2027-05-01",
+      "allDay": true
+    },
+    {
+      "id": "6188785af4da",
+      "title": "Праздник единства народа Казахстана",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-05-01",
+      "end": "2027-05-01",
+      "allDay": true
+    },
+    {
+      "id": "fd6707fc7711",
+      "title": "Праздник единства народа Казахстана перенесенный выходной день",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-05-03",
+      "end": "2027-05-03",
+      "allDay": true
+    },
+    {
+      "id": "7a33ae89ed05",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-03T12:00:00+08:00",
+      "end": "2027-05-03T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-03"
+      ]
+    },
+    {
+      "id": "192db69d2868",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-03T16:00:00+08:00",
+      "end": "2027-05-03T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-03"
+      ]
+    },
+    {
+      "id": "8afea4fb3ab2",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-04T09:00:00+08:00",
+      "end": "2027-05-04T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-04"
+      ]
+    },
+    {
+      "id": "8ed39ba6b535",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-04T12:00:00+08:00",
+      "end": "2027-05-04T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-04"
+      ]
+    },
+    {
+      "id": "8047c462ff74",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-04T16:00:00+08:00",
+      "end": "2027-05-04T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-04"
+      ]
+    },
+    {
+      "id": "d80ca0560b38",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-05T09:00:00+08:00",
+      "end": "2027-05-05T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-05"
+      ]
+    },
+    {
+      "id": "80b8f149acc5",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-05T12:00:00+08:00",
+      "end": "2027-05-05T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-05"
+      ]
+    },
+    {
+      "id": "c29d2e2e12f8",
+      "title": "New moon 6:58pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-05-06",
+      "end": "2027-05-06",
+      "allDay": true
+    },
+    {
+      "id": "97e794b88d2e",
+      "title": "День защитника Отечества",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-05-07",
+      "end": "2027-05-07",
+      "allDay": true
+    },
+    {
+      "id": "bcafb8cd6b7d",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-07T09:00:00+08:00",
+      "end": "2027-05-07T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-07"
+      ]
+    },
+    {
+      "id": "35a18234439b",
+      "title": "Mother's Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-05-09",
+      "end": "2027-05-09",
+      "allDay": true
+    },
+    {
+      "id": "c9011f010afc",
+      "title": "День Победы",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-05-09",
+      "end": "2027-05-09",
+      "allDay": true
+    },
+    {
+      "id": "3939c465c122",
+      "title": "День Победы перенесенный выходной день",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-05-10",
+      "end": "2027-05-10",
+      "allDay": true
+    },
+    {
+      "id": "61baffd21be6",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-10T12:00:00+08:00",
+      "end": "2027-05-10T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-10"
+      ]
+    },
+    {
+      "id": "8faceff1bc6d",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-10T16:00:00+08:00",
+      "end": "2027-05-10T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-10"
+      ]
+    },
+    {
+      "id": "9df004520f00",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-11T09:00:00+08:00",
+      "end": "2027-05-11T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-11"
+      ]
+    },
+    {
+      "id": "66fc3f224807",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-11T12:00:00+08:00",
+      "end": "2027-05-11T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-11"
+      ]
+    },
+    {
+      "id": "6c0a6321c823",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-11T16:00:00+08:00",
+      "end": "2027-05-11T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-11"
+      ]
+    },
+    {
+      "id": "e78166952536",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-12T09:00:00+08:00",
+      "end": "2027-05-12T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-12"
+      ]
+    },
+    {
+      "id": "11f799adbf67",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-12T12:00:00+08:00",
+      "end": "2027-05-12T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-12"
+      ]
+    },
+    {
+      "id": "31ea3f15c2b3",
+      "title": "Buddha's Birthday",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-05-13",
+      "end": "2027-05-13",
+      "allDay": true
+    },
+    {
+      "id": "6fbc684afaec",
+      "title": "First quarter 12:44pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-05-13",
+      "end": "2027-05-13",
+      "allDay": true
+    },
+    {
+      "id": "f1b9c2794f48",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-14T09:00:00+08:00",
+      "end": "2027-05-14T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-14"
+      ]
+    },
+    {
+      "id": "7098828cb2d8",
+      "title": "Курбан айт (предположительно)",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-05-16",
+      "end": "2027-05-16",
+      "allDay": true
+    },
+    {
+      "id": "b0d7ae89c0e6",
+      "title": "Eid al-Adha (tentative)",
+      "calendar": "Muslim Holidays",
+      "color": 2,
+      "start": "2027-05-17",
+      "end": "2027-05-17",
+      "allDay": true
+    },
+    {
+      "id": "1111926c34c1",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-17T12:00:00+08:00",
+      "end": "2027-05-17T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-17"
+      ]
+    },
+    {
+      "id": "917f9eb8e9f0",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-17T16:00:00+08:00",
+      "end": "2027-05-17T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-17"
+      ]
+    },
+    {
+      "id": "c9c3e5c937b9",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-18T09:00:00+08:00",
+      "end": "2027-05-18T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-18"
+      ]
+    },
+    {
+      "id": "9b1336c56993",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-18T12:00:00+08:00",
+      "end": "2027-05-18T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-18"
+      ]
+    },
+    {
+      "id": "8fa703ca898b",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-18T16:00:00+08:00",
+      "end": "2027-05-18T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-18"
+      ]
+    },
+    {
+      "id": "615f7f9fbb85",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-19T09:00:00+08:00",
+      "end": "2027-05-19T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-19"
+      ]
+    },
+    {
+      "id": "87479793f6d8",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-19T12:00:00+08:00",
+      "end": "2027-05-19T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-19"
+      ]
+    },
+    {
+      "id": "b80b003d673c",
+      "title": "Full moon 6:59pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-05-20",
+      "end": "2027-05-20",
+      "allDay": true
+    },
+    {
+      "id": "3dac6fbcb929",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-21T09:00:00+08:00",
+      "end": "2027-05-21T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-21"
+      ]
+    },
+    {
+      "id": "a396d27c6255",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-24T12:00:00+08:00",
+      "end": "2027-05-24T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-24"
+      ]
+    },
+    {
+      "id": "e2c6f6fe841c",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-24T16:00:00+08:00",
+      "end": "2027-05-24T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-24"
+      ]
+    },
+    {
+      "id": "ad3590076012",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-25T09:00:00+08:00",
+      "end": "2027-05-25T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-25"
+      ]
+    },
+    {
+      "id": "da281be16c2d",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-25T12:00:00+08:00",
+      "end": "2027-05-25T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-25"
+      ]
+    },
+    {
+      "id": "a76dec572338",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-25T16:00:00+08:00",
+      "end": "2027-05-25T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-25"
+      ]
+    },
+    {
+      "id": "6e3ac31a688d",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-26T09:00:00+08:00",
+      "end": "2027-05-26T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-26"
+      ]
+    },
+    {
+      "id": "a51e6681e9e0",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-26T12:00:00+08:00",
+      "end": "2027-05-26T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-26"
+      ]
+    },
+    {
+      "id": "4e1b279bbb1e",
+      "title": "Last quarter 9:58pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-05-28",
+      "end": "2027-05-28",
+      "allDay": true
+    },
+    {
+      "id": "be74534045dc",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-28T09:00:00+08:00",
+      "end": "2027-05-28T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-28"
+      ]
+    },
+    {
+      "id": "2b59f19ed5c4",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-31T12:00:00+08:00",
+      "end": "2027-05-31T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-31"
+      ]
+    },
+    {
+      "id": "5c8b3e06a245",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-31T16:00:00+08:00",
+      "end": "2027-05-31T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-31"
+      ]
+    },
+    {
+      "id": "c31a4bc2f768",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-01T09:00:00+08:00",
+      "end": "2027-06-01T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-01"
+      ]
+    },
+    {
+      "id": "f82d168d66e8",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-01T12:00:00+08:00",
+      "end": "2027-06-01T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-01"
+      ]
+    },
+    {
+      "id": "a39a6353512b",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-01T16:00:00+08:00",
+      "end": "2027-06-01T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-01"
+      ]
+    },
+    {
+      "id": "cd3d30263e20",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-02T09:00:00+08:00",
+      "end": "2027-06-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-02"
+      ]
+    },
+    {
+      "id": "7dd9493e7bd3",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-02T12:00:00+08:00",
+      "end": "2027-06-02T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-02"
+      ]
+    },
+    {
+      "id": "b97b433b049c",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-04T09:00:00+08:00",
+      "end": "2027-06-04T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-04"
+      ]
+    },
+    {
+      "id": "0241b59a5cbf",
+      "title": "New moon 3:40am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-06-05",
+      "end": "2027-06-05",
+      "allDay": true
+    },
+    {
+      "id": "acbfdf867005",
+      "title": "Muharram (tentative)",
+      "calendar": "Muslim Holidays",
+      "color": 2,
+      "start": "2027-06-06",
+      "end": "2027-06-06",
+      "allDay": true
+    },
+    {
+      "id": "152479820e1d",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-07T12:00:00+08:00",
+      "end": "2027-06-07T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-07"
+      ]
+    },
+    {
+      "id": "212ccc6f9572",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-07T16:00:00+08:00",
+      "end": "2027-06-07T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-07"
+      ]
+    },
+    {
+      "id": "3a859bec226d",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-08T09:00:00+08:00",
+      "end": "2027-06-08T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-08"
+      ]
+    },
+    {
+      "id": "1c0fcc6c4e83",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-08T12:00:00+08:00",
+      "end": "2027-06-08T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-08"
+      ]
+    },
+    {
+      "id": "0866c4a7b739",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-08T16:00:00+08:00",
+      "end": "2027-06-08T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-08"
+      ]
+    },
+    {
+      "id": "5ce782e20bf0",
+      "title": "Dragon Boat Festival",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-06-09",
+      "end": "2027-06-09",
+      "allDay": true
+    },
+    {
+      "id": "ba611d329069",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-09T09:00:00+08:00",
+      "end": "2027-06-09T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-09"
+      ]
+    },
+    {
+      "id": "739c2123200d",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-09T12:00:00+08:00",
+      "end": "2027-06-09T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-09"
+      ]
+    },
+    {
+      "id": "28cfbf977f8b",
+      "title": "First quarter 6:56pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-06-11",
+      "end": "2027-06-11",
+      "allDay": true
+    },
+    {
+      "id": "4191c5425955",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-11T09:00:00+08:00",
+      "end": "2027-06-11T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-11"
+      ]
+    },
+    {
+      "id": "6eddf4ed6969",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-14T12:00:00+08:00",
+      "end": "2027-06-14T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-14"
+      ]
+    },
+    {
+      "id": "4ff36c0885d7",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-14T16:00:00+08:00",
+      "end": "2027-06-14T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-14"
+      ]
+    },
+    {
+      "id": "569020177a00",
+      "title": "Ashura (tentative)",
+      "calendar": "Muslim Holidays",
+      "color": 2,
+      "start": "2027-06-15",
+      "end": "2027-06-15",
+      "allDay": true
+    },
+    {
+      "id": "b915461ecf05",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-15T09:00:00+08:00",
+      "end": "2027-06-15T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-15"
+      ]
+    },
+    {
+      "id": "654731850786",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-15T12:00:00+08:00",
+      "end": "2027-06-15T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-15"
+      ]
+    },
+    {
+      "id": "381fd102499a",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-15T16:00:00+08:00",
+      "end": "2027-06-15T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-15"
+      ]
+    },
+    {
+      "id": "098149a3bfc3",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-16T09:00:00+08:00",
+      "end": "2027-06-16T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-16"
+      ]
+    },
+    {
+      "id": "f644870aa356",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-16T12:00:00+08:00",
+      "end": "2027-06-16T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-16"
+      ]
+    },
+    {
+      "id": "dd3d2e998644",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-18T09:00:00+08:00",
+      "end": "2027-06-18T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-18"
+      ]
+    },
+    {
+      "id": "6d9032d112e5",
+      "title": "Full moon 8:44am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-06-19",
+      "end": "2027-06-19",
+      "allDay": true
+    },
+    {
+      "id": "8f359aac30eb",
+      "title": "Father's Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-06-20",
+      "end": "2027-06-20",
+      "allDay": true
+    },
+    {
+      "id": "cd14e5c1cf27",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-21T12:00:00+08:00",
+      "end": "2027-06-21T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-21"
+      ]
+    },
+    {
+      "id": "d12497bd3c86",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-21T16:00:00+08:00",
+      "end": "2027-06-21T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-21"
+      ]
+    },
+    {
+      "id": "a5460f5dd952",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-22T09:00:00+08:00",
+      "end": "2027-06-22T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-22"
+      ]
+    },
+    {
+      "id": "5887027b7ea1",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-22T12:00:00+08:00",
+      "end": "2027-06-22T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-22"
+      ]
+    },
+    {
+      "id": "5094c96d3b12",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-22T16:00:00+08:00",
+      "end": "2027-06-22T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-22"
+      ]
+    },
+    {
+      "id": "72dd9292de74",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-23T09:00:00+08:00",
+      "end": "2027-06-23T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-23"
+      ]
+    },
+    {
+      "id": "9ec191baa54c",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-23T12:00:00+08:00",
+      "end": "2027-06-23T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-23"
+      ]
+    },
+    {
+      "id": "926b4d34e9a4",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-25T09:00:00+08:00",
+      "end": "2027-06-25T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-25"
+      ]
+    },
+    {
+      "id": "3ba862519bce",
+      "title": "Last quarter 12:54pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-06-27",
+      "end": "2027-06-27",
+      "allDay": true
+    },
+    {
+      "id": "ea869dbfefb5",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-28T12:00:00+08:00",
+      "end": "2027-06-28T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-28"
+      ]
+    },
+    {
+      "id": "03c52c4d3895",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-28T16:00:00+08:00",
+      "end": "2027-06-28T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-28"
+      ]
+    },
+    {
+      "id": "5aa8d3e4fbc2",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-29T09:00:00+08:00",
+      "end": "2027-06-29T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-29"
+      ]
+    },
+    {
+      "id": "05d2b5e023e3",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-29T12:00:00+08:00",
+      "end": "2027-06-29T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-29"
+      ]
+    },
+    {
+      "id": "055bd7575fa6",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-29T16:00:00+08:00",
+      "end": "2027-06-29T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-29"
+      ]
+    },
+    {
+      "id": "248e82384fcb",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-30T09:00:00+08:00",
+      "end": "2027-06-30T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-30"
+      ]
+    },
+    {
+      "id": "c4e24aab3fbb",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-30T12:00:00+08:00",
+      "end": "2027-06-30T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-30"
+      ]
+    },
+    {
+      "id": "51556c036f1b",
+      "title": "Hong Kong Special Administrative Region Establishment Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-07-01",
+      "end": "2027-07-01",
+      "allDay": true
+    },
+    {
+      "id": "480ce64301c8",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-02T09:00:00+08:00",
+      "end": "2027-07-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-02"
+      ]
+    },
+    {
+      "id": "8ef3669422c7",
+      "title": "New moon 11:02am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-07-04",
+      "end": "2027-07-04",
+      "allDay": true
+    },
+    {
+      "id": "4120dae9105d",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-05T12:00:00+08:00",
+      "end": "2027-07-05T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-05"
+      ]
+    },
+    {
+      "id": "343780ca2825",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-05T16:00:00+08:00",
+      "end": "2027-07-05T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-05"
+      ]
+    },
+    {
+      "id": "60b2aad50419",
+      "title": "День Столицы",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-07-06",
+      "end": "2027-07-06",
+      "allDay": true
+    },
+    {
+      "id": "1d830a67882a",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-06T09:00:00+08:00",
+      "end": "2027-07-06T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-06"
+      ]
+    },
+    {
+      "id": "8f6530efe318",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-06T12:00:00+08:00",
+      "end": "2027-07-06T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-06"
+      ]
+    },
+    {
+      "id": "479e5d59fe3f",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-06T16:00:00+08:00",
+      "end": "2027-07-06T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-06"
+      ]
+    },
+    {
+      "id": "06033b3e9e2c",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-07T09:00:00+08:00",
+      "end": "2027-07-07T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-07"
+      ]
+    },
+    {
+      "id": "e4762dcfa7df",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-07T12:00:00+08:00",
+      "end": "2027-07-07T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-07"
+      ]
+    },
+    {
+      "id": "43ecebce0d94",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-09T09:00:00+08:00",
+      "end": "2027-07-09T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-09"
+      ]
+    },
+    {
+      "id": "40269a510d8d",
+      "title": "First quarter 2:39am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-07-11",
+      "end": "2027-07-11",
+      "allDay": true
+    },
+    {
+      "id": "17d5ba9b170d",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-12T12:00:00+08:00",
+      "end": "2027-07-12T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-12"
+      ]
+    },
+    {
+      "id": "380c04d56fe6",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-12T16:00:00+08:00",
+      "end": "2027-07-12T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-12"
+      ]
+    },
+    {
+      "id": "4899b5b1c7ac",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-13T09:00:00+08:00",
+      "end": "2027-07-13T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-13"
+      ]
+    },
+    {
+      "id": "a918922e359d",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-13T12:00:00+08:00",
+      "end": "2027-07-13T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-13"
+      ]
+    },
+    {
+      "id": "7bd1c511ba08",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-13T16:00:00+08:00",
+      "end": "2027-07-13T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-13"
+      ]
+    },
+    {
+      "id": "9c22f3be20c7",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-14T09:00:00+08:00",
+      "end": "2027-07-14T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-14"
+      ]
+    },
+    {
+      "id": "b79ca5f26539",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-14T12:00:00+08:00",
+      "end": "2027-07-14T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-14"
+      ]
+    },
+    {
+      "id": "3bc27bd34188",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-16T09:00:00+08:00",
+      "end": "2027-07-16T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-16"
+      ]
+    },
+    {
+      "id": "a4b53fd81b7b",
+      "title": "Full moon 11:45pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-07-18",
+      "end": "2027-07-18",
+      "allDay": true
+    },
+    {
+      "id": "d54e75ed4085",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-19T12:00:00+08:00",
+      "end": "2027-07-19T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-19"
+      ]
+    },
+    {
+      "id": "4be418f3e92a",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-19T16:00:00+08:00",
+      "end": "2027-07-19T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-19"
+      ]
+    },
+    {
+      "id": "cb8d0da3d9e9",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-20T09:00:00+08:00",
+      "end": "2027-07-20T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-20"
+      ]
+    },
+    {
+      "id": "bba652bc3e9a",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-20T12:00:00+08:00",
+      "end": "2027-07-20T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-20"
+      ]
+    },
+    {
+      "id": "4e6ca29fc018",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-20T16:00:00+08:00",
+      "end": "2027-07-20T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-20"
+      ]
+    },
+    {
+      "id": "1415d23b7d51",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-21T09:00:00+08:00",
+      "end": "2027-07-21T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-21"
+      ]
+    },
+    {
+      "id": "9b16537057be",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-21T12:00:00+08:00",
+      "end": "2027-07-21T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-21"
+      ]
+    },
+    {
+      "id": "a5b0749998cf",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-23T09:00:00+08:00",
+      "end": "2027-07-23T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-23"
+      ]
+    },
+    {
+      "id": "89f18904cd52",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-26T12:00:00+08:00",
+      "end": "2027-07-26T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-26"
+      ]
+    },
+    {
+      "id": "8cf0d869cba1",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-26T16:00:00+08:00",
+      "end": "2027-07-26T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-26"
+      ]
+    },
+    {
+      "id": "6baf5cad294f",
+      "title": "Last quarter 12:55am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-07-27",
+      "end": "2027-07-27",
+      "allDay": true
+    },
+    {
+      "id": "2c5a896b21c9",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-27T09:00:00+08:00",
+      "end": "2027-07-27T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-27"
+      ]
+    },
+    {
+      "id": "881bf2c67aac",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-27T12:00:00+08:00",
+      "end": "2027-07-27T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-27"
+      ]
+    },
+    {
+      "id": "494089b250ee",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-27T16:00:00+08:00",
+      "end": "2027-07-27T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-27"
+      ]
+    },
+    {
+      "id": "c04d24ea3402",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-28T09:00:00+08:00",
+      "end": "2027-07-28T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-28"
+      ]
+    },
+    {
+      "id": "a6fb5750d4ab",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-28T12:00:00+08:00",
+      "end": "2027-07-28T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-28"
+      ]
+    },
+    {
+      "id": "45880a613c92",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-30T09:00:00+08:00",
+      "end": "2027-07-30T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-30"
+      ]
+    },
+    {
+      "id": "ac958fd9a445",
+      "title": "New moon 6:05pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-08-02",
+      "end": "2027-08-02",
+      "allDay": true
+    },
+    {
+      "id": "d2264cd0a5f2",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-02T12:00:00+08:00",
+      "end": "2027-08-02T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-02"
+      ]
+    },
+    {
+      "id": "7e99cbb6b794",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-02T16:00:00+08:00",
+      "end": "2027-08-02T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-02"
+      ]
+    },
+    {
+      "id": "72d46ada76e3",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-03T09:00:00+08:00",
+      "end": "2027-08-03T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-03"
+      ]
+    },
+    {
+      "id": "8539499480be",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-03T12:00:00+08:00",
+      "end": "2027-08-03T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-03"
+      ]
+    },
+    {
+      "id": "3d4caf0c460b",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-03T16:00:00+08:00",
+      "end": "2027-08-03T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-03"
+      ]
+    },
+    {
+      "id": "828c4854d907",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-04T09:00:00+08:00",
+      "end": "2027-08-04T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-04"
+      ]
+    },
+    {
+      "id": "662a2f01e675",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-04T12:00:00+08:00",
+      "end": "2027-08-04T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-04"
+      ]
+    },
+    {
+      "id": "5201f06d91b4",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-06T09:00:00+08:00",
+      "end": "2027-08-06T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-06"
+      ]
+    },
+    {
+      "id": "c7d6ccbda2fa",
+      "title": "First quarter 12:54pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-08-09",
+      "end": "2027-08-09",
+      "allDay": true
+    },
+    {
+      "id": "8a7c8b9e223a",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-09T12:00:00+08:00",
+      "end": "2027-08-09T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-09"
+      ]
+    },
+    {
+      "id": "33215bf9c75c",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-09T16:00:00+08:00",
+      "end": "2027-08-09T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-09"
+      ]
+    },
+    {
+      "id": "7439106b2fc8",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-10T09:00:00+08:00",
+      "end": "2027-08-10T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-10"
+      ]
+    },
+    {
+      "id": "bee70cf7f081",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-10T12:00:00+08:00",
+      "end": "2027-08-10T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-10"
+      ]
+    },
+    {
+      "id": "d4c5c5a0fd7e",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-10T16:00:00+08:00",
+      "end": "2027-08-10T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-10"
+      ]
+    },
+    {
+      "id": "a2d55c2af7a8",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-11T09:00:00+08:00",
+      "end": "2027-08-11T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-11"
+      ]
+    },
+    {
+      "id": "844a0ea60e93",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-11T12:00:00+08:00",
+      "end": "2027-08-11T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-11"
+      ]
+    },
+    {
+      "id": "4ee39ec69e09",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-13T09:00:00+08:00",
+      "end": "2027-08-13T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-13"
+      ]
+    },
+    {
+      "id": "352e905cd1e3",
+      "title": "The Prophet's Birthday (tentative)",
+      "calendar": "Muslim Holidays",
+      "color": 2,
+      "start": "2027-08-15",
+      "end": "2027-08-15",
+      "allDay": true
+    },
+    {
+      "id": "6257e31379e4",
+      "title": "Hungry Ghost Festival",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-08-16",
+      "end": "2027-08-16",
+      "allDay": true
+    },
+    {
+      "id": "4ca823b5086a",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-16T12:00:00+08:00",
+      "end": "2027-08-16T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-16"
+      ]
+    },
+    {
+      "id": "9b667ff09b34",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-16T16:00:00+08:00",
+      "end": "2027-08-16T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-16"
+      ]
+    },
+    {
+      "id": "1490d6f2ef3f",
+      "title": "Full moon 3:29pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-08-17",
+      "end": "2027-08-17",
+      "allDay": true
+    },
+    {
+      "id": "2da84625b56b",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-17T09:00:00+08:00",
+      "end": "2027-08-17T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-17"
+      ]
+    },
+    {
+      "id": "128842a14183",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-17T12:00:00+08:00",
+      "end": "2027-08-17T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-17"
+      ]
+    },
+    {
+      "id": "792ad493cb09",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-17T16:00:00+08:00",
+      "end": "2027-08-17T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-17"
+      ]
+    },
+    {
+      "id": "c66fb64d336d",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-18T09:00:00+08:00",
+      "end": "2027-08-18T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-18"
+      ]
+    },
+    {
+      "id": "5340d48ef88f",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-18T12:00:00+08:00",
+      "end": "2027-08-18T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-18"
+      ]
+    },
+    {
+      "id": "99f0ceeabf30",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-20T09:00:00+08:00",
+      "end": "2027-08-20T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-20"
+      ]
+    },
+    {
+      "id": "68e4d3198046",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-23T12:00:00+08:00",
+      "end": "2027-08-23T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-23"
+      ]
+    },
+    {
+      "id": "0c3c7b9acef0",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-23T16:00:00+08:00",
+      "end": "2027-08-23T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-23"
+      ]
+    },
+    {
+      "id": "0883a91962b7",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-24T09:00:00+08:00",
+      "end": "2027-08-24T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-24"
+      ]
+    },
+    {
+      "id": "92feb0366b3e",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-24T12:00:00+08:00",
+      "end": "2027-08-24T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-24"
+      ]
+    },
+    {
+      "id": "090a478f7fd9",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-24T16:00:00+08:00",
+      "end": "2027-08-24T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-24"
+      ]
+    },
+    {
+      "id": "ef3fae09c600",
+      "title": "Last quarter 10:27am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-08-25",
+      "end": "2027-08-25",
+      "allDay": true
+    },
+    {
+      "id": "a9d692470eb7",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-25T09:00:00+08:00",
+      "end": "2027-08-25T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-25"
+      ]
+    },
+    {
+      "id": "7e391df92c95",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-25T12:00:00+08:00",
+      "end": "2027-08-25T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-25"
+      ]
+    },
+    {
+      "id": "b5a9d5271632",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-27T09:00:00+08:00",
+      "end": "2027-08-27T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-27"
+      ]
+    },
+    {
+      "id": "511a858c27cf",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-30T12:00:00+08:00",
+      "end": "2027-08-30T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-30"
+      ]
+    },
+    {
+      "id": "2014b65cb660",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-30T16:00:00+08:00",
+      "end": "2027-08-30T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-30"
+      ]
+    },
+    {
+      "id": "255e2e422381",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-31T09:00:00+08:00",
+      "end": "2027-08-31T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-31"
+      ]
+    },
+    {
+      "id": "6eeee21d73c9",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-31T12:00:00+08:00",
+      "end": "2027-08-31T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-31"
+      ]
+    },
+    {
+      "id": "6950ab3ac9f3",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-31T16:00:00+08:00",
+      "end": "2027-08-31T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-31"
+      ]
+    },
+    {
+      "id": "70f410c804ad",
+      "title": "New moon 1:41am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-09-01",
+      "end": "2027-09-01",
+      "allDay": true
+    },
+    {
+      "id": "b4cab387fa5f",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-01T09:00:00+08:00",
+      "end": "2027-09-01T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-01"
+      ]
+    },
+    {
+      "id": "e4d3ff5017f8",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-01T12:00:00+08:00",
+      "end": "2027-09-01T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-01"
+      ]
+    },
+    {
+      "id": "23b72d8e6124",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-03T09:00:00+08:00",
+      "end": "2027-09-03T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-03"
+      ]
+    },
+    {
+      "id": "3675cfd48179",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-06T12:00:00+08:00",
+      "end": "2027-09-06T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-06"
+      ]
+    },
+    {
+      "id": "7e8d1c5b6542",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-06T16:00:00+08:00",
+      "end": "2027-09-06T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-06"
+      ]
+    },
+    {
+      "id": "bc26156a60c8",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-07T09:00:00+08:00",
+      "end": "2027-09-07T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-07"
+      ]
+    },
+    {
+      "id": "e9491e50c774",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-07T12:00:00+08:00",
+      "end": "2027-09-07T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-07"
+      ]
+    },
+    {
+      "id": "b0427363200e",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-07T16:00:00+08:00",
+      "end": "2027-09-07T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-07"
+      ]
+    },
+    {
+      "id": "2f73551a4047",
+      "title": "First quarter 2:31am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-09-08",
+      "end": "2027-09-08",
+      "allDay": true
+    },
+    {
+      "id": "1ecf0b77aa1d",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-08T09:00:00+08:00",
+      "end": "2027-09-08T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-08"
+      ]
+    },
+    {
+      "id": "e8413b8a4f19",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-08T12:00:00+08:00",
+      "end": "2027-09-08T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-08"
+      ]
+    },
+    {
+      "id": "849ee1c168d8",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-10T09:00:00+08:00",
+      "end": "2027-09-10T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-10"
+      ]
+    },
+    {
+      "id": "13e7445272ef",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-13T12:00:00+08:00",
+      "end": "2027-09-13T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-13"
+      ]
+    },
+    {
+      "id": "28b6d8b8f4f4",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-13T16:00:00+08:00",
+      "end": "2027-09-13T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-13"
+      ]
+    },
+    {
+      "id": "ac144e18b182",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-14T09:00:00+08:00",
+      "end": "2027-09-14T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-14"
+      ]
+    },
+    {
+      "id": "d9c35c7056de",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-14T12:00:00+08:00",
+      "end": "2027-09-14T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-14"
+      ]
+    },
+    {
+      "id": "9299c269f9fb",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-14T16:00:00+08:00",
+      "end": "2027-09-14T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-14"
+      ]
+    },
+    {
+      "id": "eef478592828",
+      "title": "Mid-Autumn Festival",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-09-15",
+      "end": "2027-09-15",
+      "allDay": true
+    },
+    {
+      "id": "0e9505d0b957",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-15T09:00:00+08:00",
+      "end": "2027-09-15T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-15"
+      ]
+    },
+    {
+      "id": "6b0de4bd88f6",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-15T12:00:00+08:00",
+      "end": "2027-09-15T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-15"
+      ]
+    },
+    {
+      "id": "9687eb1ad89a",
+      "title": "Day after Mid-Autumn Festival",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-09-16",
+      "end": "2027-09-16",
+      "allDay": true
+    },
+    {
+      "id": "ab6cb75d3903",
+      "title": "Full moon 7:04am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-09-16",
+      "end": "2027-09-16",
+      "allDay": true
+    },
+    {
+      "id": "4cfe3605f72c",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-17T09:00:00+08:00",
+      "end": "2027-09-17T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-17"
+      ]
+    },
+    {
+      "id": "ebf124e0fd6b",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-20T12:00:00+08:00",
+      "end": "2027-09-20T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-20"
+      ]
+    },
+    {
+      "id": "509061d4ffee",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-20T16:00:00+08:00",
+      "end": "2027-09-20T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-20"
+      ]
+    },
+    {
+      "id": "bb5500875763",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-21T09:00:00+08:00",
+      "end": "2027-09-21T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-21"
+      ]
+    },
+    {
+      "id": "16877be1ddcd",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-21T12:00:00+08:00",
+      "end": "2027-09-21T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-21"
+      ]
+    },
+    {
+      "id": "ff6ffcfdbb55",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-21T16:00:00+08:00",
+      "end": "2027-09-21T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-21"
+      ]
+    },
+    {
+      "id": "f5870ab83b40",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-22T09:00:00+08:00",
+      "end": "2027-09-22T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-22"
+      ]
+    },
+    {
+      "id": "c93516c824db",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-22T12:00:00+08:00",
+      "end": "2027-09-22T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-22"
+      ]
+    },
+    {
+      "id": "7dc2d331f630",
+      "title": "Last quarter 6:20pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-09-23",
+      "end": "2027-09-23",
+      "allDay": true
+    },
+    {
+      "id": "5e3d8c6c4661",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-24T09:00:00+08:00",
+      "end": "2027-09-24T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-24"
+      ]
+    },
+    {
+      "id": "9a6c0e3ebf88",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-27T12:00:00+08:00",
+      "end": "2027-09-27T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-27"
+      ]
+    },
+    {
+      "id": "bd7ea87827e6",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-27T16:00:00+08:00",
+      "end": "2027-09-27T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-27"
+      ]
+    },
+    {
+      "id": "9372e91c399e",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-28T09:00:00+08:00",
+      "end": "2027-09-28T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-28"
+      ]
+    },
+    {
+      "id": "c4c02f0a68ed",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-28T12:00:00+08:00",
+      "end": "2027-09-28T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-28"
+      ]
+    },
+    {
+      "id": "8fdd667bb9ac",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-28T16:00:00+08:00",
+      "end": "2027-09-28T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-28"
+      ]
+    },
+    {
+      "id": "79b4fe2066b7",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-29T09:00:00+08:00",
+      "end": "2027-09-29T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-29"
+      ]
+    },
+    {
+      "id": "03597084bae7",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-29T12:00:00+08:00",
+      "end": "2027-09-29T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-29"
+      ]
+    },
+    {
+      "id": "c2437fc42490",
+      "title": "New moon 10:36am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-09-30",
+      "end": "2027-09-30",
+      "allDay": true
+    },
+    {
+      "id": "eb307522e069",
+      "title": "National Day",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-10-01",
+      "end": "2027-10-01",
+      "allDay": true
+    },
+    {
+      "id": "eb792f2163f1",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-01T09:00:00+08:00",
+      "end": "2027-10-01T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-01"
+      ]
+    },
+    {
+      "id": "f7415140f25b",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-04T12:00:00+08:00",
+      "end": "2027-10-04T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-04"
+      ]
+    },
+    {
+      "id": "7d06c284a7dd",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-04T16:00:00+08:00",
+      "end": "2027-10-04T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-04"
+      ]
+    },
+    {
+      "id": "b029aa4c2830",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-05T09:00:00+08:00",
+      "end": "2027-10-05T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-05"
+      ]
+    },
+    {
+      "id": "75661b681773",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-05T12:00:00+08:00",
+      "end": "2027-10-05T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-05"
+      ]
+    },
+    {
+      "id": "90dbe5f77693",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-05T16:00:00+08:00",
+      "end": "2027-10-05T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-05"
+      ]
+    },
+    {
+      "id": "23593ee335a5",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-06T09:00:00+08:00",
+      "end": "2027-10-06T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-06"
+      ]
+    },
+    {
+      "id": "b161dfacd967",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-06T12:00:00+08:00",
+      "end": "2027-10-06T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-06"
+      ]
+    },
+    {
+      "id": "c3fef4b9e087",
+      "title": "First quarter 7:47pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-10-07",
+      "end": "2027-10-07",
+      "allDay": true
+    },
+    {
+      "id": "23a88da1954b",
+      "title": "Chung Yeung Festival",
+      "calendar": "Holidays in Hong Kong",
+      "color": 1,
+      "start": "2027-10-08",
+      "end": "2027-10-08",
+      "allDay": true
+    },
+    {
+      "id": "66ed53274e81",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-08T09:00:00+08:00",
+      "end": "2027-10-08T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-08"
+      ]
+    },
+    {
+      "id": "7b9cbed56b9e",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-11T12:00:00+08:00",
+      "end": "2027-10-11T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-11"
+      ]
+    },
+    {
+      "id": "220dd596d778",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-11T16:00:00+08:00",
+      "end": "2027-10-11T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-11"
+      ]
+    },
+    {
+      "id": "4e2e5a5d8418",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-12T09:00:00+08:00",
+      "end": "2027-10-12T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-12"
+      ]
+    },
+    {
+      "id": "d3d8cc26b61d",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-12T12:00:00+08:00",
+      "end": "2027-10-12T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-12"
+      ]
+    },
+    {
+      "id": "01a13d434b82",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-12T16:00:00+08:00",
+      "end": "2027-10-12T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-12"
+      ]
+    },
+    {
+      "id": "8bfe9622b772",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-13T09:00:00+08:00",
+      "end": "2027-10-13T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-13"
+      ]
+    },
+    {
+      "id": "1cf3386d6c3b",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-13T12:00:00+08:00",
+      "end": "2027-10-13T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-13"
+      ]
+    },
+    {
+      "id": "5433123f1acf",
+      "title": "Full moon 9:47pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-10-15",
+      "end": "2027-10-15",
+      "allDay": true
+    },
+    {
+      "id": "abff6dd6dc3f",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-15T09:00:00+08:00",
+      "end": "2027-10-15T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-15"
+      ]
+    },
+    {
+      "id": "369fd34b141c",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-18T12:00:00+08:00",
+      "end": "2027-10-18T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-18"
+      ]
+    },
+    {
+      "id": "a71b26ed66db",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-18T16:00:00+08:00",
+      "end": "2027-10-18T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-18"
+      ]
+    },
+    {
+      "id": "ee49c8c9f41e",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-19T09:00:00+08:00",
+      "end": "2027-10-19T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-19"
+      ]
+    },
+    {
+      "id": "11cbc1df47d0",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-19T12:00:00+08:00",
+      "end": "2027-10-19T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-19"
+      ]
+    },
+    {
+      "id": "6f103199042e",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-19T16:00:00+08:00",
+      "end": "2027-10-19T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-19"
+      ]
+    },
+    {
+      "id": "cf17a2d7be55",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-20T09:00:00+08:00",
+      "end": "2027-10-20T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-20"
+      ]
+    },
+    {
+      "id": "f7790f4085b8",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-20T12:00:00+08:00",
+      "end": "2027-10-20T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-20"
+      ]
+    },
+    {
+      "id": "269ed21de78b",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-22T09:00:00+08:00",
+      "end": "2027-10-22T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-22"
+      ]
+    },
+    {
+      "id": "0ea93015dace",
+      "title": "Last quarter 1:29am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-10-23",
+      "end": "2027-10-23",
+      "allDay": true
+    },
+    {
+      "id": "0c908c53787d",
+      "title": "День Республики",
+      "calendar": "Праздники Казахстана",
+      "color": 1,
+      "start": "2027-10-25",
+      "end": "2027-10-25",
+      "allDay": true
+    },
+    {
+      "id": "5dfd0a2d8697",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-25T12:00:00+08:00",
+      "end": "2027-10-25T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-25"
+      ]
+    },
+    {
+      "id": "c83b79827054",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-25T16:00:00+08:00",
+      "end": "2027-10-25T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-25"
+      ]
+    },
+    {
+      "id": "b1da4dee789b",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-26T09:00:00+08:00",
+      "end": "2027-10-26T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-26"
+      ]
+    },
+    {
+      "id": "509c7062560a",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-26T12:00:00+08:00",
+      "end": "2027-10-26T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-26"
+      ]
+    },
+    {
+      "id": "d57aaf68acac",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-26T16:00:00+08:00",
+      "end": "2027-10-26T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-26"
+      ]
+    },
+    {
+      "id": "ac8a9b1a3e39",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-27T09:00:00+08:00",
+      "end": "2027-10-27T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-27"
+      ]
+    },
+    {
+      "id": "716b78f1ed9c",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-27T12:00:00+08:00",
+      "end": "2027-10-27T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-27"
+      ]
+    },
+    {
+      "id": "d184754bd82e",
+      "title": "New moon 9:36pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-10-29",
+      "end": "2027-10-29",
+      "allDay": true
+    },
+    {
+      "id": "37b734a44b09",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-29T09:00:00+08:00",
+      "end": "2027-10-29T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-29"
+      ]
+    },
+    {
+      "id": "408d33b68049",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-01T12:00:00+08:00",
+      "end": "2027-11-01T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-01"
+      ]
+    },
+    {
+      "id": "699b6ae458a2",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-01T16:00:00+08:00",
+      "end": "2027-11-01T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-01"
+      ]
+    }
+  ]
 }
