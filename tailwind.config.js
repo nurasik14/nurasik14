@@ -4,7 +4,7 @@
 const v = (name) => `rgb(var(--${name}) / <alpha-value>)`;
 
 export default {
-  content: ['./index.html', './planner/index.html', './src/**/*.{js,jsx}'],
+  content: ['./index.html', './planner/index.html', './news/index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       fontFamily: {

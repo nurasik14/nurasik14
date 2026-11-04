@@ -8,7 +8,7 @@ export default function TopBar({ page, cmdOpen, onCommand }) {
   const mac = isMac();
   return (
     <header className="sticky top-0 z-30 h-12 border-b border-line bg-bg">
-      <div className="wrap flex h-full items-stretch gap-2 font-mono text-[12px] sm:gap-5 sm:text-[13px]">
+      <div className="wrap flex h-full items-stretch gap-2 font-mono text-[12px] max-[399px]:gap-1.5 sm:gap-5 sm:text-[13px]">
         <a
           href={BASE}
           className="flex shrink-0 items-center text-fg no-underline transition-colors hover:text-signal"
@@ -29,7 +29,7 @@ export default function TopBar({ page, cmdOpen, onCommand }) {
                   <a
                     href={p.href}
                     aria-current={active ? 'page' : undefined}
-                    className={`flex items-center border-x px-2 no-underline transition-colors sm:px-3.5 ${
+                    className={`flex items-center border-x px-2 no-underline transition-colors max-[399px]:px-1.5 sm:px-3.5 ${
                       active
                         ? 'border-line bg-surface text-fg shadow-[inset_0_-2px_0_rgb(var(--signal))]'
                         : 'border-transparent text-fg-dim hover:bg-surface hover:text-fg'

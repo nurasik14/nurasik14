@@ -43,8 +43,9 @@
 **Live site → https://nurasik14.github.io/nurasik14/**
 
 This repository also hosts my portfolio site (React 19, Vite, Tailwind, run with bun). It is styled as
-an editor session with two open buffers: `index.md`, the portfolio, and `planner.cal`, my planner at
-`/planner/`. A vim-like statusline at the bottom shows the real mode, buffer, section and scroll
+an editor session with three open buffers: `index.md`, the portfolio, `planner.cal`, my planner at
+`/planner/`, and `news.fm`, encrypted weekly news wrap-ups the browser reads aloud at `/news/`
+(see [docs/NEWS.md](./docs/NEWS.md)). A vim-like statusline at the bottom shows the real mode, buffer, section and scroll
 position, and `:` opens a command line. The hero shows real DQN training curves (fig. 1). Projects
 are an experiments ledger: each row expands to show its config as YAML and its measured results.
 The planner can also sync with Google Calendar on localhost: sealed plans are pushed to a dedicated

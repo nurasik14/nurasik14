@@ -2,6 +2,7 @@ import { execSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import newsApi from './plugins/news-sync.js';
 import plannerApi from './plugins/planner-api.js';
 
 // Locally the site is served from "/" (http://localhost:5173/).
@@ -26,13 +27,15 @@ export default defineConfig(({ command }) => ({
   // plannerApi adds a small JSON read/write API to `vite` (dev) and
   // `vite preview`. It does not exist in the static Pages build; the planner
   // only probes it on loopback hosts and is read-only everywhere else.
-  plugins: [react(), plannerApi()],
+  // newsApi is the same kind of local-only plugin, see docs/NEWS.md.
+  plugins: [react(), plannerApi(), newsApi()],
   build: {
     outDir: 'dist',
     rollupOptions: {
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         planner: resolve(import.meta.dirname, 'planner/index.html'),
+        news: resolve(import.meta.dirname, 'news/index.html'),
       },
     },
   },

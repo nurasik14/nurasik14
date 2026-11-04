@@ -1,6 +1,6 @@
-/* The workbench shell shared by index.md (portfolio) and planner.cal.
+/* The workbench shell shared by index.md (portfolio), planner.cal and news.fm.
  * Contract: docs/DESIGN.md "Shell". Public API (keep stable):
- *   <AppShell page="index"|"planner" sections={[{ id, label, key }]} defaultMode="NORMAL">
+ *   <AppShell page="index"|"planner"|"news" sections={[{ id, label, key }]} defaultMode="NORMAL">
  *   useShell() -> { mode, setMode(name|null), flash(text, tone?), registerCommands(list) -> unregister }
  *   useCommands([{ name, desc, keys?, run }]) adds page commands to the command line
  * Layout: with `sections`, the shell wraps children in the page column (.wrap)
@@ -20,6 +20,7 @@ import TopBar from './TopBar';
 export { useCommands, useShell } from './context';
 
 const FLASH_MS = 4000;
+const CHORDS = { i: 'index', p: 'planner', n: 'news' };
 
 // The section whose top has crossed 60% of the viewport most recently is the
 // current one. IntersectionObserver keeps this off the scroll handler.
@@ -156,9 +157,9 @@ export default function AppShell({ page = 'index', sections = [], defaultMode = 
       }
       const chord = e.timeStamp - gAt < 1000;
       gAt = 0;
-      if (chord && (e.key === 'i' || e.key === 'p')) {
+      if (chord && CHORDS[e.key]) {
         e.preventDefault();
-        go(e.key === 'i' ? 'index' : 'planner');
+        go(CHORDS[e.key]);
         return;
       }
       if (/^[1-9]$/.test(e.key)) {

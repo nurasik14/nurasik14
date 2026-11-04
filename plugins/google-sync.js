@@ -53,13 +53,13 @@ const LIST_FIELDS = 'items(id,summary,summaryOverride,primary,deleted),nextPageT
 
 // ---------------------------------------------------------------- secrets
 
-const isInside = (parent, child) => {
+export const isInside = (parent, child) => {
   const rel = relative(parent, child);
   return rel === '' || (rel !== '..' && !rel.startsWith(`..${sep}`) && !isAbsolute(rel));
 };
 
 /** realpath of `p`, or of its nearest existing ancestor joined with the rest. */
-function realish(p) {
+export function realish(p) {
   try {
     return realpathSync(p);
   } catch {
@@ -83,7 +83,7 @@ export function resolveHome({ root, env = process.env }) {
 
 const tilde = (p) => (p.startsWith(homedir() + sep) ? `~${p.slice(homedir().length)}` : p);
 
-async function writeAtomic(file, text, mode) {
+export async function writeAtomic(file, text, mode) {
   await mkdir(dirname(file), { recursive: true });
   const tmp = `${file}.tmp`;
   await rm(tmp, { force: true });
@@ -94,7 +94,9 @@ async function writeAtomic(file, text, mode) {
 
 const DEFAULT_SETTINGS = { selected: [], plannerCalendarId: null, lastSync: null, needsReconnect: false };
 
-export function createSecrets(home) {
+const plannerSettings = (s) => ({ ...DEFAULT_SETTINGS, ...s, selected: Array.isArray(s.selected) ? s.selected.filter((x) => typeof x === 'string') : [] });
+
+export function createSecrets(home, normalizeSettings = plannerSettings) {
   const at = (name) => join(home, name);
   let queue = Promise.resolve();
   const serial = (fn) => {
@@ -150,8 +152,7 @@ export function createSecrets(home) {
     saveToken: (t) => writeJson('token.json', t),
     deleteToken: () => rm(at('token.json'), { force: true }),
     async settings() {
-      const s = (await readJson('settings.json')) ?? {};
-      return { ...DEFAULT_SETTINGS, ...s, selected: Array.isArray(s.selected) ? s.selected.filter((x) => typeof x === 'string') : [] };
+      return normalizeSettings((await readJson('settings.json')) ?? {});
     },
     saveSettings(patch) {
       return serial(async () => {
@@ -178,13 +179,13 @@ export class GoogleError extends HttpError {
   }
 }
 
-const form = (params) => ({
+export const form = (params) => ({
   method: 'POST',
   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
   body: new URLSearchParams(Object.entries(params).filter(([, v]) => v)).toString(),
 });
 
-async function readBody(res) {
+export async function readBody(res) {
   try {
     return await res.json();
   } catch {
@@ -192,7 +193,7 @@ async function readBody(res) {
   }
 }
 
-function createGoogle({ secrets, fetch, sleep, now }) {
+export function createGoogle({ secrets, fetch, sleep, now, baseUrl = GOOGLE.calendar, service = 'google calendar' }) {
   async function refresh(token, client) {
     let res;
     try {
@@ -231,7 +232,7 @@ function createGoogle({ secrets, fetch, sleep, now }) {
   }
 
   /**
-   * One Calendar API call. Refreshes an expired token first; a 401 triggers
+   * One Google API call. Refreshes an expired token first; a 401 triggers
    * one refresh and one retry; 429 / 403 rate limits back off briefly.
    * Statuses in `allow` are returned instead of thrown.
    */
@@ -242,7 +243,7 @@ function createGoogle({ secrets, fetch, sleep, now }) {
       token = await refresh(token, client);
       refreshed = true;
     }
-    const url = `${GOOGLE.calendar}${path}${query ? `?${new URLSearchParams(query)}` : ''}`;
+    const url = `${baseUrl}${path}${query ? `?${new URLSearchParams(query)}` : ''}`;
     for (let attempt = 0; ; attempt++) {
       let res;
       try {
@@ -252,7 +253,7 @@ function createGoogle({ secrets, fetch, sleep, now }) {
           body: body ? JSON.stringify(body) : undefined,
         });
       } catch {
-        throw new HttpError(502, 'google calendar unreachable');
+        throw new HttpError(502, `${service} unreachable`);
       }
       if (res.status === 401) {
         if (refreshed) throw new ReconnectError();

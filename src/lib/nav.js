@@ -5,6 +5,7 @@ export const BASE = import.meta.env.BASE_URL; // always ends with "/"
 export const PAGES = {
   index: { buffer: 'index.md', href: BASE },
   planner: { buffer: 'planner.cal', href: `${BASE}planner/` },
+  news: { buffer: 'news.fm', href: `${BASE}news/` },
 };
 export const CV_HREF = `${BASE}${PROFILE.cv}`;
 

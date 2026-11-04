@@ -54,9 +54,9 @@ export function isLoopbackHost(host) {
 }
 
 /** http://<host><base>api/google/callback — base starts and ends with "/". */
-export function redirectUriFor(host, base) {
+export function redirectUriFor(host, base, path = 'api/google/callback') {
   if (!isLoopbackHost(host)) throw new Error('not a loopback host');
-  return `http://${host.trim().toLowerCase()}${base}api/google/callback`;
+  return `http://${host.trim().toLowerCase()}${base}${path}`;
 }
 
 // ---------------------------------------------------------------- PKCE
@@ -83,7 +83,7 @@ export async function createPkce() {
   return { verifier, challenge: base64url(await sha256Bytes(verifier)), method: 'S256' };
 }
 
-export function buildAuthUrl({ clientId, redirectUri, state, challenge, scopes = SCOPES }) {
+export function buildAuthUrl({ clientId, redirectUri, state, challenge, scopes = SCOPES, prompt = 'consent', includeGrantedScopes = true, loginHint }) {
   const q = new URLSearchParams({
     client_id: clientId,
     redirect_uri: redirectUri,
@@ -93,8 +93,9 @@ export function buildAuthUrl({ clientId, redirectUri, state, challenge, scopes =
     code_challenge: challenge,
     code_challenge_method: 'S256',
     access_type: 'offline',
-    prompt: 'consent',
-    include_granted_scopes: 'true',
+    prompt,
+    include_granted_scopes: String(includeGrantedScopes),
+    ...(loginHint ? { login_hint: loginHint } : {}),
   });
   return `${GOOGLE.auth}?${q}`;
 }

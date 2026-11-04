@@ -1,7 +1,8 @@
 # Design: "Workbench" (v3)
 
-The site is Nurassyl's workbench, presented as one editor session with two
-open buffers: `index.md` (the portfolio) and `planner.cal` (the planner).
+The site is Nurassyl's workbench, presented as one editor session with three
+open buffers: `index.md` (the portfolio), `planner.cal` (the planner) and
+`news.fm` (spoken news wrap-ups, encrypted).
 It should look like a programmer built it with care. That means quiet chrome,
 exact alignment, real data and a few precise details. Avoid glow, glass,
 gradients, marquees and fake telemetry.
@@ -14,8 +15,9 @@ gradients, marquees and fake telemetry.
   awards. The hero shows evidence (fig. 1) instead of a slogan.
 - Signature: the **statusline**, a vim-like bar fixed to the bottom. It
   reports actual state: mode (`NORMAL`, `INSERT` while typing, `READONLY` on
-  Pages, `SEALED` briefly after a seal), the current buffer, the current
-  section and scroll position. `:` opens the command line, which is the
+  Pages, `SEALED` briefly after a seal, `LOCKED`, `PLAYING` and `PAUSED` on
+  news.fm), the current buffer, the current section and scroll position. `:`
+  opens the command line, which is the
   command palette rendered as a sheet that rises from the statusline.
 - Rejected concepts: (1) the previous "agent run" terminal. It was too close
   to v2 and leaned on tool-call theatre. (2) A light Swiss editorial ledger.
@@ -57,28 +59,30 @@ Rules:
 
 ## Shell (src/shell/)
 
-`<AppShell page="index"|"planner" sections={[{id,label,key}]}>` renders:
+`<AppShell page="index"|"planner"|"news" sections={[{id,label,key}]}>` renders:
 
 1. **Top bar** (sticky, 48px): `~/nurassyl` home link on the left. Buffer
    tabs are real `<a>` links: `index.md` → `${BASE_URL}`, `planner.cal` →
-   `${BASE_URL}planner/`, with `aria-current="page"` on the active one. On the
+   `${BASE_URL}planner/`, `news.fm` → `${BASE_URL}news/`, with
+   `aria-current="page"` on the active one. On the
    right: a `:` command button with a `Ctrl K` hint, and `cv.pdf ↓`.
 2. **Outline rail** (only when `sections` is given, ≥1100px): sticky
    left column listing sections as anchor links. The current section has an
    amber `▌` cursor (IntersectionObserver) and `aria-current="location"`.
 3. **Statusline** (fixed bottom, 28px, mono 12px). Left: mode block (amber
-   background with ink text for NORMAL; ok for INSERT; info for READONLY;
-   signal for SEALED), then buffer name, then current section. Right:
+   background with ink text for NORMAL; ok for INSERT and PLAYING; info for
+   READONLY and LOCKED; signal for SEALED and PAUSED), then buffer name, then
+   current section. Right:
    message area (`flash` text, auto-clears after 4s, `aria-live="polite"`),
    `utf-8`, scroll `NN%`. Below 640px only the mode, buffer and message show.
    Page content gets bottom padding so the bar never covers it or focus.
 4. **Command line** (`:`, `/`, Ctrl/Cmd+K): a modal sheet anchored above
    the statusline with an input prefilled `:`. It filters commands (sections,
-   `cv`, `planner`, `index`, `email` copies the address, `gh`, `hf`, `in`).
+   `cv`, `planner`, `index`, `news`, `email` copies the address, `gh`, `hf`, `in`).
    Arrow keys and Enter run a command. Esc closes it and returns focus to the
    opener. Focus is trapped inside the sheet, and it uses `role="dialog"`.
 5. Global keys (ignored while typing): `1`–`9` jump to sections, `g i`
-   goes to index.md and `g p` goes to planner.cal.
+   goes to index.md, `g p` goes to planner.cal and `g n` goes to news.fm.
 
 Context API (`useShell()`): `{ mode, setMode(name|null), flash(text, tone?) }`.
 `setMode(null)` restores the page default. The shell sets `INSERT`
@@ -87,13 +91,17 @@ the previous mode.
 
 ## Mobile (<640px)
 
-The top bar shows the home link, the two buffer tabs and the `:` button. The
+The top bar shows the home link, the three buffer tabs and the `:` button.
+Below 400px the home link shrinks to `~` and the tabs use 6px padding, which is
+what fits all three at 320px. No tab is ever hidden. The
 outline rail is hidden, and the command line is how you reach sections. The
 statusline collapses as described above. In the hero, the frontmatter block
 comes before the name, and fig. 1 sits below the lede at full width. Project
 rows stack their metadata under the title. On the planner, the calendar
 comes first, then the composer, then the log. Calendar cells shrink to
 date numbers, and plan bars become 4px lane strips with a list underneath.
+On news.fm, an open clip fills the viewport between the top bar and the
+statusline, with the wrap-up ledger and settings below it.
 Nothing may scroll horizontally except an explicitly labelled code block.
 
 ## Honesty rules (inherited from v2, still binding)
@@ -138,3 +146,30 @@ Notes from the first build of the shell and the portfolio page (agent A):
   cell "not measured") in place of v2's placeholder bars.
 - **Build stamp.** `src/shell/build.js` reads `VITE_COMMIT` and
   `VITE_BUILT_AT`. They still need to be defined in vite.config.js or CI.
+
+Notes on news.fm (behaviour and limits are in [NEWS.md](NEWS.md)):
+
+- **Modes.** `LOCKED` while the passphrase is needed. `PLAYING` while speaking,
+  including the gap between clips. `PAUSED` only after stopping mid-clip. Before
+  the first play, the page default shows (`NORMAL`, or `READONLY` on Pages).
+  There is no autofocus on the passphrase field, so `LOCKED` is what you see first.
+- **Amber.** One action per view: `unlock`, then `play`. When a wrap-up finishes
+  and another has unheard clips, `next unheard` takes the amber from `play`. The
+  sync panel's buttons are never amber, because it is not the page's main job.
+- **Clip card.** Geist 600 headline, script at a 66ch measure, mono label for the
+  newsletter and received time (always HKT). While speaking or paused, the current
+  sentence is `fg` and the others `fg-dim`. The footer also says `sentence 3/7`, so
+  the position is never colour alone.
+- **Clip change.** `.anim-clip`, 150ms ease-out fade and rise. The global
+  reduced-motion rule makes it instant.
+- **Header.** Below `lg` the page header is screen-reader only once a clip is open,
+  because the clip owns the viewport. Above that, the player sits next to a 20–23rem
+  column with the ledger, as on the planner.
+- **Text-only is a state, not an error.** Without speech the clips still read, and
+  play is disabled with the reason beneath it.
+- **Laptop audio (localhost only).** The card's mono line adds `voice · Ava` or
+  `voice · device`, so the engine is never a guess. The fallback to speech is silent
+  and is not treated as an error. Pages renders none of this. With audio, a clip
+  has no highlight before its first cue, or at all if the cues match no sentence: no
+  highlight is better than a wrong one. The panel's `make audio` follows the rule above
+  and is never amber.

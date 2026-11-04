@@ -19,6 +19,7 @@ function buildCommands({ page, sections, extra, go, flash }) {
     ...extra,
     { name: 'index', desc: `open ${PAGES.index.buffer}, the portfolio${here('index')}`, keys: ['g', 'i'], run: () => go('index') },
     { name: 'planner', desc: `open ${PAGES.planner.buffer}${here('planner')}`, keys: ['g', 'p'], run: () => go('planner') },
+    { name: 'news', desc: `open ${PAGES.news.buffer}${here('news')}`, keys: ['g', 'n'], run: () => go('news') },
     { name: 'cv', desc: `open ${PROFILE.cv}`, run: () => openTab(CV_HREF) },
     {
       name: 'email',

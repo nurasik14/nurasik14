@@ -7,6 +7,9 @@ const MODE_CLS = {
   INSERT: 'bg-ok text-signal-ink',
   READONLY: 'bg-info text-signal-ink',
   SEALED: 'bg-signal text-signal-ink',
+  LOCKED: 'bg-info text-signal-ink',
+  PLAYING: 'bg-ok text-signal-ink',
+  PAUSED: 'bg-signal text-signal-ink',
 };
 const TONE_CLS = { ok: 'text-ok', info: 'text-info', warn: 'text-warn', signal: 'text-signal' };
 
