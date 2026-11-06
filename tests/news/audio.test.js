@@ -8,7 +8,7 @@ import { join, resolve } from 'node:path';
 import { Readable, Writable } from 'node:stream';
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test';
 import { AUDIO_RATE, AUDIO_VOICE, audioTarget, createAudioJob, createScriptSource, createTtsRunner, parseRange, parseSrt, resolveAudioDir, TtsError } from '../../plugins/news-audio.js';
-import { encryptBacklog, encryptWeek, NEWS_SCOPES } from '../../plugins/news-core.js';
+import { decryptWeek, encryptBacklog, encryptBookmarks, encryptWeek, NEWS_SCOPES } from '../../plugins/news-core.js';
 import { createNewsHandler } from '../../plugins/news-sync.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
@@ -140,7 +140,8 @@ describe('the job', () => {
     const names = await readdir(audioDir);
     expect(names.sort()).toEqual([`${ID1}.json`, `${ID1}.mp3`, `${ID1}.srt`, `${ID2}.json`, `${ID2}.mp3`, `${ID2}.srt`, 'state.json'].sort());
     for (const name of names) expect((await stat(join(audioDir, name))).mode & 0o777).toBe(0o600);
-    expect(JSON.parse(await readFile(join(audioDir, `${ID1}.json`), 'utf8'))).toEqual({ voice: AUDIO_VOICE, rate: AUDIO_RATE, chars: story(ID1).script.length, createdAt: '2026-11-04T04:00:00.000Z' });
+    const scriptHash = new Bun.CryptoHasher('sha256').update(story(ID1).script).digest('hex');
+    expect(JSON.parse(await readFile(join(audioDir, `${ID1}.json`), 'utf8'))).toEqual({ voice: AUDIO_VOICE, rate: AUDIO_RATE, scriptHash, chars: story(ID1).script.length, createdAt: '2026-11-04T04:00:00.000Z' });
     const s = await j.status();
     expect(s).toMatchObject({ voice: AUDIO_VOICE, rate: AUDIO_RATE, total: 2, done: 2, failed: 0, running: false, ids: [ID1, ID2] });
     expect(s.lastRun).toMatchObject({ made: 2, failed: 0 });
@@ -171,6 +172,34 @@ describe('the job', () => {
     expect((await j.status()).done).toBe(1);
     settings = { voice: 'en-GB-SoniaNeural', rate: '-10%' };
     expect((await j.status()).done).toBe(0);
+  });
+
+  test('audio follows the script: a changed script means not done, and the clip is redone', async () => {
+    const j = job([story(ID1)]);
+    await j.start();
+    await j.whenIdle();
+    expect((await j.status()).done).toBe(1);
+    tts.calls.length = 0;
+    const changed = job([story(ID1, 'A rewritten script.')]);
+    expect(await changed.status()).toMatchObject({ total: 1, done: 0, ids: [] });
+    expect((await changed.start()).todo).toBe(1);
+    await changed.whenIdle();
+    expect(tts.calls.map((c) => c.text)).toEqual(['A rewritten script.']);
+    expect((await changed.status()).done).toBe(1);
+  });
+
+  test('audio made before scriptHash existed counts as not done', async () => {
+    const j = job([story(ID1)]);
+    await j.start();
+    await j.whenIdle();
+    const file = join(audioDir, `${ID1}.json`);
+    const { scriptHash, ...old } = JSON.parse(await readFile(file, 'utf8'));
+    expect(scriptHash).toMatch(/^[0-9a-f]{64}$/);
+    await writeFile(file, JSON.stringify(old));
+    expect(await j.status()).toMatchObject({ done: 0, ids: [] });
+    expect((await j.start()).todo).toBe(1);
+    await j.whenIdle();
+    expect((await j.status()).done).toBe(1);
   });
 
   test('an mp3 under 1 KB or a missing part is not done', async () => {
@@ -412,6 +441,42 @@ describe('createScriptSource', () => {
     expect(await scripts()).toEqual({ stories: [], unreadable: 2 });
     await scripts();
     expect(decrypts).toBe(1);
+  });
+
+  test('a clip only the bookmarks still hold gets audio; a published clip wins; no bookmarks is not unreadable', async () => {
+    const news = join(dir, 'news');
+    await mkdir(news);
+    await writeFile(join(news, `${WEEK}.json`), JSON.stringify(await encryptWeek({ weekId: WEEK, payload: payload(WEEK, [story(ID1)]), passphrase: PASS, iterations: 1000 })));
+    const scripts = createScriptSource({ dir: news, readIndex: indexOf([WEEK], null), readPassphrase: async () => PASS });
+    expect(await scripts()).toEqual({ stories: [{ id: ID1, script: story(ID1).script }], unreadable: 0 });
+    await writeFile(join(news, 'bookmarks.json'), JSON.stringify(await encryptBookmarks({ bookmarks: [story(ID2), story(ID1, 'An older script.')], passphrase: PASS, iterations: 1000 })));
+    expect(await scripts()).toEqual({
+      stories: [
+        { id: ID1, script: story(ID1).script },
+        { id: ID2, script: story(ID2).script },
+      ],
+      unreadable: 0,
+    });
+  });
+
+  test('storiesOf reads one file through the same memory', async () => {
+    const news = join(dir, 'news');
+    await mkdir(news);
+    await writeFile(join(news, `${WEEK}.json`), JSON.stringify(await encryptWeek({ weekId: WEEK, payload: payload(WEEK, [story(ID1)]), passphrase: PASS, iterations: 1000 })));
+    let decrypts = 0;
+    const scripts = createScriptSource({
+      dir: news,
+      readIndex: indexOf([WEEK], null),
+      readPassphrase: async () => PASS,
+      decrypt: async (...args) => {
+        decrypts += 1;
+        return decryptWeek(...args);
+      },
+    });
+    await scripts();
+    expect((await scripts.storiesOf(WEEK, PASS)).map((s) => s.id)).toEqual([ID1]);
+    expect(decrypts).toBe(1);
+    expect(await scripts.storiesOf('2026-10-23', PASS)).toBeNull();
   });
 
   test('no usable passphrase is a 400', async () => {

@@ -17,9 +17,20 @@ export const NEWSLETTER_MAX = 60;
 // type; a word or name of this length falls to an offline dictionary attack.
 export const MIN_PASSPHRASE = 8;
 export const DEFAULT_ITERATIONS = 600_000;
-export const FORMAT_VERSION = 1;
+export const FORMAT_VERSION = 2;
+/** Version 1 files have no links, and stay readable: published weeks are never re-encrypted. */
+const READABLE_VERSIONS = new Set([1, FORMAT_VERSION]);
+/** index.json did not change with the week files, and the deployed page checks this number. */
+const INDEX_VERSION = 1;
 /** The id of the one-time first wrap-up: every email before the first weekly week. */
 export const BACKLOG_ID = 'backlog';
+/** The id of the bookmarks file, which is bound to it like a week file is to its week. */
+export const BOOKMARKS_ID = 'bookmarks';
+export const BOOKMARKS_MAX = 500;
+const BOOKMARKS_VERSION = 1;
+export const LINK_TAGS_MAX = 150;
+const LINK_URL_MAX = 2048;
+const ANCHOR_MAX = 200;
 
 /** Conversion input cap: far above a real newsletter, it bounds a hostile one. */
 const HTML_MAX = 2_000_000;
@@ -177,20 +188,160 @@ function dropRegions(text, openRe, closeFor, toEnd = true) {
   return out + text.slice(at);
 }
 
+// ---------------------------------------------------------------- links
+
+const parseHttp = (text) => {
+  try {
+    const url = new URL(text);
+    return url.protocol === 'http:' || url.protocol === 'https:' ? url : null;
+  } catch {
+    return null;
+  }
+};
+
+function decodedOr(text) {
+  try {
+    return decodeURIComponent(text);
+  } catch {
+    return text;
+  }
+}
+
+/** Query parameters that redirectors keep the real address in. google.com/url alone uses q. */
+const WRAP_PARAMS = ['url', 'u', 'target', 'redirect', 'redirect_url', 'dest', 'destination', 'link'];
+const TRACKING_PARAM_RE = /^(?:utm_.*|mc_cid|mc_eid|ref_src)$/i;
+const isGoogleRedirect = (url) => url.pathname === '/url' && /(?:^|\.)google\.[a-z.]{2,8}$/i.test(url.hostname);
+
+/** An http(s) URL hiding under up to three rounds of percent-encoding, or null. */
+function decodedTarget(text) {
+  let value = text;
+  for (let round = 0; round < 3; round += 1) {
+    if (/^https?:\/\//i.test(value)) return parseHttp(value) ? value : null;
+    const next = decodedOr(value);
+    if (next === value) return null;
+    value = next;
+  }
+  return null;
+}
+
+function embeddedTarget(url) {
+  for (const name of isGoogleRedirect(url) ? ['q', ...WRAP_PARAMS] : WRAP_PARAMS) {
+    const target = decodedTarget(url.searchParams.get(name) ?? '');
+    if (target) return target;
+  }
+  for (const segment of url.pathname.split('/')) {
+    const target = decodedTarget(segment);
+    if (target) return target;
+  }
+  return null;
+}
+
+function stripTracking(link) {
+  const url = parseHttp(link);
+  const names = url ? [...url.searchParams.keys()].filter((name) => TRACKING_PARAM_RE.test(name)) : [];
+  if (!names.length) return link;
+  for (const name of names) url.searchParams.delete(name);
+  return url.toString();
+}
+
+/**
+ * The address a tracking redirect points at, read out of the URL itself (at most
+ * three levels), without tracking parameters. Anything without an embedded
+ * http(s) target stays as it is. This never fetches: resolving a redirect over
+ * the network would register a tracked click.
+ */
+export function unwrapLink(link) {
+  let current = String(link ?? '');
+  for (let level = 0; level < 3; level += 1) {
+    const url = parseHttp(current);
+    const target = url && embeddedTarget(url);
+    if (!target) break;
+    current = target;
+  }
+  return stripTracking(current);
+}
+
+const CHROME_LINK_RE = /unsubscribe|opt[\s_-]*out|preferences|manage[\s_-]*(?:your[\s_-]*)?subscription|update[\s_-]*(?:your[\s_-]*)?profile|\bview[\s_-]*(?:in|online)\b|web[\s_-]*version/i;
+const LINK_TAG_RE = /\[L\d+\]/g;
+
+/** One email's links: the same final URL gets the same tag. Footer links and other schemes get none. */
+function createLinkTable() {
+  const tags = new Map(); // final URL -> tag
+  const links = {};
+  return {
+    links,
+    tag(raw, anchor = '') {
+      if (!parseHttp(raw)) return null;
+      const url = unwrapLink(raw);
+      if (url.length > LINK_URL_MAX || [decodedOr(raw), decodedOr(url), anchor].some((text) => CHROME_LINK_RE.test(text))) return null;
+      let tag = tags.get(url);
+      if (!tag) {
+        if (tags.size >= LINK_TAGS_MAX) return null;
+        tag = `L${tags.size + 1}`;
+        tags.set(url, tag);
+        links[tag] = { url, anchor };
+      }
+      return tag;
+    },
+  };
+}
+
+const HREF_RE = /\shref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/i;
+
+/**
+ * <a href="X">anchor</a> -> "anchor [L1]". Every scan moves forward only, and
+ * once no </a> is left the search stops, so hostile markup stays linear. An
+ * unclosed anchor gets its tag where it opens.
+ */
+function tagAnchors(html, table) {
+  const open = /<a\b[^<>]*>/gi;
+  const close = /<\/a\s*>/gi;
+  let out = '';
+  let at = 0;
+  let closable = true;
+  for (let m = open.exec(html); m; m = open.exec(html)) {
+    out += html.slice(at, m.index);
+    close.lastIndex = open.lastIndex;
+    const end = closable ? close.exec(html) : null;
+    closable = Boolean(end);
+    const inner = end ? html.slice(open.lastIndex, end.index) : '';
+    const href = HREF_RE.exec(m[0]);
+    const target = href ? decodeEntities(href[1] ?? href[2] ?? href[3]).replace(INVISIBLE_RE, '').trim() : '';
+    const anchor = hardCut(decodeEntities(inner.replace(/<[^<>]*>/g, ' ')).replace(/\s+/g, ' ').trim(), ANCHOR_MAX);
+    const tag = target ? table.tag(target, anchor) : null;
+    out += tag ? `${inner} [${tag}] ` : inner;
+    at = end ? end.index + end[0].length : open.lastIndex;
+    open.lastIndex = at;
+  }
+  return out + html.slice(at);
+}
+
+/** Bare URLs -> tags, or nothing when dropped. Sentence punctuation after a tagged URL stays in the text. */
+function tagBareUrls(text, table) {
+  return text.replace(URL_RE, (match) => {
+    const bare = match.replace(/^</, '').replace(/>$/, '');
+    const tail = /[.,;:!?'*_~]+$/.exec(bare)?.[0] ?? '';
+    const url = bare.slice(0, bare.length - tail.length);
+    const tag = table.tag(/^[a-z][a-z0-9+.-]*:/i.test(url) ? url : `https://${url}`);
+    return tag ? ` [${tag}]${tail}` : '';
+  });
+}
+
 const BLOCK_TAG_RE = /<\/?(?:address|article|aside|blockquote|br|center|dd|div|dl|dt|footer|form|h[1-6]|header|hr|li|main|nav|ol|p|pre|section|table|tbody|td|tfoot|th|thead|tr|ul)\b[^<>]*>/gi;
 
-function htmlToText(html) {
+function htmlToText(html, table) {
   let text = hardCut(html, HTML_MAX);
   text = dropRegions(text, /<!--/g, () => /-->/g);
   text = dropRegions(text, /<(script|style|title|noscript|template)\b[^<>]*>/gi, (m) => new RegExp(`</${m[1]}\\s*>`, 'gi'));
   // A closing </head> is optional in HTML; what is left in there is only empty tags.
   text = dropRegions(text, /<head\b[^<>]*>/gi, () => /<\/head\s*>/gi, false);
+  text = tagAnchors(text, table);
   text = text.replace(BLOCK_TAG_RE, '\n').replace(/<[a-z/!?][^<>]*>/gi, '');
   // Entities last, so "&lt;b&gt;" stays the text "<b>" instead of becoming a tag.
   return decodeEntities(text);
 }
 
-/** Drops URLs and invisible characters, collapses whitespace, keeps paragraphs. */
+/** Drops the URLs still there and invisible characters, collapses whitespace, keeps paragraphs. */
 function tidyText(text) {
   return dropUrls(text.replace(INVISIBLE_RE, ''))
     .replace(/\r\n?/g, '\n')
@@ -198,6 +349,15 @@ function tidyText(text) {
     .replace(/ ?\n ?/g, '\n')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
+}
+
+/** The text Claude gets, with the table cut down to the tags that made it in. Only tags and no words is no text. */
+function finishBody(raw, table) {
+  const tagged = tagBareUrls(hardCut(raw, HTML_MAX).replace(INVISIBLE_RE, ''), table);
+  const tidy = tidyText(tagged.replace(/\(\s*(\[L\d+\])\s*\)/g, ' $1')).replace(/(\[L\d+\])(?:\s*\1)+/g, '$1');
+  const text = hardCut(tidy, TEXT_MAX).replace(/\[(?:L\d*)?$/, '').trim();
+  if (!text.replace(LINK_TAG_RE, '').trim()) return { text: '', links: {} };
+  return { text, links: Object.fromEntries(Object.entries(table.links).filter(([tag]) => text.includes(`[${tag}]`))) };
 }
 
 /** Inline body parts by type. Attachments carry a filename and are skipped whole. */
@@ -210,15 +370,17 @@ function collectParts(part, found) {
 }
 
 /**
- * A Gmail format=full message as plain text, without URLs, capped at TEXT_MAX.
- * A text/plain part wins unless it is blank once URLs are gone (many newsletters
- * ship a plain part that is only "view in browser: <link>").
+ * A Gmail format=full message as { text, links }: plain text capped at TEXT_MAX
+ * where every link is a tag like [L1], and the table tag -> { url, anchor }.
+ * No raw URL is left in the text. A text/plain part wins unless it is blank once
+ * links are gone (many newsletters ship a plain part that is only a link).
  */
 export function emailToText(message) {
   const parts = collectParts(message?.payload, { 'text/plain': [], 'text/html': [] });
-  const plain = tidyText(parts['text/plain'].map(decodeBase64Url).join('\n\n'));
-  const text = plain || tidyText(parts['text/html'].map((d) => htmlToText(decodeBase64Url(d))).join('\n\n'));
-  return hardCut(text, TEXT_MAX).trim();
+  const plain = finishBody(parts['text/plain'].map(decodeBase64Url).join('\n\n'), createLinkTable());
+  if (plain.text) return plain;
+  const table = createLinkTable();
+  return finishBody(parts['text/html'].map((d) => htmlToText(decodeBase64Url(d), table)).join('\n\n'), table);
 }
 
 /** RFC 2047 encoded words ("=?UTF-8?B?…?="), which raw headers may still contain. */
@@ -273,9 +435,9 @@ export function senderName(fromHeader) {
   return usable ? truncateText(name, NEWSLETTER_MAX) : domainLabel(address);
 }
 
-/** The decoded Subject on one line, or ''. */
+/** The decoded Subject on one line without URLs, or ''. */
 export function subjectOf(message) {
-  return decodeHeader(headerOf(message, 'subject')).replace(/\s+/g, ' ').trim();
+  return dropUrls(decodeHeader(headerOf(message, 'subject'))).replace(/\s+/g, ' ').trim();
 }
 
 /** The raw From header, for senderName. */
@@ -290,8 +452,8 @@ export const STORY_SCHEMA = {
       type: 'array',
       items: {
         type: 'object',
-        properties: { headline: { type: 'string' }, script: { type: 'string' } },
-        required: ['headline', 'script'],
+        properties: { headline: { type: 'string' }, script: { type: 'string' }, link: { type: 'string' } },
+        required: ['headline', 'script', 'link'],
         additionalProperties: false,
       },
     },
@@ -301,37 +463,63 @@ export const STORY_SCHEMA = {
 };
 
 /** Model output is untrusted too: an email could coax it into repeating a link or an address. */
-const speakable = (text, max) => truncateText(dropUrls(text.replace(INVISIBLE_RE, '')).replace(ADDRESS_RE, '').replace(/\s+/g, ' ').trim(), max);
+const speakable = (text, max) => truncateText(dropUrls(text.replace(INVISIBLE_RE, '').replace(/\s*\[\s*L\d+\s*\]/gi, '')).replace(ADDRESS_RE, '').replace(/\s+/g, ' ').trim(), max);
 
-/** Validates structured output. Throws on garbage; empty items are dropped; lengths are enforced here. */
-export function parseStories(structured) {
+/** The URL behind a tag like "L3", but only one this email's table really has. */
+function linkFor(tag, links) {
+  const name = typeof tag === 'string' ? tag.trim().replace(/^\[(.*)\]$/, '$1') : '';
+  return /^L\d+$/.test(name) && Object.hasOwn(links, name) ? links[name].url : null;
+}
+
+/**
+ * Validates structured output against this email's link table. Throws on garbage;
+ * empty items are dropped; lengths are enforced here. `link` comes back as the URL or null.
+ */
+export function parseStories(structured, links = {}) {
   if (!Array.isArray(structured?.stories)) throw new Error('claude output has no stories list');
   const stories = [];
   for (const item of structured.stories) {
     if (typeof item?.headline !== 'string' || typeof item?.script !== 'string') throw new Error('claude output has a malformed story');
     const headline = speakable(item.headline, HEADLINE_MAX);
     const script = speakable(item.script, SCRIPT_MAX);
-    if (headline && script) stories.push({ headline, script });
+    if (headline && script) stories.push({ headline, script, link: linkFor(item.link, links) });
   }
   return stories.slice(0, STORIES_MAX);
 }
 
 // ---------------------------------------------------------------- payload
 
+const MESSAGE_ID_RE = /^[0-9a-f]{8,24}$/i;
+const ACCOUNT_RE = /^[^\s/?#@]+@[^\s/?#@]+$/;
+
+/** Opens the email in Gmail, on a device logged in to that account. null when either part looks wrong. */
+export function gmailLink(account, messageId) {
+  const address = String(account ?? '').trim();
+  return ACCOUNT_RE.test(address) && MESSAGE_ID_RE.test(String(messageId)) ? `https://mail.google.com/mail/u/${address}/#all/${messageId}` : null;
+}
+
 /**
  * The plaintext of one week (or the backlog). `emails` are { messageId,
  * internalDate, newsletter, stories }. Built by whitelist: nothing else from an
- * email can reach the result. Weeks run oldest first; the backlog newest first,
- * so the freshest of a long history comes first.
+ * email can reach the result, and the account address only reaches links.email.
+ * Weeks run oldest first; the backlog newest first, so the freshest of a long
+ * history comes first.
  */
-export async function buildPayload({ weekId, generatedAt, emails, newestFirst = false }) {
+export async function buildPayload({ weekId, generatedAt, emails, newestFirst = false, account = null }) {
   const rows = [];
   for (const email of emails) {
     for (const [index, story] of email.stories.entries()) {
       const id = (await sha256Hex(`${email.messageId}:${index}`)).slice(0, 12);
       rows.push({
         ms: Number(email.internalDate),
-        story: { id, headline: story.headline, script: story.script, newsletter: email.newsletter, receivedAt: zonedIso(Number(email.internalDate)) },
+        story: {
+          id,
+          headline: story.headline,
+          script: story.script,
+          newsletter: email.newsletter,
+          receivedAt: zonedIso(Number(email.internalDate)),
+          links: { email: gmailLink(account, email.messageId), article: parseHttp(story.link) ? story.link : null },
+        },
       });
     }
   }
@@ -386,6 +574,10 @@ export async function encryptBacklog({ until, payload, passphrase, iterations })
   return { ...(await encryptSnapshot({ id: BACKLOG_ID, start: null, end: endIso, payload, passphrase, iterations })), until };
 }
 
+/** The bookmarks file: a snapshot list bound to its own id, so a week file renamed to it does not open. */
+export const encryptBookmarks = ({ bookmarks, passphrase, iterations }) =>
+  encryptSnapshot({ id: BOOKMARKS_ID, start: null, end: null, payload: { version: BOOKMARKS_VERSION, bookmarks }, passphrase, iterations });
+
 async function encryptSnapshot({ id: weekId, start: startIso, end: endIso, payload, passphrase, iterations = DEFAULT_ITERATIONS }) {
   const state = checkPassphrase(passphrase);
   if (state !== 'ok') throw new Error(`passphrase is ${state}; at least ${MIN_PASSPHRASE} characters are required`);
@@ -411,7 +603,7 @@ async function encryptSnapshot({ id: weekId, start: startIso, end: endIso, paylo
 export async function decryptWeek(file, passphrase, { week = file?.week } = {}) {
   const { kdf, cipher } = file ?? {};
   const iterations = kdf?.iterations;
-  if (file?.version !== FORMAT_VERSION || kdf?.name !== 'PBKDF2' || kdf?.hash !== 'SHA-256' || cipher?.name !== 'AES-GCM' || !Number.isInteger(iterations) || iterations < 1 || iterations > 10_000_000) {
+  if (!READABLE_VERSIONS.has(file?.version) || kdf?.name !== 'PBKDF2' || kdf?.hash !== 'SHA-256' || cipher?.name !== 'AES-GCM' || !Number.isInteger(iterations) || iterations < 1 || iterations > 10_000_000) {
     throw new Error('not a news.fm week file');
   }
   let salt;
@@ -445,5 +637,5 @@ export const serializeWeek = (file) => `${JSON.stringify(file, null, 2)}\n`;
  */
 export function serializeIndex(weekIds, backlog = null) {
   const weeks = [...new Set(weekIds)].sort(compareDates).reverse();
-  return serializeWeek({ version: FORMAT_VERSION, ...(backlog ? { backlog: { until: backlog.until } } : {}), weeks });
+  return serializeWeek({ version: INDEX_VERSION, ...(backlog ? { backlog: { until: backlog.until } } : {}), weeks });
 }

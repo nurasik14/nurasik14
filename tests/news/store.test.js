@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test';
-import { BACKLOG_ID, encryptBacklog, encryptWeek, WrongPassphraseError } from '../../plugins/news-core.js';
+import { BACKLOG_ID, encryptBacklog, encryptBookmarks, encryptWeek, WrongPassphraseError } from '../../plugins/news-core.js';
 import {
+  backlogText,
   chooseWrapUp,
   connectMessage,
   findClip,
@@ -17,8 +18,10 @@ import {
   readProgress,
   readRemembered,
   readSettings,
+  rebuildNews,
   rememberPassphrase,
   resumeIndex,
+  setBookmark,
   setLastClip,
   swipeAction,
   syncSummary,
@@ -47,6 +50,60 @@ const respond = (status, body) => ({
 
 const stories = (...ids) => ids.map((id) => ({ id }));
 const ready = (...ids) => ({ status: 'ready', stories: stories(...ids) });
+
+describe('bookmarks and links', () => {
+  const PASS = 'a sufficiently long test passphrase';
+  const story = { id: 'aaaaaaaaaaa1', week: '2026-10-23', headline: 'H', script: 'One. Two.', newsletter: 'N', receivedAt: 'r', links: { email: 'https://mail.google.com/mail/u/a@b.example/#all/18f2a3b4c5d6e7f8', article: null }, savedAt: 's' };
+
+  test('no bookmarks file means none, and costs no key derivation', async () => {
+    expect(await openWrapUp('bookmarks', PASS, { fetch: async () => respond(404) })).toEqual({ status: 'ready', stories: [], generatedAt: null });
+    await expect(openWrapUp('bookmarks', PASS, { fetch: async () => respond(500) })).rejects.toThrow('HTTP 500');
+    await expect(openWrapUp('2026-10-23', PASS, { fetch: async () => respond(404) })).rejects.toThrow('HTTP 404');
+  });
+
+  test('the file opens as a wrap-up, and a week file under that name does not', async () => {
+    const file = await encryptBookmarks({ bookmarks: [story], passphrase: PASS, iterations: 1000 });
+    const { stories: clips } = await openWrapUp('bookmarks', PASS, { fetch: async () => respond(200, file) });
+    expect(clips).toEqual([{ id: story.id, week: story.week, headline: 'H', script: 'One. Two.', newsletter: 'N', receivedAt: 'r', sentences: ['One.', 'Two.'], links: story.links }]);
+    const week = await encryptWeek({ weekId: '2026-10-23', payload: { stories: [] }, passphrase: PASS, iterations: 1000 });
+    await expect(openWrapUp('bookmarks', PASS, { fetch: async () => respond(200, week) })).rejects.toBeInstanceOf(WrongPassphraseError);
+  });
+
+  test('a version 1 file reads, with no links', async () => {
+    const file = await encryptWeek({ weekId: '2026-10-23', payload: { stories: [{ id: 'a', headline: 'H', script: 'S.' }] }, passphrase: PASS, iterations: 1000 });
+    const { stories: clips } = await openWrapUp('2026-10-23', PASS, { fetch: async () => respond(200, { ...file, version: 1 }) });
+    expect(clips[0].links).toEqual({ email: null, article: null });
+  });
+
+  test('the POSTs: a bookmark names a story and nothing more; rebuild has its own route', async () => {
+    const real = globalThis.fetch;
+    const sent = [];
+    globalThis.fetch = async (url, init) => {
+      sent.push({ url, init });
+      return respond(200, { bookmarks: ['aaaaaaaaaaa1'] });
+    };
+    try {
+      expect(await setBookmark({ id: 'aaaaaaaaaaa1', week: '2026-10-23', on: true, headline: 'not sent' })).toEqual({ bookmarks: ['aaaaaaaaaaa1'] });
+      await rebuildNews();
+    } finally {
+      globalThis.fetch = real;
+    }
+    expect(sent[0].url).toEndWith('api/news/bookmarks');
+    expect(sent[0].init.method).toBe('POST');
+    expect(sent[0].init.headers['Content-Type']).toBe('application/json');
+    expect(JSON.parse(sent[0].init.body)).toEqual({ id: 'aaaaaaaaaaa1', week: '2026-10-23', on: true });
+    expect(sent[1].url).toEndWith('api/news/backlog/rebuild');
+    expect(sent[1].init.method).toBe('POST');
+  });
+
+  test('the panel row shows a rebuild only when one is unfinished', () => {
+    expect(backlogText({ state: 'published', until: '2026-10-30' })).toBe('published · until 2026-10-30');
+    expect(backlogText({ state: 'published', until: '2026-10-30', rebuild: { done: 12, total: 34, running: true } })).toBe('published · until 2026-10-30 · rebuild 12/34');
+    expect(backlogText({ state: 'published', until: '2026-10-30', rebuild: { done: 12, total: 34, running: false } })).toBe('published · until 2026-10-30 · rebuild 12/34, rebuild again to continue');
+    expect(backlogText({ state: 'in-progress', until: '2026-10-30', done: 2, total: null })).toBe('2 emails · until 2026-10-30');
+    expect(backlogText(null)).toBe('none');
+  });
+});
 
 describe('index', () => {
   test('weeks newest first, backlog last', () => {
@@ -239,6 +296,12 @@ describe('choosing a wrap-up', () => {
     expect(nextUnheardWrapUp(entries, { new: ready('a') }, {}, 'new')).toBeNull();
   });
 
+  test('nextUnheardWrapUp from the bookmarks, which are not an entry, starts at the newest and reaches the last', () => {
+    const lib = { new: ready('a'), mid: ready('b'), [BACKLOG_ID]: ready('c') };
+    expect(nextUnheardWrapUp(entries, lib, {}, 'bookmarks').id).toBe('new');
+    expect(nextUnheardWrapUp(entries, { [BACKLOG_ID]: ready('c') }, {}, 'bookmarks').id).toBe(BACKLOG_ID);
+  });
+
   test('findClip searches what is read', () => {
     const lib = { new: { status: 'loading' }, mid: ready('a', 'b') };
     expect(findClip(entries, lib, 'b')).toEqual({ id: 'mid', index: 1 });
@@ -272,6 +335,7 @@ describe('page helpers', () => {
   test('readNewsUrl parses ?w= and #clip-, and rejects the rest', () => {
     expect(readNewsUrl('https://x.test/news/?w=2026-10-30#clip-a1b2c3')).toEqual({ week: '2026-10-30', clipId: 'a1b2c3' });
     expect(readNewsUrl('https://x.test/news/?w=backlog')).toEqual({ week: 'backlog', clipId: null });
+    expect(readNewsUrl('https://x.test/news/?w=bookmarks')).toEqual({ week: 'bookmarks', clipId: null });
     expect(readNewsUrl('https://x.test/news/?w=2026-10-31#plan-1234')).toEqual({ week: null, clipId: null });
     expect(readNewsUrl(undefined)).toEqual({ week: null, clipId: null });
   });

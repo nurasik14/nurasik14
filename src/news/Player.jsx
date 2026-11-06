@@ -1,16 +1,18 @@
 import React from 'react';
-import { WrongPassphraseError } from '../../plugins/news-core.js';
+import { BOOKMARKS_ID, WrongPassphraseError } from '../../plugins/news-core.js';
 import { useCommands, useShell } from '../shell/AppShell';
-import { isTypingTarget, scrollToId } from '../lib/nav';
+import { scrollToId } from '../lib/nav';
 import { createAudioSource, voiceLabel } from './audio.js';
 import { clampRate, cycleRate, isSpeaking, pickVoice, RATE_MAX, RATE_MIN, rankVoices, rateLabel, SpeechController, stepRate } from './speech.js';
 import {
   audioCues,
   audioUrl,
+  BOOKMARKS_ENTRY,
   chooseWrapUp,
   findClip,
   formatReceived,
   heardCount,
+  keyAction,
   markHeard,
   newsUrl,
   nextUnheardWrapUp,
@@ -20,6 +22,7 @@ import {
   readSettings,
   resumeIndex,
   safeStorage,
+  setBookmark,
   setLastClip,
   swipeAction,
   writeProgress,
@@ -30,12 +33,13 @@ const VOICE_POLL_MS = 250;
 const VOICE_POLLS = 12;
 
 /**
- * Decrypts the other wrap-ups one at a time, newest first. Each file has its
- * own salt, so each costs a full key derivation; `prioritize` moves one to the
- * front of the line when it is selected. Results stay in memory only.
+ * Decrypts the other wrap-ups one at a time: the bookmarks, so every card knows
+ * its star, then newest first. Each file has its own salt, so each costs a full
+ * key derivation; `prioritize` moves one to the front of the line when it is
+ * selected, and `refresh` reads one again. Results stay in memory only.
  */
-function useLibrary(entries, passphrase, first) {
-  const [lib, setLib] = React.useState(() => ({ [entries[0].id]: first }));
+function useLibrary(entries, passphrase, first, firstBookmarks) {
+  const [lib, setLib] = React.useState(() => ({ [entries[0].id]: first, ...(firstBookmarks ? { [BOOKMARKS_ID]: firstBookmarks } : {}) }));
   const libRef = React.useRef(lib);
   const priorityRef = React.useRef([]);
   const wakeRef = React.useRef(null);
@@ -54,7 +58,7 @@ function useLibrary(entries, passphrase, first) {
     };
     const nextId = () => {
       priorityRef.current = priorityRef.current.filter((id) => !isDone(id));
-      return priorityRef.current[0] ?? entries.find((e) => !isDone(e.id))?.id ?? null;
+      return priorityRef.current[0] ?? [BOOKMARKS_ENTRY, ...entries].find((e) => !isDone(e.id))?.id ?? null;
     };
     (async () => {
       while (live) {
@@ -89,7 +93,19 @@ function useLibrary(entries, passphrase, first) {
     [update],
   );
 
-  return { lib, prioritize };
+  // The old value stays on screen until the new one is in; the latest read wins.
+  const readCount = React.useRef(0);
+  const refresh = React.useCallback(
+    async (id) => {
+      readCount.current += 1;
+      const read = readCount.current;
+      const wrapUp = await openWrapUp(id, passphrase);
+      if (read === readCount.current) update(id, wrapUp);
+    },
+    [passphrase, update],
+  );
+
+  return { lib, prioritize, refresh };
 }
 
 /** { phase: 'unavailable' | 'loading' | 'none' | 'ready', voices }. Voices can arrive late or without an event. */
@@ -246,11 +262,20 @@ function createLaptopAudio(local, ids, createMedia) {
   return { media, source: createAudioSource({ ids, url: audioUrl, loadCues: audioCues, preloadEl }) };
 }
 
-export default function Player({ entries, first, passphrase, onLock, synth = globalThis.speechSynthesis, local = false, audio = null, createMedia = newMediaElement }) {
+/** The card's link, opened elsewhere. It sits outside the swipe area, so tapping it cannot turn the clip. */
+function ClipLink({ href, children }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="link inline-flex min-h-11 items-center text-fg-dim lg:min-h-0">
+      {children} <span aria-hidden="true">↗</span>
+    </a>
+  );
+}
+
+export default function Player({ entries, first, passphrase, onLock, synth = globalThis.speechSynthesis, local = false, audio = null, createMedia = newMediaElement, firstBookmarks = null }) {
   const { setMode, flash } = useShell();
   const [storage] = React.useState(safeStorage);
   const [url] = React.useState(() => readNewsUrl(globalThis.location?.href));
-  const { lib, prioritize } = useLibrary(entries, passphrase, first);
+  const { lib, prioritize, refresh } = useLibrary(entries, passphrase, first, firstBookmarks);
   const libRef = React.useRef(lib);
   const [progress, setProgress] = React.useState(() => readProgress(storage));
   const progressRef = React.useRef(progress);
@@ -259,9 +284,8 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
   const canSpeak = speech.phase === 'ready';
   const voice = React.useMemo(() => pickVoice(speech.voices, settings.voice), [speech.voices, settings.voice]);
 
-  const [selected, setSelected] = React.useState(() =>
-    url.week && entries.some((e) => e.id === url.week) ? url.week : automaticSelection(entries, lib, progress, url.clipId),
-  );
+  const isListed = (id) => id === BOOKMARKS_ID || entries.some((e) => e.id === id);
+  const [selected, setSelected] = React.useState(() => (url.week && isListed(url.week) ? url.week : automaticSelection(entries, lib, progress, url.clipId)));
   // Chosen as wrap-ups finish decrypting, during render, as the planner adjusts its month. Then it stays put.
   if (!selected) {
     const id = automaticSelection(entries, lib, progress, url.clipId);
@@ -285,12 +309,20 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
 
   const wrapUp = selected ? lib[selected] : null;
   const attached = wrapUp?.status === 'ready' && snap.queueId === selected;
-  const clips = attached ? wrapUp.stories : [];
+  // The controller's list: a bookmark removed while it plays leaves the queue only once it is quiet.
+  const clips = attached ? controller.clips : [];
   const clip = clips[snap.clip] ?? null;
   const speaking = isSpeaking(snap.status);
-  const selectedEntry = entries.find((e) => e.id === selected) ?? null;
+  const selectedEntry = selected === BOOKMARKS_ID ? BOOKMARKS_ENTRY : (entries.find((e) => e.id === selected) ?? null);
   const clipHasAudio = controller.usesAudio(clip);
   const canPlay = canSpeak || clipHasAudio;
+
+  // The last POST answer shows at once, until the re-read file catches up.
+  const [answeredIds, setAnsweredIds] = React.useState(null);
+  const bookmarksFile = lib[BOOKMARKS_ID];
+  const bookmarkIds = React.useMemo(() => new Set(answeredIds ?? bookmarksFile?.stories?.map((s) => s.id) ?? []), [answeredIds, bookmarksFile]);
+  const bookmarked = Boolean(clip && bookmarkIds.has(clip.id));
+  const clipLinks = clip?.links ?? {};
 
   React.useEffect(() => {
     if (!laptop.source) return;
@@ -375,7 +407,7 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
     if (linkHandled.current) return;
     linkHandled.current = true;
     if (url.week) {
-      if (!entries.some((e) => e.id === url.week)) flash(`no wrap-up ${url.week}`, 'warn');
+      if (url.week !== BOOKMARKS_ID && !entries.some((e) => e.id === url.week)) flash(`no wrap-up ${url.week}`, 'warn');
       else if (!libRef.current[url.week]) prioritize(url.week);
     }
     if (wantedClip.current && controller.queueId) {
@@ -399,6 +431,14 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
   React.useEffect(() => {
     if (selected && wrapUp?.status === 'ready' && snap.queueId !== selected) attach(selected, wrapUp.stories);
   }, [selected, wrapUp, snap.queueId, attach]);
+
+  // The bookmarks changed under their own queue: taken in once nothing is playing, staying on the clip if it is still there.
+  const quiet = !speaking && snap.status !== 'paused';
+  React.useEffect(() => {
+    if (!attached || selected !== BOOKMARKS_ID || !quiet || wrapUp.stories === controller.clips) return;
+    const at = wrapUp.stories.findIndex((s) => s.id === controller.clips[controller.clip]?.id);
+    controller.setQueue(wrapUp.stories, at >= 0 ? at : controller.clip, BOOKMARKS_ID);
+  }, [attached, selected, quiet, wrapUp, controller]);
 
   // ?w= and #clip- follow the player; last position follows too.
   React.useEffect(() => {
@@ -437,11 +477,14 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
     const onHash = () => {
       const { clipId } = readNewsUrl(window.location.href);
       if (!clipId) return;
+      const here = controller.clips.findIndex((c) => c.id === clipId);
+      if (here >= 0) {
+        controller.goTo(here);
+        return;
+      }
       const found = findClip(entries, libRef.current, clipId);
       if (!found) {
         flash(`no clip ${clipId}`, 'warn');
-      } else if (found.id === controller.queueId) {
-        controller.goTo(found.index);
       } else {
         wantedClip.current = clipId;
         selectWrapUp(found.id);
@@ -471,6 +514,36 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
     else controller.toggle();
   }
 
+  // The laptop edits, every device reads. Ignored until the list is known, or the direction would be a guess.
+  const bookmarkBusy = React.useRef(false);
+  async function toggleBookmark() {
+    if (!local || !clip) return;
+    if (bookmarkBusy.current || !['ready', 'error'].includes(lib[BOOKMARKS_ID]?.status)) {
+      flash('bookmarks are busy · try again in a moment', 'info');
+      return;
+    }
+    bookmarkBusy.current = true;
+    const on = !bookmarkIds.has(clip.id);
+    try {
+      const { bookmarks } = await setBookmark({ id: clip.id, week: clip.week ?? selected, on });
+      setAnsweredIds(bookmarks);
+      flash(`${on ? 'bookmarked' : 'bookmark removed'} · publish to reach the phone`, 'ok');
+    } catch (err) {
+      flash(`bookmark failed: ${err.message}`, 'warn');
+      bookmarkBusy.current = false;
+      return;
+    }
+    try {
+      await refresh(BOOKMARKS_ID);
+      setAnsweredIds(null);
+    } catch (err) {
+      // Saved all the same; the stars keep following the answer.
+      flash(`bookmark saved, but the file did not re-read: ${err.message}`, 'warn');
+    } finally {
+      bookmarkBusy.current = false;
+    }
+  }
+
   const actions = React.useRef({});
   React.useEffect(() => {
     actions.current = {
@@ -480,6 +553,8 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
       faster: () => changeRate(stepRate(settings.rate, 1)),
       slower: () => changeRate(stepRate(settings.rate, -1)),
       cycle: () => changeRate(cycleRate(settings.rate)),
+      bookmark: toggleBookmark,
+      canBookmark: local,
     };
   });
 
@@ -487,34 +562,11 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
 
   React.useEffect(() => {
     const onKey = (e) => {
-      if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
-      if (isTypingTarget(e.target) || e.target?.closest?.('[data-cmdline]')) return;
       const a = actions.current;
-      if (e.key === ' ') {
-        // Space on a focused control activates that control.
-        if (e.repeat || e.target?.closest?.('button, a, summary, label, input')) return;
-        e.preventDefault();
-        a.toggle();
-      } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        // A focused clip with more text than fits scrolls instead.
-        const el = scrollerRef.current;
-        if (el && e.target === el && el.scrollHeight > el.clientHeight) return;
-        e.preventDefault();
-        if (e.key === 'ArrowDown') a.next();
-        else a.prev();
-      } else if (e.key === 'j' || e.key === 'ArrowRight') {
-        e.preventDefault();
-        a.next();
-      } else if (e.key === 'k' || e.key === 'ArrowLeft') {
-        e.preventDefault();
-        a.prev();
-      } else if (e.key === '+' || e.key === '=') {
-        e.preventDefault();
-        a.faster();
-      } else if (e.key === '-') {
-        e.preventDefault();
-        a.slower();
-      }
+      const action = keyAction(e, { scroller: scrollerRef.current, canBookmark: a.canBookmark });
+      if (!action) return;
+      e.preventDefault();
+      a[action]();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -526,9 +578,10 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
       { name: 'next', desc: 'next clip', keys: ['j'], run: () => actions.current.next() },
       { name: 'prev', desc: 'previous clip', keys: ['k'], run: () => actions.current.prev() },
       { name: 'speed', desc: `cycle speed, now ${rateLabel(settings.rate)}`, keys: ['+', '-'], run: () => actions.current.cycle() },
+      ...(local ? [{ name: 'bookmark', desc: 'bookmark this clip, or remove it (localhost)', keys: ['b'], run: () => actions.current.bookmark() }] : []),
       { name: 'lock', desc: 'forget the passphrase on this device', run: () => onLock() },
     ],
-    [settings.rate, onLock],
+    [settings.rate, onLock, local],
   );
   useCommands(commands);
 
@@ -598,6 +651,11 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
             <div className="flex items-baseline justify-between gap-x-4">
               <span className="label min-w-0 truncate">{clip.newsletter || 'newsletter'}</span>
               <span className="shrink-0 whitespace-nowrap font-mono text-[12px] text-fg-dim">
+                {bookmarked && (
+                  <span role="img" aria-label="bookmarked" className="text-fg">
+                    ★{' '}
+                  </span>
+                )}
                 clip {snap.clip + 1} / {clips.length}
               </span>
             </div>
@@ -630,10 +688,24 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
                 </p>
               </div>
             </div>
+            {(local || clipLinks.email || clipLinks.article) && (
+              <div className="mt-3 flex flex-wrap items-center gap-x-4 font-mono text-[12px]">
+                {local && (
+                  <button type="button" className="btn h-7 px-2 text-[12px]" onClick={toggleBookmark} aria-pressed={bookmarked} aria-keyshortcuts="b">
+                    <span aria-hidden="true">{bookmarked ? '★' : '☆'}</span>
+                    bookmark
+                  </button>
+                )}
+                {clipLinks.email && <ClipLink href={clipLinks.email}>email</ClipLink>}
+                {clipLinks.article && <ClipLink href={clipLinks.article}>article</ClipLink>}
+              </div>
+            )}
           </>
         ) : (
           <div className="flex-1">
-            {wrapUp?.status === 'ready' && attached && !clips.length && <p className="font-mono text-[13px] text-fg-dim">{selectedEntry?.label} has no clips: no email arrived that week.</p>}
+            {wrapUp?.status === 'ready' && attached && !clips.length && (
+              <p className="font-mono text-[13px] text-fg-dim">{selected === BOOKMARKS_ID ? 'no bookmarks yet' : `${selectedEntry?.label} has no clips: no email arrived that week.`}</p>
+            )}
             {wrapUp?.status === 'error' && (
               <div role="alert" className="font-mono text-[13px]">
                 <p className="break-words text-warn">
@@ -714,6 +786,11 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
             <span>
               <kbd className="kbd">+</kbd> <kbd className="kbd">-</kbd> speed
             </span>
+            {local && (
+              <span>
+                <kbd className="kbd">b</kbd> bookmark
+              </span>
+            )}
           </span>
           <span aria-hidden="true" className="lg:hidden">
             swipe ↑ next · ↓ prev
@@ -738,6 +815,9 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
             </button>
           </div>
           <ul className="space-y-0.5">
+            {(bookmarkIds.size > 0 || bookmarksFile?.status === 'error') && (
+              <WrapUpRow entry={BOOKMARKS_ENTRY} wrapUp={bookmarksFile} progress={progress} current={selected === BOOKMARKS_ID} onSelect={selectWrapUp} />
+            )}
             {entries.map((entry) => (
               <WrapUpRow key={entry.id} entry={entry} wrapUp={lib[entry.id]} progress={progress} current={entry.id === selected} onSelect={selectWrapUp} />
             ))}

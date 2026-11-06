@@ -4,7 +4,7 @@ import { homedir, tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { PassThrough, Readable } from 'node:stream';
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test';
-import { decryptWeek, NEWS_SCOPES, STORY_SCHEMA } from '../../plugins/news-core.js';
+import { BOOKMARKS_MAX, decryptWeek, encryptBookmarks, encryptWeek, NEWS_SCOPES, STORY_SCHEMA } from '../../plugins/news-core.js';
 import { buildClaudePrompt, CLAUDE_RULES, createClaudeRunner, createNewsDataHandler, createNewsHandler, resolveNewsHome } from '../../plugins/news-sync.js';
 
 const hkt = (s) => Date.parse(`${s}+08:00`);
@@ -69,9 +69,9 @@ function fakeGoogle() {
   return g;
 }
 
-function invoke(handler, { method = 'GET', url, headers = {}, remote = '::1' }) {
+function invoke(handler, { method = 'GET', url, headers = {}, remote = '::1', body }) {
   return new Promise((ok) => {
-    const req = Readable.from([]);
+    const req = Readable.from(body === undefined ? [] : [Buffer.from(JSON.stringify(body))]);
     req.method = method;
     req.url = url;
     req.headers = { host: 'localhost:5181', ...headers };
@@ -104,8 +104,8 @@ const defaultClaude = async ({ text }) => {
   if (text.includes('confirm your subscription')) return { stories: [] };
   return {
     stories: [
-      { headline: 'Tunnel back', script: `Big news! ${BODY} Details at ${LINK} or ${ADDRESS}.` },
-      { headline: 'Second item', script: 'Also, ferries run late.' },
+      { headline: 'Tunnel back', script: `Big news! ${BODY} [L1] Details at ${LINK} or ${ADDRESS}.`, link: 'L1' },
+      { headline: 'Second item', script: 'Also, ferries run late.', link: '' },
     ],
   };
 };
@@ -425,10 +425,11 @@ describe('sync (weekly, after the backlog)', () => {
     expect(res.status).toBe(200);
     expect(res.body).toEqual({ published: ['2026-10-23'], skipped: null, emails: 3, stories: 4 });
 
-    // Exactly the three in-window emails, oldest first, with URLs gone before Claude.
+    // Exactly the three in-window emails, oldest first, with URLs turned to tags before Claude.
     expect(seen.map((e) => e.newsletter)).toEqual(['Harbour Daily', 'Harbour Daily', 'example']);
-    expect(seen[0].text).toBe(BODY);
+    expect(seen[0].text).toBe(`${BODY} [L1]`);
     expect(seen.map((e) => e.text).join()).not.toContain(LINK);
+    expect(JSON.stringify(seen)).not.toMatch(/https?:|track\.example/);
 
     expect(await readdir(join(root, 'public/data/news'))).toEqual(['2026-10-23.json', 'index.json']);
     expect(await readFile(newsFile('index.json'), 'utf8')).toBe('{\n  "version": 1,\n  "backlog": {\n    "until": "2026-10-23"\n  },\n  "weeks": [\n    "2026-10-23"\n  ]\n}\n');
@@ -450,21 +451,57 @@ describe('sync (weekly, after the backlog)', () => {
     ]);
     expect(payload.stories[0].headline).toBe('Tunnel back');
     expect(payload.stories[0].newsletter).toBe('Harbour Daily');
-    expect(Object.keys(payload.stories[0]).sort()).toEqual(['headline', 'id', 'newsletter', 'receivedAt', 'script']);
+    expect(Object.keys(payload.stories[0]).sort()).toEqual(['headline', 'id', 'links', 'newsletter', 'receivedAt', 'script']);
+    expect(payload.stories[0].links).toEqual({ email: null, article: LINK }); // 'm1' is not a Gmail id
 
     const index = await readFile(newsFile('index.json'), 'utf8');
     // Message ids quoted: a bare 'm1' turns up by chance in random base64 ciphertext.
-    const leaks = [ADDRESS, ACCOUNT, '"m1"', '"m2"', 'Ticket for', 'harbour tunnel', LINK, 'track.example', PASS, 'rt-live', 'at-live', 'https://', 'http://'];
+    const leaks = [ADDRESS, ACCOUNT, '"m1"', '"m2"', 'Ticket for', 'harbour tunnel', LINK, 'track.example', PASS, 'rt-live', 'at-live', 'https://', 'http://', '@'];
     for (const text of [raw, index]) for (const leak of leaks) expect(text).not.toContain(leak);
 
-    // The decrypted payload may hold a rewritten fact, but no address, id or link.
-    const plain = JSON.stringify(payload);
-    for (const leak of [ADDRESS, ACCOUNT, '"m1', 'Ticket for', LINK, 'track.example', 'https://', '@']) expect(plain).not.toContain(leak);
+    // The decrypted payload may hold a rewritten fact, but no address, id or link outside links.
+    const plain = JSON.stringify(payload.stories.map((story) => ({ ...story, links: null })));
+    for (const leak of [ADDRESS, ACCOUNT, '"m1', 'Ticket for', LINK, 'track.example', 'http', '[L', '@']) expect(plain).not.toContain(leak);
 
     const s = await status();
     expect(s.published).toEqual(['2026-10-23']);
     expect(s.pending).toEqual([]);
     expect(s.lastSync).toBe(new Date(NOW).toISOString());
+  });
+
+  test('links: gmail and article reach the payload, and the file shows neither', async () => {
+    await connectToken();
+    const gmailId = '18f2a3b4c5d6e7f8';
+    const wrapped = `https://tracking.tldrnewsletter.com/CL0/https:%2F%2Fexample.com%2Fstory%3Fid=1%26utm_source=x/1/0100/abc=`;
+    g.messages = [message(gmailId, '2026-10-24T09:00:00', { body: `${BODY} ${wrapped} and https://other.example/unsubscribe/9` })];
+    const seen = [];
+    claude = async (email) => {
+      seen.push(email.text);
+      return { stories: [{ headline: 'H', script: 'S', link: 'L1' }, { headline: 'H2', script: 'S2', link: 'L9' }] };
+    };
+    await sync();
+    expect(seen).toEqual([`${BODY} [L1] and`]);
+    const raw = await readFile(newsFile('2026-10-23.json'), 'utf8');
+    const file = JSON.parse(raw);
+    expect(file.version).toBe(2);
+    const { stories } = await decryptWeek(file, PASS);
+    const email = `https://mail.google.com/mail/u/${ACCOUNT}/#all/${gmailId}`;
+    expect(stories.map((s) => s.links)).toEqual([
+      { email, article: 'https://example.com/story?id=1' },
+      { email, article: null },
+    ]);
+
+    // The whole file is base64 and JSON punctuation, so these cannot appear by chance.
+    expect(raw).not.toContain('@');
+    expect(raw).not.toContain('://');
+    // "http" can turn up in random base64, so it is only looked for outside of it.
+    expect(JSON.stringify([file.version, file.week, file.start, file.end, file.kdf.name, file.kdf.hash, file.cipher.name])).not.toMatch(/http|@/);
+    for (const needle of ['"email"', '"article"', gmailId]) expect(raw).not.toContain(needle);
+
+    // Decrypted, "@" and "http" live only in the link values.
+    for (const story of stories) {
+      expect(JSON.stringify({ ...story, links: null })).not.toMatch(/@|http/);
+    }
   });
 
   test('a week with no email is still published, without calling Claude', async () => {
@@ -755,6 +792,340 @@ describe('backlog (the first sync)', () => {
   });
 });
 
+describe('backlog rebuild', () => {
+  const IDS = ['18f0000000000001', '18f0000000000002', '18f0000000000003', '18f0000000000004'];
+  const emails = () => IDS.map((id, i) => message(id, `2026-10-0${i + 1}T09:00:00`, { body: `Email ${i + 1}. https://a.example/${i + 1}` }));
+  const rebuild = () => invoke(handler, { method: 'POST', url: '/api/news/backlog/rebuild' });
+  const cacheNames = async () => (await readdir(join(dir, 'stories')).catch(() => [])).filter((n) => n.endsWith('.json'));
+
+  /** The state the real site is in: a backlog already out, under the same window. */
+  async function published() {
+    await connectToken();
+    g.messages = emails();
+    claude = async () => ({ stories: [{ headline: 'Old', script: 'Old script.', link: '' }] });
+    expect((await sync()).body.published).toEqual(['backlog']);
+    claude = async ({ text }) => ({ stories: [{ headline: 'New', script: `New script for ${text.slice(0, 7)}.`, link: 'L1' }] });
+  }
+
+  test('remakes the file over the same window, with links, and leaves the index and settings window alone', async () => {
+    await published();
+    const index = await readFile(newsFile('index.json'), 'utf8');
+    const res = await rebuild();
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({ published: ['backlog'], skipped: null, emails: 4, stories: 4 });
+    const file = await readJson(newsFile('backlog.json'));
+    expect(file).toMatchObject({ version: 2, until: '2026-10-30' });
+    const { stories } = await decryptWeek(file, PASS, { week: 'backlog' });
+    expect(stories.map((s) => s.headline)).toEqual(['New', 'New', 'New', 'New']);
+    expect(stories[0].links).toEqual({ email: `https://mail.google.com/mail/u/${ACCOUNT}/#all/${IDS[3]}`, article: 'https://a.example/4' });
+    expect(await readFile(newsFile('index.json'), 'utf8')).toBe(index);
+    expect((await readJson(join(home, 'settings.json'))).backlogUntil).toBe('2026-10-30');
+    expect(await cacheNames()).toEqual([]);
+    expect((await status()).backlog).toEqual({ state: 'published', until: '2026-10-30' });
+  });
+
+  test('the old file stays byte for byte until the last email; it resumes across calls under the cap', async () => {
+    await published();
+    build({ maxEmails: 3 });
+    const before = await readFile(newsFile('backlog.json'), 'utf8');
+    let calls = 0;
+    const real = claude;
+    claude = async (email) => {
+      calls += 1;
+      return real(email);
+    };
+    const first = await rebuild();
+    expect(first.body).toEqual({ published: [], skipped: 'backlog rebuild: 3 of 4 emails done, 3 Claude calls used; rebuild again to continue', emails: 0, stories: 0 });
+    expect(calls).toBe(3);
+    expect(await readFile(newsFile('backlog.json'), 'utf8')).toBe(before);
+    expect((await status()).backlog).toEqual({ state: 'published', until: '2026-10-30', rebuild: { done: 3, total: 4, running: false } });
+
+    // A restart in between loses nothing.
+    build({ maxEmails: 3 });
+    expect((await status()).backlog.rebuild).toEqual({ done: 3, total: 4, running: false });
+    const last = await rebuild();
+    expect(last.body.published).toEqual(['backlog']);
+    expect(calls).toBe(4);
+    expect(await readFile(newsFile('backlog.json'), 'utf8')).not.toBe(before);
+    expect((await status()).backlog.rebuild).toBeUndefined();
+  });
+
+  test('a failed email stops it: the old file stays and what was done stays cached', async () => {
+    await published();
+    const before = await readFile(newsFile('backlog.json'), 'utf8');
+    let calls = 0;
+    const real = claude;
+    claude = async (email) => {
+      calls += 1;
+      if (calls === 2) throw new Error('claude error: boom');
+      return real(email);
+    };
+    const res = await rebuild();
+    expect(res.body.skipped).toBe('backlog rebuild failed: email 2 of 4: claude error: boom');
+    expect(res.body.published).toEqual([]);
+    expect(await readFile(newsFile('backlog.json'), 'utf8')).toBe(before);
+    expect((await rebuild()).body.published).toEqual(['backlog']);
+    expect(calls).toBe(5); // 1 ok, 1 failed, then that one again and the two left
+  });
+
+  test('cached stories of the old format are never reused, by a rebuild or a first build', async () => {
+    await published();
+    await mkdir(join(dir, 'stories'), { recursive: true });
+    const stale = { internalDate: String(hkt('2026-10-01T09:00:00')), newsletter: 'Stale', stories: [{ headline: 'STALE', script: 'STALE' }] };
+    for (const id of IDS) {
+      const name = new Bun.CryptoHasher('sha256').update(`news.fm:${id}`).digest('hex').slice(0, 32);
+      await writeFile(join(dir, 'stories', `${name}.json`), JSON.stringify(stale));
+    }
+    await rebuild();
+    const { stories } = await decryptWeek(await readJson(newsFile('backlog.json')), PASS, { week: 'backlog' });
+    expect(stories.map((s) => s.headline)).not.toContain('STALE');
+
+    await rm(newsFile('index.json'));
+    await rm(newsFile('backlog.json'));
+    await sync();
+    const again = await decryptWeek(await readJson(newsFile('backlog.json')), PASS, { week: 'backlog' });
+    expect(again.stories.map((s) => s.headline)).not.toContain('STALE');
+  });
+
+  test('it shares the lock with sync: each refuses while the other runs, and progress shows', async () => {
+    await published();
+    let release;
+    let entered;
+    const started = new Promise((ok) => { entered = ok; });
+    claude = () => {
+      entered();
+      return new Promise((ok) => { release = () => ok({ stories: [] }); });
+    };
+    build({ maxEmails: 1 });
+    const running = rebuild();
+    await started;
+    const s = await status();
+    expect(s.syncing).toBe(true);
+    expect(s.backlog.rebuild).toEqual({ done: 0, total: 4, running: true });
+    expect((await sync()).status).toBe(409);
+    expect((await rebuild()).status).toBe(409);
+    release();
+    expect((await running).status).toBe(200);
+    expect((await status()).syncing).toBe(false);
+  });
+
+  test('a weekly sync between two calls works, and neither disturbs the other', async () => {
+    await published();
+    const later = () => hkt('2026-11-07T10:00:00'); // the week of Oct 30 is complete now
+    build({ maxEmails: 1, now: later });
+    expect((await rebuild()).body.published).toEqual([]);
+    build({ maxEmails: 5, now: later });
+    const before = await readFile(newsFile('backlog.json'), 'utf8');
+    expect((await sync()).body.published).toEqual(['2026-10-30']);
+    expect(await readFile(newsFile('backlog.json'), 'utf8')).toBe(before);
+    expect((await rebuild()).body.published).toEqual(['backlog']);
+    expect(await readJson(newsFile('index.json'))).toEqual({ version: 1, backlog: { until: '2026-10-30' }, weeks: ['2026-10-30'] });
+  });
+
+  test('it needs a published backlog and the same things a sync needs', async () => {
+    await connectToken();
+    expect((await rebuild()).status).toBe(409);
+    await backlogPublished('2026-10-30');
+    await rm(join(home, 'passphrase'));
+    expect((await rebuild()).status).toBe(400);
+    await writeFile(join(home, 'passphrase'), `${PASS}\n`);
+    await rm(join(home, 'token.json'));
+    expect((await rebuild()).status).toBe(400);
+    expect((await invoke(handler, { url: '/api/news/backlog/rebuild' })).status).toBe(405);
+    expect((await invoke(handler, { method: 'POST', url: '/api/news/backlog/rebuild', remote: '192.168.1.20' })).status).toBe(403);
+    expect((await invoke(handler, { method: 'POST', url: '/api/news/backlog/rebuild', headers: { origin: 'https://evil.example' } })).status).toBe(403);
+    expect(g.calls).toHaveLength(0);
+  });
+
+  test('after it publishes the audio job starts; a capped call starts nothing', async () => {
+    const audioDir = join(dir, 'audio');
+    const made = [];
+    const runTts = async ({ text, mp3, srt }) => {
+      made.push(text);
+      await writeFile(mp3, Buffer.alloc(4096, 7));
+      await writeFile(srt, '1\n00:00:00,000 --> 00:00:01,000\nHi.\n');
+    };
+    await published();
+    build({ audioDir, runTts, maxEmails: 3 });
+    await rebuild();
+    expect(made).toEqual([]);
+    expect(await exists(audioDir)).toBe(false);
+    await rebuild();
+    for (let i = 0; i < 500 && made.length < 4; i += 1) await new Promise((ok) => setTimeout(ok, 2));
+    expect(made).toHaveLength(4);
+    expect(made.every((text) => text.startsWith('New script'))).toBe(true);
+    for (let i = 0; i < 500; i += 1) {
+      const list = (await invoke(handler, { url: '/api/news/audio' })).body;
+      if (!list.running && list.done === 4) return;
+      await new Promise((ok) => setTimeout(ok, 2));
+    }
+    throw new Error('the audio job never finished');
+  });
+});
+
+describe('bookmarks', () => {
+  const WEEK = '2026-10-23';
+  const GMAIL_ID = '18f2a3b4c5d6e7f8';
+  const post = (body, options = {}) => invoke(handler, { method: 'POST', url: '/api/news/bookmarks', headers: { 'content-type': 'application/json' }, body, ...options });
+  const saved = async () => decryptWeek(await readJson(newsFile('bookmarks.json')), PASS, { week: 'bookmarks' });
+  let stories;
+
+  beforeEach(async () => {
+    await backlogPublished(WEEK);
+    await connectToken();
+    g.messages = [message(GMAIL_ID, '2026-10-24T09:00:00')];
+    await sync();
+    ({ stories } = await decryptWeek(await readJson(newsFile(`${WEEK}.json`)), PASS));
+  });
+
+  test('add builds the snapshot on the server; the file is encrypted and bound to its name', async () => {
+    const [story] = stories;
+    const res = await post({ id: story.id, week: WEEK, on: true, headline: 'EVIL', script: 'EVIL', links: { article: 'https://evil.example/' } });
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({ bookmarks: [story.id] });
+    const plain = await saved();
+    expect(plain).toEqual({
+      version: 1,
+      bookmarks: [
+        {
+          id: story.id,
+          week: WEEK,
+          headline: story.headline,
+          script: story.script,
+          newsletter: story.newsletter,
+          receivedAt: story.receivedAt,
+          links: story.links,
+          savedAt: new Date(NOW).toISOString(),
+        },
+      ],
+    });
+    expect(JSON.stringify(plain)).not.toContain('EVIL');
+    expect(story.links.email).toContain(ACCOUNT);
+
+    const raw = await readFile(newsFile('bookmarks.json'), 'utf8');
+    expect(raw).not.toContain('@');
+    expect(raw).not.toContain('://');
+    expect(raw).not.toContain(story.headline);
+    await expect(decryptWeek(JSON.parse(raw), PASS, { week: WEEK })).rejects.toThrow('wrong passphrase');
+  });
+
+  test('the newest saved comes first; remove takes one out; repeats change nothing', async () => {
+    const [a, b] = stories;
+    await post({ id: a.id, week: WEEK, on: true });
+    expect((await post({ id: b.id, week: WEEK, on: true })).body).toEqual({ bookmarks: [b.id, a.id] });
+    const before = await readFile(newsFile('bookmarks.json'), 'utf8');
+    expect((await post({ id: a.id, week: WEEK, on: true })).body).toEqual({ bookmarks: [b.id, a.id] });
+    expect(await readFile(newsFile('bookmarks.json'), 'utf8')).toBe(before);
+    expect((await post({ id: b.id, week: WEEK, on: false })).body).toEqual({ bookmarks: [a.id] });
+    expect((await saved()).bookmarks.map((s) => s.id)).toEqual([a.id]);
+    expect((await post({ id: 'ffffffffffff', week: WEEK, on: false })).body).toEqual({ bookmarks: [a.id] });
+    expect((await post({ id: a.id, week: WEEK, on: false })).body).toEqual({ bookmarks: [] });
+    expect((await saved()).bookmarks).toEqual([]);
+  });
+
+  test('two at once are both kept, and the write is atomic', async () => {
+    const [a, b] = stories;
+    const answers = await Promise.all([post({ id: a.id, week: WEEK, on: true }), post({ id: b.id, week: WEEK, on: true })]);
+    expect(answers.map((r) => r.status)).toEqual([200, 200]);
+    expect((await saved()).bookmarks.map((s) => s.id).sort()).toEqual([a.id, b.id].sort());
+    expect((await readdir(join(root, 'public/data/news'))).filter((n) => n.includes('tmp'))).toEqual([]);
+    // A leftover temp file from a crash is not what gets served, and does not break the next write.
+    await writeFile(newsFile('bookmarks.json.tmp'), 'torn');
+    expect((await post({ id: a.id, week: WEEK, on: false })).status).toBe(200);
+    expect((await saved()).bookmarks.map((s) => s.id)).toEqual([b.id]);
+  });
+
+  test('a story that is not in that file is a 404, and nothing is written', async () => {
+    expect((await post({ id: 'ffffffffffff', week: WEEK, on: true })).status).toBe(404);
+    expect(await exists(newsFile('bookmarks.json'))).toBe(false);
+  });
+
+  test('a bad request is a 400; a request that is not JSON is a 415', async () => {
+    const [story] = stories;
+    const bad = [
+      { week: WEEK, on: true },
+      { id: 'short', week: WEEK, on: true },
+      { id: '../../secret', week: WEEK, on: true },
+      { id: story.id, week: '2026-10-22', on: true },
+      { id: story.id, week: '../index', on: true },
+      { id: story.id, week: 'bookmarks', on: true },
+      { id: story.id, week: WEEK, on: 'yes' },
+      { id: story.id, week: WEEK },
+      null,
+    ];
+    for (const body of bad) expect((await post(body)).status).toBe(400);
+    expect((await invoke(handler, { method: 'POST', url: '/api/news/bookmarks', body: { id: story.id, week: WEEK, on: true } })).status).toBe(415);
+    expect(await exists(newsFile('bookmarks.json'))).toBe(false);
+  });
+
+  test('loopback, Host and Origin guards apply', async () => {
+    const body = { id: stories[0].id, week: WEEK, on: true };
+    expect((await post(body, { remote: '192.168.1.20' })).status).toBe(403);
+    expect((await post(body, { headers: { 'content-type': 'application/json', host: 'evil.example' } })).status).toBe(403);
+    expect((await post(body, { headers: { 'content-type': 'application/json', origin: 'https://evil.example' } })).status).toBe(403);
+    expect((await invoke(handler, { url: '/api/news/bookmarks', remote: '192.168.1.20' })).status).toBe(403);
+    expect(await exists(newsFile('bookmarks.json'))).toBe(false);
+    expect((await invoke(handler, { method: 'PUT', url: '/api/news/bookmarks' })).status).toBe(405);
+  });
+
+  test('no passphrase, or no published file, is a 409', async () => {
+    const body = { id: stories[0].id, week: WEEK, on: true };
+    expect((await post({ ...body, week: 'backlog' })).status).toBe(409);
+    await rm(join(home, 'passphrase'));
+    expect((await post(body)).status).toBe(409);
+    expect((await invoke(handler, { url: '/api/news/bookmarks' })).status).toBe(409);
+    expect(await exists(newsFile('bookmarks.json'))).toBe(false);
+  });
+
+  test('a week file renamed to bookmarks.json does not open: 409, and it is not overwritten', async () => {
+    await writeFile(newsFile('bookmarks.json'), await readFile(newsFile(`${WEEK}.json`), 'utf8'));
+    const before = await readFile(newsFile('bookmarks.json'), 'utf8');
+    const res = await post({ id: stories[0].id, week: WEEK, on: true });
+    expect(res.status).toBe(409);
+    expect(res.body.error).toContain('does not open');
+    expect((await invoke(handler, { url: '/api/news/bookmarks' })).status).toBe(409);
+    expect(await readFile(newsFile('bookmarks.json'), 'utf8')).toBe(before);
+  });
+
+  test('the file under another passphrase is refused the same way', async () => {
+    await writeFile(newsFile('bookmarks.json'), JSON.stringify(await encryptBookmarks({ bookmarks: [], passphrase: 'an older passphrase entirely', iterations: 1000 })));
+    expect((await post({ id: stories[0].id, week: WEEK, on: true })).status).toBe(409);
+  });
+
+  test('at the cap adding is refused and nothing is lost; removing still works', async () => {
+    const full = Array.from({ length: BOOKMARKS_MAX }, (_, i) => ({ id: i.toString(16).padStart(12, '0'), week: WEEK, headline: 'h', script: 's', newsletter: 'n', receivedAt: 'r', links: null, savedAt: 'x' }));
+    await writeFile(newsFile('bookmarks.json'), JSON.stringify(await encryptBookmarks({ bookmarks: full, passphrase: PASS, iterations: 1000 })));
+    const res = await post({ id: stories[0].id, week: WEEK, on: true });
+    expect(res.status).toBe(409);
+    expect(res.body.error).toContain(`${BOOKMARKS_MAX}`);
+    expect((await saved()).bookmarks).toHaveLength(BOOKMARKS_MAX);
+    expect((await post({ id: full[0].id, week: WEEK, on: false })).body.bookmarks).toHaveLength(BOOKMARKS_MAX - 1);
+    expect((await post({ id: stories[0].id, week: WEEK, on: true })).body.bookmarks[0]).toBe(stories[0].id);
+  });
+
+  test('a version 1 story is saved without links', async () => {
+    const id = 'abcabcabcabc';
+    const payload = { version: 1, week: '2026-10-16', generatedAt: 'g', stories: [{ id, headline: 'Old', script: 'Old.', newsletter: 'n', receivedAt: 'r' }] };
+    const file = await encryptWeek({ weekId: '2026-10-16', payload, passphrase: PASS, iterations: 1000 });
+    await writeFile(newsFile('2026-10-16.json'), JSON.stringify({ ...file, version: 1 }));
+    await post({ id, week: '2026-10-16', on: true });
+    expect((await saved()).bookmarks[0]).toMatchObject({ id, links: null });
+  });
+
+  test('GET lists the ids, and is empty with no file', async () => {
+    expect((await invoke(handler, { url: '/api/news/bookmarks' })).body).toEqual({ ids: [] });
+    await post({ id: stories[0].id, week: WEEK, on: true });
+    expect((await invoke(handler, { url: '/api/news/bookmarks' })).body).toEqual({ ids: [stories[0].id] });
+  });
+
+  test('the data handler serves the file, 404 until there is one', async () => {
+    const data = createNewsDataHandler(join(root, 'public/data/news'));
+    expect((await invoke(data, { url: '/data/news/bookmarks.json' })).status).toBe(404);
+    await post({ id: stories[0].id, week: WEEK, on: true });
+    expect((await invoke(data, { url: '/data/news/bookmarks.json' })).body.week).toBe('bookmarks');
+  });
+});
+
 describe('data handler', () => {
   let data;
   beforeEach(async () => {
@@ -898,5 +1269,6 @@ describe('createClaudeRunner', () => {
     expect(CLAUDE_RULES).toContain('untrusted');
     expect(CLAUDE_RULES).toContain('zero stories');
     expect(CLAUDE_RULES).toContain('15 to 25 second');
+    expect(CLAUDE_RULES).toContain("Each link in the email is shown as a tag like [L3]. For each story set link to the tag of the link that points to that story's article or source, or an empty string if there is none. Never invent a tag.");
   });
 });

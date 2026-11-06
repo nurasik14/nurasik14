@@ -13,14 +13,14 @@ asks for the passphrase, decrypts in the browser and reads the clips aloud.
  POST …/api/news/sync (loopback only)
     │ messages.list + messages.get ◄── Gmail (read-only)
     ▼
- email to plain text (no URLs, max 30,000 chars)
+ email to plain text (links become tags like [L3], max 30,000 chars)
     │ stdin
     ▼
- claude -p --tools "" … ──► stories per email
+ claude -p --tools "" … ──► stories per email, each naming its tag
     ▼
  encrypt (PBKDF2 + AES-256-GCM)
     ▼
- public/data/news/backlog.json (first sync), <week>.json, index.json
+ public/data/news/backlog.json (first sync), <week>.json, index.json, bookmarks.json
     │ git add/commit/push ──────────────────────►  data/news/*.json
                                                         │ fetch (ciphertext)
                                                         ▼
@@ -29,7 +29,7 @@ asks for the passphrase, decrypts in the browser and reads the clips aloud.
 ```
 
 Nothing runs in the background. Nothing talks to Google or Claude until you
-connect or POST a sync. The API exists only in `vite` and `vite preview`, and only
+connect or POST a sync or a backlog rebuild. The API exists only in `vite` and `vite preview`, and only
 answers loopback clients. Pure logic is in `plugins/news-core.js`; the handler and
 the Claude runner are in `plugins/news-sync.js`; the page is in `src/news/`.
 
@@ -56,23 +56,80 @@ the next unheard one.
 | `j` `↓` `→` | swipe up | `:next` | next clip |
 | `k` `↑` `←` | swipe down | `:prev` | previous clip |
 | `+` `-` | settings | `:speed` (cycles) | speed, 0.8–1.6 in 0.1 steps |
+| `b` | `☆` button | `:bookmark` | bookmark or un-bookmark the clip, on localhost only |
 | | `lock` button | `:lock` | forget the passphrase |
 | | sync panel | `:sync` | sync, on localhost only |
 
 Under **settings** are the voice, the speed and autoplay. The default voice is the
 best English one the browser has. Voice and speed apply from the next sentence.
 
-`?w=<week|backlog>` and `#clip-<id>` follow the player, so a URL points at a clip.
+`?w=<week|backlog|bookmarks>` and `#clip-<id>` follow the player, so a URL points at a
+clip.
 
 On a loopback host a sync panel sits below the player: account, backlog progress,
-pending weeks, last sync, laptop audio, `connect google`, `sync`, `make audio` and the
-publish command. Pages does not render it and makes no `/api` request.
+pending weeks, last sync, laptop audio, `connect google`, `sync`, `make audio`,
+`rebuild backlog` and the publish command. Pages does not render it and makes no `/api`
+request.
+
+### Links
+
+A clip has `email ↗` and `article ↗` below its text, when it has them. They open in
+a new tab and sit outside the swipe area, so a tap cannot turn the clip. Files from
+before format 2 have no links, and their clips show none.
+
+- **email** opens the original in Gmail. It only works on a device logged in to the
+  news account.
+- **article** is the link Claude picked for that story, if any.
+
+Claude never sees a URL. While an email becomes text, each link turns into a tag:
+`<a href="X">anchor</a>` into `anchor [L1]`, a bare URL into `[L1]`, and the same
+address into the same tag. A story answers with a tag, and a tag that email does not
+have counts as none. Tags are removed from the headline and script again, so they are
+never spoken.
+
+Some links get no tag and never reach a file: other schemes (`mailto:`, `tel:`,
+`javascript:`, `data:`), footer links (unsubscribe, opt-out, preferences, manage
+subscription, update profile, view in browser, web version), and links past the first
+150 in an email.
+
+**Links are never fetched.** Resolving a tracking redirect over the network would
+register a click, so the real address is only read out of the URL itself: a path
+segment holding a percent-encoded URL (TLDR's `/CL0/https:%2F%2F…`) or the parameters
+`url`, `u`, `target`, `redirect`, `redirect_url`, `dest`, `destination`, `link`, and `q`
+on `google.com/url`, up to three levels. `utm_*`, `mc_cid`, `mc_eid` and `ref_src` are
+then removed. A redirect that does not carry its target in the URL stays as it is, so
+opening that article does count as a click for the newsletter.
+
+### Bookmarks
+
+**The laptop edits, every device reads.** On localhost the `☆` button, `b` and
+`:bookmark` save the clip to `public/data/news/bookmarks.json`, which reaches the phone
+with the usual publish command. Pages has no toggle, key or command, and sends no `/api`
+request. Every card shows `★` when its story is bookmarked.
+
+With any bookmarks, a `★ bookmarks` row sits at the top of the wrap-ups. It plays them
+as a wrap-up, newest saved first, with its own heard count and `?w=bookmarks`. On the
+laptop they play in Ava by story id.
+
+The request only names a story: `POST …/api/news/bookmarks { id, week, on }`. The server
+reads that story from the published file and copies it, so nothing the page sends ends
+up in the file. Adding answers 404 for a story not in that file, and 409 with no
+passphrase file, when a file does not open, or at the limit of 500 (nothing is pushed
+out; remove one first). `GET …/api/news/bookmarks` answers `{ ids }`.
+
+A bookmark stores `id`, `week`, `headline`, `script`, `newsletter`, `receivedAt`, `links`
+and `savedAt`. It is a copy, encrypted with its own salt and bound to the name
+`bookmarks`, so a week file renamed to it does not open. It keeps its text if the
+backlog is rebuilt later; if that same id then has a new script, the Ava audio follows
+the new script. A `bookmarks.json` this passphrase cannot open is refused and left alone.
 
 ### What stays on the device
 
 Decrypted text is held in memory only. `localStorage` holds `news.fm.progress` (per
-wrap-up: last clip index and heard clip ids), `news.fm.settings` (voice name, speed,
-autoplay) and `news.fm.passphrase` if you asked for it.
+wrap-up and the bookmarks: last clip index and heard clip ids), `news.fm.settings` (voice
+name, speed, autoplay) and `news.fm.passphrase` if you asked for it. Links and the
+account address are only ever in memory too. Opening a link is the one thing that leaves
+the page: the browser asks for that address, as with any link.
 
 ### Limitations
 
@@ -102,7 +159,7 @@ use device voices.** The audio exists only on this machine: it is never written 
 the repository and never published.
 
 ```
- sync published something, or the "make audio" button
+ a sync or rebuild published something, or the "make audio" button
     │
     ▼
  decrypt public/data/news/*.json with the passphrase file (in memory)
@@ -116,8 +173,8 @@ the repository and never published.
  localhost page: <audio>, sentence highlight from the cues
 ```
 
-A job starts right after a sync that published something, or with **make audio** in
-the panel (`curl -s -X POST localhost:5173/api/news/audio`). It runs in the
+A job starts right after a sync or backlog rebuild that published something, or with
+**make audio** in the panel (`curl -s -X POST localhost:5173/api/news/audio`). It runs in the
 background and the POST answers at once, `202 { "started": true, "todo": n }`, or
 409 if a job is running. A sync's answer neither waits for the job nor reports it, and
 a sync during a job does not start a second one. `uvx` must be on the dev server's
@@ -147,9 +204,10 @@ Optional, in `settings.json`:
 ```
 
 `voice` has to look like `en-GB-SoniaNeural` and `rate` like `-10%`; anything else
-falls back to these defaults. A clip made with another voice or rate counts as not
-done, so changing either means pressing **make audio** to redo every clip. Until
-then those clips use the device voice.
+falls back to these defaults. A clip made with another voice or rate, or from another
+script (`scriptHash`, a sha256 in `<id>.json`), counts as not done, so changing the voice
+or rate means pressing **make audio** to redo every clip. Until then those clips use the
+device voice. Audio made before `scriptHash` existed counts as not done too.
 
 Set `NEWS_FM_AUDIO` to use a different directory. The dev server refuses to start if
 it is inside the project. The directory is 0700, the files 0600.
@@ -196,8 +254,29 @@ the last stopped; `status` shows `backlog: { state, until, done, total }`.
 A failed email stops the sync; the ones before it stay cached. No weekly wrap-up is
 published until the backlog is.
 
-The cache is plaintext (scripts, newsletter names, arrival times) on this machine
-only. Delete `~/.cache/news-fm/stories/` to start the backlog over.
+The cache is plaintext (scripts, article links, newsletter names, arrival times) on
+this machine only. Delete `~/.cache/news-fm/stories/` to start the backlog over.
+
+### Rebuilding the backlog
+
+**rebuild backlog** in the panel (`curl -s -X POST localhost:5173/api/news/backlog/rebuild`)
+runs every email of the published backlog through Claude again, about 10 s each, for
+example to give it links. It uses the same window and is built like the first one:
+resumable, at most 80 Claude calls per press (or `maxEmails`), and `status` shows
+`backlog.rebuild: { done, total, running }`. A failed email stops it and the finished
+ones stay cached. It answers like a sync, with the reason in `skipped`; a non-null
+`skipped` means press it again.
+
+- **The old `backlog.json` stays published and playable until the new one is complete**,
+  then it is replaced in one rename and the cache is dropped. `index.json` is not touched.
+- Its cache entries have their own key, and so do the first build's. Entries from before
+  format 2 have no links and are never reused.
+- **Sync and rebuild share one lock:** while one runs the other answers 409. Between two
+  rebuild presses a weekly sync works as usual, because neither writes what the other
+  does, so an unfinished rebuild never holds up a week.
+- Once it publishes, the audio job starts, as after a sync. The rewritten scripts no longer
+  match their audio, so those clips use the device voice until the job has remade them.
+- The open page keeps the copy it decrypted. Reload it to play the new one. Then publish.
 
 A week with no email is still published, with no stories, so the timeline has no
 holes.
@@ -237,7 +316,7 @@ that directory is inside the project.
 
 | file | written by | contents |
 |---|---|---|
-| `settings.json` | you, then sync | `account`, `lastSync`, `needsReconnect`, `backlogUntil` and `backlogProgress` (set by the first sync), optional `maxEmails`, `voice` and `rate` |
+| `settings.json` | you, then sync | `account`, `lastSync`, `needsReconnect`, `backlogUntil` and `backlogProgress` (set by the first sync), `backlogRebuild` (while a rebuild is unfinished), optional `maxEmails`, `voice` and `rate` |
 | `passphrase` | you | the encryption passphrase, at least 8 characters; only read |
 | `token.json` | connect | refresh and access token, signed-in address (mode 0600) |
 
@@ -279,17 +358,22 @@ the token at Google (best effort), deletes `token.json` and keeps your settings.
 ## Privacy
 
 **Public, forever in git history:** the week dates, the ciphertext and each file's
-size, which shows roughly how much news a week had. The files cannot be
-un-published by deleting them later.
+size, which shows roughly how much news a week had and how many bookmarks there are.
+The files cannot be un-published by deleting them later.
 
-**Encrypted:** only the headline, script, newsletter name and received time of each
-story, plus when the file was generated. Newsletter is the sender's display name,
-or the domain's label (`bbc`) when there is none. Stories have an `id` that is a
-sha256 prefix and reveals nothing.
+**Encrypted:** the headline, script, newsletter name, received time and links of each
+story, plus when the file was generated, and the same copied into the bookmarks.
+Newsletter is the sender's display name, or the domain's label (`bbc`) when there is
+none. Stories have an `id` that is a sha256 prefix and reveals nothing. Since format 2
+(`"version": 2`; version 1 files stay readable), `links` holds `email`, a Gmail address
+that contains **the news account's address and the message id**, and `article`. The owner
+accepted that. Neither is ever in a headline, a script, a newsletter name or anything
+outside the ciphertext. An `article` URL can carry whatever the newsletter put in it,
+including a subscriber id when the redirect could not be unwrapped.
 
-**Never in a published file, even encrypted:** email bodies, email addresses,
-message ids, subjects and links. URLs are stripped before Claude sees the text, and
-URLs and addresses are stripped again from what it returns.
+**Never in a published file, even encrypted:** email bodies, subjects, the senders'
+addresses, and any link other than the one chosen for a story. Claude only sees link
+tags, and URLs, tags and addresses are stripped again from what it returns.
 
 **Passphrase strength is the whole protection.** Anyone can download the ciphertext
 and guess offline for as long as they like, at the cost of 600,000 PBKDF2 rounds per
@@ -319,11 +403,13 @@ Email is untrusted, and anyone can send mail to the account. The guards:
   `~/.cache/news-fm/`.
 - The system prompt says the email is data, and text that tries to close the
   `<email>` tags is removed first.
-- Output is validated, capped and stripped of URLs and addresses.
+- Output is validated, capped and stripped of URLs and addresses. A story's link can
+  only be a tag from that email's own table, so Claude cannot be talked into a new URL.
 
 What this does not stop: a crafted email can still influence the words of its own
-story, because the words are the output. A script is only ever text read aloud, but
-do not treat it as verified. Only the sender's claims are behind it.
+story, because the words are the output. It also picks where its own `article ↗` goes,
+because the sender wrote the links. A script is only ever text read aloud, but do not
+treat it or the link as verified. Only the sender's claims are behind them.
 
 ## Testing-mode token expiry
 

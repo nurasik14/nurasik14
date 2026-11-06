@@ -165,6 +165,11 @@ Notes on news.fm (behaviour and limits are in [NEWS.md](NEWS.md)):
 - **Header.** Below `lg` the page header is screen-reader only once a clip is open,
   because the clip owns the viewport. Above that, the player sits next to a 20–23rem
   column with the ledger, as on the planner.
+- **Links and bookmarks.** A mono row under the script: `email ↗` and `article ↗` as
+  `.link` text with 44 px targets below `lg`, outside the swipe area. `★` next to the clip
+  count is `fg` with a label for screen readers, never amber: it marks state, not the
+  current location. On localhost the row starts with a small `☆ bookmark` button
+  (`aria-pressed`), which follows the rule below for the panel and is never amber either.
 - **Text-only is a state, not an error.** Without speech the clips still read, and
   play is disabled with the reason beneath it.
 - **Laptop audio (localhost only).** The card's mono line adds `voice · Ava` or

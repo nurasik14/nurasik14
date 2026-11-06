@@ -13,9 +13,10 @@ import { chmod, mkdir, readdir, readFile, rename, rm, stat, writeFile } from 'no
 import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { pipeline } from 'node:stream';
+import { sha256Hex } from './google-core.js';
 import { isInside, realish, writeAtomic } from './google-sync.js';
 import { HttpError, send } from './http.js';
-import { BACKLOG_ID, checkPassphrase, decryptWeek, MIN_PASSPHRASE } from './news-core.js';
+import { BACKLOG_ID, BOOKMARKS_ID, checkPassphrase, decryptWeek, MIN_PASSPHRASE } from './news-core.js';
 
 export const AUDIO_VOICE = 'en-US-AvaMultilingualNeural';
 export const AUDIO_RATE = '+0%';
@@ -127,10 +128,12 @@ export function createTtsRunner({ spawn = nodeSpawn, env = process.env, timeoutM
 // ---------------------------------------------------------------- scripts
 
 /**
- * { stories: [{ id, script }], unreadable }: every story of every published file.
- * Each file costs a full key derivation, so results (failures too, since the
- * status poll would otherwise pay for them every time) are kept in memory per
- * file version. A file under an older passphrase counts as unreadable.
+ * { stories: [{ id, script }], unreadable }: every story of every published file,
+ * then any clip only the bookmarks still hold. Each file costs a full key
+ * derivation, so results (failures too, since the status poll would otherwise pay
+ * for them every time) are kept in memory per file version. A file under an older
+ * passphrase counts as unreadable. `scripts.storiesOf(id, passphrase)` reads one
+ * file through the same memory: its stories, or null when missing or unreadable.
  */
 export function createScriptSource({ dir, readIndex, readPassphrase, decrypt = decryptWeek }) {
   const cache = new Map(); // wrap-up id -> { key, stories: Promise<[…] | null> }
@@ -148,7 +151,10 @@ export function createScriptSource({ dir, readIndex, readPassphrase, decrypt = d
     if (entry?.key !== key) {
       const stories = readFile(file, 'utf8')
         .then((text) => decrypt(JSON.parse(text), passphrase, { week: id }))
-        .then((payload) => (Array.isArray(payload?.stories) ? payload.stories : null))
+        .then((payload) => {
+          const stories = id === BOOKMARKS_ID ? payload?.bookmarks : payload?.stories;
+          return Array.isArray(stories) ? stories : null;
+        })
         .catch(() => null);
       entry = { key, stories };
       cache.set(id, entry);
@@ -156,24 +162,31 @@ export function createScriptSource({ dir, readIndex, readPassphrase, decrypt = d
     return entry.stories;
   }
 
-  return async function scripts() {
+  async function scripts() {
     const passphrase = await readPassphrase();
     const state = checkPassphrase(passphrase);
     if (state === 'missing') throw new HttpError(400, `the passphrase file is missing or empty; see docs/NEWS.md (at least ${MIN_PASSPHRASE} characters)`);
     if (state === 'too-short') throw new HttpError(400, `the passphrase is too short; it needs at least ${MIN_PASSPHRASE} characters`);
     const index = await readIndex();
     const found = new Map();
-    let unreadable = 0;
-    for (const id of [...index.weeks, ...(index.backlog ? [BACKLOG_ID] : [])]) {
-      const stories = await open(id, passphrase);
-      if (!stories) unreadable += 1;
+    const collect = (stories) => {
       for (const s of stories ?? []) {
         // The id ends up in a file name.
         if (ID_RE.test(s?.id ?? '') && typeof s.script === 'string' && s.script.trim() && !found.has(s.id)) found.set(s.id, { id: s.id, script: s.script });
       }
+    };
+    let unreadable = 0;
+    for (const id of [...index.weeks, ...(index.backlog ? [BACKLOG_ID] : [])]) {
+      const stories = await open(id, passphrase);
+      if (!stories) unreadable += 1;
+      collect(stories);
     }
+    // Last, so a published clip wins. Having no bookmarks is normal, not "unreadable".
+    collect(await open(BOOKMARKS_ID, passphrase));
     return { stories: [...found.values()], unreadable };
-  };
+  }
+  scripts.storiesOf = open;
+  return scripts;
 }
 
 // ---------------------------------------------------------------- job
@@ -190,9 +203,9 @@ async function pool(items, size, work) {
 }
 
 /**
- * One job at a time: makes every clip without audio for the current voice and
- * rate. A clip counts as done only with its mp3 (over 1 KB), srt and a matching
- * <id>.json. Options are injectable for tests: runTts, scripts, settings, sleep, now.
+ * One job at a time: makes every clip without audio for the current voice, rate
+ * and script text. A clip counts as done only with its mp3 (over 1 KB), srt and a
+ * matching <id>.json. Options are injectable for tests: runTts, scripts, settings, sleep, now.
  */
 export function createAudioJob({ dir, runTts = createTtsRunner(), scripts, settings, sleep = (ms) => new Promise((ok) => setTimeout(ok, ms)), now = Date.now, concurrency = CONCURRENCY }) {
   let running = false;
@@ -202,17 +215,18 @@ export function createAudioJob({ dir, runTts = createTtsRunner(), scripts, setti
   const path = (name) => join(dir, name);
   const statOf = (file) => stat(file).catch(() => null);
 
-  async function isDone(id, target) {
-    const [mp3, srt, meta] = await Promise.all([
+  async function isDone({ id, script }, target) {
+    const [mp3, srt, meta, scriptHash] = await Promise.all([
       statOf(path(`${id}.mp3`)),
       statOf(path(`${id}.srt`)),
       readFile(path(`${id}.json`), 'utf8').then(JSON.parse).catch(() => null),
+      sha256Hex(script),
     ]);
-    return mp3?.isFile() && mp3.size > MIN_MP3_BYTES && srt?.isFile() && meta?.voice === target.voice && meta?.rate === target.rate;
+    return mp3?.isFile() && mp3.size > MIN_MP3_BYTES && srt?.isFile() && meta?.voice === target.voice && meta?.rate === target.rate && meta?.scriptHash === scriptHash;
   }
 
   async function doneIds(stories, target) {
-    const flags = await Promise.all(stories.map((s) => isDone(s.id, target)));
+    const flags = await Promise.all(stories.map((s) => isDone(s, target)));
     return stories.filter((_, i) => flags[i]).map((s) => s.id);
   }
 
@@ -264,7 +278,8 @@ export function createAudioJob({ dir, runTts = createTtsRunner(), scripts, setti
       await chmod(srt, 0o600);
       await rename(srt, path(`${story.id}.srt`));
       await rename(mp3, path(`${story.id}.mp3`));
-      await writeAtomic(path(`${story.id}.json`), JSON.stringify({ ...target, chars: story.script.length, createdAt: new Date(now()).toISOString() }), 0o600);
+      const scriptHash = await sha256Hex(story.script);
+      await writeAtomic(path(`${story.id}.json`), JSON.stringify({ ...target, scriptHash, chars: story.script.length, createdAt: new Date(now()).toISOString() }), 0o600);
     } finally {
       await rm(mp3, { force: true });
       await rm(srt, { force: true });

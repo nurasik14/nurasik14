@@ -2,7 +2,7 @@ import React from 'react';
 import { useCommands, useShell } from '../shell/AppShell';
 import { copyText } from '../lib/nav';
 import { audioSummary } from './audio.js';
-import { CONNECT_HREF, newsStatus, PUBLISH_CMD, startAudio, syncNews, syncSummary } from './store.js';
+import { backlogText, CONNECT_HREF, newsStatus, PUBLISH_CMD, rebuildNews, startAudio, syncNews, syncSummary } from './store.js';
 
 const POLL_MS = 5000;
 
@@ -11,13 +11,6 @@ function formatStamp(iso) {
   if (Number.isNaN(dt.getTime())) return iso;
   const pad = (n) => String(n).padStart(2, '0');
   return `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())} ${pad(dt.getHours())}:${pad(dt.getMinutes())}`;
-}
-
-function backlogText(b) {
-  if (!b) return 'none';
-  if (b.state === 'published') return `published · until ${b.until}`;
-  if (b.state === 'in-progress') return `${b.done}${b.total === null ? '' : `/${b.total}`} emails · until ${b.until}`;
-  return `not started · until ${b.until}`;
 }
 
 function Row({ name, children }) {
@@ -54,6 +47,17 @@ export function AudioButton({ audio, onMake }) {
   return (
     <button type="button" className="btn h-7 px-2.5 text-[12px]" onClick={onMake} disabled={audio.running}>
       {audio.running ? `making audio ${audio.done}/${audio.total}` : 'make audio'}
+    </button>
+  );
+}
+
+export function RebuildButton({ rebuild = null, busy = false, onRebuild }) {
+  let text = 'rebuild backlog';
+  if (rebuild?.running) text = `rebuilding ${rebuild.done}${rebuild.total === null ? '' : `/${rebuild.total}`}`;
+  else if (rebuild) text = 'continue rebuild';
+  return (
+    <button type="button" className="btn h-7 px-2.5 text-[12px]" onClick={onRebuild} disabled={busy}>
+      {text}
     </button>
   );
 }
@@ -103,7 +107,7 @@ function PublishCommand() {
 export default function SyncPanel({ onSynced, audio = null, onAudioChanged = () => {} }) {
   const { flash } = useShell();
   const [state, setState] = React.useState({ phase: 'loading', data: null, error: '' });
-  const [run, setRun] = React.useState(null); // { startedAt } while this page's POST is out
+  const [run, setRun] = React.useState(null); // { startedAt, label } while this page's POST is out
   const [elapsed, setElapsed] = React.useState(0);
   const [result, setResult] = React.useState(null); // { summary, skipped, error }
   const runRef = React.useRef(false);
@@ -119,6 +123,7 @@ export default function SyncPanel({ onSynced, audio = null, onAudioChanged = () 
   const s = state.data;
   const elsewhere = !run && Boolean(s?.syncing); // started before a reload, or with curl
   const busy = Boolean(run) || elsewhere;
+  const rebuild = s?.backlog?.rebuild ?? null;
 
   // Long-running: the elapsed counter ticks and the status poll shows backlog progress.
   React.useEffect(() => {
@@ -139,32 +144,38 @@ export default function SyncPanel({ onSynced, audio = null, onAudioChanged = () 
     wasElsewhere.current = elsewhere;
   }, [elsewhere, onSynced]);
 
-  const runSync = React.useCallback(async () => {
-    if (runRef.current) {
-      flash('sync already running', 'info');
-      return;
-    }
-    runRef.current = true;
-    setRun({ startedAt: Date.now() });
-    setElapsed(0);
-    setResult(null);
-    try {
-      const r = await syncNews();
-      const summary = syncSummary(r);
-      setResult({ summary, skipped: r.skipped ?? null, error: null });
-      flash(r.skipped ? `${summary} · skipped, see panel` : summary, r.skipped ? 'warn' : 'ok');
-      onSynced();
-    } catch (err) {
-      setResult({ summary: null, skipped: null, error: err.message });
-      flash(`sync failed: ${err.message}`, 'warn');
-    } finally {
-      runRef.current = false;
-      // The last poll may still say syncing; this page knows better.
-      setState((st) => (st.data ? { ...st, data: { ...st.data, syncing: false } } : st));
-      setRun(null);
-      load();
-    }
-  }, [flash, load, onSynced]);
+  const runJob = React.useCallback(
+    async (label, post, describe = syncSummary) => {
+      if (runRef.current) {
+        flash('sync already running', 'info');
+        return;
+      }
+      runRef.current = true;
+      setRun({ startedAt: Date.now(), label });
+      setElapsed(0);
+      setResult(null);
+      try {
+        const r = await post();
+        const summary = describe(r);
+        setResult({ summary, skipped: r.skipped ?? null, error: null });
+        flash(r.skipped ? `${summary} · skipped, see panel` : summary, r.skipped ? 'warn' : 'ok');
+        onSynced();
+      } catch (err) {
+        setResult({ summary: null, skipped: null, error: err.message });
+        flash(`${label} failed: ${err.message}`, 'warn');
+      } finally {
+        runRef.current = false;
+        // The last poll may still say syncing; this page knows better.
+        setState((st) => (st.data ? { ...st, data: { ...st.data, syncing: false } } : st));
+        setRun(null);
+        load();
+      }
+    },
+    [flash, load, onSynced],
+  );
+  const runSync = React.useCallback(() => runJob('sync', syncNews), [runJob]);
+  // The player keeps the copy it already decrypted until the page loads again.
+  const runRebuild = () => runJob('rebuild', rebuildNews, (r) => `${syncSummary(r)}${r.published.length ? ' · reload the page to play it' : ''}`);
 
   async function makeAudio() {
     try {
@@ -188,6 +199,7 @@ export default function SyncPanel({ onSynced, audio = null, onAudioChanged = () 
     latestSync.current = runSync;
   });
   const connected = state.phase === 'ready' && s.connected;
+  const canRebuild = connected && s.backlog?.state === 'published';
   const commands = React.useMemo(
     () => (connected ? [{ name: 'sync', desc: 'read the inbox and write new wrap-ups (localhost)', run: () => latestSync.current() }] : []),
     [connected],
@@ -265,18 +277,20 @@ export default function SyncPanel({ onSynced, audio = null, onAudioChanged = () 
             </button>
           )}
           {audio && <AudioButton audio={audio} onMake={makeAudio} />}
+          {canRebuild && <RebuildButton rebuild={rebuild} busy={busy} onRebuild={runRebuild} />}
           {run && (
             <span role="status" className="text-info">
-              syncing… one Claude call per email · {elapsed} s
+              {run.label === 'rebuild' ? 'rebuilding' : 'syncing'}… one Claude call per email · {elapsed} s
             </span>
           )}
           {elsewhere && (
             <span role="status" className="text-info">
-              a sync is running on the dev server
+              {rebuild?.running ? 'a backlog rebuild is running on the dev server' : 'a sync is running on the dev server'}
             </span>
           )}
         </div>
         {audio && <p className="border-t border-line-soft px-3 py-2 text-fg-faint">make audio sends the scripts to Microsoft&apos;s Edge read-aloud service. The audio stays on this laptop.</p>}
+        {canRebuild && <p className="border-t border-line-soft px-3 py-2 text-fg-faint">rebuild backlog re-runs every backlog email through Claude (~10 s each) and remakes its audio.</p>}
       </>
     );
   }

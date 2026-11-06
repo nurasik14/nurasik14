@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "week": "bookmarks",
+  "start": null,
+  "end": null,
+  "kdf": {
+    "name": "PBKDF2",
+    "hash": "SHA-256",
+    "iterations": 600000,
+    "salt": "ejuNaVMxSh+hKw5aRFpf0w=="
+  },
+  "cipher": {
+    "name": "AES-GCM",
+    "iv": "f20Br0WUz+Ya4Y9R"
+  },
+  "data": "ga2KraOF5m/rvHJ518L4E38iIXEL+/GtV5uQGs5tkhQ5yEDJVMKiUpGg8FOC3/SRiwmoH+odLUXmlch/qhYmTYQNC7QT/TDAl2uhMq9iEg/u7ZW8THPi8oRhZXn3F3IP17DfHF7hE4bnE71ZkcJoQ2E0puISBW3pa+co2VrsVaweryk4H61cVGuLXzPgc/QTrux6AZozKubM6QLBCzmCv2Xxj/LH2IoY1OWCd6GN42B74nC4i4RmmT2aN5aNkE6YS8ynfFepxxpIVqrYsMT1qCTY0p1bCkLFvxVttlsTv8FZNGl7T/jj3PoaslmntnjCE8H6sZ37rC4iK8DGbgCgX0idxrISxBbg2mH375zrQw2JB3jWfvO9IaF7DYfHwBWZlzI5zVcppuSpdiv0eyCq3hPxzMtgWsE5JLZYmoHKRLEwQoEQ093K4EEAJu90Oz5UqRCslgDKQMsEX74jmYv+eCLZRYlSQtuFWM5TmkdeDGFttGZa2XQYggEhu7694Z8G0D6FJHzsOZTutCgEZ/Lm1FbXsX0VmzIzYmc0mTXORsFWiQmnM4Hihyv4ygJIUGDwdMh29BQwFIkeKThR9JZc6S5dGAwZZIj4lCeSRYfgdfbesvA3afGTZXXB3Z/eMZvmmraGSOMt/SC5V6CSHxq2XLhzUE7mf3ANJfX4H+/ihlScjE9IpMWhWCGDecg8I3AzjFKAkQk20Fp0zDSxWIeQZeGrxlPdvjNAVVfKp0bH0KtYlAvg8qqp/3k2+y6FafTlXKbs6zpJGkHj8nUqrIak2gkdr56o4nnLyvHskbI8CpHt+TvW2nOorHlOQVfCKd2e/LswUJlbLYtnB1DGcdRUMOCYcOroqPl0m8bxY8c8Tks="
+}

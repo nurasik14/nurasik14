@@ -1,7 +1,8 @@
 // news.fm data: the published files, what this device remembers, and the
 // local-only sync API. Decrypted text stays in memory; localStorage only ever
 // holds clip ids, positions, speech settings and (if asked) the passphrase.
-import { BACKLOG_ID, decryptWeek, isWeekId, NEWS_TZ, WrongPassphraseError } from '../../plugins/news-core.js';
+import { BACKLOG_ID, BOOKMARKS_ID, decryptWeek, isWeekId, NEWS_TZ, WrongPassphraseError } from '../../plugins/news-core.js';
+import { isTypingTarget } from '../lib/nav';
 import { clampRate, RATE_DEFAULT, splitSentences } from './speech.js';
 
 const BASE = import.meta.env.BASE_URL;
@@ -33,6 +34,9 @@ export function parseIndex(body) {
   return entries;
 }
 
+/** Bookmarks play like a wrap-up, but they are not in the index or the "what opens next" choices. */
+export const BOOKMARKS_ENTRY = { id: BOOKMARKS_ID, kind: 'bookmarks', label: '★ bookmarks', short: 'bookmarks' };
+
 /** The wrap-up list. A missing index means nothing is published yet: []. */
 export async function loadIndex({ fetch: get = globalThis.fetch } = {}) {
   let res;
@@ -52,6 +56,8 @@ export async function loadIndex({ fetch: get = globalThis.fetch } = {}) {
   return parseIndex(body);
 }
 
+const httpLink = (url) => (typeof url === 'string' && /^https?:\/\//i.test(url) ? url : null);
+
 const cleanStory = (s) =>
   s && typeof s.id === 'string' && typeof s.headline === 'string' && typeof s.script === 'string'
     ? {
@@ -61,11 +67,16 @@ const cleanStory = (s) =>
         newsletter: typeof s.newsletter === 'string' ? s.newsletter : '',
         receivedAt: typeof s.receivedAt === 'string' ? s.receivedAt : '',
         sentences: splitSentences(s.script),
+        // Version 1 files have none, so the card shows no link.
+        links: { email: httpLink(s.links?.email), article: httpLink(s.links?.article) },
+        // Only a bookmark has one: the wrap-up its story came from.
+        ...(typeof s.week === 'string' ? { week: s.week } : {}),
       }
     : null;
 
 /**
  * Fetches and decrypts one wrap-up: { status: 'ready', stories, generatedAt }.
+ * The bookmarks file reads the same way, and not having one means no bookmarks.
  * Throws WrongPassphraseError for a bad passphrase, a plain Error for the rest.
  */
 export async function openWrapUp(id, passphrase, { fetch: get = globalThis.fetch } = {}) {
@@ -77,6 +88,7 @@ export async function openWrapUp(id, passphrase, { fetch: get = globalThis.fetch
   } catch {
     throw new Error(`could not reach data/news/${id}.json`);
   }
+  if (id === BOOKMARKS_ID && res.status === 404) return { status: 'ready', stories: [], generatedAt: null };
   if (!res.ok) throw new Error(`data/news/${id}.json: HTTP ${res.status}`);
   let file;
   try {
@@ -91,8 +103,9 @@ export async function openWrapUp(id, passphrase, { fetch: get = globalThis.fetch
     if (err instanceof WrongPassphraseError) throw err;
     throw new Error(err instanceof SyntaxError ? `data/news/${id}.json holds malformed text` : `data/news/${id}.json: ${err.message}`);
   }
-  if (!Array.isArray(payload?.stories)) throw new Error(`data/news/${id}.json holds no stories`);
-  return { status: 'ready', stories: payload.stories.map(cleanStory).filter(Boolean), generatedAt: payload.generatedAt ?? null };
+  const stories = id === BOOKMARKS_ID ? payload?.bookmarks : payload?.stories;
+  if (!Array.isArray(stories)) throw new Error(`data/news/${id}.json holds no stories`);
+  return { status: 'ready', stories: stories.map(cleanStory).filter(Boolean), generatedAt: payload.generatedAt ?? null };
 }
 
 // ---------------------------------------------------------------- this device
@@ -193,9 +206,10 @@ export function chooseWrapUp(entries, lib, progress) {
 /** The next wrap-up after `currentId` with unheard clips, among those already read. */
 export function nextUnheardWrapUp(entries, lib, progress, currentId) {
   const at = entries.findIndex((e) => e.id === currentId);
-  for (let step = 1; step < entries.length; step += 1) {
+  // From the bookmarks, which are not an entry, this starts at the newest.
+  for (let step = 1; step <= entries.length; step += 1) {
     const entry = entries[(at + step) % entries.length];
-    if (hasUnheard(lib[entry.id], progress, entry.id)) return entry;
+    if (entry.id !== currentId && hasUnheard(lib[entry.id], progress, entry.id)) return entry;
   }
   return null;
 }
@@ -235,13 +249,13 @@ export const writeSettings = (storage, settings) => write(storage, KEY_SETTINGS,
 
 // ---------------------------------------------------------------- page helpers
 
-/** ?w=<weekId|backlog> and #clip-<id>; whatever does not parse is null. */
+/** ?w=<weekId|backlog|bookmarks> and #clip-<id>; whatever does not parse is null. */
 export function readNewsUrl(href) {
   if (!href) return { week: null, clipId: null };
   const url = new URL(href);
   const week = url.searchParams.get('w');
   const clip = /^#clip-([0-9a-z]{4,64})$/.exec(url.hash);
-  return { week: week === BACKLOG_ID || isWeekId(week) ? week : null, clipId: clip ? clip[1] : null };
+  return { week: week === BACKLOG_ID || week === BOOKMARKS_ID || isWeekId(week) ? week : null, clipId: clip ? clip[1] : null };
 }
 
 /** The relative URL with ?w= and #clip- replaced; the rest is kept. */
@@ -275,16 +289,49 @@ export function swipeAction({ dx, dy, startTop, clientHeight, scrollHeight, sele
   return startTop <= edge ? 'prev' : null;
 }
 
+/**
+ * The player action for a key event, or null when the key is not ours. `b` exists
+ * only where bookmarks can be edited; a focused clip that overflows keeps its arrows.
+ */
+export function keyAction(e, { scroller = null, canBookmark = false } = {}) {
+  if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return null;
+  if (isTypingTarget(e.target) || e.target?.closest?.('[data-cmdline]')) return null;
+  switch (e.key) {
+    case ' ':
+      // Space on a focused control activates that control.
+      return e.repeat || e.target?.closest?.('button, a, summary, label, input') ? null : 'toggle';
+    case 'ArrowDown':
+    case 'ArrowUp':
+      if (scroller && e.target === scroller && scroller.scrollHeight > scroller.clientHeight) return null;
+      return e.key === 'ArrowDown' ? 'next' : 'prev';
+    case 'j':
+    case 'ArrowRight':
+      return 'next';
+    case 'k':
+    case 'ArrowLeft':
+      return 'prev';
+    case '+':
+    case '=':
+      return 'faster';
+    case '-':
+      return 'slower';
+    case 'b':
+      return canBookmark && !e.repeat ? 'bookmark' : null;
+    default:
+      return null;
+  }
+}
+
 // ---------------------------------------------------------------- local API
 
-async function call(method, name) {
+async function call(method, name, body = {}) {
   let res;
   try {
     res = await fetch(`${API}/${name}`, {
       method,
       cache: 'no-store',
       headers: method === 'POST' ? { 'Content-Type': 'application/json' } : { Accept: 'application/json' },
-      body: method === 'POST' ? '{}' : undefined,
+      body: method === 'POST' ? JSON.stringify(body) : undefined,
     });
   } catch {
     throw new Error('dev server unreachable — is `bun run dev` still running?');
@@ -301,6 +348,9 @@ async function call(method, name) {
 
 export const newsStatus = () => call('GET', 'status');
 export const syncNews = () => call('POST', 'sync');
+export const rebuildNews = () => call('POST', 'backlog/rebuild');
+/** Names a story; the server copies the text out of the published file. */
+export const setBookmark = ({ id, week, on }) => call('POST', 'bookmarks', { id, week, on });
 export const audioStatus = () => call('GET', 'audio');
 export const startAudio = () => call('POST', 'audio');
 export const audioCues = (id) => call('GET', `audio/${id}.cues.json`);
@@ -311,6 +361,18 @@ const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 /** "published backlog, 2026-10-30 · 34 emails · 108 stories". */
 export function syncSummary({ published = [], emails = 0, stories = 0 }) {
   return `${published.length ? `published ${published.join(', ')}` : 'nothing new published'} · ${plural(emails, 'email')} · ${plural(stories, 'story').replace('storys', 'stories')}`;
+}
+
+/** The panel's backlog row, with a rebuild's progress when one is unfinished. */
+export function backlogText(b) {
+  if (!b) return 'none';
+  const count = ({ done, total }) => `${done}${total === null ? '' : `/${total}`}`;
+  if (b.state === 'published') {
+    const r = b.rebuild;
+    return `published · until ${b.until}${r ? ` · rebuild ${count(r)}${r.running ? '' : ', rebuild again to continue'}` : ''}`;
+  }
+  if (b.state === 'in-progress') return `${count(b)} emails · until ${b.until}`;
+  return `not started · until ${b.until}`;
 }
 
 /** Statusline text for ?google=connected|error&reason=… after the OAuth round trip. */
