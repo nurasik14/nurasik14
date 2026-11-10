@@ -35,10 +35,10 @@ speaks:  [kazakh, russian, english]
 status:  open to AI/ML internships for summer 2027
 ```
 
-- 🔭 **Building:** a Kazakh retriever meant to beat the published KazQAD baselines, MCP servers that give agents real tools, and a Minecraft-themed Linux desktop.
-- 🧪 **How I work:** keep the logs. If one of my READMEs has a number, a training run or an eval produced it.
-- 🌱 **Learning:** linear algebra, probability and algorithms at CityU, and how transformers work under the hood.
-- 🏅 **Olympiads:** International AI Olympiad (FAIO) bronze 2025 · StemCo Global Sciences gold 2025 · Iranian Geometry Olympiad bronze 2024.
+- **Building:** a Kazakh retriever meant to beat the published KazQAD baselines, a voice layer for my agent setup, MCP servers that give agents real tools, and a Minecraft-themed Linux desktop.
+- **How I work:** I run Hermes Agent as my orchestrator and hand coding to Claude Code, and I keep the logs. If one of my READMEs has a number, a training run or an eval produced it.
+- **Learning:** linear algebra, probability and algorithms at CityU, and how transformers work under the hood.
+- **Olympiads:** International AI Olympiad (FAIO) bronze 2025 · StemCo Global Sciences gold 2025 · Iranian Geometry Olympiad bronze 2024.
 
 ## `$ cat goals.md`
 
@@ -52,12 +52,40 @@ build agents that do useful work with real tools and leave logs you can check.
 - [ ] Release the retriever and its eval set on Hugging Face
 - [ ] Land an ML/AI internship for summer 2027
 - [ ] Write up the retrieval results as a first paper or workshop submission
+- [ ] Turn my agent setup into an always-on coworker I can talk to (below)
+
+### Next build: a voice for my agents
+
+Today I type to [Hermes Agent](https://github.com/NousResearch/hermes-agent), which plans the work and
+runs Claude Code as a subprocess to write the code. The plan is to give that setup a voice, so that it
+feels like one session that never ends: I talk, it keeps working in the background, and I can cut in
+mid-task to change direction without starting over.
+
+```text
+ me (mic / speaker)
+      |  ^
+      v  |
+ voice layer  -- the mouth --   streaming STT -> polisher -> streaming TTS
+      |  ^                      (polisher: drops filler words, fixes STT slips,
+      v  |                       decides "command" vs "thinking out loud")
+ Hermes Agent -- the brain  --   plans, remembers, decides, steers
+      |  ^
+      v  |
+ Claude Code  -- the hands  --   edits files, runs commands, reports back
+```
+
+- [ ] Streaming STT and TTS with barge-in: when I start speaking, playback stops at once and the words go to Hermes.
+- [ ] Polisher: a small local model (Ollama) cleans the transcript and tags it as a command or a thought.
+- [ ] Steering instead of restarting: interruptions reach Hermes as mid-turn messages; Hermes decides whether to stop the Claude Code subprocess or let it finish.
+- [ ] Two outputs from the brain: a short spoken summary for the TTS, and the full log for the screen.
+- [ ] Proactive updates: it speaks up when a long task finishes or needs approval, not only when asked.
+- [ ] Long-running memory: older turns get compressed into a running task summary so the session can last for days.
 
 ## `$ ls ~/projects`
 
 | project | what it does | stack |
 |:--|:--|:--|
-| [**overworld-hyprland**](https://github.com/nurasik14/overworld-hyprland) <img src="https://img.shields.io/github/stars/nurasik14/overworld-hyprland?style=flat-square&color=f0b35a&labelColor=191c21&label=%E2%98%85" alt="stars"> | Minecraft as a Linux desktop: hotbar workspaces, creative-inventory launcher, advancement toasts, real weather and day/night | QML, Quickshell, Hyprland |
+| [**overworld-hyprland**](https://github.com/nurasik14/overworld-hyprland) <img src="https://img.shields.io/github/stars/nurasik14/overworld-hyprland?style=flat-square&color=f0b35a&labelColor=191c21&label=stars" alt="stars"> | Minecraft as a Linux desktop: hotbar workspaces, creative-inventory launcher, advancement toasts, real weather and day/night | QML, Quickshell, Hyprland |
 | [**Apothecaries-quests**](https://github.com/nurasik14/Apothecaries-quests) | Self-hosted quest journal: an LLM writes three real-life quests sized to your energy | TypeScript, Bun, Hono, Svelte |
 | [**lastfm-taste-mcp**](https://github.com/nurasik14/lastfm-taste-mcp) | Read-only MCP server that lets an agent explore your Last.fm listening history | Python, MCP |
 | [**FlappyBird-RL**](https://github.com/nurasik14/FlappyBird-RL) | Double vs Dueling DQN. Best reward 53.1 after 168,126 episodes | PyTorch, Gymnasium |
@@ -70,6 +98,14 @@ build agents that do useful work with real tools and leave logs you can check.
 
 <table>
   <tr>
+    <td><b>agent harnesses</b></td>
+    <td>
+      <a href="https://github.com/NousResearch/hermes-agent"><img src="https://img.shields.io/badge/Hermes_Agent-orchestrator-191c21?style=flat-square&labelColor=2c3139" alt="Hermes Agent (orchestrator)"></a>
+      <a href="https://github.com/anthropics/claude-code"><img src="https://img.shields.io/badge/Claude_Code-coding_agent-D97757?style=flat-square&logo=claude&logoColor=white&labelColor=2c3139" alt="Claude Code (coding agent)"></a>
+      <img src="https://img.shields.io/badge/MCP-tool_servers-191c21?style=flat-square&logo=modelcontextprotocol&logoColor=white&labelColor=2c3139" alt="MCP tool servers">
+    </td>
+  </tr>
+  <tr>
     <td><b>languages</b></td>
     <td><img src="https://skillicons.dev/icons?i=python,ts,js,bash,cpp,php&perline=12" alt="Python, TypeScript, JavaScript, Bash, C++, PHP"></td>
   </tr>
@@ -80,7 +116,6 @@ build agents that do useful work with real tools and leave logs you can check.
       <img src="https://img.shields.io/badge/Hugging_Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black" alt="Hugging Face">
       <img src="https://img.shields.io/badge/Ollama-191c21?style=flat-square&logo=ollama&logoColor=white" alt="Ollama">
       <img src="https://img.shields.io/badge/Claude_API-D97757?style=flat-square&logo=anthropic&logoColor=white" alt="Claude API">
-      <img src="https://img.shields.io/badge/MCP-191c21?style=flat-square&logo=modelcontextprotocol&logoColor=white" alt="Model Context Protocol">
       <img src="https://img.shields.io/badge/Gymnasium-191c21?style=flat-square" alt="Gymnasium">
       <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy">
       <img src="https://img.shields.io/badge/pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="pandas">

@@ -28,6 +28,14 @@ jobs:
       - name: Install deps
         run: bun install --frozen-lockfile
 
+      # Fresh GitHub numbers for the site's contribution graph. If the API
+      # call fails, the committed snapshot in public/data/github.json is used.
+      - name: GitHub stats snapshot
+        continue-on-error: true
+        run: python3 scripts/profile_stats.py --user "${{ github.repository_owner }}" --json public/data/github.json --no-svg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       # Project sites live at /<repo>/, user sites (<user>.github.io) at /.
       # Derived from the repo name, so renaming or forking needs no edits.
       - name: Resolve base path

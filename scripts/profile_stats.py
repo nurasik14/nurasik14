@@ -298,10 +298,34 @@ def activity_card(user: dict, today: date) -> str:
     )
 
 
+def summary(user: dict, today: date) -> dict:
+    """Plain data for the portfolio site (public/data/github.json)."""
+    days = calendar_days(user)
+    current, longest = streaks(days, today)
+    repos = user["repositories"]
+    cc = user["contributionsCollection"]
+    return {
+        "login": user["login"],
+        "generated": today.isoformat(),
+        "since": user["createdAt"][:10],
+        "public_repos": repos["totalCount"],
+        "stars": sum(r["stargazerCount"] for r in repos["nodes"]),
+        "followers": user["followers"]["totalCount"],
+        "commits_last_year": cc["totalCommitContributions"],
+        "contributions_last_year": cc["contributionCalendar"]["totalContributions"],
+        "pull_requests": user["pullRequests"]["totalCount"],
+        "streak": {"current": current, "longest": longest},
+        "languages": [{"name": n, "color": c, "pct": round(p, 1)} for n, c, p in languages(user)],
+        "days": [[d.isoformat(), c] for d, c in days],
+    }
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Generate the GitHub profile stat cards.")
     ap.add_argument("--user", default=os.environ.get("GITHUB_REPOSITORY_OWNER", "nurasik14"))
-    ap.add_argument("--out", default="stats", type=Path)
+    ap.add_argument("--out", default="stats", type=Path, help="directory for the SVG cards")
+    ap.add_argument("--json", type=Path, help="also write the numbers as JSON (for the site)")
+    ap.add_argument("--no-svg", action="store_true", help="skip the SVG cards")
     args = ap.parse_args()
 
     token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
@@ -310,6 +334,12 @@ def main() -> None:
 
     user = fetch(args.user, token)
     today = date.today()
+    if args.json:
+        args.json.parent.mkdir(parents=True, exist_ok=True)
+        args.json.write_text(json.dumps(summary(user, today), separators=(",", ":")) + "\n", encoding="utf-8")
+        print(f"wrote {args.json}")
+    if args.no_svg:
+        return
     args.out.mkdir(parents=True, exist_ok=True)
     for name, svg in (
         ("overview.svg", overview_card(user)),
