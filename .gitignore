@@ -27,3 +27,7 @@ dist-ssr
 # Uncomment once you wire a real scraper and want the data versioned:
 # public/data/telemetry.json
 public/data/*.local.json
+
+# profile stats generated locally / in CI
+stats/
+output/

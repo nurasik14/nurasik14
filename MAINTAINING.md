@@ -113,3 +113,29 @@ git add -A && git commit -m "content: ..." && git push
 `main`. The base path is worked out from the repository name: a project repo
 is served from `/<repo>/` and a `<user>.github.io` repo from `/`. Renaming
 or forking needs no edits. Locally the site is always at `/`.
+
+## Profile README stats
+
+The stat cards in `README.md` (`overview.svg`, `languages.svg`,
+`activity.svg`) and the contribution snake are not committed to `main`.
+`.github/workflows/profile-stats.yml` rebuilds them daily (and on pushes that
+change the script or workflow) and force-pushes them to the `output` branch,
+which the README links to. To run it by hand: Actions → Profile stats → Run
+workflow. To preview locally:
+
+```bash
+GITHUB_TOKEN=$(gh auth token) python3 scripts/profile_stats.py --out stats
+```
+
+Locally your token also sees private-repo commits, so `commits` can be higher
+than what the workflow publishes. Languages skip forks, HTML, CSS and notebooks
+(`EXCLUDED_LANGS` in the script).
+
+## README screenshots
+
+`screenshots/*.png` are 1440×900 captures of the running site (phone: 390×844).
+Capture the planner from a non-loopback address (e.g. `bun run dev --host
+127.0.0.2`) so it shows the read-only Pages view instead of local state.
+`projects-mobile.png` is `projects.png` and `mobile.png` side by side at the
+same height; rebuild it whenever either changes, because two separate images
+of different heights do not line up on GitHub.

@@ -1,0 +1,52 @@
+name: Profile stats
+
+# Regenerates the stat cards and the contribution snake shown in README.md
+# and publishes them to the `output` branch (main stays free of daily
+# bot commits, and the Pages deploy is not triggered).
+
+on:
+  schedule:
+    - cron: "17 2 * * *" # daily, 10:17 Hong Kong time
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/profile_stats.py
+      - .github/workflows/profile-stats.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-stats
+  cancel-in-progress: true
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Stat cards
+        run: python3 scripts/profile_stats.py --user "${{ github.repository_owner }}" --out output
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Contribution snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            output/snake.svg?color_snake=#f0b35a&color_dots=#1e2228,#4a3a20,#7a5a2a,#b8853f,#f0b35a
+            output/snake-light.svg?color_snake=#b8853f&color_dots=#ebedf0,#f6e3c2,#eec98a,#e0a650,#b8853f
+
+      - name: Publish to the output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: output
+          keep_history: false
+          commit_message: "profile stats"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
