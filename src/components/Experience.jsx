@@ -1,4 +1,4 @@
-// ## 02 experience: like GitHub's "contribution activity", a year rule, then
+// ## 03 experience: like GitHub's "contribution activity", a year rule, then
 // dated rows on a vertical rail with a dot per entry. Newest first.
 import { EXPERIENCE } from '../config/portfolio.config';
 import Section from './Section';

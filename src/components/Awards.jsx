@@ -1,4 +1,4 @@
-// ## 03 awards: an aligned table with the notes (the sidebar's achievements
+// ## 04 awards: an aligned table with the notes (the sidebar's achievements
 // list is the short version), then education as a YAML block.
 import { AWARDS, EDUCATION } from '../config/portfolio.config';
 import Section from './Section';

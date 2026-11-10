@@ -101,7 +101,7 @@ function Achievements() {
         ))}
       </ul>
       <a href="#awards" className="link mt-3 inline-block font-mono text-[12px] text-fg-dim">
-        notes in <span aria-hidden>## </span>03 awards
+        notes in <span aria-hidden>## </span>04 awards
       </a>
     </div>
   );

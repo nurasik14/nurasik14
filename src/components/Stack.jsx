@@ -1,4 +1,4 @@
-// ## 04 stack: TOOLS grouped like a package manifest (static, no marquee).
+// ## 05 stack: TOOLS grouped like a package manifest (static, no marquee).
 import { TOOLS } from '../config/portfolio.config';
 import Section from './Section';
 

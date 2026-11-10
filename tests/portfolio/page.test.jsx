@@ -4,6 +4,7 @@
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { renderToStaticMarkup } from 'react-dom/server';
+import App from '../../src/App.jsx';
 import Contributions from '../../src/components/Contributions.jsx';
 import Experience from '../../src/components/Experience.jsx';
 import ProfileSidebar from '../../src/components/ProfileSidebar.jsx';
@@ -104,7 +105,8 @@ describe('tabs', () => {
   const sections = [
     { id: 'overview', label: 'overview', key: '0' },
     { id: 'projects', label: 'projects', key: '1' },
-    { id: 'contact', label: 'contact', key: '5' },
+    { id: 'weekly', label: 'weekly', key: '2' },
+    { id: 'contact', label: 'contact', key: '6' },
   ];
   const render = (section) =>
     renderToStaticMarkup(
@@ -123,6 +125,16 @@ describe('tabs', () => {
     expect(render(null).match(/aria-current="location"/g)).toHaveLength(1);
     expect(render(null)).toMatch(/href="#overview" aria-current="location"/);
     expect(render(sections[1])).toMatch(/href="#projects" aria-current="location"/);
+  });
+});
+
+describe('section order', () => {
+  test('weekly is 02, right after projects; the rest move down one', () => {
+    const html = renderToStaticMarkup(<App />);
+    const tabs = [...html.matchAll(/href="#(\w+)"[^>]*aria-keyshortcuts="(\d)"/g)].map((m) => `${m[2]} ${m[1]}`);
+    expect(tabs).toEqual(['0 overview', '1 projects', '2 weekly', '3 experience', '4 awards', '5 stack', '6 contact']);
+    const headings = [...html.matchAll(/text-signal">(\d\d)<\/span> (\w+)/g)].map((m) => `${m[1]} ${m[2]}`);
+    expect(headings).toEqual(['01 projects', '02 weekly', '03 experience', '04 awards', '05 stack', '06 contact']);
   });
 });
 
@@ -172,7 +184,7 @@ describe('activity and experience', () => {
     expect(html).not.toMatch(/\d+ contributions/);
   });
   test('experience is a dated timeline grouped by year', () => {
-    const html = renderToStaticMarkup(<Experience n="2" />);
+    const html = renderToStaticMarkup(<Experience n="3" />);
     expect(html).toContain('2025');
     expect(html).toContain('AuaLine');
     expect(html).toContain('border-l');

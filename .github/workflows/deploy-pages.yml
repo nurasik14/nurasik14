@@ -3,6 +3,11 @@ name: Deploy portfolio to GitHub Pages
 on:
   push:
     branches: [main]
+  # Daily rebuild at 04:00 Hong Kong time (20:00 UTC) so the WakaTime and
+  # GitHub numbers stay fresh without bot commits on main. GitHub may start
+  # scheduled runs a few minutes late.
+  schedule:
+    - cron: "0 20 * * *"
   workflow_dispatch:
 
 permissions:
@@ -35,6 +40,17 @@ jobs:
         run: python3 scripts/profile_stats.py --user "${{ github.repository_owner }}" --json public/data/github.json --no-svg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Last 7 complete days of WakaTime activity for the `## weekly` section.
+      # Needs the WAKATIME_OAUTH_TOKEN secret (a personal OAuth token from
+      # https://wakatime.com/oauth; plugin API keys are write-only). Without
+      # it, or if the API fails, the committed public/data/wakatime.json is
+      # deployed unchanged.
+      - name: WakaTime snapshot
+        continue-on-error: true
+        run: python3 scripts/wakatime_stats.py --json public/data/wakatime.json --soft
+        env:
+          WAKATIME_OAUTH_TOKEN: ${{ secrets.WAKATIME_OAUTH_TOKEN }}
 
       # Project sites live at /<repo>/, user sites (<user>.github.io) at /.
       # Derived from the repo name, so renaming or forking needs no edits.

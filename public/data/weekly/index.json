@@ -1,0 +1,15 @@
+{
+  "generated": "2026-11-10T20:26:31+00:00",
+  "weeks": [
+    {
+      "week": "2026-W45",
+      "start": "2026-11-02",
+      "end": "2026-11-08",
+      "complete": true,
+      "file": "data/weekly/2026-W45.json",
+      "coding_seconds": 68389,
+      "commits": 65,
+      "top_track": "泡泡 by 牛佳钰"
+    }
+  ]
+}

@@ -89,7 +89,7 @@ Rules:
    Arrow keys and Enter run a command. Esc closes it and returns focus to the
    opener. Focus is trapped inside the sheet, and it uses `role="dialog"`.
 5. Global keys (ignored while typing): `0`–`9` jump to sections (each
-   section's `key`; index.md uses `0` for overview and `1`–`5`), `g i`
+   section's `key`; index.md uses `0` for overview and `1`–`6`), `g i`
    goes to index.md, `g p` goes to planner.cal and `g n` goes to news.fm.
 
 Context API (`useShell()`): `{ mode, section, setMode(name|null), flash(text, tone?) }`.
@@ -117,7 +117,7 @@ chrome (top bar, `:` command line, statusline, `## 01` headings, YAML).
   `email` mailto button. Then a meta list with mono keys (`edu`, `loc`,
   `lang`), the `gh/ hf/ in/` links, a followers · stars · repos line (only
   once github.json has loaded), and "achievements": every award as medal
-  glyph + word, title, year, with a link to `## 03 awards` for the notes.
+  glyph + word, title, year, with a link to `## 04 awards` for the notes.
   Achievements are hidden below 768px (the awards section has them). The
   sidebar is sticky under the top bar only when it fits the viewport.
 - **Tabs** (`ProfileTabs.jsx`, replaces the outline rail here). UnderlineNav
@@ -154,9 +154,23 @@ chrome (top bar, `:` command line, statusline, `## 01` headings, YAML).
   screen readers, which get a summary sentence and a per-month table instead.
   If a full year would need cells under 8px, only the most recent weeks that
   fit are drawn, with "last N weeks shown" underneath.
-- **02 experience.** Like GitHub's contribution activity: a year rule, then
+- **02 weekly** (`Weekly.jsx`, data in MAINTAINING.md). `### last 7 days`:
+  a meta line with the range and "updated <time> HKT", three figure tiles
+  (in the editor, daily average, active days), daily bars (an SVG, hidden from
+  screen readers, which get a table instead; `<title>` tooltips on full-height
+  hit areas), the category split, then projects and languages as ranked lists
+  (time, share, a 3px bar at the share). `### digest`: mono week buttons
+  (`aria-pressed`, the selected one outlined on `surface-2`, never amber;
+  `in progress` written out for an incomplete week), the highlights, then
+  editor, git and last.fm columns (`auto-fit`, 16rem minimum). A repo's latest
+  commit subjects sit behind a `▸` disclosure. A failed source is a dashed
+  `∅ <source>: no data for this week` box. Categories use `info`, `ok`,
+  `fg-dim`, then `line-strong` for "other", always beside a word and a
+  percentage; amber and `heat-*` are not used. Grids use
+  `repeat(auto-fit, minmax(…))`, so nothing scrolls sideways at 320px.
+- **03 experience.** Like GitHub's contribution activity: a year rule, then
   dated rows on a vertical rail with a dot per entry.
-- **03 awards** (table with notes, education YAML), **04 stack**, **05
+- **04 awards** (table with notes, education YAML), **05 stack**, **06
   contact**, and the footer build stamp are unchanged.
 
 ## Mobile (<640px)

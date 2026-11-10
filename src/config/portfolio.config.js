@@ -60,7 +60,7 @@ export const DQN_RUNS = {
 };
 
 /* ---- tech stack: [name, group] ------------------------------------
- * Rendered as a package manifest in "## 04 stack", grouped by the
+ * Rendered as a package manifest in "## 05 stack", grouped by the
  * second field in order of first appearance.                         */
 export const TOOLS = [
   ['python', 'lang'], ['pytorch', 'ml'], ['hugging face', 'ml'], ['scikit-learn', 'ml'],

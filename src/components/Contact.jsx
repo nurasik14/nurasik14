@@ -1,4 +1,4 @@
-// ## 05 contact: a real mailto, a copy button that reports in the statusline.
+// ## 06 contact: a real mailto, a copy button that reports in the statusline.
 import { useRef } from 'react';
 import { PROFILE } from '../config/portfolio.config';
 import { copyText } from '../lib/nav';

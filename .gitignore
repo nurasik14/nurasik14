@@ -31,3 +31,6 @@ public/data/*.local.json
 # profile stats generated locally / in CI
 stats/
 output/
+
+# python bytecode
+__pycache__/

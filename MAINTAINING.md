@@ -12,6 +12,8 @@ certificate backs it.** Unmeasured work gets an honest empty state, not a guess.
   src/components/*.jsx             ← render it (index.md, the portfolio)
   src/shell/*                      ← top bar, outline, statusline, command line
   public/data/github.json          ← contribution graph data (scripts/profile_stats.py)
+  public/data/wakatime.json        ← ## 02 weekly: last 7 days (scripts/wakatime_stats.py)
+  public/data/weekly/              ← ## 02 weekly: digests (scripts/weekly_digest.py)
         ↓
   bun run build → dist/            ← GitHub Actions publishes this to Pages
 ```
@@ -82,9 +84,9 @@ point as text, so update it at the same time.
   `~/nurassyl` home link.
 - `NOW`: the `### now` list in the README panel. Plain sentences.
 - `LANG_COLORS`: linguist colours for the language dots on the cards.
-- `TOOLS`: `[name, group]` pairs. `## 04 stack` groups them into a manifest.
+- `TOOLS`: `[name, group]` pairs. `## 05 stack` groups them into a manifest.
 - `EXPERIENCE` (grouped by the year `when` starts with), `AWARDS` (the
-  sidebar's achievements list and the `## 03 awards` table), `EDUCATION`,
+  sidebar's achievements list and the `## 04 awards` table), `EDUCATION`,
   `LANGUAGES` and `LANG_CODES` (the sidebar shows the codes). Education fields
   are `[key, value, comment?]`; values can be strings, numbers, arrays or flat
   objects.
@@ -102,13 +104,60 @@ days`). `scripts/profile_stats.py` writes it. If the file is missing or
 malformed the page shows an error, not numbers, and the sidebar leaves out the
 followers line.
 
+## Weekly (## 02 weekly)
+
+`src/components/Weekly.jsx` reads three kinds of file at runtime (loaders,
+validators and helpers in `src/lib/weekly.js`). None of them is edited by hand:
+
+- `public/data/wakatime.json`: the last 7 complete days of WakaTime activity,
+  rewritten daily at 04:00 HKT by the deploy workflow
+  (`scripts/wakatime_stats.py`). Drives `### last 7 days`: totals, the daily
+  bars (stacked by category when there is more than one), the category split,
+  and the top 8 projects and languages (the rest fold into "other").
+- `public/data/weekly/index.json` and `public/data/weekly/<week>.json`: the
+  weekly digests (`scripts/weekly_digest.py`, run by a Hermes cron job every
+  Sunday night). Drive `### digest`: the week buttons (newest first), the
+  highlights, editor time, commits per repo and Last.fm top tracks.
+
+A missing or malformed file shows an error for that block only. A source the
+digest could not read (`{"error": "..."}`) shows "<source>: no data for this
+week" with the recorded reason, never stand-in numbers. Only paths matching
+`data/weekly/<YYYY-Www>.json` are ever fetched.
+
+How the data gets there:
+
+- **Daily (GitHub Actions):** `deploy-pages.yml` also runs on a schedule at
+  20:00 UTC = 04:00 HKT and fetches fresh WakaTime numbers at build time (no
+  commit). It needs the repo secret `WAKATIME_OAUTH_TOKEN`: a personal OAuth
+  token from https://wakatime.com/oauth. Plugin API keys (`~/.wakatime.cfg`)
+  are write-only since 2026-11-01 and get a 403. If the call fails, the
+  committed `public/data/wakatime.json` is deployed unchanged.
+- **Weekly (Hermes cron `weekly-digest`, Sundays 22:00 HKT):**
+  `~/.hermes/scripts/weekly_digest.sh` runs `scripts/weekly_digest.py` in a
+  separate clone (`~/.local/share/weekly-digest/nurasik14`), commits
+  `public/data/weekly/` + `wakatime.json` as `weekly digest <week>` and
+  pushes; the push triggers the Pages deploy. Tokens come from
+  `~/.hermes/.env` (`WAKATIME_OAUTH_TOKEN`) and `~/Projects/weekly-favs/.env`
+  (`LASTFM_API_KEY`, `LASTFM_USERNAME`). Commits are counted from the local git
+  repos under `$HOME`, without app-data repos (`quest-data`).
+
+By hand:
+
+```bash
+hermes cron run weekly-digest                       # the whole job now
+python3 scripts/weekly_digest.py --week 2026-W45 --dry-run   # inspect one week
+python3 -m unittest discover -s tests/scripts       # script tests
+```
+
+Run `git pull` before working locally: the weekly job pushes to `main`.
+
 ## Shell and keyboard shortcuts
 
 Both pages render inside `<AppShell>` (`src/shell/AppShell.jsx`):
 
 | key | does |
 |---|---|
-| `0`–`5` | jump to a section (`0` overview, `## 01 projects` … `## 05 contact`) |
+| `0`–`6` | jump to a section (`0` overview, `1` projects, `2` weekly, `3` experience, `4` awards, `5` stack, `6` contact) |
 | `:` or `/` or `Ctrl/Cmd K` | open the command line |
 | `g i` / `g p` | go to `index.md` / `planner.cal` |
 | `↑` `↓` `Enter` / `Esc` | in the command line: pick and run / close |

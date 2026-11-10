@@ -1,6 +1,6 @@
 // index.md: the portfolio buffer, laid out like a GitHub profile inside the
 // editor shell: profile sidebar + a main column with UnderlineNav tabs.
-// Section order = keyboard shortcut order (0 overview, 1-5 the rest).
+// Section order = keyboard shortcut order (0 overview, 1-6 the rest).
 import { EXPERIENCE, AWARDS, PROJECTS, TOOLS } from './config/portfolio.config';
 import Awards from './components/Awards';
 import Contact from './components/Contact';
@@ -11,15 +11,17 @@ import ProfileTabs from './components/ProfileTabs';
 import Projects from './components/Projects';
 import Readme from './components/Readme';
 import Stack from './components/Stack';
+import Weekly from './components/Weekly';
 import AppShell from './shell/AppShell';
 
 const SECTIONS = [
   { id: 'overview', label: 'overview', key: '0' },
   { id: 'projects', label: 'projects', key: '1' },
-  { id: 'experience', label: 'experience', key: '2' },
-  { id: 'awards', label: 'awards', key: '3' },
-  { id: 'stack', label: 'stack', key: '4' },
-  { id: 'contact', label: 'contact', key: '5' },
+  { id: 'weekly', label: 'weekly', key: '2' },
+  { id: 'experience', label: 'experience', key: '3' },
+  { id: 'awards', label: 'awards', key: '4' },
+  { id: 'stack', label: 'stack', key: '5' },
+  { id: 'contact', label: 'contact', key: '6' },
 ];
 const num = Object.fromEntries(SECTIONS.map((s) => [s.id, s.key]));
 const COUNTS = { projects: PROJECTS.length, experience: EXPERIENCE.length, awards: AWARDS.length, stack: TOOLS.length };
@@ -35,6 +37,7 @@ export default function App() {
           <Projects n={num.projects}>
             <Contributions />
           </Projects>
+          <Weekly n={num.weekly} />
           <Experience n={num.experience} />
           <Awards n={num.awards} />
           <Stack n={num.stack} />

@@ -1,0 +1,375 @@
+{
+  "week": "2026-W45",
+  "start": "2026-11-02",
+  "end": "2026-11-08",
+  "complete": true,
+  "generated": "2026-11-10T20:26:31+00:00",
+  "timezone": "Asia/Hong_Kong",
+  "wakatime": {
+    "total_seconds": 68389,
+    "daily_average_seconds": 9770,
+    "active_days": 6,
+    "categories": [
+      {
+        "name": "AI Coding",
+        "seconds": 68390,
+        "percent": 100.0
+      }
+    ],
+    "projects": [
+      {
+        "name": "overworld-hyprland",
+        "seconds": 20499,
+        "percent": 30.0
+      },
+      {
+        "name": "nurasik14",
+        "seconds": 9370,
+        "percent": 13.7
+      },
+      {
+        "name": "mochi-pi",
+        "seconds": 6767,
+        "percent": 9.9
+      },
+      {
+        "name": "nurasik12",
+        "seconds": 5013,
+        "percent": 7.3
+      },
+      {
+        "name": "apothecary-hyprland",
+        "seconds": 4873,
+        "percent": 7.1
+      },
+      {
+        "name": "Projects",
+        "seconds": 3352,
+        "percent": 4.9
+      },
+      {
+        "name": "AIMER_TEST",
+        "seconds": 3017,
+        "percent": 4.4
+      },
+      {
+        "name": "designloop",
+        "seconds": 2417,
+        "percent": 3.5
+      },
+      {
+        "name": "CityUHK_job_scraper",
+        "seconds": 2249,
+        "percent": 3.3
+      },
+      {
+        "name": "Zine",
+        "seconds": 1901,
+        "percent": 2.8
+      },
+      {
+        "name": "wakatime-test",
+        "seconds": 1781,
+        "percent": 2.6
+      },
+      {
+        "name": "portfolio",
+        "seconds": 1447,
+        "percent": 2.1
+      },
+      {
+        "name": "Other",
+        "seconds": 5685,
+        "percent": 8.3
+      }
+    ],
+    "languages": [
+      {
+        "name": "Markdown",
+        "seconds": 26460,
+        "percent": 38.7
+      },
+      {
+        "name": "Bash",
+        "seconds": 7324,
+        "percent": 10.7
+      },
+      {
+        "name": "Python",
+        "seconds": 6316,
+        "percent": 9.2
+      },
+      {
+        "name": "QML",
+        "seconds": 5847,
+        "percent": 8.5
+      },
+      {
+        "name": "JavaScript",
+        "seconds": 5798,
+        "percent": 8.5
+      },
+      {
+        "name": "TeX",
+        "seconds": 1744,
+        "percent": 2.5
+      },
+      {
+        "name": "Git Config",
+        "seconds": 1464,
+        "percent": 2.1
+      },
+      {
+        "name": "JSON",
+        "seconds": 983,
+        "percent": 1.4
+      },
+      {
+        "name": "Svelte",
+        "seconds": 511,
+        "percent": 0.7
+      },
+      {
+        "name": "YAML",
+        "seconds": 309,
+        "percent": 0.5
+      },
+      {
+        "name": "Text",
+        "seconds": 280,
+        "percent": 0.4
+      },
+      {
+        "name": "TOML",
+        "seconds": 119,
+        "percent": 0.2
+      },
+      {
+        "name": "Other",
+        "seconds": 11211,
+        "percent": 16.4
+      }
+    ],
+    "editors": [
+      {
+        "name": "Claude Code",
+        "seconds": 57800,
+        "percent": 84.5
+      },
+      {
+        "name": "Hermes Agent",
+        "seconds": 10590,
+        "percent": 15.5
+      }
+    ],
+    "days": [
+      {
+        "date": "2026-11-02",
+        "seconds": 876,
+        "categories": {
+          "AI Coding": 876
+        }
+      },
+      {
+        "date": "2026-11-03",
+        "seconds": 6836,
+        "categories": {
+          "AI Coding": 6836
+        }
+      },
+      {
+        "date": "2026-11-04",
+        "seconds": 15014,
+        "categories": {
+          "AI Coding": 15014
+        }
+      },
+      {
+        "date": "2026-11-05",
+        "seconds": 25531,
+        "categories": {
+          "AI Coding": 25531
+        }
+      },
+      {
+        "date": "2026-11-06",
+        "seconds": 12660,
+        "categories": {
+          "AI Coding": 12660
+        }
+      },
+      {
+        "date": "2026-11-07",
+        "seconds": 7472,
+        "categories": {
+          "AI Coding": 7472
+        }
+      },
+      {
+        "date": "2026-11-08",
+        "seconds": 0,
+        "categories": {}
+      }
+    ]
+  },
+  "git": {
+    "total": 65,
+    "repos": [
+      {
+        "name": "overworld-hyprland",
+        "commits": 33,
+        "active_days": 3,
+        "latest": [
+          "README: shields.io badges (stars, last commit, licence, Hyprland, Quickshell, Fedora, Wayland, Minec",
+          "README: mining recording at the top (00-mining.webp/.mp4, recorded live with scripts/record-mining-d",
+          "Robust readouts: only Discharging drains health, 20 s confirm before hurt/death, MemAvailable fallba",
+          "Feature: Stray Thoughts Widget",
+          "projects-everywhere: shared hypr-projects list (~/.local/share/hypr-projects), CLI + rofi menu for s"
+        ]
+      },
+      {
+        "name": "apothecary-hyprland-conf",
+        "commits": 15,
+        "active_days": 5,
+        "latest": [
+          "Feature: Stray Thoughts Widget",
+          "Projects card 工程 (shared hypr-projects list, 成 seal on built, add/edit dialog, undo), apothecary pro",
+          "OSD: volume number keeps counting past 100% in red (ink bar stays full)",
+          "ws-autolabel: read what terminals run (program, folder, Hermes session title); stricter match check;",
+          "Workspace titles: reset long-empty workspaces, rewrite titles that no longer match, --pin; single wa"
+        ]
+      },
+      {
+        "name": "OllamaSearch",
+        "commits": 5,
+        "active_days": 1,
+        "latest": [
+          "offline-full: re-run 9 qwen3.5:2b multi rows lost to an Ollama outage",
+          "Document round-2 results: README, docs, plots",
+          "simpleqa: re-run 16 qwen2.5:1.5b rows that failed on empty SearXNG results",
+          "Add round-2 benchmark results (bfcl, hotpotqa, kazqad, rgb-*, simpleqa; offline-full with multi)",
+          "Add multi-agent mode, BFCL and external QA benchmark suites"
+        ]
+      },
+      {
+        "name": "nurasik14",
+        "commits": 3,
+        "active_days": 3,
+        "latest": [
+          "first bookmark",
+          "news.fm: source links, laptop-edited bookmarks, backlog rebuild",
+          "news.fm: weekly gmail wrap-ups as spoken clips, Ava audio on localhost"
+        ]
+      },
+      {
+        "name": "logisim-16bit-processor",
+        "commits": 2,
+        "active_days": 1,
+        "latest": [
+          "Add fetch.circ (part C) with sequential test vectors",
+          "Set up processor project with register file component"
+        ]
+      },
+      {
+        "name": "pocket-zine",
+        "commits": 2,
+        "active_days": 1,
+        "latest": [
+          "Updated the README.md",
+          "Add pocket-zine: one-sheet 8-page zine templates"
+        ]
+      },
+      {
+        "name": "CityUHK_job_scraper",
+        "commits": 1,
+        "active_days": 1,
+        "latest": [
+          "Fix AIMS hang when the saved session has expired"
+        ]
+      },
+      {
+        "name": "Kazakh-RAG",
+        "commits": 1,
+        "active_days": 1,
+        "latest": [
+          "Shifting Hermes AI to be superviser and me a researcher. First deadlines from the supervisor and goa"
+        ]
+      },
+      {
+        "name": "designloop",
+        "commits": 1,
+        "active_days": 1,
+        "latest": [
+          "first commit"
+        ]
+      },
+      {
+        "name": "mochi-pi",
+        "commits": 1,
+        "active_days": 1,
+        "latest": [
+          "Add Mochi-Pi project plan"
+        ]
+      },
+      {
+        "name": "quest-journal",
+        "commits": 1,
+        "active_days": 1,
+        "latest": [
+          "Spending: \"What for\" autocomplete and more spending types"
+        ]
+      }
+    ],
+    "per_day": {
+      "2026-11-03": 8,
+      "2026-11-04": 10,
+      "2026-11-05": 31,
+      "2026-11-06": 7,
+      "2026-11-07": 7,
+      "2026-11-08": 2
+    }
+  },
+  "lastfm": {
+    "user": "Nurasik",
+    "scrobbles": 500,
+    "tracks": [
+      {
+        "name": "泡泡",
+        "artist": "牛佳钰",
+        "plays": 10,
+        "url": "https://www.last.fm/music/%E7%89%9B%E4%BD%B3%E9%92%B0/_/%E6%B3%A1%E6%B3%A1"
+      },
+      {
+        "name": "Can't Take My Eyes Off You",
+        "artist": "College Music",
+        "plays": 7,
+        "url": "https://www.last.fm/music/College+Music/_/Can%27t+Take+My+Eyes+Off+You"
+      },
+      {
+        "name": "Essence - I tried (ft. Shiloh)",
+        "artist": "Ambition",
+        "plays": 6,
+        "url": "https://www.last.fm/music/Ambition/_/Essence+-+I+tried+(ft.+Shiloh)"
+      },
+      {
+        "name": "Fatboibari ~ moonlight shawty 🌙💓",
+        "artist": "fatboibari",
+        "plays": 5,
+        "url": "https://www.last.fm/music/fatboibari/_/Fatboibari+~+moonlight+shawty+%F0%9F%8C%99%F0%9F%92%93"
+      },
+      {
+        "name": "Night Sweats",
+        "artist": "EMCEE",
+        "plays": 5,
+        "url": "https://www.last.fm/music/EMCEE/_/Night+Sweats"
+      }
+    ]
+  },
+  "highlights": [
+    "19h 00m in the editor over 6 days; most on overworld-hyprland (5h 42m).",
+    "AI Coding 100%.",
+    "Languages: Markdown, Bash, Python.",
+    "65 commits in 11 repos; busiest: overworld-hyprland (33).",
+    "On repeat: 泡泡 by 牛佳钰 (10 plays of 500 scrobbles)."
+  ]
+}
