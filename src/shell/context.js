@@ -1,7 +1,13 @@
 // Shell context. Import useShell from './AppShell' (the public entry point).
 import { createContext, useContext, useEffect } from 'react';
 
-export const ShellContext = createContext({ mode: 'NORMAL', setMode: () => {}, flash: () => {}, registerCommands: () => () => {} });
+export const ShellContext = createContext({
+  mode: 'NORMAL',
+  section: null, // the section in view: { id, label, key } or null
+  setMode: () => {},
+  flash: () => {},
+  registerCommands: () => () => {},
+});
 export const useShell = () => useContext(ShellContext);
 
 /**

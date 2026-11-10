@@ -171,16 +171,17 @@ mid-task to change direction without starting over.
 
 **Live site → https://nurasik14.github.io/nurasik14/**
 
-This repo also hosts my portfolio, built to look like an editor session: `index.md` is the portfolio,
-`planner.cal` is my planner and `news.fm` reads my weekly news wrap-ups aloud. A vim-style statusline
-shows the real mode, buffer and scroll position, and `:` opens a command line. The hero plots real DQN
-training curves, and each project row expands into its config and measured results.
+My portfolio is laid out like a GitHub profile, running inside a code editor. On the left is a
+profile sidebar. On the right are tabs, a `README.md` panel with real DQN training curves, pinned
+project cards that expand into their config and measured results, and a contribution graph built from
+the GitHub API. The editor parts are real: buffer tabs (`index.md`, `planner.cal` for my planner,
+`news.fm` for my weekly news read aloud), a vim-style statusline, and a `:` command line. Number keys
+jump between sections.
 
-<img src="./screenshots/hero.png" alt="Portfolio hero: YAML frontmatter, name, and fig. 1 with DQN training curves">
+<a href="./screenshots/demo.png"><img src="./screenshots/demo.png" alt="Portfolio pages. Top left: profile with sidebar and README panel. Top right: pinned projects. Bottom left: planner.cal. Bottom right: news.fm. Right: the profile on a phone" width="100%"></a>
 
-<img src="./screenshots/projects-mobile.png" alt="Left: projects as an experiments ledger with config and measured results. Right: planner.cal on a phone">
-
-<img src="./screenshots/planner.png" alt="planner.cal: month calendar with Google Calendar events as a dashed overlay">
+<p align="center"><sub>profile · pinned projects · planner.cal · news.fm · phone. Click for full size, or open the
+<a href="./screenshots/">individual screenshots</a>.</sub></p>
 
 <details>
 <summary><b>Run it locally</b></summary>

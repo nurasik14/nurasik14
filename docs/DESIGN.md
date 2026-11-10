@@ -11,8 +11,9 @@ gradients, marquees and fake telemetry.
 
 - Visitor: an ML/AI internship recruiter or engineer with 1 to 3 minutes,
   and the owner, who uses the planner daily on localhost.
-- Proof artifact: real training curves (`DQN_RUNS`), real repos and real
-  awards. The hero shows evidence (fig. 1) instead of a slogan.
+- Proof artifact: real training curves (`DQN_RUNS`), real repos, real
+  awards and the real contribution graph (`public/data/github.json`). The
+  README panel shows evidence (fig. 1) instead of a slogan.
 - Signature: the **statusline**, a vim-like bar fixed to the bottom. It
   reports actual state: mode (`NORMAL`, `INSERT` while typing, `READONLY` on
   Pages, `SEALED` briefly after a seal, `LOCKED`, `PLAYING` and `PAUSED` on
@@ -36,19 +37,22 @@ gradients, marquees and fake telemetry.
 | ok | `ok` | #93c47d | complete, done, YAML strings |
 | info | `info` | #82aed6 | keys, running, in-code links |
 | warn | `warn` | #e8735e | destructive actions, errors |
+| data | `heat-0`…`heat-4` | #1e2228 #4a3a20 #7a5a2a #b8853f #f0b35a | contribution-graph cells and legend only |
 
 Rules:
 - Amber is scarce. Use it for at most one primary action per view, plus the
   cursor and current-location markers. Never use it as large fills or
-  decoration.
+  decoration. The `heat-*` ramp is data (the contribution graph), not
+  decoration, and is used nowhere else.
 - Colour is never the only signal. Status always has a word or glyph next to it.
-- Type roles: **Geist** (sans) for prose and the display name.
-  **JetBrains Mono** for code, labels, metadata, dates, nav, statusline and
-  buttons. Body text is 16px with a 60–68ch measure. Labels are 12px mono
-  uppercase with +0.08em tracking (`.label`). The display name uses
-  clamp(2.75rem, 7vw, 5.5rem), Geist 600, with -0.04em tracking.
-- Spacing scale: 4/8/12/16/24/40/64. Sections are separated by a 1px `line`
-  rule plus 64px of space. Corners have a 4px radius (`rounded`). Shadows
+- Type roles: **Geist** (sans) for prose and the profile name.
+  **JetBrains Mono** for code, labels, metadata, dates, nav, the GitHub
+  handle, statusline and buttons. Body text is 16px with a 60–68ch measure.
+  Labels are 12px mono uppercase with +0.08em tracking (`.label`). The name
+  is a profile name, not a display headline: Geist 600, 24px (26px from
+  768px), -0.02em tracking, followed by a small amber cursor block.
+- Spacing scale: 4/8/12/16/24/40/64. On index.md, sections are separated by
+  a 1px `line` rule with 40px of space on each side. Corners have a 4px radius (`rounded`). Shadows
   appear only on real overlays (command line, dialogs).
 - Section headings look like markdown: a faint `##`, the shortcut number
   `01` in signal, then the title, e.g. `## 01 projects`. The number is the
@@ -66,9 +70,12 @@ Rules:
    `${BASE_URL}planner/`, `news.fm` → `${BASE_URL}news/`, with
    `aria-current="page"` on the active one. On the
    right: a `:` command button with a `Ctrl K` hint, and `cv.pdf ↓`.
-2. **Outline rail** (only when `sections` is given, ≥1100px): sticky
-   left column listing sections as anchor links. The current section has an
-   amber `▌` cursor (IntersectionObserver) and `aria-current="location"`.
+2. **Outline rail** (only when `sections` is given and `outline="rail"`, the
+   default; ≥1100px): sticky left column listing sections as anchor links.
+   The current section has an amber `▌` cursor (IntersectionObserver) and
+   `aria-current="location"`. index.md passes `outline="none"` and draws its
+   own section tabs instead (see "index.md" below); the shell then puts the
+   children straight into the `.wrap` page column.
 3. **Statusline** (fixed bottom, 28px, mono 12px). Left: mode block (amber
    background with ink text for NORMAL; ok for INSERT and PLAYING; info for
    READONLY and LOCKED; signal for SEALED and PAUSED), then buffer name, then
@@ -81,13 +88,76 @@ Rules:
    `cv`, `planner`, `index`, `news`, `email` copies the address, `gh`, `hf`, `in`).
    Arrow keys and Enter run a command. Esc closes it and returns focus to the
    opener. Focus is trapped inside the sheet, and it uses `role="dialog"`.
-5. Global keys (ignored while typing): `1`–`9` jump to sections, `g i`
+5. Global keys (ignored while typing): `0`–`9` jump to sections (each
+   section's `key`; index.md uses `0` for overview and `1`–`5`), `g i`
    goes to index.md, `g p` goes to planner.cal and `g n` goes to news.fm.
 
-Context API (`useShell()`): `{ mode, setMode(name|null), flash(text, tone?) }`.
+Context API (`useShell()`): `{ mode, section, setMode(name|null), flash(text, tone?) }`.
+`section` is the section in view (`{ id, label, key }` or null), the same
+value the statusline shows.
 `setMode(null)` restores the page default. The shell sets `INSERT`
 automatically while an input, textarea or select has focus, then restores
 the previous mode.
+
+## index.md: a GitHub-style profile
+
+The portfolio buffer reads like a GitHub profile page inside the editor
+chrome (top bar, `:` command line, statusline, `## 01` headings, YAML).
+
+- **Layout.** From 1012px: a 296px profile sidebar, 32px gap, and the main
+  column. 768–1011px: the same with a 14.5rem sidebar. Below 768px the
+  sidebar is a top block. The main column is a CSS container
+  (`.profile-main`); its width, not the viewport's, decides the README and
+  pinned-card columns.
+- **Sidebar** (`ProfileSidebar.jsx`, the page's `h1`). Round avatar (the
+  real GitHub avatar, `alt=""`, eager, 260×260; an `NS` monogram on a surface
+  circle if it fails), the name, the handle `nurasik14` in mono `fg-dim`, a
+  bordered status pill (`●` in ok, then `open to AI/ML internships · summer
+  2027`), the short bio, then `cv.pdf ↓` (the one amber action) beside an
+  `email` mailto button. Then a meta list with mono keys (`edu`, `loc`,
+  `lang`), the `gh/ hf/ in/` links, a followers · stars · repos line (only
+  once github.json has loaded), and "achievements": every award as medal
+  glyph + word, title, year, with a link to `## 03 awards` for the notes.
+  Achievements are hidden below 768px (the awards section has them). The
+  sidebar is sticky under the top bar only when it fits the viewport.
+- **Tabs** (`ProfileTabs.jsx`, replaces the outline rail here). UnderlineNav
+  style, sticky under the top bar: `00 overview`, `01 projects 8`, … each an
+  anchor link with `aria-keyshortcuts`, counts in a `surface-2` pill. The
+  current section (from `useShell().section`) is `fg` with a 2px amber
+  underline, its number in amber, and `aria-current="location"`. Below
+  ~1000px the tab list scrolls sideways inside itself and keeps the
+  current tab in view; the page never does.
+- **00 overview: README.md panel.** A bordered frame with a mono header row
+  `nurasik14 / README.md`. Body: the YAML frontmatter (focus, status, based,
+  langs), a short intro, a `### now` list, and fig. 1. When the main column
+  is at least 48rem, fig. 1 sits in a 20rem column on the right.
+- **01 projects.** "pinned": GitHub-style cards, two columns when the main
+  column is at least 34rem. Each card: the name in mono `info` (a link to the
+  repo when there is one), a bordered status badge (glyph + word), the
+  description, `result:` line, stack as dots (filled in the linguist colour
+  for languages, hollow for tools) and a `details` disclosure button
+  (`aria-expanded`/`aria-controls`). Details (config YAML, results panel,
+  open repo) open full width under the card's row: each panel follows its
+  card in the DOM and spans the grid, and `grid-auto-flow: dense` lets the
+  next card fill the slot beside the open one. Archived projects are a compact
+  list under the cards with the same disclosure. `#project-<id>` opens and
+  scrolls to a project; opening one writes that hash back.
+- **Activity** (`Contributions.jsx`, inside 01 projects, `#activity`).
+  "N contributions in the last year" and "as of <generated>", a 53-week
+  Sunday-first grid in the `heat-*` shades (quartiles of the non-zero days;
+  the busiest day is always `heat-4`), month labels, Mon/Wed/Fri labels, a
+  less/more legend, current and longest streak, commits (last year) and pull
+  requests (all time), then a language bar and legend. Data is fetched at
+  runtime from `${BASE_URL}data/github.json`. While loading, the box says so;
+  if the fetch fails, it says what failed and links to the live GitHub graph,
+  with no numbers. Cells have `<title>` tooltips; the SVG is hidden from
+  screen readers, which get a summary sentence and a per-month table instead.
+  If a full year would need cells under 8px, only the most recent weeks that
+  fit are drawn, with "last N weeks shown" underneath.
+- **02 experience.** Like GitHub's contribution activity: a year rule, then
+  dated rows on a vertical rail with a dot per entry.
+- **03 awards** (table with notes, education YAML), **04 stack**, **05
+  contact**, and the footer build stamp are unchanged.
 
 ## Mobile (<640px)
 
@@ -95,9 +165,12 @@ The top bar shows the home link, the three buffer tabs and the `:` button.
 Below 400px the home link shrinks to `~` and the tabs use 6px padding, which is
 what fits all three at 320px. No tab is ever hidden. The
 outline rail is hidden, and the command line is how you reach sections. The
-statusline collapses as described above. In the hero, the frontmatter block
-comes before the name, and fig. 1 sits below the lede at full width. Project
-rows stack their metadata under the title. On the planner, the calendar
+statusline collapses as described above. On index.md (below 768px) the
+profile is a top block: 64px avatar beside the name and handle, then status,
+bio, buttons, meta and links. The tab bar follows it, bleeds to the screen
+edges and scrolls sideways inside itself. Pinned cards are one column, a
+card's status badge wraps under a long name, and the contribution graph
+shows the last weeks that fit. On the planner, the calendar
 comes first, then the composer, then the log. Calendar cells shrink to
 date numbers, and plan bars become 4px lane strips with a list underneath.
 On news.fm, an open clip fills the viewport between the top bar and the
@@ -114,7 +187,10 @@ Nothing may scroll horizontally except an explicitly labelled code block.
 
 ## Shipped notes
 
-Notes from the first build of the shell and the portfolio page (agent A):
+Notes from the first build of the shell and the portfolio page (agent A).
+The hero and the projects ledger described here were replaced by the GitHub
+profile layout above; the notes on the shell, fig. 1 and the build stamp
+still hold:
 
 - **Shell layout.** With `sections`, AppShell puts children in the `.wrap`
   page column next to the outline rail (rail 10.5rem + 48px gap at ≥1100px).
@@ -141,9 +217,9 @@ Notes from the first build of the shell and the portfolio page (agent A):
   labelled tick, and the x-axis title has its own row under the tick labels.
   Focus the chart and use ←/→ to step through
   checkpoints, with the readout in an `aria-live` line.
-- **Projects ledger.** Column layout from `lg`; below that, id and stack
-  move under the name. The rag panel shows an empty recall@5 table (every
-  cell "not measured") in place of v2's placeholder bars.
+- **Results panels.** The rag panel (kazakh_rag) shows an NDCG@10 / MRR
+  table with every cell "not measured"; the only number is the published
+  KazQAD baseline it aims to beat.
 - **Build stamp.** `src/shell/build.js` reads `VITE_COMMIT` and
   `VITE_BUILT_AT`. They still need to be defined in vite.config.js or CI.
 

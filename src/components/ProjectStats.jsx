@@ -1,7 +1,7 @@
-/* The results panel inside an open project row. Keyed by `stats` in
+/* The results panel inside a project's details. Keyed by `stats` in
  * portfolio.config.js; an { empty, note } object renders an honest
  * placeholder instead of a number nobody measured. */
-import { DQN_RUNS } from '../config/portfolio.config';
+import { DQN_RUNS, PROJECTS } from '../config/portfolio.config';
 import { valueAt } from '../lib/chart';
 
 const n = (v) => v.toLocaleString('en-US');
@@ -123,42 +123,37 @@ function SearchStats() {
   );
 }
 
+// kazakh_rag: the metrics it will report, all still empty. The only number is
+// the published KazQAD baseline it aims to beat (from the project config).
 function RagStats() {
-  const langs = ['kk', 'ru', 'en'];
+  const baseline = PROJECTS.find((p) => p.stats === 'rag')?.input?.baseline?.['ndcg@10'];
   return (
     <>
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse font-mono text-[13px] tabular-nums">
-          <caption className="sr-only">recall@5 by language and retrieval method: not measured yet</caption>
-          <thead>
-            <tr className="text-fg-faint">
-              <th scope="col" className="border-b border-line py-1 pr-4 text-left font-normal">recall@5</th>
-              {langs.map((l) => (
-                <th key={l} scope="col" className="border-b border-line py-1 pr-4 text-right font-normal">
-                  {l}
-                </th>
-              ))}
+      <table className="w-full border-collapse font-mono text-[13px] tabular-nums">
+        <caption className="sr-only">Kazakh retrieval metrics: not measured yet</caption>
+        <thead>
+          <tr className="text-fg-faint">
+            <th scope="col" className="border-b border-line py-1 pr-4 text-left font-normal">metric</th>
+            <th scope="col" className="border-b border-line py-1 pr-4 text-right font-normal">kk</th>
+          </tr>
+        </thead>
+        <tbody>
+          {['NDCG@10', 'MRR'].map((m) => (
+            <tr key={m}>
+              <th scope="row" className="border-b border-line-soft py-1.5 pr-4 text-left font-normal text-fg">
+                {m}
+              </th>
+              <td className="border-b border-line-soft py-1.5 pr-4 text-right text-fg-faint">
+                <span aria-hidden>—</span>
+                <span className="sr-only">not measured</span>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {['dense', 'hybrid'].map((m) => (
-              <tr key={m}>
-                <th scope="row" className="border-b border-line-soft py-1.5 pr-4 text-left font-normal text-fg">
-                  {m}
-                </th>
-                {langs.map((l) => (
-                  <td key={l} className="border-b border-line-soft py-1.5 pr-4 text-right text-fg-faint">
-                    <span aria-hidden>—</span>
-                    <span className="sr-only">not measured</span>
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <Empty title="waiting for the first benchmark" className="mt-3">
-        Recall@5 per language and retrieval method goes in this table once it&apos;s measured. Every cell is empty until then.
+          ))}
+        </tbody>
+      </table>
+      <Empty title="not measured yet" className="mt-3">
+        NDCG@10 and MRR on Kazakh questions go in this table once there is code to measure.
+        {baseline != null && <> The target is the published KazQAD baseline, NDCG@10 {baseline}.</>}
       </Empty>
     </>
   );

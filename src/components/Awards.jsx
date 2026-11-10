@@ -1,5 +1,6 @@
-// ## 03 awards: an aligned table, then education as a YAML block.
-import { AWARDS, EDUCATION, LANGUAGES } from '../config/portfolio.config';
+// ## 03 awards: an aligned table with the notes (the sidebar's achievements
+// list is the short version), then education as a YAML block.
+import { AWARDS, EDUCATION } from '../config/portfolio.config';
 import Section from './Section';
 import Yaml from './Yaml';
 
@@ -39,15 +40,10 @@ export default function Awards({ n }) {
         </tbody>
       </table>
 
-      <h3 className="mb-3 mt-12 font-mono text-[15px] font-medium text-fg">
+      <h3 className="mb-3 mt-10 font-mono text-[15px] font-medium text-fg">
         <span aria-hidden className="text-fg-faint">### </span>education
       </h3>
       <Yaml title="education.yaml" lines={EDU_LINES} className="max-w-2xl" />
-      <p className="mt-4 font-mono text-[13px] text-fg-dim">
-        <span className="text-info">languages</span>
-        <span className="text-fg-faint">: </span>
-        {LANGUAGES.join(' · ')}
-      </p>
     </Section>
   );
 }

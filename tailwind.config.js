@@ -20,6 +20,8 @@ export default {
         ok: v('ok'), // sage: done / complete / strings
         info: v('info'), // steel: keys, running, links inside code
         warn: v('warn'), // rust: destructive, errors
+        // contribution graph: #1e2228 #4a3a20 #7a5a2a #b8853f #f0b35a
+        heat: { 0: v('heat-0'), 1: v('heat-1'), 2: v('heat-2'), 3: v('heat-3'), 4: v('heat-4') },
       },
       maxWidth: { page: '1180px' },
     },

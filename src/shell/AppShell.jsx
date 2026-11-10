@@ -1,10 +1,11 @@
 /* The workbench shell shared by index.md (portfolio), planner.cal and news.fm.
  * Contract: docs/DESIGN.md "Shell". Public API (keep stable):
- *   <AppShell page="index"|"planner"|"news" sections={[{ id, label, key }]} defaultMode="NORMAL">
- *   useShell() -> { mode, setMode(name|null), flash(text, tone?), registerCommands(list) -> unregister }
+ *   <AppShell page="index"|"planner"|"news" sections={[{ id, label, key }]} outline="rail"|"none" defaultMode="NORMAL">
+ *   useShell() -> { mode, section, setMode(name|null), flash(text, tone?), registerCommands(list) -> unregister }
  *   useCommands([{ name, desc, keys?, run }]) adds page commands to the command line
- * Layout: with `sections`, the shell wraps children in the page column (.wrap)
- * next to the outline rail; without them, children own their width. */
+ * Layout: with `sections`, the shell wraps children in the page column (.wrap),
+ * next to the outline rail unless outline="none" (the page then draws its own
+ * section nav from useShell().section); without them, children own their width. */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { PROFILE } from '../config/portfolio.config';
 import { isTypingTarget, PAGES, scrollToId } from '../lib/nav';
@@ -88,7 +89,7 @@ function Footer() {
   );
 }
 
-export default function AppShell({ page = 'index', sections = [], defaultMode = 'NORMAL', children }) {
+export default function AppShell({ page = 'index', sections = [], outline = 'rail', defaultMode = 'NORMAL', children }) {
   const [override, setOverride] = useState(null);
   const [msg, setMsg] = useState(null);
   const [cmd, setCmd] = useState(null); // null, or the prefix the command line opened with
@@ -108,7 +109,10 @@ export default function AppShell({ page = 'index', sections = [], defaultMode = 
     return () => setRegistered((xs) => xs.filter((x) => x !== entry));
   }, []);
   const pageCommands = useMemo(() => registered.flatMap((x) => x.commands), [registered]);
-  const ctx = useMemo(() => ({ mode, setMode, flash, registerCommands }), [mode, setMode, flash, registerCommands]);
+  const ctx = useMemo(
+    () => ({ mode, section: current, setMode, flash, registerCommands }),
+    [mode, current, setMode, flash, registerCommands],
+  );
 
   useEffect(() => {
     if (!msg) return undefined;
@@ -162,7 +166,7 @@ export default function AppShell({ page = 'index', sections = [], defaultMode = 
         go(CHORDS[e.key]);
         return;
       }
-      if (/^[1-9]$/.test(e.key)) {
+      if (/^[0-9]$/.test(e.key)) {
         const s = sections.find((x, i) => (x.key ?? String(i + 1)) === e.key);
         if (s && scrollToId(s.id)) e.preventDefault();
       }
@@ -171,7 +175,7 @@ export default function AppShell({ page = 'index', sections = [], defaultMode = 
     return () => window.removeEventListener('keydown', onKey);
   }, [sections, go]);
 
-  const hasRail = sections.length > 0;
+  const hasSections = sections.length > 0;
 
   return (
     <ShellContext.Provider value={ctx}>
@@ -183,13 +187,17 @@ export default function AppShell({ page = 'index', sections = [], defaultMode = 
           Skip to content
         </a>
         <TopBar page={page} cmdOpen={cmdOpen} onCommand={() => setCmd(':')} />
-        {hasRail ? (
+        {hasSections && outline === 'rail' ? (
           <div className="wrap flex-1 min-[1100px]:grid min-[1100px]:grid-cols-[10.5rem_minmax(0,1fr)] min-[1100px]:gap-12">
             <OutlineRail sections={sections} current={current} />
             <main id="main" tabIndex={-1} className="min-w-0 focus:outline-none">
               {children}
             </main>
           </div>
+        ) : hasSections ? (
+          <main id="main" tabIndex={-1} className="wrap min-w-0 flex-1 focus:outline-none">
+            {children}
+          </main>
         ) : (
           <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
             {children}

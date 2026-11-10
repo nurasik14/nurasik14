@@ -1,7 +1,7 @@
-// Hero: YAML frontmatter, the name, lede, actions; fig. 1 (real DQN logs) on the right.
-import { DQN_RUNS, LANGUAGES, PROFILE } from '../config/portfolio.config';
-import { CV_HREF } from '../lib/nav';
-import ProfileLinks from './ProfileLinks';
+/* Section 00 overview: a GitHub-style profile README frame. Header row
+ * "nurasik14 / README.md", then the YAML frontmatter, a short intro, the
+ * "### now" list and fig. 1 (real DQN logs). */
+import { DQN_RUNS, LANGUAGES, NOW, PROFILE } from '../config/portfolio.config';
 import { valueAt } from '../lib/chart';
 import StepChart from './StepChart';
 
@@ -14,7 +14,6 @@ const end = (pts) => pts.at(-1);
 const n = (v) => v.toLocaleString('en-US');
 
 function Frontmatter() {
-  // Only fields the H1 and lede below don't already say.
   const rows = [
     ['focus', PROFILE.focus],
     ['status', PROFILE.status],
@@ -64,7 +63,7 @@ function Fig1() {
       <p className="sr-only">
         Best reward so far by training episode. Double DQN rises from {DQN_RUNS.double[0][1]} to {dy} over {n(dx)}{' '}
         episodes. Dueling DQN reaches {uy} by episode {n(ux)}, when its run stopped; Double DQN&apos;s best at that
-        episode was {valueAt(DQN_RUNS.double, ux)}. The same numbers are in a table in the train_dqn project row.
+        episode was {valueAt(DQN_RUNS.double, ux)}. The same numbers are in a table in the train_dqn project details.
       </p>
       <StepChart
         label={`Step chart: best reward so far versus episode, Double DQN ${dy} at ${n(dx)} episodes, Dueling DQN ${uy} at ${n(ux)}.`}
@@ -83,29 +82,42 @@ function Fig1() {
   );
 }
 
-export default function Hero() {
+export default function Readme({ id = 'overview' }) {
   return (
-    <header className="grid grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-10 pt-10 sm:pt-14 min-[1100px]:pt-12 xl:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] xl:items-start">
-      <div>
-        <Frontmatter />
-        <h1 className="mt-6 font-sans text-[clamp(2.75rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-fg">
-          {PROFILE.name}
-          <span aria-hidden className="ml-[0.06em] inline-block h-[0.78em] w-[0.42em] translate-y-[0.06em] bg-signal" />
-        </h1>
-        <p className="mt-6 max-w-[62ch] text-[17px] leading-[1.65] text-fg-dim">{PROFILE.lede}</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <a href={CV_HREF} className="btn btn-primary">
-            Read the CV <span aria-hidden>↗</span>
-          </a>
-          <a href="#projects" className="btn">
-            Projects <kbd aria-hidden className="kbd border-line-strong">1</kbd>
-          </a>
+    <section id={id} tabIndex={-1} aria-labelledby={`${id}-title`} className="scroll-mt-12 pt-6 focus:outline-none">
+      <article className="rounded border border-line">
+        <header className="flex items-center justify-between gap-4 border-b border-line px-4 py-2.5 font-mono text-[12px]">
+          <h2 id={`${id}-title`} className="min-w-0 truncate font-normal">
+            <span className="sr-only">overview: </span>
+            <span className="text-fg-dim">{PROFILE.github}</span>
+            <span className="text-fg-faint"> / </span>
+            <span className="text-fg">README.md</span>
+          </h2>
+          <span aria-hidden className="shrink-0 text-fg-faint">
+            md
+          </span>
+        </header>
+        <div className="readme-body p-4 sm:p-6">
+          <div className="min-w-0">
+            <Frontmatter />
+            <p className="mt-5 max-w-[62ch] leading-[1.65] text-fg-dim">{PROFILE.intro}</p>
+            <h3 className="mb-2 mt-6 font-mono text-[14px] font-medium text-fg">
+              <span aria-hidden className="text-fg-faint">### </span>now
+            </h3>
+            <ul className="max-w-[62ch] space-y-1.5 text-[15px] leading-[1.55] text-fg-dim">
+              {NOW.map((x) => (
+                <li key={x} className="grid grid-cols-[2ch_minmax(0,1fr)]">
+                  <span aria-hidden className="font-mono text-fg-faint">-</span>
+                  <span>{x}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="min-w-0">
+            <Fig1 />
+          </div>
         </div>
-        <ProfileLinks className="mt-6" />
-      </div>
-      <div className="max-w-2xl xl:max-w-none xl:pt-[1.7em]">
-        <Fig1 />
-      </div>
-    </header>
+      </article>
+    </section>
   );
 }

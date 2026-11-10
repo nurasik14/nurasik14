@@ -21,6 +21,13 @@
   --ok: 147 196 125; /* #93c47d sage */
   --info: 130 174 214; /* #82aed6 steel */
   --warn: 232 115 94; /* #e8735e rust */
+  /* Contribution-graph shades, none to most. Data, not decoration, so the
+   * amber ramp is allowed here. Level 0 gets a line outline in the graph. */
+  --heat-0: 30 34 40; /* #1e2228 */
+  --heat-1: 74 58 32; /* #4a3a20 */
+  --heat-2: 122 90 42; /* #7a5a2a */
+  --heat-3: 184 133 63; /* #b8853f */
+  --heat-4: 240 179 90; /* #f0b35a */
   color-scheme: dark;
 }
 
@@ -128,6 +135,38 @@
   }
   .anim-clip {
     animation: clip-in 150ms ease-out both;
+  }
+  /* index.md main column (next to the profile sidebar). Its width, not the
+   * viewport's, decides the README and pinned-card columns. */
+  .profile-main {
+    container-type: inline-size;
+  }
+  .readme-body {
+    display: grid;
+    gap: 1.5rem;
+  }
+  /* Pinned cards. A card's details panel follows it in the DOM and spans the
+   * row; `dense` lets the next card fill the slot beside the open one, so the
+   * panel lands right under the card's row. */
+  .pinned-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-flow: row dense;
+    gap: 1rem;
+  }
+  .pinned-details {
+    grid-column: 1 / -1;
+  }
+  @container (min-width: 34rem) {
+    .pinned-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @container (min-width: 48rem) {
+    .readme-body {
+      grid-template-columns: minmax(0, 1fr) 20rem;
+      align-items: start;
+    }
   }
   /* Inline text links in prose: dim underline that brightens on hover. */
   .link {

@@ -8,14 +8,24 @@
 
 export const PROFILE = {
   name: 'Nurassyl Serikov',
-  handle: 'nurassyl',
-  // Not shown on the page (the lede says it); kept as the one-line role.
+  handle: 'nurassyl', // the top bar's ~/nurassyl home link
+  github: 'nurasik14', // the username line under the name
+  // Real GitHub avatar. If it fails to load, the sidebar shows `monogram`.
+  avatar: 'https://avatars.githubusercontent.com/u/76750044?v=4',
+  monogram: 'NS',
+  // Not shown on the page (the bio says it); kept as the one-line role.
   role: 'first-year CS student, City University of Hong Kong',
+  school: 'City University of Hong Kong',
+  degree: 'BSc CS 2026-2030',
   location: 'Hong Kong',
-  status: 'open to AI/ML internships in Hong Kong',
+  // The sidebar pill shows this with " · " in place of ", ".
+  status: 'open to AI/ML internships, summer 2027',
   focus: ['LLM agents', 'reinforcement learning', 'retrieval'],
-  lede:
-    "I'm a first-year Computer Science student at City University of Hong Kong, on a full scholarship. I build agents that call tools, train RL models, and keep the training logs to prove what they did.",
+  // Sidebar bio, short like a GitHub bio (the lede, trimmed).
+  bio: 'First-year CS student at City University of Hong Kong, on a full scholarship. I build agents that call tools and train RL models.',
+  // The intro paragraph in the README.md panel, above the "now" list and fig. 1.
+  intro:
+    'I keep the training logs to prove what my models did: fig. 1 is two DQN variants learning Flappy Bird from reward alone. Every number on this page comes from a log, a repo or a certificate, and work that is not measured yet says so.',
   // Put the PDF at public/Nurassyl_Serikov_CV.pdf and it is served from here.
   cv: 'Nurassyl_Serikov_CV.pdf',
   email: 'nurasik.s@my.cityu.edu.hk',
@@ -27,6 +37,13 @@ export const PROFILE = {
     { prefix: 'in/', label: 'nurasik12', href: 'https://linkedin.com/in/nurasik12' },
   ],
 };
+
+/* ---- now: the "### now" list in the README.md panel --------------- */
+export const NOW = [
+  'Building a Kazakh retriever to beat the KazQAD baseline',
+  'Building a voice layer for my agent setup: Hermes as the brain, Claude Code as the hands, streaming STT/TTS as the voice, steerable mid-task',
+  'CS freshman at CityU (linear algebra, probability, algorithms)',
+];
 
 /* ---- DQN training logs (FlappyBird-RL/runs/graphs/*.log) ----------
  * [episode, best reward so far]. Copied from the "new best reward"
@@ -51,23 +68,39 @@ export const TOOLS = [
   ['fastapi', 'api'], ['opencv', 'cv'], ['mediapipe', 'cv'], ['gymnasium', 'rl'],
   ['typescript', 'lang'], ['react', 'web'], ['node.js', 'web'], ['postgresql', 'db'],
   ['docker', 'ops'], ['linux', 'ops'], ['git', 'ops'], ['playwright', 'test'],
+  ['hermes agent', 'harness'], ['claude code', 'harness'], ['mcp', 'llm'], ['svelte', 'web'],
+  ['bun', 'web'], ['hono', 'api'], ['qml / quickshell', 'desktop'],
 ];
 
-/* ---- projects: the experiments ledger in "## 01 projects" ----------
- * id: unique; the row is deep-linkable as #project-<id>
+/* ---- language dots on the pinned cards -----------------------------
+ * GitHub linguist colours. A stack item named here gets a filled dot in
+ * its colour; libraries and tools get a hollow dot. The name is always
+ * written next to the dot, so the colour is never the only signal.    */
+export const LANG_COLORS = {
+  python: '#3572A5',
+  typescript: '#3178c6',
+  javascript: '#f1e05a',
+  qml: '#44a51c',
+  shell: '#89e051',
+};
+
+/* ---- projects: the pinned cards in "## 01 projects" -----------------
+ * Array order = pin order. 'archived' projects are listed compactly
+ * under the cards instead of getting a card.
+ * id: unique; the card is deep-linkable as #project-<id>
  * status: 'complete' | 'running' | 'archived'
- * result: one line on the collapsed row. Only measured numbers; if
- *         nothing is measured yet, say so.
+ * result: one line on the card. Only measured numbers; if nothing is
+ *         measured yet, say so.
  * stack: optional; falls back to input.stack
- * input: rendered as YAML (inputFile names the block); a `repo` value
- *        ("owner/name") also becomes the row's repo link.
- * stats: 'dqn' | 'search' | 'rag' | { empty: title, note }          */
+ * input: rendered as YAML under "details" (inputFile names the block);
+ *        a `repo` value ("owner/name") also links the card's name.
+ * stats: 'dqn' | 'search' | 'rag' | { empty: title, note }
+ * defaultOpen: true opens that project's details on load.             */
 export const PROJECTS = [
   {
     id: 'dqn',
     name: 'train_dqn',
     status: 'complete',
-    defaultOpen: true,
     // Same numbers as the last DQN_RUNS.double point; keep them in sync.
     result: 'Double DQN: best reward 53.1 after 168,126 episodes',
     description:
@@ -89,6 +122,60 @@ export const PROJECTS = [
     stats: 'dqn',
   },
   {
+    id: 'overworld',
+    name: 'overworld-hyprland',
+    status: 'complete',
+    result: '19 stars on GitHub',
+    stack: ['qml', 'quickshell', 'hyprland'],
+    description:
+      'Minecraft as a Linux desktop: hotbar workspaces, creative-inventory launcher, advancement toasts, chat commands, an F3 screen, real weather and day/night.',
+    inputFile: 'shell.yaml',
+    input: {
+      compositor: 'hyprland',
+      shell: 'quickshell (qml)',
+      workspaces: 'hotbar',
+      launcher: 'creative inventory',
+      extras: ['advancement toasts', 'chat commands', 'F3 screen', 'weather', 'day/night'],
+      repo: 'nurasik14/overworld-hyprland',
+    },
+    stats: { empty: 'desktop theme, no benchmark', note: 'Screenshots and install steps are in the repo.' },
+  },
+  {
+    id: 'lastfm',
+    name: 'lastfm-taste-mcp',
+    status: 'complete',
+    result: '24 read-only tools',
+    stack: ['python', 'mcp'],
+    description:
+      'A read-only MCP server that lets an AI agent look at your Last.fm listening history: this week, most-played songs, loved tracks and similar music.',
+    inputFile: 'server.yaml',
+    input: {
+      protocol: 'mcp',
+      source: 'Last.fm',
+      access: 'read-only',
+      tools: 24,
+      repo: 'nurasik14/lastfm-taste-mcp',
+    },
+    stats: { empty: 'tool server, no benchmark', note: 'Nothing is measured here; the repo has the code.' },
+  },
+  {
+    id: 'quests',
+    name: 'apothecaries_quests',
+    status: 'complete',
+    result: 'PWA; self-hosted',
+    stack: ['typescript', 'bun', 'hono', 'svelte'],
+    description:
+      'Self-hosted daily quest journal: an LLM writes three real-life quests sized to your energy, you rate the day at night, finished quests buy real treats. Works with Claude, Ollama or any OpenAI-compatible API.',
+    inputFile: 'app.yaml',
+    input: {
+      app: 'pwa, self-hosted',
+      quests_per_day: 3,
+      llm: ['claude', 'ollama', 'openai-compatible'],
+      repo: 'nurasik14/Apothecaries-quests',
+    },
+    stats: { empty: 'app, no benchmark', note: 'Nothing is measured here; the repo has the code.' },
+  },
+  {
     id: 'search',
     name: 'ollama_search',
     status: 'complete',
@@ -108,20 +195,21 @@ export const PROJECTS = [
   },
   {
     id: 'rag',
-    name: 'trilingual_rag',
+    name: 'kazakh_rag',
     status: 'running',
-    result: 'in progress; recall@5 not measured yet',
+    result: 'design phase; no code or results yet',
+    stack: ['python', 'hugging face'],
     description:
-      'Question answering over Kazakh, Russian and English documents, comparing dense and hybrid retrieval.',
+      'A retriever for Kazakh questions over a Kazakh corpus, aiming to beat the published KazQAD baseline (NDCG@10 0.389). Started as trilingual kk/ru/en and narrowed to Kazakh for v1.',
     inputFile: 'eval.yaml',
     input: {
-      langs: ['kk', 'ru', 'en'],
-      retrieval: ['dense', 'hybrid'],
-      compare: 'multilingual embedding models',
-      metric: 'recall@5',
-      stack: ['python', 'hugging face', 'vector db'],
+      lang: 'kk',
+      benchmark: 'KazQAD',
+      baseline: { 'ndcg@10': 0.389 },
+      metrics: ['ndcg@10', 'mrr'],
+      repo: 'nurasik14/Kazakh-RAG',
     },
-    statsFile: 'recall@5',
+    statsFile: 'ndcg@10 · mrr',
     stats: 'rag',
   },
   {
@@ -131,7 +219,7 @@ export const PROJECTS = [
     result: 'prototype; code not published',
     description: 'LLM characters that remember earlier conversations through an embedding store.',
     input: { store: 'embeddings', stack: ['python', 'llm', 'embeddings'], memory: 'retrieve past turns by similarity' },
-    stats: { empty: 'prototype, code not published', note: "I'm rebuilding it in public. This row will link the repo when it's up." },
+    stats: { empty: 'prototype, code not published', note: "I'm rebuilding it in public. This entry will link the repo when it's up." },
   },
   {
     id: 'cursor',
@@ -204,3 +292,5 @@ export const EDUCATION = [
   },
 ];
 export const LANGUAGES = ['kazakh', 'russian', 'english'];
+// Short codes for the sidebar (screen readers get the full name).
+export const LANG_CODES = { kazakh: 'kk', russian: 'ru', english: 'en' };
