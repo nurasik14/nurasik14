@@ -285,12 +285,12 @@ describe('the job', () => {
     expect(await j.status()).toMatchObject({ done: 1, failed: 0 });
   });
 
-  test('at most 3 clips run at once', async () => {
+  test('at most 6 clips run at once', async () => {
     const j = job([ID1, ID2, ID3, ID4, 'eeeeeeeeeee5', 'fffffffffff6', 'aaaaaaaaaab7'].map((id) => story(id)));
     await j.start();
     await j.whenIdle();
     expect(tts.calls).toHaveLength(7);
-    expect(tts.peak).toBe(3);
+    expect(tts.peak).toBe(6);
   });
 
   test('a second start is a 409 while one runs; running and progress show meanwhile', async () => {

@@ -5,7 +5,7 @@ import { join, resolve } from 'node:path';
 import { PassThrough, Readable } from 'node:stream';
 import { afterEach, beforeEach, describe, expect, test } from 'bun:test';
 import { BOOKMARKS_MAX, decryptWeek, encryptBookmarks, encryptWeek, NEWS_SCOPES, STORY_SCHEMA } from '../../plugins/news-core.js';
-import { buildClaudePrompt, CLAUDE_RULES, createClaudeRunner, createNewsDataHandler, createNewsHandler, resolveNewsHome } from '../../plugins/news-sync.js';
+import { buildClaudePrompt, CLAUDE_RULES, createClaudeRunner, createNewsDataHandler, createNewsHandler, mapLimited, resolveNewsHome } from '../../plugins/news-sync.js';
 
 const hkt = (s) => Date.parse(`${s}+08:00`);
 const ROOT = resolve(import.meta.dirname, '../..');
@@ -413,6 +413,28 @@ describe('sync (weekly, after the backlog)', () => {
     message('after', '2026-10-30T00:00:00'),
   ];
 
+  test('sends at most 4 emails to Claude at once and keeps them in arrival order', async () => {
+    await connectToken();
+    g.messages = [1, 2, 3, 4, 5, 6, 7].map((n) => message(`p${n}`, `2026-10-${22 + n}T0${n}:00:00`));
+    let running = 0;
+    let peak = 0;
+    let n = 0;
+    claude = async (email) => {
+      running += 1;
+      peak = Math.max(peak, running);
+      // The first ones sent finish last.
+      await new Promise((ok) => setTimeout(ok, 30 - 4 * n++));
+      running -= 1;
+      return defaultClaude(email);
+    };
+    const res = await sync();
+    expect(res.body).toMatchObject({ published: ['2026-10-23'], skipped: null, emails: 7 });
+    expect(peak).toBe(4);
+    const payload = await decryptWeek(JSON.parse(await readFile(newsFile('2026-10-23.json'), 'utf8')), PASS, { week: '2026-10-23' });
+    const times = payload.stories.map((s) => s.receivedAt);
+    expect(times).toEqual([...times].sort());
+  });
+
   test('happy path writes the week, the index and leaks nothing', async () => {
     await connectToken();
     g.messages = generate();
@@ -741,7 +763,7 @@ describe('backlog (the first sync)', () => {
     expect(await cacheFiles()).toEqual([]);
   });
 
-  test('a failed email stops the backlog; finished ones stay cached', async () => {
+  test('a failed email stops the backlog; the ones that ran stay cached', async () => {
     await connectToken();
     g.messages = [message('a', '2026-10-01T09:00:00'), message('b', '2026-10-02T09:00:00', { body: 'EXPLODE' }), message('c', '2026-10-03T09:00:00')];
     let calls = 0;
@@ -753,10 +775,10 @@ describe('backlog (the first sync)', () => {
     expect(res.body.published).toEqual([]);
     expect(res.body.skipped).toBe('backlog failed: email 2 of 3: claude error: boom');
     expect(await exists(newsFile('backlog.json'))).toBe(false);
-    expect(calls).toBe(2); // a, then b failed
+    expect(calls).toBe(3); // a, b and c ran at once; b failed
     g.messages[1] = message('b', '2026-10-02T09:00:00');
     expect((await sync()).body.published).toEqual(['backlog']);
-    // a came from the cache: only b (retried) and c cost a call.
+    // a and c came from the cache: only b (retried) cost a call.
     expect(calls).toBe(4);
   });
 
@@ -861,11 +883,12 @@ describe('backlog rebuild', () => {
       return real(email);
     };
     const res = await rebuild();
-    expect(res.body.skipped).toBe('backlog rebuild failed: email 2 of 4: claude error: boom');
+    // All four run at once, so which email made the second call varies.
+    expect(res.body.skipped).toMatch(/^backlog rebuild failed: email [1-4] of 4: claude error: boom$/);
     expect(res.body.published).toEqual([]);
     expect(await readFile(newsFile('backlog.json'), 'utf8')).toBe(before);
     expect((await rebuild()).body.published).toEqual(['backlog']);
-    expect(calls).toBe(5); // 1 ok, 1 failed, then that one again and the two left
+    expect(calls).toBe(5); // 3 ok and cached, 1 failed, then only that one again
   });
 
   test('cached stories of the old format are never reused, by a rebuild or a first build', async () => {
@@ -1168,6 +1191,32 @@ describe('data handler', () => {
   });
 });
 
+describe('mapLimited', () => {
+  test('keeps order, caps concurrency, and after an error lets running work finish but starts nothing new', async () => {
+    let running = 0;
+    let peak = 0;
+    const started = [];
+    const fn = async (x) => {
+      started.push(x);
+      running += 1;
+      peak = Math.max(peak, running);
+      await new Promise((ok) => setTimeout(ok, x === 2 ? 1 : 10));
+      running -= 1;
+      if (x === 2) throw new Error('two');
+      return x * 10;
+    };
+    await expect(mapLimited([1, 2, 3, 4, 5], 2, fn)).rejects.toThrow('two');
+    expect(started).toEqual([1, 2]);
+    expect(peak).toBe(2);
+    expect(await mapLimited([3, 1, 2], 2, async (x) => x * 10)).toEqual([30, 10, 20]);
+  });
+
+  test('STOP ends the run without failing and leaves the rest undefined', async () => {
+    const out = await mapLimited([1, 2, 3, 4], 1, async (x) => (x === 3 ? mapLimited.STOP : x));
+    expect(out).toEqual([1, 2, undefined, undefined]);
+  });
+});
+
 describe('createClaudeRunner', () => {
   function fakeSpawn(behave) {
     const calls = [];
@@ -1208,6 +1257,8 @@ describe('createClaudeRunner', () => {
     expect(cmd).toBe('claude');
     expect(args).toEqual([
       '-p',
+      '--model',
+      'sonnet',
       '--tools',
       '',
       '--strict-mcp-config',

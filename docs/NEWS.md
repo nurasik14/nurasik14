@@ -16,7 +16,8 @@ asks for the passphrase, decrypts in the browser and reads the clips aloud.
  email to plain text (links become tags like [L3], max 30,000 chars)
     │ stdin
     ▼
- claude -p --tools "" … ──► stories per email, each naming its tag
+ claude -p --model sonnet --tools "" … ──► stories per email, each naming its tag
+   (4 emails at a time)
     ▼
  encrypt (PBKDF2 + AES-256-GCM)
     ▼
@@ -163,7 +164,7 @@ the repository and never published.
     │
     ▼
  decrypt public/data/news/*.json with the passphrase file (in memory)
-    │ the script of each clip that has no audio yet (3 at a time)
+    │ the script of each clip that has no audio yet (6 at a time)
     ▼
  uvx --from edge-tts==7.3.1 edge-tts … ──► Microsoft's Edge read-aloud service
     ▼
@@ -251,7 +252,8 @@ resumable. Each email's stories are cached in `~/.cache/news-fm/stories/` (0700;
 files 0600, named by a hash of the message id) and the next sync continues where
 the last stopped; `status` shows `backlog: { state, until, done, total }`.
 `backlog.json` is written only when every email is done, then the cache is deleted.
-A failed email stops the sync; the ones before it stay cached. No weekly wrap-up is
+Emails go to Claude 4 at a time. A failed email stops the sync: nothing new
+starts, and the ones already running finish and stay cached. No weekly wrap-up is
 published until the backlog is.
 
 The cache is plaintext (scripts, article links, newsletter names, arrival times) on
@@ -260,7 +262,7 @@ this machine only. Delete `~/.cache/news-fm/stories/` to start the backlog over.
 ### Rebuilding the backlog
 
 **rebuild backlog** in the panel (`curl -s -X POST localhost:5173/api/news/backlog/rebuild`)
-runs every email of the published backlog through Claude again, about 10 s each, for
+runs every email of the published backlog through Claude again, 4 at a time, for
 example to give it links. It uses the same window and is built like the first one:
 resumable, at most 80 Claude calls per press (or `maxEmails`), and `status` shows
 `backlog.rebuild: { done, total, running }`. A failed email stops it and the finished
@@ -334,7 +336,7 @@ Use the sync panel at <http://localhost:5173/news/>, or the API directly. With
    curl -s localhost:5173/api/news/status
    ```
 
-3. Press **sync**. This can take many minutes, since it makes one Claude call per
+3. Press **sync**. This can take several minutes, since it makes one Claude call per
    email. The panel counts the seconds and shows the backlog as it progresses. With
    curl, the response only arrives at the end:
 
@@ -397,6 +399,7 @@ no narrower form.
 
 Email is untrusted, and anyone can send mail to the account. The guards:
 
+- The model is pinned to Sonnet (`--model sonnet`); the plan's default is not used.
 - `--tools ""` gives Claude no tools, so an email cannot make it read files, run
   commands or fetch URLs. `--strict-mcp-config` and `--setting-sources ""` keep out
   MCP servers, hooks and settings. The working directory is an empty folder under

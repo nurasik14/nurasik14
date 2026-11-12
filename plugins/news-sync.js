@@ -71,6 +71,10 @@ const GMAIL = 'https://gmail.googleapis.com/gmail/v1';
 const STATE_TTL_MS = 10 * 60 * 1000;
 const MAX_EMAILS = 80;
 const CLAUDE_TIMEOUT_MS = 180_000;
+// Rewriting a newsletter into short scripts does not need the plan's default (Opus).
+const CLAUDE_MODEL = 'sonnet';
+// Emails sent to Claude at once, in a week and in the backlog.
+const CLAUDE_CONCURRENCY = 4;
 const KILL_GRACE_MS = 5_000;
 
 // ---------------------------------------------------------------- secrets
@@ -120,6 +124,36 @@ export function createStoryCache(dir, namespace) {
     },
   };
 }
+/**
+ * fn(item, i) over items, at most `size` at a time; results in item order.
+ * After the first error nothing new starts; the ones already running finish,
+ * then that error is thrown. fn may return `mapLimited.STOP` to start nothing
+ * more without failing; those items and every unstarted one stay `undefined`.
+ */
+export async function mapLimited(items, size, fn) {
+  const out = Array.from({ length: items.length }); // no holes: .some/.map must see unstarted items
+  let next = 0;
+  let stopped = false;
+  let error = null;
+  const worker = async () => {
+    while (!stopped && next < items.length) {
+      const i = next++;
+      try {
+        const value = await fn(items[i], i);
+        if (value === mapLimited.STOP) stopped = true;
+        else out[i] = value;
+      } catch (err) {
+        if (!error) error = err;
+        stopped = true;
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: Math.max(1, Math.min(size, items.length)) }, worker));
+  if (error) throw error;
+  return out;
+}
+mapLimited.STOP = Symbol('stop');
+
 const sameAddress = (a, b) => String(a ?? '').trim().toLowerCase() === String(b ?? '').trim().toLowerCase();
 
 // ---------------------------------------------------------------- Claude
@@ -157,6 +191,8 @@ export function createClaudeRunner({ cacheDir = join(homedir(), '.cache', 'news-
   const cwd = join(cacheDir, 'claude-cwd');
   const args = [
     '-p',
+    '--model',
+    CLAUDE_MODEL,
     '--tools',
     '',
     '--strict-mcp-config',
@@ -264,6 +300,7 @@ export function createNewsHandler({
   storyDir = join(homedir(), '.cache', 'news-fm', 'stories'),
   audioDir = null,
   runTts = createTtsRunner(),
+  claudeConcurrency = CLAUDE_CONCURRENCY,
 }) {
   const own = createSecrets(home, newsSettings);
   const planner = createSecrets(plannerHome);
@@ -505,39 +542,50 @@ export function createNewsHandler({
   async function buildBacklog({ until, passphrase, account, budget, stories: storyCache, onProgress = () => {} }) {
     const window = backlogWindow(until);
     const ids = await listMessageIds(window);
-    const emails = [];
     let done = 0;
     onProgress(done, ids.length);
-    for (const id of ids) {
+    // claudeConcurrency emails at a time. A Claude call is reserved before the
+    // Gmail fetch (so the cap holds with several in flight) and given back for an
+    // email with no text. Every finished email is cached at once, so a failure or
+    // the cap loses nothing that already ran.
+    const entries = await mapLimited(ids, claudeConcurrency, async (id, i) => {
       let entry = await storyCache.get(id);
       if (!entry) {
-        if (budget.calls >= budget.cap) return { published: false, done, total: ids.length };
+        if (budget.calls >= budget.cap) return mapLimited.STOP;
+        budget.calls += 1;
         const { data } = await google.api('GET', `/users/me/messages/${encodeURIComponent(id)}`, {
           query: { format: 'full', fields: 'id,internalDate,payload' },
         });
         if (!data?.id || !Number.isFinite(Number(data.internalDate))) throw new Error('gmail returned a message without an internalDate');
         if (!inWindow(data.internalDate, window)) {
+          budget.calls -= 1;
           entry = { skip: true };
         } else {
           const newsletter = senderName(fromOf(data));
           const { text, links } = emailToText(data);
           let stories = [];
           if (text) {
-            budget.calls += 1;
             try {
               stories = parseStories(await runClaude({ newsletter, subject: subjectOf(data), text }), links);
             } catch (err) {
-              throw new Error(`email ${done + 1} of ${ids.length}: ${err.message}`);
+              throw new Error(`email ${i + 1} of ${ids.length}: ${err.message}`);
             }
+          } else {
+            budget.calls -= 1;
           }
           entry = { internalDate: String(data.internalDate), newsletter, stories };
         }
         await storyCache.put(id, entry);
       }
-      if (!entry.skip) emails.push({ messageId: id, internalDate: entry.internalDate, newsletter: entry.newsletter, stories: entry.stories });
       done += 1;
       onProgress(done, ids.length);
-    }
+      return entry;
+    });
+    if (entries.some((entry) => !entry)) return { published: false, done, total: ids.length };
+    const emails = entries
+      .map((entry, i) => ({ entry, id: ids[i] }))
+      .filter(({ entry }) => !entry.skip)
+      .map(({ entry, id }) => ({ messageId: id, internalDate: entry.internalDate, newsletter: entry.newsletter, stories: entry.stories }));
     const payload = await buildPayload({ weekId: BACKLOG_ID, generatedAt: new Date(now()).toISOString(), emails, newestFirst: true, account });
     const file = await encryptBacklog({ until, payload, passphrase, ...(iterations ? { iterations } : {}) });
     await writeAtomic(join(dir, 'backlog.json'), serializeWeek(file));
@@ -670,21 +718,20 @@ export function createNewsHandler({
             out.skipped = `week ${weekId} needs ${needed} Claude calls and ${calls} of ${cap} are used; sync again, or raise maxEmails in settings.json if one week is over the cap`;
             break;
           }
-          const emails = [];
-          for (const [i, message] of messages.entries()) {
+          calls += needed;
+          const emails = await mapLimited(messages, claudeConcurrency, async (message, i) => {
             const newsletter = senderName(fromOf(message));
             let stories = [];
             // An email with no text has nothing to rewrite; a subject alone invites invention.
             if (bodies[i].text) {
-              calls += 1;
               try {
                 stories = parseStories(await runClaude({ newsletter, subject: subjectOf(message), text: bodies[i].text }), bodies[i].links);
               } catch (err) {
                 throw new Error(`email ${i + 1} of ${messages.length}: ${err.message}`);
               }
             }
-            emails.push({ messageId: message.id, internalDate: message.internalDate, newsletter, stories });
-          }
+            return { messageId: message.id, internalDate: message.internalDate, newsletter, stories };
+          });
           const payload = await buildPayload({ weekId, generatedAt: new Date(now()).toISOString(), emails, account: settings.account });
           const file = await encryptWeek({ weekId, payload, passphrase, ...(iterations ? { iterations } : {}) });
           await writeAtomic(join(dir, `${weekId}.json`), serializeWeek(file));
