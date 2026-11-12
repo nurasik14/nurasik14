@@ -1,0 +1,323 @@
+{
+  "week": "2026-W46",
+  "start": "2026-11-09",
+  "end": "2026-11-12",
+  "complete": false,
+  "generated": "2026-11-12T04:34:18+00:00",
+  "timezone": "Asia/Hong_Kong",
+  "wakatime": {
+    "total_seconds": 41862,
+    "daily_average_seconds": 10466,
+    "active_days": 4,
+    "categories": [
+      {
+        "name": "AI Coding",
+        "seconds": 41862,
+        "percent": 100.0
+      }
+    ],
+    "projects": [
+      {
+        "name": "pygym",
+        "seconds": 14049,
+        "percent": 33.6
+      },
+      {
+        "name": "overworld-hyprland",
+        "seconds": 10584,
+        "percent": 25.3
+      },
+      {
+        "name": "nurasik14",
+        "seconds": 3739,
+        "percent": 8.9
+      },
+      {
+        "name": "Projects",
+        "seconds": 2158,
+        "percent": 5.2
+      },
+      {
+        "name": "apothecary-hyprland",
+        "seconds": 1918,
+        "percent": 4.6
+      },
+      {
+        "name": "nurasik12",
+        "seconds": 1792,
+        "percent": 4.3
+      },
+      {
+        "name": "Unknown Project",
+        "seconds": 1492,
+        "percent": 3.6
+      },
+      {
+        "name": "quest-journal",
+        "seconds": 1334,
+        "percent": 3.2
+      },
+      {
+        "name": "scripts",
+        "seconds": 1133,
+        "percent": 2.7
+      },
+      {
+        "name": "upw",
+        "seconds": 1084,
+        "percent": 2.6
+      },
+      {
+        "name": "tg-nebula-drift",
+        "seconds": 686,
+        "percent": 1.6
+      },
+      {
+        "name": "CityUHK_job_scraper",
+        "seconds": 416,
+        "percent": 1.0
+      },
+      {
+        "name": "Other",
+        "seconds": 1392,
+        "percent": 3.3
+      }
+    ],
+    "languages": [
+      {
+        "name": "Python",
+        "seconds": 14320,
+        "percent": 34.2
+      },
+      {
+        "name": "Markdown",
+        "seconds": 8303,
+        "percent": 19.8
+      },
+      {
+        "name": "JavaScript",
+        "seconds": 3787,
+        "percent": 9.0
+      },
+      {
+        "name": "QML",
+        "seconds": 3607,
+        "percent": 8.6
+      },
+      {
+        "name": "Text",
+        "seconds": 3010,
+        "percent": 7.2
+      },
+      {
+        "name": "HTML",
+        "seconds": 1092,
+        "percent": 2.6
+      },
+      {
+        "name": "Bash",
+        "seconds": 1044,
+        "percent": 2.5
+      },
+      {
+        "name": "TypeScript",
+        "seconds": 554,
+        "percent": 1.3
+      },
+      {
+        "name": "Svelte",
+        "seconds": 339,
+        "percent": 0.8
+      },
+      {
+        "name": "YAML",
+        "seconds": 158,
+        "percent": 0.4
+      },
+      {
+        "name": "INI",
+        "seconds": 128,
+        "percent": 0.3
+      },
+      {
+        "name": "Image (png)",
+        "seconds": 118,
+        "percent": 0.3
+      },
+      {
+        "name": "Other",
+        "seconds": 5378,
+        "percent": 12.8
+      }
+    ],
+    "editors": [
+      {
+        "name": "Claude Code",
+        "seconds": 38310,
+        "percent": 91.5
+      },
+      {
+        "name": "Hermes Agent",
+        "seconds": 2488,
+        "percent": 5.9
+      },
+      {
+        "name": "Hermes",
+        "seconds": 1064,
+        "percent": 2.5
+      }
+    ],
+    "days": [
+      {
+        "date": "2026-11-09",
+        "seconds": 1761,
+        "categories": {
+          "AI Coding": 1761
+        }
+      },
+      {
+        "date": "2026-11-10",
+        "seconds": 16371,
+        "categories": {
+          "AI Coding": 16371
+        }
+      },
+      {
+        "date": "2026-11-11",
+        "seconds": 22305,
+        "categories": {
+          "AI Coding": 22305
+        }
+      },
+      {
+        "date": "2026-11-12",
+        "seconds": 1425,
+        "categories": {
+          "AI Coding": 1425
+        }
+      }
+    ]
+  },
+  "git": {
+    "total": 48,
+    "repos": [
+      {
+        "name": "pygym",
+        "commits": 33,
+        "active_days": 2,
+        "latest": [
+          "test: pass on Python 3.10-3.12 and without numpy",
+          "release: 0.2.0",
+          "docs: README for 0.2.0 with a demo, usage and known problems",
+          "feat(ai): prompt with examples of the requested level, team rules and ethics",
+          "docs: prompt design for the team"
+        ]
+      },
+      {
+        "name": "nurasik14",
+        "commits": 4,
+        "active_days": 2,
+        "latest": [
+          "Weekly section: WakaTime last 7 days + weekly digest (WakaTime, git, Last.fm)",
+          "Portfolio: GitHub-style profile inside the editor shell; compact README demo",
+          "README: agent harnesses, voice-agent goal, no emoji; github.json snapshot for the site",
+          "Profile README: fix screenshot alignment, new sections, self-hosted stats cards"
+        ]
+      },
+      {
+        "name": "apothecary-hyprland-conf",
+        "commits": 3,
+        "active_days": 2,
+        "latest": [
+          "Bar clock: CityU semester + teaching week (port of Overworld's SemesterService)",
+          "Now Playing: YouTube video behind a VPN (yt-dlp JS runtime + tv/mweb client fallback past the bot wa",
+          "Feature: Now Playing scroll with TikTok actions"
+        ]
+      },
+      {
+        "name": "overworld-hyprland",
+        "commits": 3,
+        "active_days": 2,
+        "latest": [
+          "Bar clock: CityU semester + teaching week (Sem A 2026/27, from the official academic calendar)",
+          "Now Playing: YouTube video behind a VPN (yt-dlp JS runtime + tv/mweb client fallback past the bot wa",
+          "Feature: Now Playing PiP with TikTok actions"
+        ]
+      },
+      {
+        "name": "nebula-drift",
+        "commits": 2,
+        "active_days": 1,
+        "latest": [
+          "Bot (menu button, Mini App + game card), README, share via game proxy",
+          "Nebula Drift: Telegram Mini App game"
+        ]
+      },
+      {
+        "name": "quest-journal",
+        "commits": 2,
+        "active_days": 2,
+        "latest": [
+          "feat: photo uploads for weekly quest, checkpoints, ledger highlight/notes",
+          "feat: quiz updated"
+        ]
+      },
+      {
+        "name": "Simple-back-youtube-retrieval-api",
+        "commits": 1,
+        "active_days": 1,
+        "latest": [
+          "docs"
+        ]
+      }
+    ],
+    "per_day": {
+      "2026-11-10": 11,
+      "2026-11-11": 34,
+      "2026-11-12": 3
+    }
+  },
+  "lastfm": {
+    "user": "Nurasik",
+    "scrobbles": 295,
+    "tracks": [
+      {
+        "name": "worry (Slowed)",
+        "artist": "LONOWN",
+        "plays": 4,
+        "url": "https://www.last.fm/music/LONOWN/_/worry+(Slowed)"
+      },
+      {
+        "name": "Alan Walker - Where are you now (Faded) (Lyrics)",
+        "artist": "Cakes & Eclairs",
+        "plays": 3,
+        "url": "https://www.last.fm/music/Cakes+&+Eclairs/_/Alan+Walker+-+Where+are+you+now+(Faded)+(Lyrics)"
+      },
+      {
+        "name": "Duke Dumont - Ocean Drive",
+        "artist": "Duke Dumont",
+        "plays": 3,
+        "url": "https://www.last.fm/music/Duke+Dumont/_/Duke+Dumont+-+Ocean+Drive"
+      },
+      {
+        "name": "Felix Jaehn - Ain't Nobody (Loves Me Better)  ft. Jasmine Thompson",
+        "artist": "Felix Jaehn",
+        "plays": 3,
+        "url": "https://www.last.fm/music/Felix+Jaehn/_/Felix+Jaehn+-+Ain%27t+Nobody+(Loves+Me+Better)++ft.+Jasmine+Thompson"
+      },
+      {
+        "name": "Nhạc Nền Hot Tiktok Douyin 2026",
+        "artist": "Illusionary Daytime 幻昼 (抖音DJ纯享旋律版2026) Slow Remix Tiktok",
+        "plays": 3,
+        "url": "https://www.last.fm/music/Illusionary+Daytime+%E5%B9%BB%E6%98%BC+(%E6%8A%96%E9%9F%B3DJ%E7%BA%AF%E4%BA%AB%E6%97%8B%E5%BE%8B%E7%89%882026)+Slow+Remix+Tiktok/_/Nh%E1%BA%A1c+N%E1%BB%81n+Hot+Tiktok+Douyin+2026"
+      }
+    ]
+  },
+  "highlights": [
+    "11h 38m in the editor over 4 days; most on pygym (3h 54m).",
+    "AI Coding 100%.",
+    "Languages: Python, Markdown, JavaScript.",
+    "48 commits in 7 repos; busiest: pygym (33).",
+    "On repeat: worry (Slowed) by LONOWN (4 plays of 295 scrobbles)."
+  ]
+}
