@@ -1,18 +1,18 @@
 {
   "week": "2026-W46",
   "start": "2026-11-09",
-  "end": "2026-11-12",
+  "end": "2026-11-14",
   "complete": false,
-  "generated": "2026-11-12T04:34:18+00:00",
+  "generated": "2026-11-14T12:44:56+00:00",
   "timezone": "Asia/Hong_Kong",
   "wakatime": {
-    "total_seconds": 41862,
-    "daily_average_seconds": 10466,
-    "active_days": 4,
+    "total_seconds": 99266,
+    "daily_average_seconds": 16544,
+    "active_days": 6,
     "categories": [
       {
         "name": "AI Coding",
-        "seconds": 41862,
+        "seconds": 99266,
         "percent": 100.0
       }
     ],
@@ -20,151 +20,151 @@
       {
         "name": "pygym",
         "seconds": 14049,
-        "percent": 33.6
+        "percent": 14.2
+      },
+      {
+        "name": "claimmap",
+        "seconds": 12991,
+        "percent": 13.1
+      },
+      {
+        "name": "nurasik12",
+        "seconds": 12932,
+        "percent": 13.0
+      },
+      {
+        "name": "CityUHK_job_scraper",
+        "seconds": 12820,
+        "percent": 12.9
       },
       {
         "name": "overworld-hyprland",
         "seconds": 10584,
-        "percent": 25.3
+        "percent": 10.7
       },
       {
         "name": "nurasik14",
-        "seconds": 3739,
-        "percent": 8.9
-      },
-      {
-        "name": "Projects",
-        "seconds": 2158,
-        "percent": 5.2
-      },
-      {
-        "name": "apothecary-hyprland",
-        "seconds": 1918,
-        "percent": 4.6
-      },
-      {
-        "name": "nurasik12",
-        "seconds": 1792,
-        "percent": 4.3
+        "seconds": 5402,
+        "percent": 5.4
       },
       {
         "name": "Unknown Project",
-        "seconds": 1492,
-        "percent": 3.6
-      },
-      {
-        "name": "quest-journal",
-        "seconds": 1334,
-        "percent": 3.2
-      },
-      {
-        "name": "scripts",
-        "seconds": 1133,
-        "percent": 2.7
-      },
-      {
-        "name": "upw",
-        "seconds": 1084,
-        "percent": 2.6
+        "seconds": 3311,
+        "percent": 3.3
       },
       {
         "name": "tg-nebula-drift",
-        "seconds": 686,
-        "percent": 1.6
+        "seconds": 3292,
+        "percent": 3.3
       },
       {
-        "name": "CityUHK_job_scraper",
-        "seconds": 416,
-        "percent": 1.0
+        "name": "Projects",
+        "seconds": 3261,
+        "percent": 3.3
+      },
+      {
+        "name": "scripts",
+        "seconds": 3210,
+        "percent": 3.2
+      },
+      {
+        "name": "scratch",
+        "seconds": 3079,
+        "percent": 3.1
+      },
+      {
+        "name": "hermes",
+        "seconds": 2519,
+        "percent": 2.5
       },
       {
         "name": "Other",
-        "seconds": 1392,
-        "percent": 3.3
+        "seconds": 11717,
+        "percent": 11.8
       }
     ],
     "languages": [
       {
         "name": "Python",
-        "seconds": 14320,
-        "percent": 34.2
+        "seconds": 31329,
+        "percent": 31.6
       },
       {
         "name": "Markdown",
-        "seconds": 8303,
-        "percent": 19.8
+        "seconds": 16475,
+        "percent": 16.6
       },
       {
         "name": "JavaScript",
-        "seconds": 3787,
-        "percent": 9.0
+        "seconds": 8314,
+        "percent": 8.4
+      },
+      {
+        "name": "Text",
+        "seconds": 5054,
+        "percent": 5.1
+      },
+      {
+        "name": "Bash",
+        "seconds": 4264,
+        "percent": 4.3
       },
       {
         "name": "QML",
         "seconds": 3607,
-        "percent": 8.6
-      },
-      {
-        "name": "Text",
-        "seconds": 3010,
-        "percent": 7.2
+        "percent": 3.6
       },
       {
         "name": "HTML",
-        "seconds": 1092,
-        "percent": 2.6
-      },
-      {
-        "name": "Bash",
-        "seconds": 1044,
-        "percent": 2.5
+        "seconds": 3140,
+        "percent": 3.2
       },
       {
         "name": "TypeScript",
         "seconds": 554,
-        "percent": 1.3
+        "percent": 0.6
+      },
+      {
+        "name": "Image (png)",
+        "seconds": 388,
+        "percent": 0.4
       },
       {
         "name": "Svelte",
         "seconds": 339,
-        "percent": 0.8
-      },
-      {
-        "name": "YAML",
-        "seconds": 158,
-        "percent": 0.4
-      },
-      {
-        "name": "INI",
-        "seconds": 128,
         "percent": 0.3
       },
       {
-        "name": "Image (png)",
-        "seconds": 118,
-        "percent": 0.3
+        "name": "TOML",
+        "seconds": 235,
+        "percent": 0.2
+      },
+      {
+        "name": "CSS",
+        "seconds": 195,
+        "percent": 0.2
       },
       {
         "name": "Other",
-        "seconds": 5378,
-        "percent": 12.8
+        "seconds": 25355,
+        "percent": 25.5
       }
     ],
     "editors": [
       {
         "name": "Claude Code",
-        "seconds": 38310,
-        "percent": 91.5
+        "seconds": 48175,
+        "percent": 48.5
       },
       {
         "name": "Hermes Agent",
-        "seconds": 2488,
-        "percent": 5.9
+        "seconds": 26008,
+        "percent": 26.2
       },
       {
         "name": "Hermes",
-        "seconds": 1064,
-        "percent": 2.5
+        "seconds": 25084,
+        "percent": 25.3
       }
     ],
     "days": [
@@ -191,15 +191,29 @@
       },
       {
         "date": "2026-11-12",
-        "seconds": 1425,
+        "seconds": 18773,
         "categories": {
-          "AI Coding": 1425
+          "AI Coding": 18773
+        }
+      },
+      {
+        "date": "2026-11-13",
+        "seconds": 17692,
+        "categories": {
+          "AI Coding": 17692
+        }
+      },
+      {
+        "date": "2026-11-14",
+        "seconds": 22364,
+        "categories": {
+          "AI Coding": 22364
         }
       }
     ]
   },
   "git": {
-    "total": 48,
+    "total": 59,
     "repos": [
       {
         "name": "pygym",
@@ -215,13 +229,25 @@
       },
       {
         "name": "nurasik14",
-        "commits": 4,
-        "active_days": 2,
+        "commits": 10,
+        "active_days": 4,
         "latest": [
-          "Weekly section: WakaTime last 7 days + weekly digest (WakaTime, git, Last.fm)",
-          "Portfolio: GitHub-style profile inside the editor shell; compact README demo",
-          "README: agent harnesses, voice-agent goal, no emoji; github.json snapshot for the site",
-          "Profile README: fix screenshot alignment, new sections, self-hosted stats cards"
+          "bookmarks update",
+          "news: Sonnet for email rewriting, 4 emails to Claude at once, 6 audio clips at once",
+          "news: 2026-10-30",
+          "Add privacy page for the Google OAuth app",
+          "bookmarks update"
+        ]
+      },
+      {
+        "name": "nebula-drift",
+        "commits": 4,
+        "active_days": 1,
+        "latest": [
+          "ORBIT: new in-message widget game (daily seeded runs, 3 hazard types, near misses, theme-native) + d",
+          "In-message widget version (Bot API 10.4) with bot leaderboard; sprite-cached renderer",
+          "Bot (menu button, Mini App + game card), README, share via game proxy",
+          "Nebula Drift: Telegram Mini App game"
         ]
       },
       {
@@ -245,12 +271,12 @@
         ]
       },
       {
-        "name": "nebula-drift",
+        "name": "CityUHK_job_scraper",
         "commits": 2,
         "active_days": 1,
         "latest": [
-          "Bot (menu button, Mini App + game card), README, share via game proxy",
-          "Nebula Drift: Telegram Mini App game"
+          "Use one compact text per listing; add length-bias analysis",
+          "Retrieval evaluation and v2 search: bge-m3, query understanding, reranker"
         ]
       },
       {
@@ -269,55 +295,65 @@
         "latest": [
           "docs"
         ]
+      },
+      {
+        "name": "claimmap",
+        "commits": 1,
+        "active_days": 1,
+        "latest": [
+          "ClaimMap: live pitch analyzer for investors (hackathon build)"
+        ]
       }
     ],
     "per_day": {
       "2026-11-10": 11,
       "2026-11-11": 34,
-      "2026-11-12": 3
+      "2026-11-12": 10,
+      "2026-11-13": 2,
+      "2026-11-14": 2
     }
   },
   "lastfm": {
     "user": "Nurasik",
-    "scrobbles": 295,
+    "scrobbles": 500,
     "tracks": [
+      {
+        "name": "𝙈𝙊𝙉𝙏𝘼𝙂𝙀𝙈 𝘿𝙀𝙎𝙀𝙍𝙏𝙄𝘾𝙊 𝙨𝙡𝙤𝙬𝙚𝙙",
+        "artist": "NOIBEER",
+        "plays": 13,
+        "url": "https://www.last.fm/music/NOIBEER/_/%F0%9D%99%88%F0%9D%99%8A%F0%9D%99%89%F0%9D%99%8F%F0%9D%98%BC%F0%9D%99%82%F0%9D%99%80%F0%9D%99%88+%F0%9D%98%BF%F0%9D%99%80%F0%9D%99%8E%F0%9D%99%80%F0%9D%99%8D%F0%9D%99%8F%F0%9D%99%84%F0%9D%98%BE%F0%9D%99%8A+%F0%9D%99%A8%F0%9D%99%A1%F0%9D%99%A4%F0%9D%99%AC%F0%9D%99%9A%F0%9D%99%99"
+      },
       {
         "name": "worry (Slowed)",
         "artist": "LONOWN",
-        "plays": 4,
+        "plays": 8,
         "url": "https://www.last.fm/music/LONOWN/_/worry+(Slowed)"
       },
       {
-        "name": "Alan Walker - Where are you now (Faded) (Lyrics)",
-        "artist": "Cakes & Eclairs",
-        "plays": 3,
-        "url": "https://www.last.fm/music/Cakes+&+Eclairs/_/Alan+Walker+-+Where+are+you+now+(Faded)+(Lyrics)"
+        "name": "Childish Gambino - Les (edited)",
+        "artist": "S4M",
+        "plays": 4,
+        "url": "https://www.last.fm/music/S4M/_/Childish+Gambino+-+Les+(edited)"
       },
       {
-        "name": "Duke Dumont - Ocean Drive",
-        "artist": "Duke Dumont",
-        "plays": 3,
-        "url": "https://www.last.fm/music/Duke+Dumont/_/Duke+Dumont+-+Ocean+Drive"
+        "name": "Cool for the Summer (hardstyle remix + SUPER SLOWED)",
+        "artist": "lxminal",
+        "plays": 4,
+        "url": "https://www.last.fm/music/lxminal/_/Cool+for+the+Summer+(hardstyle+remix+%252B+SUPER+SLOWED)"
       },
       {
-        "name": "Felix Jaehn - Ain't Nobody (Loves Me Better)  ft. Jasmine Thompson",
-        "artist": "Felix Jaehn",
-        "plays": 3,
-        "url": "https://www.last.fm/music/Felix+Jaehn/_/Felix+Jaehn+-+Ain%27t+Nobody+(Loves+Me+Better)++ft.+Jasmine+Thompson"
-      },
-      {
-        "name": "Nhạc Nền Hot Tiktok Douyin 2026",
-        "artist": "Illusionary Daytime 幻昼 (抖音DJ纯享旋律版2026) Slow Remix Tiktok",
-        "plays": 3,
-        "url": "https://www.last.fm/music/Illusionary+Daytime+%E5%B9%BB%E6%98%BC+(%E6%8A%96%E9%9F%B3DJ%E7%BA%AF%E4%BA%AB%E6%97%8B%E5%BE%8B%E7%89%882026)+Slow+Remix+Tiktok/_/Nh%E1%BA%A1c+N%E1%BB%81n+Hot+Tiktok+Douyin+2026"
+        "name": "Narvent - Recall (4K)",
+        "artist": "Narvent",
+        "plays": 4,
+        "url": "https://www.last.fm/music/Narvent/_/Narvent+-+Recall+(4K)"
       }
     ]
   },
   "highlights": [
-    "11h 38m in the editor over 4 days; most on pygym (3h 54m).",
+    "27h 34m in the editor over 6 days; most on pygym (3h 54m).",
     "AI Coding 100%.",
     "Languages: Python, Markdown, JavaScript.",
-    "48 commits in 7 repos; busiest: pygym (33).",
-    "On repeat: worry (Slowed) by LONOWN (4 plays of 295 scrobbles)."
+    "59 commits in 9 repos; busiest: pygym (33).",
+    "On repeat: 𝙈𝙊𝙉𝙏𝘼𝙂𝙀𝙈 𝘿𝙀𝙎𝙀𝙍𝙏𝙄𝘾𝙊 𝙨𝙡𝙤𝙬𝙚𝙙 by NOIBEER (13 plays of 500 scrobbles)."
   ]
 }
