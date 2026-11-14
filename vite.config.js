@@ -1,4 +1,5 @@
 import { execSync } from 'node:child_process';
+import { setDefaultAutoSelectFamilyAttemptTimeout } from 'node:net';
 import { resolve } from 'node:path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
@@ -8,6 +9,12 @@ import plannerApi from './plugins/planner-api.js';
 // Locally the site is served from "/" (http://localhost:5173/).
 // On GitHub Pages the workflow sets VITE_BASE_PATH to "/<repo>/".
 const BASE_PATH = process.env.VITE_BASE_PATH ?? '/';
+
+// The local Google/Gmail plugins call Google from this process. Node's
+// happy-eyeballs gives each address only 250 ms and then abandons it; behind
+// the VPN an IPv4 connect often takes 300-600 ms and IPv6 is blackholed, so
+// fetch failed with ConnectTimeoutError ("google=error&reason=network").
+setDefaultAutoSelectFamilyAttemptTimeout(2000);
 
 // Real build info for the footer: short commit sha + build date.
 const gitSha = () => {
