@@ -47,9 +47,11 @@ import {
   fromOf,
   gmailQuery,
   inWindow,
+  isBlocked,
   isWeekId,
   MIN_PASSPHRASE,
   NEWS_SCOPES,
+  parseBlocklist,
   parseStories,
   pendingWeeks,
   senderName,
@@ -319,6 +321,18 @@ export function createNewsHandler({
     for (const [k, v] of pending) if (v.expires <= now()) pending.delete(k);
   };
 
+  /** The local blocklist ([] without a file). A file that cannot be read or parsed stops the sync. */
+  async function readBlocklist() {
+    let text;
+    try {
+      text = await readFile(join(home, 'blocklist.txt'), 'utf8');
+    } catch (err) {
+      if (err.code === 'ENOENT') return [];
+      throw err;
+    }
+    return parseBlocklist(text);
+  }
+
   async function readPassphrase() {
     try {
       return await readFile(join(home, 'passphrase'), 'utf8');
@@ -507,12 +521,12 @@ export function createNewsHandler({
 
   // ------------------------------------------------------------ sync
 
-  async function listMessageIds(window) {
+  async function listMessageIds(window, blocklist) {
     const ids = [];
     let pageToken;
     do {
       const { data } = await google.api('GET', '/users/me/messages', {
-        query: { q: gmailQuery(window), maxResults: '500', fields: 'messages/id,nextPageToken', ...(pageToken ? { pageToken } : {}) },
+        query: { q: gmailQuery(window, blocklist), maxResults: '500', fields: 'messages/id,nextPageToken', ...(pageToken ? { pageToken } : {}) },
       });
       for (const m of data?.messages ?? []) ids.push(m.id);
       pageToken = data?.nextPageToken;
@@ -521,14 +535,14 @@ export function createNewsHandler({
   }
 
   /** The week's messages, oldest first. The query is a day too wide; inWindow is exact. */
-  async function fetchWeek(window) {
+  async function fetchWeek(window, blocklist) {
     const messages = [];
-    for (const id of await listMessageIds(window)) {
+    for (const id of await listMessageIds(window, blocklist)) {
       const { data } = await google.api('GET', `/users/me/messages/${encodeURIComponent(id)}`, {
         query: { format: 'full', fields: 'id,internalDate,payload' },
       });
       if (!data?.id || !Number.isFinite(Number(data.internalDate))) throw new Error('gmail returned a message without an internalDate');
-      if (inWindow(data.internalDate, window)) messages.push(data);
+      if (inWindow(data.internalDate, window) && !isBlocked(data, blocklist)) messages.push(data);
     }
     return messages.sort((a, b) => Number(a.internalDate) - Number(b.internalDate) || (a.id < b.id ? -1 : 1));
   }
@@ -539,9 +553,9 @@ export function createNewsHandler({
    * (published: false). When all are done it writes backlog.json; the caller drops
    * the cache entries (ids). A failed email throws; the ones before it stay cached.
    */
-  async function buildBacklog({ until, passphrase, account, budget, stories: storyCache, onProgress = () => {} }) {
+  async function buildBacklog({ until, passphrase, account, budget, blocklist, stories: storyCache, onProgress = () => {} }) {
     const window = backlogWindow(until);
-    const ids = await listMessageIds(window);
+    const ids = await listMessageIds(window, blocklist);
     let done = 0;
     onProgress(done, ids.length);
     // claudeConcurrency emails at a time. A Claude call is reserved before the
@@ -557,7 +571,7 @@ export function createNewsHandler({
           query: { format: 'full', fields: 'id,internalDate,payload' },
         });
         if (!data?.id || !Number.isFinite(Number(data.internalDate))) throw new Error('gmail returned a message without an internalDate');
-        if (!inWindow(data.internalDate, window)) {
+        if (!inWindow(data.internalDate, window) || isBlocked(data, blocklist)) {
           budget.calls -= 1;
           entry = { skip: true };
         } else {
@@ -623,6 +637,7 @@ export function createNewsHandler({
     syncing = true;
     try {
       const { passphrase, settings } = await readyToSync();
+      const blocklist = await readBlocklist();
       const index = await readIndex();
       if (!index.backlog) throw new HttpError(409, 'there is no published backlog to rebuild; sync first');
       const cap = claudeCap(settings);
@@ -637,6 +652,7 @@ export function createNewsHandler({
           passphrase,
           account: settings.account,
           budget: { calls: 0, cap },
+          blocklist,
           stories: rebuildCache,
           onProgress: (done, total) => {
             rebuilding = { done, total };
@@ -669,6 +685,7 @@ export function createNewsHandler({
     syncing = true;
     try {
       const { passphrase, settings } = await readyToSync();
+      const blocklist = await readBlocklist();
       const index = await readIndex();
       const published = index.weeks;
       const cap = claudeCap(settings);
@@ -687,7 +704,7 @@ export function createNewsHandler({
         }
         let result;
         try {
-          result = await buildBacklog({ until, passphrase, account: settings.account, budget, stories: cache });
+          result = await buildBacklog({ until, passphrase, account: settings.account, budget, blocklist, stories: cache });
           if (result.published) {
             await writeAtomic(indexFile, serializeIndex([], { until }));
             await cache.drop(result.ids);
@@ -711,7 +728,7 @@ export function createNewsHandler({
       for (const weekId of pendingFrom(index)) {
         try {
           const window = weekWindow(weekId);
-          const messages = await fetchWeek(window);
+          const messages = await fetchWeek(window, blocklist);
           const bodies = messages.map((message) => emailToText(message));
           const needed = bodies.filter((body) => body.text).length;
           if (calls + needed > cap) {

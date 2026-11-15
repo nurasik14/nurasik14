@@ -104,10 +104,42 @@ export function backlogWindow(untilWeekId) {
  * a day wider on each side and the caller filters with inWindow. A window
  * without a start (the backlog) has no after: term.
  */
-export function gmailQuery(window) {
+export function gmailQuery(window, blocklist = []) {
   const before = Math.floor(window.endMs / 1000) + DAY_SECONDS;
   const after = Number.isFinite(window.startMs) ? `after:${Math.floor(window.startMs / 1000) - DAY_SECONDS} ` : '';
-  return `${after}before:${before} -in:sent -in:drafts -in:chats`;
+  const blocked = blocklist.length ? ` ${blocklistQuery(blocklist)}` : '';
+  return `${after}before:${before} -in:sent -in:drafts -in:chats${blocked}`;
+}
+
+// ---------------------------------------------------------------- blocklist
+
+/**
+ * The local blocklist: blocklist.txt in the news.fm home, next to the token and
+ * never in the repository. One sender domain, address or single word per line;
+ * `#` starts a comment. Matching mail is left out of the Gmail search and checked
+ * again after fetching (isBlocked), so it never reaches Claude or a published file.
+ * Anything that is not a plain term throws, so a typo cannot silently match nothing.
+ */
+export function parseBlocklist(text) {
+  const terms = new Set();
+  for (const raw of String(text ?? '').split('\n')) {
+    const term = raw.replace(/#.*/, '').trim().toLowerCase();
+    if (!term) continue;
+    if (!/^[a-z0-9@._+-]{2,100}$/.test(term)) throw new RangeError(`blocklist.txt: "${term}" is not a domain, address or single word`);
+    terms.add(term);
+  }
+  return [...terms];
+}
+
+/** Gmail terms leaving out the blocklist: a domain or address as a sender, a word anywhere. */
+export const blocklistQuery = (terms) => terms.map((t) => (/[@.]/.test(t) ? `-from:${t}` : `-${t}`)).join(' ');
+
+/** True when a blocklist term appears in the sender, recipients, subject or body text. */
+export function isBlocked(message, blocklist) {
+  if (!blocklist.length) return false;
+  const headers = ['from', 'to', 'cc', 'reply-to', 'sender', 'subject'].map((name) => headerOf(message, name));
+  const haystack = `${headers.join('\n')}\n${emailToText(message).text}`.toLowerCase();
+  return blocklist.some((term) => haystack.includes(term));
 }
 
 /** internalDate (ms, UTC; Gmail sends a string) inside [startMs, endMs). */

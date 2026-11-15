@@ -13,7 +13,10 @@ import {
   encryptBookmarks,
   encryptWeek,
   gmailLink,
+  blocklistQuery,
   gmailQuery,
+  isBlocked,
+  parseBlocklist,
   HEADLINE_MAX,
   inWindow,
   isWeekId,
@@ -131,6 +134,37 @@ describe('weeks', () => {
     expect(inWindow(w.endMs, w)).toBe(false);
     expect(inWindow('garbage', w)).toBe(false);
     expect(inWindow(undefined, w)).toBe(false);
+  });
+
+  test('parseBlocklist: one term per line, comments, lower case, no duplicates; junk throws', () => {
+    expect(parseBlocklist('# work mail\nExample-Corp.com\n\n  acme  # the client\nacme\nboss@mail.example.org\n')).toEqual([
+      'example-corp.com',
+      'acme',
+      'boss@mail.example.org',
+    ]);
+    expect(parseBlocklist('')).toEqual([]);
+    expect(() => parseBlocklist('two words')).toThrow('not a domain, address or single word');
+    expect(() => parseBlocklist('a"b')).toThrow();
+    expect(() => parseBlocklist('x OR (y)')).toThrow();
+  });
+
+  test('blocklistQuery: domains and addresses as senders, words anywhere', () => {
+    expect(blocklistQuery(['example-corp.com', 'acme', 'boss@mail.example.org'])).toBe('-from:example-corp.com -acme -from:boss@mail.example.org');
+    expect(gmailQuery(weekWindow('2026-10-30'), ['acme'])).toBe('after:1793203200 before:1793980800 -in:sent -in:drafts -in:chats -acme');
+  });
+
+  test('isBlocked matches headers or body text, case-insensitive; an empty list blocks nothing', () => {
+    const mail = (headers, text = 'ordinary newsletter text') => ({
+      payload: { mimeType: 'text/plain', headers, body: { data: btoa(text), size: text.length } },
+    });
+    const list = ['example-corp.com', 'acme'];
+    expect(isBlocked(mail([{ name: 'From', value: 'Jobs <noreply@Example-Corp.com>' }]), list)).toBe(true);
+    expect(isBlocked(mail([{ name: 'Reply-To', value: 'boss@example-corp.com' }]), list)).toBe(true);
+    expect(isBlocked(mail([{ name: 'Subject', value: 'Re: ACME contract' }]), list)).toBe(true);
+    expect(isBlocked(mail([{ name: 'From', value: 'friend@example.com' }], 'news about Acme AS'), list)).toBe(true);
+    expect(isBlocked(mail([{ name: 'From', value: 'The Batch <hello@deeplearning.ai>' }]), list)).toBe(false);
+    expect(isBlocked(mail([{ name: 'Subject', value: 'acme' }]), [])).toBe(false);
+    expect(isBlocked({}, list)).toBe(false);
   });
 
   test('gmailQuery widens by a day in epoch seconds', () => {

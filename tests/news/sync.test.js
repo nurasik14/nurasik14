@@ -435,6 +435,39 @@ describe('sync (weekly, after the backlog)', () => {
     expect(times).toEqual([...times].sort());
   });
 
+  test('mail matching the local blocklist never reaches Claude or the week, even if Gmail returns it', async () => {
+    await connectToken();
+    await writeFile(join(home, 'blocklist.txt'), '# private\nexample-corp.com\nacme\n');
+    g.messages = [
+      message('ok1', '2026-10-24T09:00:00'),
+      message('dom', '2026-10-25T09:00:00', { from: 'Jobs <noreply@example-corp.com>', subject: 'New message from your client' }),
+      message('word', '2026-10-26T09:00:00', { from: 'someone@example.com', subject: 'Hello', body: 'About the ACME repo' }),
+      message('ok2', '2026-10-27T09:00:00'),
+    ];
+    const seen = [];
+    claude = async (email) => {
+      seen.push(email);
+      return defaultClaude(email);
+    };
+    const res = await sync();
+    expect(res.body).toMatchObject({ published: ['2026-10-23'], skipped: null, emails: 2 });
+    expect(seen).toHaveLength(2);
+    expect(JSON.stringify(seen)).not.toMatch(/example-corp|acme|your client/i);
+    const q = new URL(g.calls.find((c) => new URL(c.url).pathname.endsWith('/messages')).url).searchParams.get('q');
+    expect(q).toEndWith(' -from:example-corp.com -acme');
+    const payload = await decryptWeek(JSON.parse(await readFile(newsFile('2026-10-23.json'), 'utf8')), PASS, { week: '2026-10-23' });
+    expect(JSON.stringify(payload)).not.toMatch(/example-corp|acme|your client/i);
+  });
+
+  test('a blocklist that does not parse stops the sync before Gmail is read', async () => {
+    await connectToken();
+    await writeFile(join(home, 'blocklist.txt'), 'two words\n');
+    g.messages = [message('ok1', '2026-10-24T09:00:00')];
+    const res = await sync();
+    expect(res.status).toBeGreaterThanOrEqual(400);
+    expect(g.calls.some((c) => new URL(c.url).pathname.endsWith('/messages'))).toBe(false);
+  });
+
   test('happy path writes the week, the index and leaks nothing', async () => {
     await connectToken();
     g.messages = generate();
