@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "pulledAt": "2026-10-31T17:03:03.911Z",
+  "pulledAt": "2026-11-15T00:06:14.596Z",
   "window": {
-    "start": "2026-09-02",
-    "end": "2027-11-01"
+    "start": "2026-09-16",
+    "end": "2027-11-15"
   },
   "calendars": [
     {
@@ -28,204 +28,6 @@
     }
   ],
   "events": [
-    {
-      "id": "16e54aa220a4",
-      "title": "Intro to Computer Programming(C) CS1302A",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-02T09:00:00+08:00",
-      "end": "2026-09-02T12:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-02"
-      ]
-    },
-    {
-      "id": "d279d74f0340",
-      "title": "Last quarter 3:51pm",
-      "calendar": "Phases of the Moon",
-      "color": 0,
-      "start": "2026-09-04",
-      "end": "2026-09-04",
-      "allDay": true
-    },
-    {
-      "id": "baf9104de728",
-      "title": "Computer Organization(C) CS2115",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-07T12:00:00+08:00",
-      "end": "2026-09-07T15:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-07"
-      ]
-    },
-    {
-      "id": "f0759a55e290",
-      "title": "Calculus(C) MA1508",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-08T09:00:00+08:00",
-      "end": "2026-09-08T12:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-08"
-      ]
-    },
-    {
-      "id": "83d35b373da2",
-      "title": "Intro to Programming(T/L) CS1302A",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-08T12:00:00+08:00",
-      "end": "2026-09-08T13:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-08"
-      ]
-    },
-    {
-      "id": "6bba5b53611d",
-      "title": "University English(T) GE1401",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-08T16:00:00+08:00",
-      "end": "2026-09-08T19:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-08"
-      ]
-    },
-    {
-      "id": "5ec0aa5dee39",
-      "title": "Intro to Computer Programming(C) CS1302A",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-09T09:00:00+08:00",
-      "end": "2026-09-09T12:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-09"
-      ]
-    },
-    {
-      "id": "9149d2dd8154",
-      "title": "Calculus(T) MA1508",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-09T12:00:00+08:00",
-      "end": "2026-09-09T13:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-09"
-      ]
-    },
-    {
-      "id": "b044b0000efa",
-      "title": "Welcome Night",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-09T20:00:00+08:00",
-      "end": "2026-09-09T22:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-09"
-      ]
-    },
-    {
-      "id": "e3432d8c937d",
-      "title": "House of Impact",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-10T12:00:00+08:00",
-      "end": "2026-09-10T14:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-10"
-      ]
-    },
-    {
-      "id": "90b56de12869",
-      "title": "New moon 11:27am",
-      "calendar": "Phases of the Moon",
-      "color": 0,
-      "start": "2026-09-11",
-      "end": "2026-09-11",
-      "allDay": true
-    },
-    {
-      "id": "614daa1916de",
-      "title": "Movies & Psychology (C) GE1137",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-11T09:00:00+08:00",
-      "end": "2026-09-11T12:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-11"
-      ]
-    },
-    {
-      "id": "100def9f7f68",
-      "title": "Computer Organization(C) CS2115",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-14T12:00:00+08:00",
-      "end": "2026-09-14T15:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-14"
-      ]
-    },
-    {
-      "id": "5a921532003c",
-      "title": "Basketball",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-14T15:00:00+08:00",
-      "end": "2026-09-14T17:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-14"
-      ]
-    },
-    {
-      "id": "dc359756340c",
-      "title": "Calculus(C) MA1508",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-15T09:00:00+08:00",
-      "end": "2026-09-15T12:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-15"
-      ]
-    },
-    {
-      "id": "811117c18b0c",
-      "title": "Intro to Programming(T/L) CS1302A",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-15T12:00:00+08:00",
-      "end": "2026-09-15T13:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-15"
-      ]
-    },
-    {
-      "id": "aa6ec92dd969",
-      "title": "University English(T) GE1401",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-15T16:00:00+08:00",
-      "end": "2026-09-15T19:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-15"
-      ]
-    },
     {
       "id": "4f4599e6d465",
       "title": "Intro to Computer Programming(C) CS1302A",
@@ -1679,6 +1481,30 @@
       ]
     },
     {
+      "id": "60923725dc44",
+      "title": "Archery uni",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-05T10:00:00+08:00",
+      "end": "2026-11-05T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-05"
+      ]
+    },
+    {
+      "id": "c31c94d8b2d0",
+      "title": "Tennis Table uni",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-05T16:30:00+08:00",
+      "end": "2026-11-05T18:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-05"
+      ]
+    },
+    {
       "id": "c1b300f202aa",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -1688,6 +1514,42 @@
       "allDay": false,
       "days": [
         "2026-11-06"
+      ]
+    },
+    {
+      "id": "c4d85835698f",
+      "title": "Archery uni",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-06T14:00:00+08:00",
+      "end": "2026-11-06T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-06"
+      ]
+    },
+    {
+      "id": "7daae1ae475d",
+      "title": "EMP Proffessional Image Building",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-06T18:30:00+08:00",
+      "end": "2026-11-06T20:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-06"
+      ]
+    },
+    {
+      "id": "bb28e54b5042",
+      "title": "Sro hiking outside mos",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-07T10:00:00+08:00",
+      "end": "2026-11-07T14:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-07"
       ]
     },
     {
@@ -1718,6 +1580,18 @@
       "color": 0,
       "start": "2026-11-09T12:00:00+08:00",
       "end": "2026-11-09T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-09"
+      ]
+    },
+    {
+      "id": "c04d44dd9b6c",
+      "title": "Basketball uni",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-09T15:00:00+08:00",
+      "end": "2026-11-09T17:00:00+08:00",
       "allDay": false,
       "days": [
         "2026-11-09"
@@ -1800,7 +1674,7 @@
     },
     {
       "id": "47ffe2a9b9bc",
-      "title": "Calculus(T) MA1508",
+      "title": "Calculus(T) MA1508 Mid",
       "calendar": "primary",
       "color": 0,
       "start": "2026-11-11T12:00:00+08:00",
@@ -1823,6 +1697,57 @@
       ]
     },
     {
+      "id": "7367501e5b08",
+      "title": "Archery Intermediate Training",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-12T10:00:00+08:00",
+      "end": "2026-11-12T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-12"
+      ]
+    },
+    {
+      "id": "464ce8b2b869",
+      "title": "Tennis",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-12T17:30:00+08:00",
+      "end": "2026-11-12T19:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-12"
+      ]
+    },
+    {
+      "id": "75f318005ba6",
+      "title": "OPPORTUNITY: Apply - GBA Learning Trip (CRESDA)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-13",
+      "end": "2026-11-13",
+      "allDay": true
+    },
+    {
+      "id": "8989ec963574",
+      "title": "OPPORTUNITY: BUHack 2.0 (online 48h hackathon)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-13",
+      "end": "2026-11-15",
+      "allDay": true
+    },
+    {
+      "id": "bf5a59bc6b35",
+      "title": "OPPORTUNITY: Register - Tiger professional portrait shoot (19 Nov)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-13",
+      "end": "2026-11-13",
+      "allDay": true
+    },
+    {
       "id": "f78378094686",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -1835,6 +1760,27 @@
       ]
     },
     {
+      "id": "89cbd9b3ea92",
+      "title": "OPPORTUNITY: Vibe Coding Workshop (Tiger House)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-13T15:00:00+08:00",
+      "end": "2026-11-13T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-13"
+      ]
+    },
+    {
+      "id": "8e2d4c132957",
+      "title": "OPPORTUNITY: NOVA YOUTH AI Startup Challenge (HKU)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-14",
+      "end": "2026-11-14",
+      "allDay": true
+    },
+    {
       "id": "fd1aecc55336",
       "title": "PyCon HK 2026",
       "calendar": "primary",
@@ -1844,6 +1790,51 @@
       "allDay": false,
       "days": [
         "2026-11-14",
+        "2026-11-15"
+      ]
+    },
+    {
+      "id": "547efb69efbf",
+      "title": "PyCon HK 2026 - Day 2 Development Sprint",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-15",
+      "end": "2026-11-15",
+      "allDay": true
+    },
+    {
+      "id": "3139f6f03e65",
+      "title": "Beach Party Hall 16",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-15T12:00:00+08:00",
+      "end": "2026-11-15T18:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-15"
+      ]
+    },
+    {
+      "id": "7eb177e25c6d",
+      "title": "DUE: CS1302A E-Quiz 9 closes",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-15T23:00:00+08:00",
+      "end": "2026-11-15T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-15"
+      ]
+    },
+    {
+      "id": "6c8d9eb8cdf8",
+      "title": "DUE: MA1508 second hand-in assignment",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-15T23:00:00+08:00",
+      "end": "2026-11-15T23:59:00+08:00",
+      "allDay": false,
+      "days": [
         "2026-11-15"
       ]
     },
@@ -1872,6 +1863,18 @@
       ]
     },
     {
+      "id": "25929ccec1a6",
+      "title": "EMP training: How to be a Good Mentee (compulsory)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-16T18:00:00+08:00",
+      "end": "2026-11-16T19:45:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-16"
+      ]
+    },
+    {
       "id": "d4beff3ade35",
       "title": "First quarter 7:48pm",
       "calendar": "Phases of the Moon",
@@ -1887,6 +1890,18 @@
       "color": 0,
       "start": "2026-11-17T09:00:00+08:00",
       "end": "2026-11-17T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-17"
+      ]
+    },
+    {
+      "id": "378a930fa2b6",
+      "title": "Accept/decline pygym GitHub invite (expires 14:09)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-17T12:00:00+08:00",
+      "end": "2026-11-17T12:15:00+08:00",
       "allDay": false,
       "days": [
         "2026-11-17"
@@ -1941,6 +1956,51 @@
       ]
     },
     {
+      "id": "49b8d16b27e8",
+      "title": "Columbia-CityUHK Joint Bachelor's Q&A (webinar)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-19T06:00:00+08:00",
+      "end": "2026-11-19T07:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-19"
+      ]
+    },
+    {
+      "id": "23498be8ca7f",
+      "title": "Tennis",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-19T17:30:00+08:00",
+      "end": "2026-11-19T19:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-19"
+      ]
+    },
+    {
+      "id": "737ba6346888",
+      "title": "DUE: GE1401 Final Argumentative Essay (Draft 3)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-19T23:00:00+08:00",
+      "end": "2026-11-19T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-19"
+      ]
+    },
+    {
+      "id": "ceaea86dfddd",
+      "title": "OPPORTUNITY: Apply - HKPC & HKCERT ACT Student Programme 2027",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-20",
+      "end": "2026-11-20",
+      "allDay": true
+    },
+    {
       "id": "44b0f9580b51",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -1950,6 +2010,75 @@
       "allDay": false,
       "days": [
         "2026-11-20"
+      ]
+    },
+    {
+      "id": "6dbb940011a1",
+      "title": "CS2613 Seminar: Digital Forensics & Incident Response (eWalker)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-20T17:00:00+08:00",
+      "end": "2026-11-20T18:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-20"
+      ]
+    },
+    {
+      "id": "7b2f7a353210",
+      "title": "EMP training: Networking & Professional Dining Etiquette (tentative)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-20T18:30:00+08:00",
+      "end": "2026-11-20T20:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-20"
+      ]
+    },
+    {
+      "id": "b26f00332d50",
+      "title": "DEADLINE: GE1601 course end - finish Component 3 + 4",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-22",
+      "end": "2026-11-22",
+      "allDay": true
+    },
+    {
+      "id": "c0069f79e71e",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-22T10:00:00+08:00",
+      "end": "2026-11-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-22"
+      ]
+    },
+    {
+      "id": "a2b2a35900da",
+      "title": "DUE: CS2613 reflection - From Strategy to Agents",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-22T23:00:00+08:00",
+      "end": "2026-11-22T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-22"
+      ]
+    },
+    {
+      "id": "1bc59ef96b00",
+      "title": "[email] Due: CS1302A Project",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-22T23:29:00+08:00",
+      "end": "2026-11-22T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-22"
       ]
     },
     {
@@ -1992,6 +2121,18 @@
       "color": 0,
       "start": "2026-11-24T09:00:00+08:00",
       "end": "2026-11-24T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-24"
+      ]
+    },
+    {
+      "id": "efe74b1a113e",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-24T10:00:00+08:00",
+      "end": "2026-11-24T10:30:00+08:00",
       "allDay": false,
       "days": [
         "2026-11-24"
@@ -2046,6 +2187,48 @@
       ]
     },
     {
+      "id": "6d99a133c95a",
+      "title": "DUE: MA1508 WebWork_08 (Integral Techniques)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-25T23:00:00+08:00",
+      "end": "2026-11-25T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-25"
+      ]
+    },
+    {
+      "id": "4e343384f882",
+      "title": "Tennis",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-26T17:30:00+08:00",
+      "end": "2026-11-26T19:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-26"
+      ]
+    },
+    {
+      "id": "ea95eab647d1",
+      "title": "Download Hall 16 Returning Scheme files",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-27",
+      "end": "2026-11-27",
+      "allDay": true
+    },
+    {
+      "id": "8751b9435e15",
+      "title": "OPPORTUNITY: Apply - Grand Challenges Scholars Programme (GCSP)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-27",
+      "end": "2026-11-27",
+      "allDay": true
+    },
+    {
       "id": "12ce62513cc5",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -2056,6 +2239,69 @@
       "days": [
         "2026-11-27"
       ]
+    },
+    {
+      "id": "4691d49011dd",
+      "title": "[email] GE1137 Quiz (Movies & Psychology)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-27T10:00:00+08:00",
+      "end": "2026-11-27T11:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-27"
+      ]
+    },
+    {
+      "id": "7954a02fe545",
+      "title": "[email] Due: GE1601 Course Evaluation",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-28T09:00:00+08:00",
+      "end": "2026-11-28T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-28"
+      ]
+    },
+    {
+      "id": "16efedf1ad15",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-28T10:00:00+08:00",
+      "end": "2026-11-28T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-28"
+      ]
+    },
+    {
+      "id": "8e0086136ac9",
+      "title": "Academic honesty declaration deadline (if not done)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-30",
+      "end": "2026-11-30",
+      "allDay": true
+    },
+    {
+      "id": "b536fb7952e6",
+      "title": "OPPORTUNITY: GAC 2027 Cabinet team application",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-30",
+      "end": "2026-11-30",
+      "allDay": true
+    },
+    {
+      "id": "348092ba3134",
+      "title": "Submit November student-helper timesheet (AIMS)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-30",
+      "end": "2026-11-30",
+      "allDay": true
     },
     {
       "id": "a859a81b75f5",
@@ -2127,6 +2373,30 @@
       ]
     },
     {
+      "id": "89415001ec15",
+      "title": "DUE: CS2115 Final Project (16-bit Logisim processor)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-01T23:00:00+08:00",
+      "end": "2026-12-01T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-01"
+      ]
+    },
+    {
+      "id": "d7b7c15438cd",
+      "title": "DUE: MA1508 WebWork_06 (extended)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-01T23:00:00+08:00",
+      "end": "2026-12-01T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-01"
+      ]
+    },
+    {
       "id": "96e5e993f3bc",
       "title": "Intro to Computer Programming(C) CS1302A",
       "calendar": "primary",
@@ -2151,6 +2421,18 @@
       ]
     },
     {
+      "id": "d206e1b6a1f6",
+      "title": "DUE: MA1508 WebWork_07 (extended)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-02T23:00:00+08:00",
+      "end": "2026-12-02T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-02"
+      ]
+    },
+    {
       "id": "c88fe9df5fa5",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -2161,6 +2443,27 @@
       "days": [
         "2026-12-04"
       ]
+    },
+    {
+      "id": "0074d4efb56a",
+      "title": "DUE: MA1508 WebWork_09 (Application of Integrals)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-06T23:00:00+08:00",
+      "end": "2026-12-06T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "1b920d827b00",
+      "title": "Semester A final exams start",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-07",
+      "end": "2026-12-07",
+      "allDay": true
     },
     {
       "id": "491a5d727859",
@@ -2256,6 +2559,30 @@
       ]
     },
     {
+      "id": "75db4be24ee4",
+      "title": "Cancel Discord Nitro trial (charges $9.99 on Dec 12)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-10T10:00:00+08:00",
+      "end": "2026-12-10T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-10"
+      ]
+    },
+    {
+      "id": "3f2d9f379450",
+      "title": "Final Exam Intro To Programming",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-10T14:00:00+08:00",
+      "end": "2026-12-10T16:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-10"
+      ]
+    },
+    {
       "id": "d01c51a9749b",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -2266,6 +2593,27 @@
       "days": [
         "2026-12-11"
       ]
+    },
+    {
+      "id": "80e548ab52e1",
+      "title": "Calculus Final Exam",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-11T14:00:00+08:00",
+      "end": "2026-12-11T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-11"
+      ]
+    },
+    {
+      "id": "f199fe75a16f",
+      "title": "OPPORTUNITY: IT Certification Sponsorship - round 1",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-14",
+      "end": "2026-12-14",
+      "allDay": true
     },
     {
       "id": "2e924a78f91d",
@@ -2298,6 +2646,18 @@
       "color": 0,
       "start": "2026-12-15T09:00:00+08:00",
       "end": "2026-12-15T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-15"
+      ]
+    },
+    {
+      "id": "2db4c76c6f83",
+      "title": "Computer Organization Final Exam",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-15T09:30:00+08:00",
+      "end": "2026-12-15T11:45:00+08:00",
       "allDay": false,
       "days": [
         "2026-12-15"
@@ -2418,6 +2778,18 @@
       ]
     },
     {
+      "id": "d43a1ae42c20",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-22T10:00:00+08:00",
+      "end": "2026-12-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-22"
+      ]
+    },
+    {
       "id": "61db311407f6",
       "title": "Intro to Programming(T/L) CS1302A",
       "calendar": "primary",
@@ -2475,6 +2847,30 @@
       "allDay": true
     },
     {
+      "id": "b4cbaf77d4e9",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-24T10:00:00+08:00",
+      "end": "2026-12-24T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-24"
+      ]
+    },
+    {
+      "id": "42157131a5c8",
+      "title": "DUE: CS2613 reflection - Digital Forensics (DFIR)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-24T23:00:00+08:00",
+      "end": "2026-12-24T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-24"
+      ]
+    },
+    {
       "id": "4fabd30ec8a1",
       "title": "Christmas Day",
       "calendar": "Holidays in Hong Kong",
@@ -2503,6 +2899,18 @@
       "start": "2026-12-26",
       "end": "2026-12-26",
       "allDay": true
+    },
+    {
+      "id": "a2bbfa5ff8c9",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-28T10:00:00+08:00",
+      "end": "2026-12-28T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-28"
+      ]
     },
     {
       "id": "2c13f34e7de9",
@@ -2997,6 +3405,30 @@
       ]
     },
     {
+      "id": "4a83aed0de59",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-22T10:00:00+08:00",
+      "end": "2027-01-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-22"
+      ]
+    },
+    {
+      "id": "888f042a5b81",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-24T10:00:00+08:00",
+      "end": "2027-01-24T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-24"
+      ]
+    },
+    {
       "id": "73e97ba0e45c",
       "title": "Computer Organization(C) CS2115",
       "calendar": "primary",
@@ -3078,6 +3510,18 @@
       "allDay": false,
       "days": [
         "2027-01-27"
+      ]
+    },
+    {
+      "id": "b358b719fb8a",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-28T10:00:00+08:00",
+      "end": "2027-01-28T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-28"
       ]
     },
     {
@@ -3366,6 +3810,15 @@
       "allDay": true
     },
     {
+      "id": "550cf49bea9b",
+      "title": "OPPORTUNITY: IT Certification Sponsorship - round 2",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-15",
+      "end": "2027-02-15",
+      "allDay": true
+    },
+    {
       "id": "e6ff32b39a33",
       "title": "Computer Organization(C) CS2115",
       "calendar": "primary",
@@ -3471,6 +3924,18 @@
       "allDay": true
     },
     {
+      "id": "46800e8f1ff2",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-22T10:00:00+08:00",
+      "end": "2027-02-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-22"
+      ]
+    },
+    {
       "id": "bf27859d2a3c",
       "title": "Computer Organization(C) CS2115",
       "calendar": "primary",
@@ -3543,6 +4008,18 @@
       ]
     },
     {
+      "id": "46981303eb25",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-24T10:00:00+08:00",
+      "end": "2027-02-24T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-24"
+      ]
+    },
+    {
       "id": "860c2c1220af",
       "title": "Calculus(T) MA1508",
       "calendar": "primary",
@@ -3574,6 +4051,18 @@
       "start": "2027-02-28",
       "end": "2027-02-28",
       "allDay": true
+    },
+    {
+      "id": "e199673f1fe1",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-02-28T10:00:00+08:00",
+      "end": "2027-02-28T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-02-28"
+      ]
     },
     {
       "id": "1bf9231fb941",
@@ -3945,6 +4434,18 @@
       "allDay": true
     },
     {
+      "id": "04103bb2a1e7",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-22T10:00:00+08:00",
+      "end": "2027-03-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-22"
+      ]
+    },
+    {
       "id": "673ff5c58893",
       "title": "Computer Organization(C) CS2115",
       "calendar": "primary",
@@ -4035,6 +4536,18 @@
       ]
     },
     {
+      "id": "2569dc6a4da0",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-24T10:00:00+08:00",
+      "end": "2027-03-24T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-24"
+      ]
+    },
+    {
       "id": "d5c801a691ec",
       "title": "Calculus(T) MA1508",
       "calendar": "primary",
@@ -4086,10 +4599,31 @@
       "allDay": true
     },
     {
+      "id": "00197fa60990",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-03-28T10:00:00+08:00",
+      "end": "2027-03-28T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-03-28"
+      ]
+    },
+    {
       "id": "218c6d39e165",
       "title": "Easter Monday",
       "calendar": "Holidays in Hong Kong",
       "color": 1,
+      "start": "2027-03-29",
+      "end": "2027-03-29",
+      "allDay": true
+    },
+    {
+      "id": "5802b0f6572d",
+      "title": "OPPORTUNITY: IT Certification Sponsorship - round 3 (last)",
+      "calendar": "primary",
+      "color": 0,
       "start": "2027-03-29",
       "end": "2027-03-29",
       "allDay": true
@@ -4512,6 +5046,18 @@
       ]
     },
     {
+      "id": "f9d06cd06fe9",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-22T10:00:00+08:00",
+      "end": "2027-04-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-22"
+      ]
+    },
+    {
       "id": "b30e2687a953",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -4521,6 +5067,18 @@
       "allDay": false,
       "days": [
         "2027-04-23"
+      ]
+    },
+    {
+      "id": "fb51dfe08c6d",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-24T10:00:00+08:00",
+      "end": "2027-04-24T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-24"
       ]
     },
     {
@@ -4596,6 +5154,18 @@
       ]
     },
     {
+      "id": "b368103c48c6",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-28T10:00:00+08:00",
+      "end": "2027-04-28T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-28"
+      ]
+    },
+    {
       "id": "8a1a4fc9acaa",
       "title": "Calculus(T) MA1508",
       "calendar": "primary",
@@ -4614,6 +5184,15 @@
       "color": 0,
       "start": "2027-04-29",
       "end": "2027-04-29",
+      "allDay": true
+    },
+    {
+      "id": "beeb30cf3c62",
+      "title": "OPPORTUNITY: CS English Test Sponsorship (IELTS/TOEFL)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-30",
+      "end": "2027-04-30",
       "allDay": true
     },
     {
@@ -5034,6 +5613,30 @@
       ]
     },
     {
+      "id": "8bfe206a9384",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-22T10:00:00+08:00",
+      "end": "2027-05-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-22"
+      ]
+    },
+    {
+      "id": "267d6954017b",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-24T10:00:00+08:00",
+      "end": "2027-05-24T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-24"
+      ]
+    },
+    {
       "id": "a396d27c6255",
       "title": "Computer Organization(C) CS2115",
       "calendar": "primary",
@@ -5133,6 +5736,18 @@
       "color": 0,
       "start": "2027-05-28T09:00:00+08:00",
       "end": "2027-05-28T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-05-28"
+      ]
+    },
+    {
+      "id": "b9e638c680ac",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-05-28T10:00:00+08:00",
+      "end": "2027-05-28T10:30:00+08:00",
       "allDay": false,
       "days": [
         "2027-05-28"
@@ -5526,6 +6141,18 @@
       ]
     },
     {
+      "id": "91c053d81575",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-22T10:00:00+08:00",
+      "end": "2027-06-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-22"
+      ]
+    },
+    {
       "id": "5887027b7ea1",
       "title": "Intro to Programming(T/L) CS1302A",
       "calendar": "primary",
@@ -5574,6 +6201,18 @@
       ]
     },
     {
+      "id": "8523f2c529db",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-24T10:00:00+08:00",
+      "end": "2027-06-24T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-24"
+      ]
+    },
+    {
       "id": "926b4d34e9a4",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -5593,6 +6232,18 @@
       "start": "2027-06-27",
       "end": "2027-06-27",
       "allDay": true
+    },
+    {
+      "id": "70dbcf1f4ffd",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-06-28T10:00:00+08:00",
+      "end": "2027-06-28T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-06-28"
+      ]
     },
     {
       "id": "ea869dbfefb5",
@@ -6012,6 +6663,18 @@
       ]
     },
     {
+      "id": "1e7a473d1497",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-22T10:00:00+08:00",
+      "end": "2027-07-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-22"
+      ]
+    },
+    {
       "id": "a5b0749998cf",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -6021,6 +6684,18 @@
       "allDay": false,
       "days": [
         "2027-07-23"
+      ]
+    },
+    {
+      "id": "5c5dffbeaf8a",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-24T10:00:00+08:00",
+      "end": "2027-07-24T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-24"
       ]
     },
     {
@@ -6099,6 +6774,18 @@
       "color": 0,
       "start": "2027-07-28T09:00:00+08:00",
       "end": "2027-07-28T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-07-28"
+      ]
+    },
+    {
+      "id": "400fdeaf6222",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-07-28T10:00:00+08:00",
+      "end": "2027-07-28T10:30:00+08:00",
       "allDay": false,
       "days": [
         "2027-07-28"
@@ -6462,6 +7149,18 @@
       ]
     },
     {
+      "id": "587ed73d765b",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-22T10:00:00+08:00",
+      "end": "2027-08-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-22"
+      ]
+    },
+    {
       "id": "68e4d3198046",
       "title": "Computer Organization(C) CS2115",
       "calendar": "primary",
@@ -6492,6 +7191,18 @@
       "color": 0,
       "start": "2027-08-24T09:00:00+08:00",
       "end": "2027-08-24T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-24"
+      ]
+    },
+    {
+      "id": "70e28e31f26f",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-24T10:00:00+08:00",
+      "end": "2027-08-24T10:30:00+08:00",
       "allDay": false,
       "days": [
         "2027-08-24"
@@ -6564,6 +7275,18 @@
       "allDay": false,
       "days": [
         "2027-08-27"
+      ]
+    },
+    {
+      "id": "1d1d10af475b",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-08-28T10:00:00+08:00",
+      "end": "2027-08-28T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-08-28"
       ]
     },
     {
@@ -6972,6 +7695,18 @@
       ]
     },
     {
+      "id": "67b6d53abaa4",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-22T10:00:00+08:00",
+      "end": "2027-09-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-22"
+      ]
+    },
+    {
       "id": "c93516c824db",
       "title": "Calculus(T) MA1508",
       "calendar": "primary",
@@ -6999,6 +7734,18 @@
       "color": 0,
       "start": "2027-09-24T09:00:00+08:00",
       "end": "2027-09-24T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-24"
+      ]
+    },
+    {
+      "id": "455d6f376cc2",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-24T10:00:00+08:00",
+      "end": "2027-09-24T10:30:00+08:00",
       "allDay": false,
       "days": [
         "2027-09-24"
@@ -7035,6 +7782,18 @@
       "color": 0,
       "start": "2027-09-28T09:00:00+08:00",
       "end": "2027-09-28T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-09-28"
+      ]
+    },
+    {
+      "id": "6e15a4d41995",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-09-28T10:00:00+08:00",
+      "end": "2027-09-28T10:30:00+08:00",
       "allDay": false,
       "days": [
         "2027-09-28"
@@ -7434,6 +8193,18 @@
       ]
     },
     {
+      "id": "8fc91149b3fc",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-22T10:00:00+08:00",
+      "end": "2027-10-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-22"
+      ]
+    },
+    {
       "id": "0ea93015dace",
       "title": "Last quarter 1:29am",
       "calendar": "Phases of the Moon",
@@ -7441,6 +8212,18 @@
       "start": "2027-10-23",
       "end": "2027-10-23",
       "allDay": true
+    },
+    {
+      "id": "da85c72d9943",
+      "title": "Sosim (telecom) bill / plan renewal",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-24T10:00:00+08:00",
+      "end": "2027-10-24T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-24"
+      ]
     },
     {
       "id": "0c908c53787d",
@@ -7536,6 +8319,18 @@
       ]
     },
     {
+      "id": "98ba764eb067",
+      "title": "YouTube Premium (student) renews in 2 days (HK$58)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-10-28T10:00:00+08:00",
+      "end": "2027-10-28T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-10-28"
+      ]
+    },
+    {
       "id": "d184754bd82e",
       "title": "New moon 9:36pm",
       "calendar": "Phases of the Moon",
@@ -7578,6 +8373,216 @@
       "allDay": false,
       "days": [
         "2027-11-01"
+      ]
+    },
+    {
+      "id": "b00ed691682d",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-02T09:00:00+08:00",
+      "end": "2027-11-02T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-02"
+      ]
+    },
+    {
+      "id": "4bf8c9c65425",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-02T12:00:00+08:00",
+      "end": "2027-11-02T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-02"
+      ]
+    },
+    {
+      "id": "3929919c529f",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-02T16:00:00+08:00",
+      "end": "2027-11-02T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-02"
+      ]
+    },
+    {
+      "id": "3436906bd795",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-03T09:00:00+08:00",
+      "end": "2027-11-03T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-03"
+      ]
+    },
+    {
+      "id": "663cd2a2eeaf",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-03T12:00:00+08:00",
+      "end": "2027-11-03T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-03"
+      ]
+    },
+    {
+      "id": "6fb406713614",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-05T09:00:00+08:00",
+      "end": "2027-11-05T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-05"
+      ]
+    },
+    {
+      "id": "a82c4a34f8ae",
+      "title": "First quarter 4:00pm",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-11-06",
+      "end": "2027-11-06",
+      "allDay": true
+    },
+    {
+      "id": "cb2c4db490b3",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-08T12:00:00+08:00",
+      "end": "2027-11-08T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-08"
+      ]
+    },
+    {
+      "id": "13dc6fdb264c",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-08T16:00:00+08:00",
+      "end": "2027-11-08T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-08"
+      ]
+    },
+    {
+      "id": "6ff91d501762",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-09T09:00:00+08:00",
+      "end": "2027-11-09T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-09"
+      ]
+    },
+    {
+      "id": "d42b6e224fd3",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-09T12:00:00+08:00",
+      "end": "2027-11-09T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-09"
+      ]
+    },
+    {
+      "id": "ed13b28fdb23",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-09T16:00:00+08:00",
+      "end": "2027-11-09T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-09"
+      ]
+    },
+    {
+      "id": "cdb308b58aee",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-10T09:00:00+08:00",
+      "end": "2027-11-10T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-10"
+      ]
+    },
+    {
+      "id": "f58cb5a55258",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-10T12:00:00+08:00",
+      "end": "2027-11-10T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-10"
+      ]
+    },
+    {
+      "id": "c13ef6d907d6",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-12T09:00:00+08:00",
+      "end": "2027-11-12T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-12"
+      ]
+    },
+    {
+      "id": "e66eda16398f",
+      "title": "Full moon 11:26am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-11-14",
+      "end": "2027-11-14",
+      "allDay": true
+    },
+    {
+      "id": "2acab9b3feed",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-15T12:00:00+08:00",
+      "end": "2027-11-15T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-15"
+      ]
+    },
+    {
+      "id": "72410f5b78cb",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-15T16:00:00+08:00",
+      "end": "2027-11-15T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-15"
       ]
     }
   ]
