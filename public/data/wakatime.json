@@ -1,181 +1,174 @@
 {
   "source": "wakatime",
-  "generated": "2026-11-14T12:45:10+00:00",
+  "generated": "2026-11-15T14:01:00+00:00",
   "timezone": "Asia/Hong_Kong",
   "range": {
-    "start": "2026-11-07",
-    "end": "2026-11-13",
+    "start": "2026-11-08",
+    "end": "2026-11-14",
     "days": 7
   },
-  "total_seconds": 85951,
-  "daily_average_seconds": 12279,
+  "total_seconds": 106356,
+  "daily_average_seconds": 15194,
   "active_days": 7,
   "categories": [
     {
       "name": "AI Coding",
-      "seconds": 85951,
+      "seconds": 106356,
       "percent": 100.0
     }
   ],
   "projects": [
     {
-      "name": "CityUHK_job_scraper",
-      "seconds": 14870,
-      "percent": 17.3
-    },
-    {
       "name": "pygym",
       "seconds": 14049,
-      "percent": 16.3
-    },
-    {
-      "name": "overworld-hyprland",
-      "seconds": 10602,
-      "percent": 12.3
+      "percent": 13.2
     },
     {
       "name": "nurasik12",
-      "seconds": 9502,
-      "percent": 11.1
+      "seconds": 13816,
+      "percent": 13.0
+    },
+    {
+      "name": "claimmap",
+      "seconds": 12991,
+      "percent": 12.2
+    },
+    {
+      "name": "CityUHK_job_scraper",
+      "seconds": 12820,
+      "percent": 12.1
+    },
+    {
+      "name": "overworld-hyprland",
+      "seconds": 10584,
+      "percent": 10.0
+    },
+    {
+      "name": "Unknown Project",
+      "seconds": 6330,
+      "percent": 6.0
     },
     {
       "name": "nurasik14",
-      "seconds": 5402,
-      "percent": 6.3
+      "seconds": 6177,
+      "percent": 5.8
+    },
+    {
+      "name": "scratch",
+      "seconds": 4387,
+      "percent": 4.1
     },
     {
       "name": "tg-nebula-drift",
       "seconds": 3292,
-      "percent": 3.8
+      "percent": 3.1
+    },
+    {
+      "name": "Projects",
+      "seconds": 3281,
+      "percent": 3.1
     },
     {
       "name": "scripts",
       "seconds": 3210,
-      "percent": 3.7
-    },
-    {
-      "name": "Projects",
-      "seconds": 3088,
-      "percent": 3.6
+      "percent": 3.0
     },
     {
       "name": "hermes",
-      "seconds": 2673,
-      "percent": 3.1
-    },
-    {
-      "name": "designloop",
-      "seconds": 2417,
-      "percent": 2.8
-    },
-    {
-      "name": "Unknown Project",
-      "seconds": 2367,
-      "percent": 2.8
-    },
-    {
-      "name": "apothecary-hyprland",
-      "seconds": 1918,
-      "percent": 2.2
+      "seconds": 2519,
+      "percent": 2.4
     },
     {
       "name": "Other",
-      "seconds": 12460,
-      "percent": 14.5
+      "seconds": 12799,
+      "percent": 12.0
     }
   ],
   "languages": [
     {
       "name": "Python",
-      "seconds": 30562,
-      "percent": 35.6
+      "seconds": 32255,
+      "percent": 30.3
     },
     {
       "name": "Markdown",
-      "seconds": 14607,
-      "percent": 17.0
-    },
-    {
-      "name": "Text",
-      "seconds": 5220,
-      "percent": 6.1
+      "seconds": 16691,
+      "percent": 15.7
     },
     {
       "name": "JavaScript",
-      "seconds": 4721,
-      "percent": 5.5
+      "seconds": 8830,
+      "percent": 8.3
+    },
+    {
+      "name": "Text",
+      "seconds": 5054,
+      "percent": 4.8
+    },
+    {
+      "name": "Bash",
+      "seconds": 4264,
+      "percent": 4.0
     },
     {
       "name": "QML",
       "seconds": 3607,
-      "percent": 4.2
+      "percent": 3.4
     },
     {
       "name": "HTML",
-      "seconds": 3085,
-      "percent": 3.6
-    },
-    {
-      "name": "Bash",
-      "seconds": 1626,
-      "percent": 1.9
+      "seconds": 3140,
+      "percent": 3.0
     },
     {
       "name": "TypeScript",
       "seconds": 554,
-      "percent": 0.6
+      "percent": 0.5
     },
     {
-      "name": "TOML",
-      "seconds": 354,
+      "name": "Image (png)",
+      "seconds": 388,
       "percent": 0.4
     },
     {
       "name": "Svelte",
       "seconds": 339,
-      "percent": 0.4
+      "percent": 0.3
     },
     {
-      "name": "YAML",
-      "seconds": 158,
+      "name": "TOML",
+      "seconds": 235,
       "percent": 0.2
     },
     {
-      "name": "INI",
-      "seconds": 141,
+      "name": "CSS",
+      "seconds": 195,
       "percent": 0.2
     },
     {
       "name": "Other",
-      "seconds": 20967,
-      "percent": 24.4
+      "seconds": 30786,
+      "percent": 28.9
     }
   ],
   "editors": [
     {
       "name": "Claude Code",
-      "seconds": 51579,
-      "percent": 60.0
-    },
-    {
-      "name": "Hermes Agent",
-      "seconds": 22413,
-      "percent": 26.1
+      "seconds": 48708,
+      "percent": 45.8
     },
     {
       "name": "Hermes",
-      "seconds": 11959,
-      "percent": 13.9
+      "seconds": 29484,
+      "percent": 27.7
+    },
+    {
+      "name": "Hermes Agent",
+      "seconds": 28164,
+      "percent": 26.5
     }
   ],
   "days": [
-    {
-      "date": "2026-11-07",
-      "seconds": 8176,
-      "categories": {
-        "AI Coding": 8176
-      }
-    },
     {
       "date": "2026-11-08",
       "seconds": 873,
@@ -216,6 +209,13 @@
       "seconds": 17692,
       "categories": {
         "AI Coding": 17692
+      }
+    },
+    {
+      "date": "2026-11-14",
+      "seconds": 28581,
+      "categories": {
+        "AI Coding": 28581
       }
     }
   ]
