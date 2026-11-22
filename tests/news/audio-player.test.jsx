@@ -1,6 +1,6 @@
 // Laptop audio on the page: cue mapping, the controller's <audio> path against a
 // fake element, and each state's markup, as in page.test.jsx. No DOM, no network.
-import { describe, expect, test } from 'bun:test';
+import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { encryptBacklog } from '../../plugins/news-core.js';
 import { audioSummary, clipTiming, createAudioSource, mapCues, sentenceAt, voiceLabel } from '../../src/news/audio.js';
@@ -8,6 +8,18 @@ import Player from '../../src/news/Player.jsx';
 import { SpeechController } from '../../src/news/speech.js';
 import { openWrapUp } from '../../src/news/store.js';
 import { AudioButton, AudioRow } from '../../src/news/SyncPanel.jsx';
+
+// These tests were written for the stored (oldest-first) clip order, so they
+// run with that setting saved; 'newest first by default' has its own test.
+const OLDEST_FIRST = { getItem: (k) => (k === 'news.fm.settings' ? '{"newestFirst":false}' : null), setItem: () => {}, removeItem: () => {} };
+let savedStorage;
+beforeAll(() => {
+  savedStorage = globalThis.localStorage;
+  globalThis.localStorage = OLDEST_FIRST;
+});
+afterAll(() => {
+  globalThis.localStorage = savedStorage;
+});
 
 const AVA = 'en-US-AvaMultilingualNeural';
 const cue = (start, end, text) => ({ start, end, text });

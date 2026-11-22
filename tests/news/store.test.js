@@ -8,6 +8,7 @@ import {
   forgetPassphrase,
   formatReceived,
   heardCount,
+  keyAction,
   loadIndex,
   markHeard,
   newsUrl,
@@ -20,9 +21,11 @@ import {
   readSettings,
   rebuildNews,
   rememberPassphrase,
+  playOrder,
   resumeIndex,
   setBookmark,
   setLastClip,
+  storedIndex,
   swipeAction,
   syncSummary,
   writeProgress,
@@ -253,6 +256,31 @@ describe('progress', () => {
     expect(resumeIndex(s, { w: { last: 1, heard: ['a', 'b', 'c'] } }, 'w')).toBe(1);
     expect(resumeIndex([], {}, 'w')).toBe(0);
   });
+
+  test('playOrder sorts by arrival either way, keeps one email\'s clips in order, and is cached', () => {
+    const at = (id, receivedAt) => ({ id, receivedAt });
+    const s = [at('a1', '2026-11-06T09:00:00+08:00'), at('a2', '2026-11-06T09:00:00+08:00'), at('b', '2026-11-07T09:00:00+08:00'), at('x', '')];
+    expect(playOrder(s, true).map((c) => c.id)).toEqual(['b', 'a1', 'a2', 'x']);
+    expect(playOrder(s, false).map((c) => c.id)).toEqual(['x', 'a1', 'a2', 'b']);
+    expect(playOrder(s, true)).toBe(playOrder(s, true));
+    expect(s.map((c) => c.id)).toEqual(['a1', 'a2', 'b', 'x']);
+  });
+
+  test('resumeIndex and storedIndex: last stays a stored-order index under any play order', () => {
+    const s = stories('a', 'b', 'c');
+    const reversed = [s[2], s[1], s[0]];
+    expect(resumeIndex(s, { w: { last: 0, heard: [] } }, 'w', reversed)).toBe(2);
+    expect(resumeIndex(s, { w: { last: 2, heard: ['c'] } }, 'w', reversed)).toBe(1);
+    expect(resumeIndex(s, {}, 'w', reversed)).toBe(0);
+    expect(storedIndex(s, reversed, 0)).toBe(2);
+    expect(storedIndex(s, reversed, 2)).toBe(0);
+  });
+
+  test('keyAction leaves arrow keys to a focused slider', () => {
+    const range = { type: 'range', closest: () => null };
+    expect(keyAction({ key: 'ArrowRight', target: range })).toBeNull();
+    expect(keyAction({ key: 'j', target: range })).toBe('next');
+  });
 });
 
 describe('choosing a wrap-up', () => {
@@ -323,11 +351,11 @@ describe('this device', () => {
 
   test('settings default, round trip and clamp', () => {
     const storage = fakeStorage();
-    expect(readSettings(storage)).toEqual({ voice: null, rate: 1.1, autoplay: true });
-    writeSettings(storage, { voice: 'Samantha', rate: 1.4, autoplay: false });
-    expect(readSettings(storage)).toEqual({ voice: 'Samantha', rate: 1.4, autoplay: false });
+    expect(readSettings(storage)).toEqual({ voice: null, rate: 1.1, autoplay: true, newestFirst: true });
+    writeSettings(storage, { voice: 'Samantha', rate: 1.4, autoplay: false, newestFirst: false });
+    expect(readSettings(storage)).toEqual({ voice: 'Samantha', rate: 1.4, autoplay: false, newestFirst: false });
     expect(readSettings(fakeStorage({ 'news.fm.settings': '{"rate":40}' })).rate).toBe(1.6);
-    expect(readSettings(fakeStorage({ 'news.fm.settings': 'nope' }))).toEqual({ voice: null, rate: 1.1, autoplay: true });
+    expect(readSettings(fakeStorage({ 'news.fm.settings': 'nope' }))).toEqual({ voice: null, rate: 1.1, autoplay: true, newestFirst: true });
   });
 });
 

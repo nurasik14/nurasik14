@@ -17,6 +17,7 @@ import {
   newsUrl,
   nextUnheardWrapUp,
   openWrapUp,
+  playOrder,
   readNewsUrl,
   readProgress,
   readSettings,
@@ -24,6 +25,7 @@ import {
   safeStorage,
   setBookmark,
   setLastClip,
+  storedIndex,
   swipeAction,
   writeProgress,
   writeSettings,
@@ -251,6 +253,9 @@ function automaticSelection(entries, lib, progress, clipId) {
   return chooseWrapUp(entries, lib, progress);
 }
 
+/** Bookmarks keep their own order (newest bookmark first); weeks follow the order setting. */
+const queueOf = (id, stories, newestFirst) => (id === BOOKMARKS_ID ? stories : playOrder(stories, newestFirst));
+
 const newMediaElement = () => (globalThis.Audio ? new globalThis.Audio() : null);
 
 /** The <audio> element that plays laptop audio, and the source for it. Neither exists on Pages. */
@@ -300,8 +305,9 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
     // Attached here too so the first render already shows the clip.
     const stories = selected && lib[selected]?.stories;
     if (stories) {
-      const wanted = stories.findIndex((s) => s.id === url.clipId);
-      c.setQueue(stories, wanted >= 0 ? wanted : resumeIndex(stories, progress, selected), selected);
+      const queue = queueOf(selected, stories, settings.newestFirst);
+      const wanted = queue.findIndex((s) => s.id === url.clipId);
+      c.setQueue(queue, wanted >= 0 ? wanted : resumeIndex(stories, progress, selected, queue), selected);
     }
     return c;
   });
@@ -359,9 +365,11 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
     if (session) session.playbackState = speaking ? 'playing' : snap.status === 'paused' ? 'paused' : 'none';
   }, [session, speaking, snap.status]);
 
+  const settingsRef = React.useRef(settings);
   React.useEffect(() => {
     libRef.current = lib;
     progressRef.current = progress;
+    settingsRef.current = settings;
   });
 
   React.useEffect(() => {
@@ -418,10 +426,11 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
 
   const attach = React.useCallback(
     (id, stories) => {
-      const wanted = wantedClip.current ? stories.findIndex((s) => s.id === wantedClip.current) : -1;
+      const queue = queueOf(id, stories, settingsRef.current.newestFirst);
+      const wanted = wantedClip.current ? queue.findIndex((s) => s.id === wantedClip.current) : -1;
       if (wantedClip.current && wanted < 0) flash(`no clip ${wantedClip.current} in this wrap-up`, 'warn');
       wantedClip.current = null;
-      controller.setQueue(stories, wanted >= 0 ? wanted : resumeIndex(stories, progressRef.current, id), id);
+      controller.setQueue(queue, wanted >= 0 ? wanted : resumeIndex(stories, progressRef.current, id, queue), id);
       if (playOnAttach.current) controller.play();
       playOnAttach.current = false;
     },
@@ -445,13 +454,15 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
     if (!attached) return;
     const next = newsUrl(window.location.href, selected, clip?.id ?? null);
     if (next !== `${window.location.pathname}${window.location.search}${window.location.hash}`) window.history.replaceState(window.history.state, '', next);
-    const updated = setLastClip(progressRef.current, selected, snap.clip);
+    // Saved as a stored-order index, so it survives flipping the order.
+    const stories = libRef.current[selected]?.stories ?? controller.clips;
+    const updated = setLastClip(progressRef.current, selected, selected === BOOKMARKS_ID ? snap.clip : storedIndex(stories, controller.clips, snap.clip));
     if (updated !== progressRef.current) {
       progressRef.current = updated;
       setProgress(updated);
       writeProgress(storage, updated);
     }
-  }, [attached, selected, clip, snap.clip, storage]);
+  }, [attached, selected, clip, snap.clip, storage, controller]);
 
   const selectWrapUp = React.useCallback(
     (id, { play = false } = {}) => {
@@ -504,6 +515,31 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
     saveSettings({ ...settings, rate: next });
     flash(`speed ${rateLabel(next)}`, 'info');
   }
+  /** Flips newest/oldest first, staying on the clip that is showing. A clip that was playing plays on. */
+  function toggleOrder() {
+    const next = { ...settings, newestFirst: !settings.newestFirst };
+    settingsRef.current = next;
+    saveSettings(next);
+    flash(next.newestFirst ? 'newest first' : 'oldest first', 'info');
+    if (!attached || selected === BOOKMARKS_ID) return;
+    const queue = queueOf(selected, wrapUp.stories, next.newestFirst);
+    const at = Math.max(0, queue.findIndex((s) => s.id === clip?.id));
+    const wasPlaying = speaking;
+    controller.setQueue(queue, at, selected);
+    if (wasPlaying) controller.play();
+  }
+
+  // The scrubber: dragging only previews, letting go jumps, so playback is not restarted at every step.
+  // Tied to its wrap-up, so a drag left over from another week is ignored.
+  const [scrubState, setScrubState] = React.useState(null);
+  const scrub = scrubState?.queueId === snap.queueId ? scrubState.index : null;
+  const setScrub = (index) => setScrubState({ queueId: snap.queueId, index });
+  const commitScrub = () => {
+    if (scrub === null) return;
+    setScrubState(null);
+    if (scrub !== snap.clip) controller.goTo(scrub);
+  };
+
   function changeAutoplay(on) {
     controller.setAutoplay(on);
     saveSettings({ ...settings, autoplay: on });
@@ -554,6 +590,7 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
       slower: () => changeRate(stepRate(settings.rate, -1)),
       cycle: () => changeRate(cycleRate(settings.rate)),
       bookmark: toggleBookmark,
+      order: toggleOrder,
       canBookmark: local,
     };
   });
@@ -579,9 +616,10 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
       { name: 'prev', desc: 'previous clip', keys: ['k'], run: () => actions.current.prev() },
       { name: 'speed', desc: `cycle speed, now ${rateLabel(settings.rate)}`, keys: ['+', '-'], run: () => actions.current.cycle() },
       ...(local ? [{ name: 'bookmark', desc: 'bookmark this clip, or remove it (localhost)', keys: ['b'], run: () => actions.current.bookmark() }] : []),
+      { name: 'order', desc: `flip clip order, now ${settings.newestFirst ? 'newest' : 'oldest'} first`, run: () => actions.current.order() },
       { name: 'lock', desc: 'forget the passphrase on this device', run: () => onLock() },
     ],
-    [settings.rate, onLock, local],
+    [settings.rate, settings.newestFirst, onLock, local],
   );
   useCommands(commands);
 
@@ -759,6 +797,45 @@ export default function Player({ entries, first, passphrase, onLock, synth = glo
             <span aria-hidden="true">→</span>
           </button>
         </div>
+
+        {clips.length > 1 && (
+          <div className="mt-4 font-mono text-[12px]">
+            <div className="flex items-center gap-3">
+              <label htmlFor="news-scrub" className="shrink-0 text-fg-dim">
+                clip
+              </label>
+              <input
+                id="news-scrub"
+                type="range"
+                min={0}
+                max={clips.length - 1}
+                step={1}
+                value={scrub ?? snap.clip}
+                onChange={(e) => setScrub(Number(e.target.value))}
+                onPointerUp={commitScrub}
+                onKeyUp={commitScrub}
+                onBlur={commitScrub}
+                aria-valuetext={`clip ${(scrub ?? snap.clip) + 1} of ${clips.length}`}
+                className="h-6 min-w-0 flex-1 cursor-pointer accent-info"
+              />
+              <output htmlFor="news-scrub" className="w-[7ch] shrink-0 text-right text-fg">
+                {(scrub ?? snap.clip) + 1}/{clips.length}
+              </output>
+            </div>
+            <p className="mt-1 min-h-[1.25rem] truncate text-fg-faint" aria-live="polite">
+              {scrub !== null && clips[scrub] ? `→ ${clips[scrub].headline}` : ''}
+            </p>
+          </div>
+        )}
+
+        {selected !== BOOKMARKS_ID && clips.length > 1 && (
+          <div className="mt-1 flex justify-center lg:justify-start">
+            <button type="button" className="btn h-7 px-2 text-[12px]" onClick={toggleOrder} title="flip the clip order">
+              <span aria-hidden="true">{settings.newestFirst ? '↓' : '↑'}</span>
+              {settings.newestFirst ? 'newest first' : 'oldest first'}
+            </button>
+          </div>
+        )}
 
         {!canPlay && (
           <p id="news-speech-reason" className="mt-2 text-center font-mono text-[12px] text-fg-dim lg:text-left">

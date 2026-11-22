@@ -1,13 +1,25 @@
 // The locked -> unlocked flow with a real encrypted file. The repo has no DOM
 // test setup, so this drives the real unlock function and renders each state's
 // markup with react-dom/server, as tests/planner/google-overlay.test.jsx does.
-import { describe, expect, test } from 'bun:test';
+import { afterAll, beforeAll, describe, expect, test } from 'bun:test';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { encryptBacklog, encryptBookmarks, encryptWeek, WrongPassphraseError } from '../../plugins/news-core.js';
 import Player from '../../src/news/Player.jsx';
 import { keyAction, loadIndex, openWrapUp } from '../../src/news/store.js';
 import { RebuildButton } from '../../src/news/SyncPanel.jsx';
 import Unlock from '../../src/news/Unlock.jsx';
+
+// These tests were written for the stored (oldest-first) clip order, so they
+// run with that setting saved; 'newest first by default' has its own test.
+const OLDEST_FIRST = { getItem: (k) => (k === 'news.fm.settings' ? '{"newestFirst":false}' : null), setItem: () => {}, removeItem: () => {} };
+let savedStorage;
+beforeAll(() => {
+  savedStorage = globalThis.localStorage;
+  globalThis.localStorage = OLDEST_FIRST;
+});
+afterAll(() => {
+  globalThis.localStorage = savedStorage;
+});
 
 const PASSPHRASE = 'correct horse battery';
 const WEEK = '2026-10-30';
@@ -88,6 +100,20 @@ describe('locked -> unlocked', () => {
     expect(html).toContain('Samantha (en-US)');
     expect(html).not.toContain('speech is not available');
     expect(html).toMatch(/>lock</);
+  });
+
+  test('with nothing saved, a week opens newest first, with the order button and the clip slider', async () => {
+    const { entries, first } = await unlock(PASSPHRASE);
+    globalThis.localStorage = undefined;
+    try {
+      const html = renderToStaticMarkup(<Player entries={entries} first={first} passphrase={PASSPHRASE} onLock={() => {}} synth={fakeSynth([{ name: 'Samantha', lang: 'en-US' }])} />);
+      expect(html).toContain('Chips rally');
+      expect(html).toMatch(/clip 1 \/ 2/);
+      expect(html).toContain('newest first');
+      expect(html).toMatch(/<input id="news-scrub" type="range" min="0" max="1"/);
+    } finally {
+      globalThis.localStorage = OLDEST_FIRST;
+    }
   });
 
   test('without speech the text is all there and play says why it is off', async () => {

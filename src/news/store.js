@@ -215,16 +215,48 @@ export function nextUnheardWrapUp(entries, lib, progress, currentId) {
 }
 
 /** Where to pick a wrap-up up again: the last clip, or the next unheard one if that was heard. */
-export function resumeIndex(stories, progress, id) {
+/**
+ * Where to resume, as an index into `ordered` (the play order; by default the
+ * stored order). `last` is kept as an index into the stored order, so flipping
+ * the play order never moves the resume point.
+ */
+export function resumeIndex(stories, progress, id, ordered = stories) {
   if (!stories.length) return 0;
   const entry = entryOf(progress, id);
-  const last = Math.min(entry.last, stories.length - 1);
+  // Never opened: start at the top of the play order, not at stored clip 0.
+  const last = progress[id] ? Math.max(0, ordered.indexOf(stories[Math.min(entry.last, stories.length - 1)])) : 0;
   const heard = new Set(entry.heard);
-  for (let step = 0; step < stories.length; step += 1) {
-    const i = (last + step) % stories.length;
-    if (!heard.has(stories[i].id)) return i;
+  for (let step = 0; step < ordered.length; step += 1) {
+    const i = (last + step) % ordered.length;
+    if (!heard.has(ordered[i].id)) return i;
   }
   return last;
+}
+
+const receivedMs = (s) => {
+  const ms = Date.parse(s.receivedAt);
+  return Number.isNaN(ms) ? -Infinity : ms;
+};
+const orderCache = { true: new WeakMap(), false: new WeakMap() };
+
+/**
+ * A wrap-up's clips in play order: by the email's arrival, newest or oldest
+ * first. The sort is stable, so the clips of one email keep their order either
+ * way. Cached, so the same wrap-up always gives the same array.
+ */
+export function playOrder(stories, newestFirst) {
+  const cache = orderCache[Boolean(newestFirst)];
+  let ordered = cache.get(stories);
+  if (!ordered) {
+    ordered = [...stories].sort((a, b) => (newestFirst ? receivedMs(b) - receivedMs(a) : receivedMs(a) - receivedMs(b)));
+    cache.set(stories, ordered);
+  }
+  return ordered;
+}
+
+/** A play-order index turned back into a stored-order index, for `last`. */
+export function storedIndex(stories, ordered, playIndex) {
+  return Math.max(0, stories.indexOf(ordered[playIndex]));
 }
 
 export function findClip(entries, lib, clipId) {
@@ -235,13 +267,14 @@ export function findClip(entries, lib, clipId) {
   return null;
 }
 
-/** Voice name, rate and autoplay. Never content. */
+/** Voice name, rate, autoplay and clip order. Never content. */
 export function readSettings(storage) {
   const raw = readJson(storage, KEY_SETTINGS);
   return {
     voice: typeof raw?.voice === 'string' ? raw.voice : null,
     rate: raw?.rate === undefined ? RATE_DEFAULT : clampRate(raw.rate),
     autoplay: raw?.autoplay !== false,
+    newestFirst: raw?.newestFirst !== false,
   };
 }
 
@@ -296,6 +329,8 @@ export function swipeAction({ dx, dy, startTop, clientHeight, scrollHeight, sele
 export function keyAction(e, { scroller = null, canBookmark = false } = {}) {
   if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return null;
   if (isTypingTarget(e.target) || e.target?.closest?.('[data-cmdline]')) return null;
+  // A focused slider (the clip scrubber) moves with the arrow keys itself.
+  if (e.target?.type === 'range' && e.key.startsWith('Arrow')) return null;
   switch (e.key) {
     case ' ':
       // Space on a focused control activates that control.
