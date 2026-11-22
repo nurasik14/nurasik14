@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "pulledAt": "2026-11-15T00:06:14.596Z",
+  "pulledAt": "2026-11-22T13:03:50.554Z",
   "window": {
-    "start": "2026-09-16",
-    "end": "2027-11-15"
+    "start": "2026-09-23",
+    "end": "2027-11-22"
   },
   "calendars": [
     {
@@ -28,159 +28,6 @@
     }
   ],
   "events": [
-    {
-      "id": "4f4599e6d465",
-      "title": "Intro to Computer Programming(C) CS1302A",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-16T09:00:00+08:00",
-      "end": "2026-09-16T12:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-16"
-      ]
-    },
-    {
-      "id": "f37f9e620b9f",
-      "title": "Calculus(T) MA1508",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-16T12:00:00+08:00",
-      "end": "2026-09-16T13:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-16"
-      ]
-    },
-    {
-      "id": "524ca0ff5553",
-      "title": "Physical Education(T) PED1305",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-17T09:00:00+08:00",
-      "end": "2026-09-17T10:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-17"
-      ]
-    },
-    {
-      "id": "572d3198ff71",
-      "title": "Movies & Psychology (C) GE1137",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-18T09:00:00+08:00",
-      "end": "2026-09-18T12:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-18"
-      ]
-    },
-    {
-      "id": "e7807a45a892",
-      "title": "Kazakh welcome Cityu",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-18T16:00:00+08:00",
-      "end": "2026-09-18T18:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-18"
-      ]
-    },
-    {
-      "id": "ee0dff247bc2",
-      "title": "First quarter 4:44am",
-      "calendar": "Phases of the Moon",
-      "color": 0,
-      "start": "2026-09-19",
-      "end": "2026-09-19",
-      "allDay": true
-    },
-    {
-      "id": "ea77f126c260",
-      "title": "Launch day Gen AI",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-19T00:00:00+08:00",
-      "end": "2026-09-19T18:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-19"
-      ]
-    },
-    {
-      "id": "0f250f30aefb",
-      "title": "Computer Organization(C) CS2115 Quiz Closed Book",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-21T12:00:00+08:00",
-      "end": "2026-09-21T15:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-21"
-      ]
-    },
-    {
-      "id": "ffcc59d6a641",
-      "title": "Computer Organization(T) CS2115",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-21T16:00:00+08:00",
-      "end": "2026-09-21T17:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-21"
-      ]
-    },
-    {
-      "id": "f6806100a47f",
-      "title": "Robocon Interview",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-21T16:30:00+08:00",
-      "end": "2026-09-21T17:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-21"
-      ]
-    },
-    {
-      "id": "c206c4d819f6",
-      "title": "Calculus(C) MA1508",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-22T09:00:00+08:00",
-      "end": "2026-09-22T12:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-22"
-      ]
-    },
-    {
-      "id": "40fca0315b65",
-      "title": "Intro to Programming(T/L) CS1302A",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-22T12:00:00+08:00",
-      "end": "2026-09-22T13:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-22"
-      ]
-    },
-    {
-      "id": "a544548614c1",
-      "title": "University English(T) GE1401",
-      "calendar": "primary",
-      "color": 0,
-      "start": "2026-09-22T16:00:00+08:00",
-      "end": "2026-09-22T19:00:00+08:00",
-      "allDay": false,
-      "days": [
-        "2026-09-22"
-      ]
-    },
     {
       "id": "5fdb6e1aeb55",
       "title": "Intro to Computer Programming(C) CS1302A",
@@ -1920,12 +1767,24 @@
       ]
     },
     {
-      "id": "4d622263f87a",
-      "title": "University English(T) GE1401",
+      "id": "f9ad7b3ef7cc",
+      "title": "[email] CS1302A CE-Quiz 9",
       "calendar": "primary",
       "color": 0,
-      "start": "2026-11-17T16:00:00+08:00",
-      "end": "2026-11-17T19:00:00+08:00",
+      "start": "2026-11-17T12:00:00+08:00",
+      "end": "2026-11-17T12:50:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-17"
+      ]
+    },
+    {
+      "id": "4d622263f87a",
+      "title": "University English(T) GE1401 Essay review",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-17T16:50:00+08:00",
+      "end": "2026-11-17T17:00:00+08:00",
       "allDay": false,
       "days": [
         "2026-11-17"
@@ -1962,6 +1821,54 @@
       "color": 0,
       "start": "2026-11-19T06:00:00+08:00",
       "end": "2026-11-19T07:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-19"
+      ]
+    },
+    {
+      "id": "7cda7908a7b0",
+      "title": "[opp] Due: Archery Fun Day registration (27 Nov)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-19T09:00:00+08:00",
+      "end": "2026-11-19T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-19"
+      ]
+    },
+    {
+      "id": "da6e06dcfc01",
+      "title": "[opp] Due: HSBC Global Scholarship - Global Stream (SFA 1762)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-19T09:00:00+08:00",
+      "end": "2026-11-19T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-19"
+      ]
+    },
+    {
+      "id": "7ed20e64be4d",
+      "title": "[opp] Due: HSBC Global Scholarship - Mainland Stream (SFA 1863)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-19T09:00:00+08:00",
+      "end": "2026-11-19T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-19"
+      ]
+    },
+    {
+      "id": "073d936ef41e",
+      "title": "Student Exchange Fair 2026 (From Here to Everywhere!)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-19T11:00:00+08:00",
+      "end": "2026-11-19T16:00:00+08:00",
       "allDay": false,
       "days": [
         "2026-11-19"
@@ -2013,6 +1920,30 @@
       ]
     },
     {
+      "id": "d10ba2666fda",
+      "title": "[opp] Due: HSBC Student Work Placement 2027",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-20T09:00:00+08:00",
+      "end": "2026-11-20T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-20"
+      ]
+    },
+    {
+      "id": "c0a04a605879",
+      "title": "Student Exchange Fair 2026 (From Here to Everywhere!)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-20T11:00:00+08:00",
+      "end": "2026-11-20T16:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-20"
+      ]
+    },
+    {
       "id": "6dbb940011a1",
       "title": "CS2613 Seminar: Digital Forensics & Incident Response (eWalker)",
       "calendar": "primary",
@@ -2044,6 +1975,18 @@
       "start": "2026-11-22",
       "end": "2026-11-22",
       "allDay": true
+    },
+    {
+      "id": "bddac7769821",
+      "title": "[opp] Due: Golf Fun Day (Golf Simulator) enrolment",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-22T09:00:00+08:00",
+      "end": "2026-11-22T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-22"
+      ]
     },
     {
       "id": "c0069f79e71e",
@@ -2094,6 +2037,18 @@
       ]
     },
     {
+      "id": "c4427945279e",
+      "title": "Sports For All Basketball Club Funday",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-23T15:00:00+08:00",
+      "end": "2026-11-23T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-23"
+      ]
+    },
+    {
       "id": "4140d3389241",
       "title": "Computer Organization(T) CS2115",
       "calendar": "primary",
@@ -2113,6 +2068,18 @@
       "start": "2026-11-24",
       "end": "2026-11-24",
       "allDay": true
+    },
+    {
+      "id": "98fdfe623abf",
+      "title": "[opp] Due: CGCC Mainland Study Tour 2027 (CV to SDS)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-24T08:30:00+08:00",
+      "end": "2026-11-24T09:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-24"
+      ]
     },
     {
       "id": "8843c5260dac",
@@ -2175,12 +2142,60 @@
       ]
     },
     {
+      "id": "f43d75d24760",
+      "title": "[email] CS1302A project lightning talk (1 min, in lecture)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-25T09:00:00+08:00",
+      "end": "2026-11-25T10:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-25"
+      ]
+    },
+    {
+      "id": "bc1ce3a2002c",
+      "title": "[opp] Due: CAH lecture 借來的火，寫誰的詩 (30 Nov) registration",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-25T09:00:00+08:00",
+      "end": "2026-11-25T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-25"
+      ]
+    },
+    {
+      "id": "db46c6ac691c",
+      "title": "[opp] Due: HK AI Science Week Master Talks registration",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-25T09:00:00+08:00",
+      "end": "2026-11-25T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-25"
+      ]
+    },
+    {
       "id": "b98b1e7f3909",
       "title": "Calculus(T) MA1508",
       "calendar": "primary",
       "color": 0,
       "start": "2026-11-25T12:00:00+08:00",
       "end": "2026-11-25T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-25"
+      ]
+    },
+    {
+      "id": "d5c4fda67edf",
+      "title": "[opp] Due: Chinese Enterprise Career Fair (26 Nov) registration",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-25T16:30:00+08:00",
+      "end": "2026-11-25T17:00:00+08:00",
       "allDay": false,
       "days": [
         "2026-11-25"
@@ -2196,6 +2211,18 @@
       "allDay": false,
       "days": [
         "2026-11-25"
+      ]
+    },
+    {
+      "id": "45aea55b57db",
+      "title": "[email] Chinese Enterprise Career Fair",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-26T13:00:00+08:00",
+      "end": "2026-11-26T16:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-26"
       ]
     },
     {
@@ -2235,6 +2262,30 @@
       "color": 0,
       "start": "2026-11-27T09:00:00+08:00",
       "end": "2026-11-27T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-27"
+      ]
+    },
+    {
+      "id": "218c63d08c66",
+      "title": "[email] Masters Talk - HK AI Science Week",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-27T09:00:00+08:00",
+      "end": "2026-11-27T12:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-11-27"
+      ]
+    },
+    {
+      "id": "513b82fbe068",
+      "title": "[opp] Due: Explore Xinjiang Youth Study Tour 2027 application",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-11-27T09:00:00+08:00",
+      "end": "2026-11-27T09:30:00+08:00",
       "allDay": false,
       "days": [
         "2026-11-27"
@@ -2349,6 +2400,30 @@
       ]
     },
     {
+      "id": "001e29ba4504",
+      "title": "[opp] Due: Prof. Wellman Distinguished Seminar (3 Dec) registration",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-01T09:00:00+08:00",
+      "end": "2026-12-01T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-01"
+      ]
+    },
+    {
+      "id": "423c1605e539",
+      "title": "[opp] Due: WAIC UP! AI Short Film submission",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-01T09:00:00+08:00",
+      "end": "2026-12-01T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-01"
+      ]
+    },
+    {
       "id": "93981832f827",
       "title": "Intro to Programming(T/L) CS1302A",
       "calendar": "primary",
@@ -2433,6 +2508,30 @@
       ]
     },
     {
+      "id": "8b5cc7c3285c",
+      "title": "IR Call / CC chat with Avi  (Nurassyl Serikov)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-03T09:00:00+08:00",
+      "end": "2026-12-03T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-03"
+      ]
+    },
+    {
+      "id": "1f42f6ec70ab",
+      "title": "[opp] Due: Practifly AI Mathematical Thinking Elite Challenge 2026 form",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-03T09:00:00+08:00",
+      "end": "2026-12-03T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-03"
+      ]
+    },
+    {
       "id": "c88fe9df5fa5",
       "title": "Movies & Psychology (C) GE1137",
       "calendar": "primary",
@@ -2445,11 +2544,119 @@
       ]
     },
     {
+      "id": "1fc6e70708eb",
+      "title": "[opp] Due: HKSAR Gov Scholarship TDS & ROA activity proposals",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-04T09:00:00+08:00",
+      "end": "2026-12-04T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-04"
+      ]
+    },
+    {
+      "id": "3251371620d9",
+      "title": "[opp] Due: HSBC Global Graduate Programme 2027",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-04T09:00:00+08:00",
+      "end": "2026-12-04T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-04"
+      ]
+    },
+    {
+      "id": "05aeddbaeca4",
+      "title": "[opp] Due: HSBC Summer Internship 2027",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-04T09:00:00+08:00",
+      "end": "2026-12-04T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-04"
+      ]
+    },
+    {
+      "id": "4a52ec91d539",
+      "title": "[opp] Due: Innovation and Technology Scholarship 2026/27",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-04T16:30:00+08:00",
+      "end": "2026-12-04T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-04"
+      ]
+    },
+    {
+      "id": "1d13320e7357",
+      "title": "[opp] Due: University Council student member nominations",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-04T16:30:00+08:00",
+      "end": "2026-12-04T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-04"
+      ]
+    },
+    {
+      "id": "cf306785366f",
+      "title": "[opp] Due: Cheng Foundation Scholarship (SFA 1533)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-06T09:00:00+08:00",
+      "end": "2026-12-06T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "ad5c5fdd6997",
+      "title": "[opp] Due: FANs Community Service Award, non-local (SFA 1085)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-06T09:00:00+08:00",
+      "end": "2026-12-06T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-06"
+      ]
+    },
+    {
       "id": "0074d4efb56a",
       "title": "DUE: MA1508 WebWork_09 (Application of Integrals)",
       "calendar": "primary",
       "color": 0,
       "start": "2026-12-06T23:00:00+08:00",
+      "end": "2026-12-06T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "ae5e27c715ce",
+      "title": "[email] Due: LOQ course evaluation (Sem A 2026/27)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-06T23:29:00+08:00",
+      "end": "2026-12-06T23:59:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-06"
+      ]
+    },
+    {
+      "id": "37f163bbcb88",
+      "title": "[email] Due: MA1508 Hand-in Assignment 3",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-06T23:29:00+08:00",
       "end": "2026-12-06T23:59:00+08:00",
       "allDay": false,
       "days": [
@@ -3024,6 +3231,18 @@
       "allDay": true
     },
     {
+      "id": "541b61d74bf5",
+      "title": "[opp] Due: Endeavour Merit Award (SFA 947)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2026-12-31T09:00:00+08:00",
+      "end": "2026-12-31T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2026-12-31"
+      ]
+    },
+    {
       "id": "b82d4eb494b5",
       "title": "New Year's Day",
       "calendar": "Holidays in Hong Kong",
@@ -3414,6 +3633,18 @@
       "allDay": false,
       "days": [
         "2027-01-22"
+      ]
+    },
+    {
+      "id": "34d721f53fa8",
+      "title": "[opp] Due: Li Po Chun Scholarship (SFA 125)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-01-24T09:00:00+08:00",
+      "end": "2027-01-24T09:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-01-24"
       ]
     },
     {
@@ -5202,6 +5433,18 @@
       "color": 0,
       "start": "2027-04-30T09:00:00+08:00",
       "end": "2027-04-30T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-04-30"
+      ]
+    },
+    {
+      "id": "46e4149debf7",
+      "title": "[opp] Due: CS Overseas Learning Funding Scheme",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-04-30T09:00:00+08:00",
+      "end": "2027-04-30T09:30:00+08:00",
       "allDay": false,
       "days": [
         "2027-04-30"
@@ -8583,6 +8826,123 @@
       "allDay": false,
       "days": [
         "2027-11-15"
+      ]
+    },
+    {
+      "id": "6919e01a2031",
+      "title": "Calculus(C) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-16T09:00:00+08:00",
+      "end": "2027-11-16T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-16"
+      ]
+    },
+    {
+      "id": "bdcb5a5ce650",
+      "title": "Intro to Programming(T/L) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-16T12:00:00+08:00",
+      "end": "2027-11-16T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-16"
+      ]
+    },
+    {
+      "id": "d351fb70aa84",
+      "title": "University English(T) GE1401",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-16T16:00:00+08:00",
+      "end": "2027-11-16T19:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-16"
+      ]
+    },
+    {
+      "id": "60cfbe687e57",
+      "title": "Intro to Computer Programming(C) CS1302A",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-17T09:00:00+08:00",
+      "end": "2027-11-17T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-17"
+      ]
+    },
+    {
+      "id": "49c5a8dfbf9a",
+      "title": "Calculus(T) MA1508",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-17T12:00:00+08:00",
+      "end": "2027-11-17T13:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-17"
+      ]
+    },
+    {
+      "id": "9ac98bffe59d",
+      "title": "Movies & Psychology (C) GE1137",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-19T09:00:00+08:00",
+      "end": "2027-11-19T12:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-19"
+      ]
+    },
+    {
+      "id": "62bda366e076",
+      "title": "Last quarter 8:48am",
+      "calendar": "Phases of the Moon",
+      "color": 0,
+      "start": "2027-11-21",
+      "end": "2027-11-21",
+      "allDay": true
+    },
+    {
+      "id": "2633933c256c",
+      "title": "Claude Max renews in 2 days ($116)",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-22T10:00:00+08:00",
+      "end": "2027-11-22T10:30:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-22"
+      ]
+    },
+    {
+      "id": "effe7c1c4f0c",
+      "title": "Computer Organization(C) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-22T12:00:00+08:00",
+      "end": "2027-11-22T15:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-22"
+      ]
+    },
+    {
+      "id": "78f5d21d5023",
+      "title": "Computer Organization(T) CS2115",
+      "calendar": "primary",
+      "color": 0,
+      "start": "2027-11-22T16:00:00+08:00",
+      "end": "2027-11-22T17:00:00+08:00",
+      "allDay": false,
+      "days": [
+        "2027-11-22"
       ]
     }
   ]
