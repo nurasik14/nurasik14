@@ -1,0 +1,328 @@
+{
+  "week": "2026-W47",
+  "start": "2026-11-16",
+  "end": "2026-11-22",
+  "complete": false,
+  "generated": "2026-11-22T14:00:13+00:00",
+  "timezone": "Asia/Hong_Kong",
+  "wakatime": {
+    "total_seconds": 84825,
+    "daily_average_seconds": 12118,
+    "active_days": 7,
+    "categories": [
+      {
+        "name": "AI Coding",
+        "seconds": 84826,
+        "percent": 100.0
+      }
+    ],
+    "projects": [
+      {
+        "name": "overnight",
+        "seconds": 15850,
+        "percent": 18.7
+      },
+      {
+        "name": "logisim-16bit-processor",
+        "seconds": 9876,
+        "percent": 11.6
+      },
+      {
+        "name": "pygym",
+        "seconds": 9662,
+        "percent": 11.4
+      },
+      {
+        "name": "scratch",
+        "seconds": 6586,
+        "percent": 7.8
+      },
+      {
+        "name": "ProgressDoc",
+        "seconds": 5165,
+        "percent": 6.1
+      },
+      {
+        "name": "nurasik14",
+        "seconds": 4890,
+        "percent": 5.8
+      },
+      {
+        "name": "nurasik12",
+        "seconds": 4824,
+        "percent": 5.7
+      },
+      {
+        "name": "quint",
+        "seconds": 3960,
+        "percent": 4.7
+      },
+      {
+        "name": "hypr-fresh",
+        "seconds": 3663,
+        "percent": 4.3
+      },
+      {
+        "name": "hackathon-scout",
+        "seconds": 3440,
+        "percent": 4.1
+      },
+      {
+        "name": "alu_eq",
+        "seconds": 3372,
+        "percent": 4.0
+      },
+      {
+        "name": "papers",
+        "seconds": 2871,
+        "percent": 3.4
+      },
+      {
+        "name": "Other",
+        "seconds": 10594,
+        "percent": 12.5
+      }
+    ],
+    "languages": [
+      {
+        "name": "Markdown",
+        "seconds": 31411,
+        "percent": 37.0
+      },
+      {
+        "name": "Python",
+        "seconds": 20551,
+        "percent": 24.2
+      },
+      {
+        "name": "Text",
+        "seconds": 6385,
+        "percent": 7.5
+      },
+      {
+        "name": "Bash",
+        "seconds": 4122,
+        "percent": 4.9
+      },
+      {
+        "name": "JSON",
+        "seconds": 3165,
+        "percent": 3.7
+      },
+      {
+        "name": "QML",
+        "seconds": 1357,
+        "percent": 1.6
+      },
+      {
+        "name": "JavaScript",
+        "seconds": 421,
+        "percent": 0.5
+      },
+      {
+        "name": "Image (png)",
+        "seconds": 209,
+        "percent": 0.2
+      },
+      {
+        "name": "INI",
+        "seconds": 149,
+        "percent": 0.2
+      },
+      {
+        "name": "CSS",
+        "seconds": 106,
+        "percent": 0.1
+      },
+      {
+        "name": "BibTeX",
+        "seconds": 58,
+        "percent": 0.1
+      },
+      {
+        "name": "Other",
+        "seconds": 16862,
+        "percent": 19.9
+      }
+    ],
+    "editors": [
+      {
+        "name": "Hermes",
+        "seconds": 39716,
+        "percent": 46.8
+      },
+      {
+        "name": "Claude Code",
+        "seconds": 37938,
+        "percent": 44.7
+      },
+      {
+        "name": "Hermes Agent",
+        "seconds": 7171,
+        "percent": 8.5
+      }
+    ],
+    "days": [
+      {
+        "date": "2026-11-16",
+        "seconds": 15155,
+        "categories": {
+          "AI Coding": 15155
+        }
+      },
+      {
+        "date": "2026-11-17",
+        "seconds": 19021,
+        "categories": {
+          "AI Coding": 19021
+        }
+      },
+      {
+        "date": "2026-11-18",
+        "seconds": 11520,
+        "categories": {
+          "AI Coding": 11520
+        }
+      },
+      {
+        "date": "2026-11-19",
+        "seconds": 4130,
+        "categories": {
+          "AI Coding": 4130
+        }
+      },
+      {
+        "date": "2026-11-20",
+        "seconds": 581,
+        "categories": {
+          "AI Coding": 581
+        }
+      },
+      {
+        "date": "2026-11-21",
+        "seconds": 8760,
+        "categories": {
+          "AI Coding": 8760
+        }
+      },
+      {
+        "date": "2026-11-22",
+        "seconds": 25658,
+        "categories": {
+          "AI Coding": 25658
+        }
+      }
+    ]
+  },
+  "git": {
+    "total": 20,
+    "repos": [
+      {
+        "name": "pygym",
+        "commits": 6,
+        "active_days": 2,
+        "latest": [
+          "AI provider presets, saved API keys and a live key check",
+          "README: why pygym, how it works, real-output images",
+          "Set AI provider and address from the CLI; fix cloud ready check",
+          "Rewrite README as the full front page for 0.3.0",
+          "Docs, demo notebook and real-machine checks for tips at your error"
+        ]
+      },
+      {
+        "name": "nurasik14",
+        "commits": 5,
+        "active_days": 4,
+        "latest": [
+          "google",
+          "news: newest/oldest-first toggle and a clip slider",
+          "privacy: cover the Hermes assistant's Google app",
+          "news: leave out mail matching a local blocklist",
+          "sync google account"
+        ]
+      },
+      {
+        "name": "logisim-16bit-processor",
+        "commits": 4,
+        "active_days": 2,
+        "latest": [
+          "Datapath: data RAM inside (async read), Clock and MemWrite inputs, register file clock pin; tests an",
+          "renamed the register file",
+          "Add ALU hand-off notes and record why blt is signed",
+          "Add ALU component (alu.circ) with test vectors"
+        ]
+      },
+      {
+        "name": "overworld-hyprland",
+        "commits": 4,
+        "active_days": 2,
+        "latest": [
+          "Day cycle: pin dawn or dusk — /time set dawn|dusk, overworld daycycle dawn|dusk, Options cycle Auto→",
+          "Workspace auto-labels: blocklist file masks private domains/words as [private] before anything is se",
+          "Now Playing PiP: choose the source tab/app (chip + list, overworld nowplaying sources|pick, bridge 1",
+          "Workspace titles: on/off toggles — Options → Workspace Cards / Claude Labels; overworld ws card on|o"
+        ]
+      },
+      {
+        "name": "apothecary-hyprland-conf",
+        "commits": 1,
+        "active_days": 1,
+        "latest": [
+          "Workspace titles: apothecary ws card on|off|toggle|status, ws auto toggle (port from Overworld)"
+        ]
+      }
+    ],
+    "per_day": {
+      "2026-11-15": 1,
+      "2026-11-16": 3,
+      "2026-11-17": 3,
+      "2026-11-18": 5,
+      "2026-11-19": 2,
+      "2026-11-21": 4,
+      "2026-11-22": 2
+    }
+  },
+  "lastfm": {
+    "user": "Nurasik",
+    "scrobbles": 270,
+    "tracks": [
+      {
+        "name": "Cradles - Bass Boosted | Why didn’t you choose me!?",
+        "artist": "Ouroboros",
+        "plays": 13,
+        "url": "https://www.last.fm/music/Ouroboros/_/Cradles+-+Bass+Boosted+%7C+Why+didn%E2%80%99t+you+choose+me!%3F"
+      },
+      {
+        "name": "i wanna be yours - arctic monkeys (electric guitar cover)",
+        "artist": "Mirandilla Ronan",
+        "plays": 13,
+        "url": "https://www.last.fm/music/Mirandilla+Ronan/_/i+wanna+be+yours+-+arctic+monkeys+(electric+guitar+cover)"
+      },
+      {
+        "name": "EASY MONEY (Slowed)",
+        "artist": "dvspair - Topic",
+        "plays": 9,
+        "url": "https://www.last.fm/music/dvspair+-+Topic/_/EASY+MONEY+(Slowed)"
+      },
+      {
+        "name": "Russ - 3:15 (Breathe) (Lyrics)",
+        "artist": "Taj Tracks",
+        "plays": 5,
+        "url": "https://www.last.fm/music/Taj+Tracks/_/Russ+-+3:15+(Breathe)+(Lyrics)"
+      },
+      {
+        "name": "JAWNY - Honeypie",
+        "artist": "Jawny",
+        "plays": 4,
+        "url": "https://www.last.fm/music/Jawny/_/JAWNY+-+Honeypie"
+      }
+    ]
+  },
+  "highlights": [
+    "23h 34m in the editor over 7 days; most on overnight (4h 24m).",
+    "AI Coding 100%.",
+    "Languages: Markdown, Python, Text.",
+    "20 commits in 5 repos; busiest: pygym (6).",
+    "On repeat: Cradles - Bass Boosted | Why didn’t you choose me!? by Ouroboros (13 plays of 270 scrobbles)."
+  ]
+}

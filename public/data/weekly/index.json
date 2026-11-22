@@ -1,6 +1,16 @@
 {
-  "generated": "2026-11-15T14:00:43+00:00",
+  "generated": "2026-11-22T14:00:13+00:00",
   "weeks": [
+    {
+      "week": "2026-W47",
+      "start": "2026-11-16",
+      "end": "2026-11-22",
+      "complete": false,
+      "file": "data/weekly/2026-W47.json",
+      "coding_seconds": 84825,
+      "commits": 20,
+      "top_track": "Cradles - Bass Boosted | Why didn’t you choose me!? by Ouroboros"
+    },
     {
       "week": "2026-W46",
       "start": "2026-11-09",

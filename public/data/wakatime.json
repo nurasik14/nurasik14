@@ -1,221 +1,211 @@
 {
   "source": "wakatime",
-  "generated": "2026-11-15T14:01:00+00:00",
+  "generated": "2026-11-22T14:00:18+00:00",
   "timezone": "Asia/Hong_Kong",
   "range": {
-    "start": "2026-11-08",
-    "end": "2026-11-14",
+    "start": "2026-11-15",
+    "end": "2026-11-21",
     "days": 7
   },
-  "total_seconds": 106356,
-  "daily_average_seconds": 15194,
+  "total_seconds": 69572,
+  "daily_average_seconds": 9939,
   "active_days": 7,
   "categories": [
     {
       "name": "AI Coding",
-      "seconds": 106356,
+      "seconds": 69573,
       "percent": 100.0
     }
   ],
   "projects": [
     {
+      "name": "logisim-16bit-processor",
+      "seconds": 12846,
+      "percent": 18.5
+    },
+    {
       "name": "pygym",
-      "seconds": 14049,
-      "percent": 13.2
-    },
-    {
-      "name": "nurasik12",
-      "seconds": 13816,
-      "percent": 13.0
-    },
-    {
-      "name": "claimmap",
-      "seconds": 12991,
-      "percent": 12.2
-    },
-    {
-      "name": "CityUHK_job_scraper",
-      "seconds": 12820,
-      "percent": 12.1
+      "seconds": 9785,
+      "percent": 14.1
     },
     {
       "name": "overworld-hyprland",
-      "seconds": 10584,
-      "percent": 10.0
-    },
-    {
-      "name": "Unknown Project",
-      "seconds": 6330,
-      "percent": 6.0
-    },
-    {
-      "name": "nurasik14",
-      "seconds": 6177,
-      "percent": 5.8
+      "seconds": 7096,
+      "percent": 10.2
     },
     {
       "name": "scratch",
-      "seconds": 4387,
-      "percent": 4.1
+      "seconds": 6747,
+      "percent": 9.7
     },
     {
-      "name": "tg-nebula-drift",
-      "seconds": 3292,
-      "percent": 3.1
+      "name": "nurasik12",
+      "seconds": 5767,
+      "percent": 8.3
     },
     {
-      "name": "Projects",
-      "seconds": 3281,
-      "percent": 3.1
+      "name": "nurasik14",
+      "seconds": 5327,
+      "percent": 7.7
+    },
+    {
+      "name": "ProgressDoc",
+      "seconds": 5165,
+      "percent": 7.4
+    },
+    {
+      "name": "quint",
+      "seconds": 3960,
+      "percent": 5.7
+    },
+    {
+      "name": "hypr-fresh",
+      "seconds": 3663,
+      "percent": 5.3
+    },
+    {
+      "name": "alu_eq",
+      "seconds": 3372,
+      "percent": 4.8
     },
     {
       "name": "scripts",
-      "seconds": 3210,
-      "percent": 3.0
+      "seconds": 2157,
+      "percent": 3.1
     },
     {
-      "name": "hermes",
-      "seconds": 2519,
-      "percent": 2.4
+      "name": "Unknown Project",
+      "seconds": 1268,
+      "percent": 1.8
     },
     {
       "name": "Other",
-      "seconds": 12799,
-      "percent": 12.0
+      "seconds": 2332,
+      "percent": 3.4
     }
   ],
   "languages": [
     {
-      "name": "Python",
-      "seconds": 32255,
-      "percent": 30.3
-    },
-    {
       "name": "Markdown",
-      "seconds": 16691,
-      "percent": 15.7
+      "seconds": 27936,
+      "percent": 40.2
     },
     {
-      "name": "JavaScript",
-      "seconds": 8830,
-      "percent": 8.3
-    },
-    {
-      "name": "Text",
-      "seconds": 5054,
-      "percent": 4.8
+      "name": "Python",
+      "seconds": 17186,
+      "percent": 24.7
     },
     {
       "name": "Bash",
-      "seconds": 4264,
-      "percent": 4.0
+      "seconds": 4337,
+      "percent": 6.2
     },
     {
       "name": "QML",
-      "seconds": 3607,
-      "percent": 3.4
+      "seconds": 1653,
+      "percent": 2.4
     },
     {
-      "name": "HTML",
-      "seconds": 3140,
-      "percent": 3.0
+      "name": "Text",
+      "seconds": 1533,
+      "percent": 2.2
     },
     {
-      "name": "TypeScript",
-      "seconds": 554,
-      "percent": 0.5
+      "name": "JavaScript",
+      "seconds": 894,
+      "percent": 1.3
+    },
+    {
+      "name": "JSON",
+      "seconds": 835,
+      "percent": 1.2
     },
     {
       "name": "Image (png)",
-      "seconds": 388,
-      "percent": 0.4
-    },
-    {
-      "name": "Svelte",
-      "seconds": 339,
+      "seconds": 209,
       "percent": 0.3
     },
     {
-      "name": "TOML",
-      "seconds": 235,
+      "name": "INI",
+      "seconds": 146,
       "percent": 0.2
     },
     {
       "name": "CSS",
-      "seconds": 195,
+      "seconds": 106,
       "percent": 0.2
     },
     {
       "name": "Other",
-      "seconds": 30786,
-      "percent": 28.9
+      "seconds": 14739,
+      "percent": 21.2
     }
   ],
   "editors": [
     {
-      "name": "Claude Code",
-      "seconds": 48708,
-      "percent": 45.8
+      "name": "Hermes",
+      "seconds": 44199,
+      "percent": 63.5
     },
     {
-      "name": "Hermes",
-      "seconds": 29484,
-      "percent": 27.7
+      "name": "Claude Code",
+      "seconds": 17005,
+      "percent": 24.4
     },
     {
       "name": "Hermes Agent",
-      "seconds": 28164,
-      "percent": 26.5
+      "seconds": 8368,
+      "percent": 12.0
     }
   ],
   "days": [
     {
-      "date": "2026-11-08",
-      "seconds": 873,
+      "date": "2026-11-15",
+      "seconds": 10405,
       "categories": {
-        "AI Coding": 873
+        "AI Coding": 10405
       }
     },
     {
-      "date": "2026-11-09",
-      "seconds": 1761,
+      "date": "2026-11-16",
+      "seconds": 15155,
       "categories": {
-        "AI Coding": 1761
+        "AI Coding": 15155
       }
     },
     {
-      "date": "2026-11-10",
-      "seconds": 16371,
+      "date": "2026-11-17",
+      "seconds": 19021,
       "categories": {
-        "AI Coding": 16371
+        "AI Coding": 19021
       }
     },
     {
-      "date": "2026-11-11",
-      "seconds": 22305,
+      "date": "2026-11-18",
+      "seconds": 11520,
       "categories": {
-        "AI Coding": 22305
+        "AI Coding": 11520
       }
     },
     {
-      "date": "2026-11-12",
-      "seconds": 18773,
+      "date": "2026-11-19",
+      "seconds": 4130,
       "categories": {
-        "AI Coding": 18773
+        "AI Coding": 4130
       }
     },
     {
-      "date": "2026-11-13",
-      "seconds": 17692,
+      "date": "2026-11-20",
+      "seconds": 581,
       "categories": {
-        "AI Coding": 17692
+        "AI Coding": 581
       }
     },
     {
-      "date": "2026-11-14",
-      "seconds": 28581,
+      "date": "2026-11-21",
+      "seconds": 8760,
       "categories": {
-        "AI Coding": 28581
+        "AI Coding": 8760
       }
     }
   ]
