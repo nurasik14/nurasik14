@@ -263,6 +263,19 @@ def index_row(d: dict) -> dict:
     }
 
 
+def unfinished_weeks(out_dir: Path, current: str) -> list[str]:
+    """Earlier weeks the index still marks incomplete. The Sunday 22:00 run
+    is two hours before its week ends, so every scheduled digest starts out
+    incomplete; the next run rebuilds it once the week is over."""
+    try:
+        idx = json.loads((out_dir / "index.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return []
+    return sorted(w["week"] for w in idx.get("weeks", [])
+                  if not w.get("complete") and re.fullmatch(r"\d{4}-W\d{2}", str(w.get("week", "")))
+                  and w["week"] < current)
+
+
 def write(d: dict, out_dir: Path) -> list[Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     f = out_dir / f"{d['week']}.json"
@@ -309,7 +322,13 @@ def main() -> int:
     if args.dry_run:
         print(json.dumps(d, indent=2, ensure_ascii=False))
         return 0
-    write(d, Path(args.out))
+    out = Path(args.out)
+    if not args.week:
+        for wk in unfinished_weeks(out, d["week"]):
+            past = build(wk, roots, authors, exclude)
+            write(past, out)
+            print(f"finalised {wk}")
+    write(d, out)
     token = waka.token_from_env()
     if args.wakatime_json and token:
         s, e = waka.last_complete_days(7)

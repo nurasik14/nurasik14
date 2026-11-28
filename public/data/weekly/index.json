@@ -1,25 +1,25 @@
 {
-  "generated": "2026-11-22T14:00:13+00:00",
+  "generated": "2026-11-28T07:26:22+00:00",
   "weeks": [
     {
       "week": "2026-W47",
       "start": "2026-11-16",
       "end": "2026-11-22",
-      "complete": false,
+      "complete": true,
       "file": "data/weekly/2026-W47.json",
-      "coding_seconds": 84825,
-      "commits": 20,
-      "top_track": "Cradles - Bass Boosted | Why didn’t you choose me!? by Ouroboros"
+      "coding_seconds": 86774,
+      "commits": 21,
+      "top_track": null
     },
     {
       "week": "2026-W46",
       "start": "2026-11-09",
       "end": "2026-11-15",
-      "complete": false,
+      "complete": true,
       "file": "data/weekly/2026-W46.json",
-      "coding_seconds": 108553,
-      "commits": 61,
-      "top_track": "𝙈𝙊𝙉𝙏𝘼𝙂𝙀𝙈 𝘿𝙀𝙎𝙀𝙍𝙏𝙄𝘾𝙊 𝙨𝙡𝙤𝙬𝙚𝙙 by NOIBEER"
+      "coding_seconds": 115889,
+      "commits": 62,
+      "top_track": null
     },
     {
       "week": "2026-W45",

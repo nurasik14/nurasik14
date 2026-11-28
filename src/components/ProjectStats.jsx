@@ -83,6 +83,25 @@ function DqnStats() {
   );
 }
 
+// cityu_job_recommender: numbers from the repo's eval/ (60 held-out test
+// queries over 5,510 listings; README "Retrieval evaluation").
+function JobsStats() {
+  return (
+    <>
+      <dl className="grid gap-2 sm:grid-cols-3">
+        <Fig value="0.641">nDCG@10, BM25 keyword search (first version)</Fig>
+        <Fig value="0.754">nDCG@10, hybrid BM25 + bge-m3 (default)</Fig>
+        <Fig value="0.803">nDCG@10, with the bge-reranker-v2-m3 reranker</Fig>
+      </dl>
+      <p className="mt-3 max-w-[62ch] text-[14px] leading-relaxed text-fg-dim">
+        <span className="text-fg">Hybrid beats keywords by +0.114</span> (95% bootstrap CI +0.059 to +0.176), at 146 ms p50 per search including the bge-m3 query embedding.
+        The 100 queries are split 40 dev / 60 test, so the defaults were chosen on dev and these numbers come from test. The
+        reranker is off by default: on dev it added almost nothing.
+      </p>
+    </>
+  );
+}
+
 function Node({ children, sub, hl }) {
   return (
     <div className={`rounded border bg-bg px-2.5 py-2 ${hl ? 'border-info/70' : 'border-line'}`}>
@@ -161,6 +180,7 @@ function RagStats() {
 
 export default function ProjectStats({ stats }) {
   if (stats === 'dqn') return <DqnStats />;
+  if (stats === 'jobs') return <JobsStats />;
   if (stats === 'search') return <SearchStats />;
   if (stats === 'rag') return <RagStats />;
   return <Empty title={stats.empty}>{stats.note}</Empty>;

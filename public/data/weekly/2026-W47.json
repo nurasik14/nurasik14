@@ -2,17 +2,17 @@
   "week": "2026-W47",
   "start": "2026-11-16",
   "end": "2026-11-22",
-  "complete": false,
-  "generated": "2026-11-22T14:00:13+00:00",
+  "complete": true,
+  "generated": "2026-11-28T07:26:22+00:00",
   "timezone": "Asia/Hong_Kong",
   "wakatime": {
-    "total_seconds": 84825,
-    "daily_average_seconds": 12118,
+    "total_seconds": 86774,
+    "daily_average_seconds": 12396,
     "active_days": 7,
     "categories": [
       {
         "name": "AI Coding",
-        "seconds": 84826,
+        "seconds": 86775,
         "percent": 100.0
       }
     ],
@@ -20,94 +20,94 @@
       {
         "name": "overnight",
         "seconds": 15850,
-        "percent": 18.7
+        "percent": 18.3
       },
       {
         "name": "logisim-16bit-processor",
         "seconds": 9876,
-        "percent": 11.6
+        "percent": 11.4
       },
       {
         "name": "pygym",
         "seconds": 9662,
-        "percent": 11.4
+        "percent": 11.1
       },
       {
         "name": "scratch",
-        "seconds": 6586,
-        "percent": 7.8
+        "seconds": 7021,
+        "percent": 8.1
+      },
+      {
+        "name": "nurasik14",
+        "seconds": 5245,
+        "percent": 6.0
       },
       {
         "name": "ProgressDoc",
         "seconds": 5165,
-        "percent": 6.1
-      },
-      {
-        "name": "nurasik14",
-        "seconds": 4890,
-        "percent": 5.8
+        "percent": 6.0
       },
       {
         "name": "nurasik12",
         "seconds": 4824,
-        "percent": 5.7
+        "percent": 5.6
+      },
+      {
+        "name": "hackathon-scout",
+        "seconds": 4600,
+        "percent": 5.3
       },
       {
         "name": "quint",
         "seconds": 3960,
-        "percent": 4.7
+        "percent": 4.6
       },
       {
         "name": "hypr-fresh",
         "seconds": 3663,
-        "percent": 4.3
-      },
-      {
-        "name": "hackathon-scout",
-        "seconds": 3440,
-        "percent": 4.1
+        "percent": 4.2
       },
       {
         "name": "alu_eq",
         "seconds": 3372,
-        "percent": 4.0
+        "percent": 3.9
       },
       {
         "name": "papers",
         "seconds": 2871,
-        "percent": 3.4
+        "percent": 3.3
       },
       {
         "name": "Other",
         "seconds": 10594,
-        "percent": 12.5
+        "percent": 12.2
       }
     ],
     "languages": [
       {
         "name": "Markdown",
-        "seconds": 31411,
-        "percent": 37.0
+        "seconds": 31651,
+        "percent": 36.5
       },
       {
         "name": "Python",
-        "seconds": 20551,
-        "percent": 24.2
+        "seconds": 21362,
+        "percent": 24.6
       },
       {
         "name": "Text",
-        "seconds": 6385,
-        "percent": 7.5
+        "seconds": 6734,
+        "percent": 7.8
       },
       {
         "name": "Bash",
-        "seconds": 4122,
-        "percent": 4.9
+        "seconds": 4165,
+        "percent": 4.8
       },
       {
         "name": "JSON",
         "seconds": 3165,
-        "percent": 3.7
+        "percent": 3.6
       },
       {
         "name": "QML",
@@ -116,8 +116,8 @@
       },
       {
         "name": "JavaScript",
-        "seconds": 421,
-        "percent": 0.5
+        "seconds": 580,
+        "percent": 0.7
       },
       {
         "name": "Image (png)",
@@ -141,25 +141,25 @@
       },
       {
         "name": "Other",
-        "seconds": 16862,
-        "percent": 19.9
+        "seconds": 17209,
+        "percent": 19.8
       }
     ],
     "editors": [
       {
         "name": "Hermes",
-        "seconds": 39716,
-        "percent": 46.8
+        "seconds": 39681,
+        "percent": 45.7
       },
       {
         "name": "Claude Code",
-        "seconds": 37938,
-        "percent": 44.7
+        "seconds": 39337,
+        "percent": 45.3
       },
       {
         "name": "Hermes Agent",
-        "seconds": 7171,
-        "percent": 8.5
+        "seconds": 7757,
+        "percent": 8.9
       }
     ],
     "days": [
@@ -207,16 +207,28 @@
       },
       {
         "date": "2026-11-22",
-        "seconds": 25658,
+        "seconds": 27607,
         "categories": {
-          "AI Coding": 25658
+          "AI Coding": 27607
         }
       }
     ]
   },
   "git": {
-    "total": 20,
+    "total": 21,
     "repos": [
+      {
+        "name": "nurasik14",
+        "commits": 6,
+        "active_days": 4,
+        "latest": [
+          "weekly digest 2026-W47",
+          "google",
+          "news: newest/oldest-first toggle and a clip slider",
+          "privacy: cover the Hermes assistant's Google app",
+          "news: leave out mail matching a local blocklist"
+        ]
+      },
       {
         "name": "pygym",
         "commits": 6,
@@ -227,18 +239,6 @@
           "Set AI provider and address from the CLI; fix cloud ready check",
           "Rewrite README as the full front page for 0.3.0",
           "Docs, demo notebook and real-machine checks for tips at your error"
-        ]
-      },
-      {
-        "name": "nurasik14",
-        "commits": 5,
-        "active_days": 4,
-        "latest": [
-          "google",
-          "news: newest/oldest-first toggle and a clip slider",
-          "privacy: cover the Hermes assistant's Google app",
-          "news: leave out mail matching a local blocklist",
-          "sync google account"
         ]
       },
       {
@@ -279,50 +279,16 @@
       "2026-11-18": 5,
       "2026-11-19": 2,
       "2026-11-21": 4,
-      "2026-11-22": 2
+      "2026-11-22": 3
     }
   },
   "lastfm": {
-    "user": "Nurasik",
-    "scrobbles": 270,
-    "tracks": [
-      {
-        "name": "Cradles - Bass Boosted | Why didn’t you choose me!?",
-        "artist": "Ouroboros",
-        "plays": 13,
-        "url": "https://www.last.fm/music/Ouroboros/_/Cradles+-+Bass+Boosted+%7C+Why+didn%E2%80%99t+you+choose+me!%3F"
-      },
-      {
-        "name": "i wanna be yours - arctic monkeys (electric guitar cover)",
-        "artist": "Mirandilla Ronan",
-        "plays": 13,
-        "url": "https://www.last.fm/music/Mirandilla+Ronan/_/i+wanna+be+yours+-+arctic+monkeys+(electric+guitar+cover)"
-      },
-      {
-        "name": "EASY MONEY (Slowed)",
-        "artist": "dvspair - Topic",
-        "plays": 9,
-        "url": "https://www.last.fm/music/dvspair+-+Topic/_/EASY+MONEY+(Slowed)"
-      },
-      {
-        "name": "Russ - 3:15 (Breathe) (Lyrics)",
-        "artist": "Taj Tracks",
-        "plays": 5,
-        "url": "https://www.last.fm/music/Taj+Tracks/_/Russ+-+3:15+(Breathe)+(Lyrics)"
-      },
-      {
-        "name": "JAWNY - Honeypie",
-        "artist": "Jawny",
-        "plays": 4,
-        "url": "https://www.last.fm/music/Jawny/_/JAWNY+-+Honeypie"
-      }
-    ]
+    "error": "RuntimeError: LASTFM_API_KEY / LASTFM_USERNAME not set"
   },
   "highlights": [
-    "23h 34m in the editor over 7 days; most on overnight (4h 24m).",
+    "24h 06m in the editor over 7 days; most on overnight (4h 24m).",
     "AI Coding 100%.",
     "Languages: Markdown, Python, Text.",
-    "20 commits in 5 repos; busiest: pygym (6).",
-    "On repeat: Cradles - Bass Boosted | Why didn’t you choose me!? by Ouroboros (13 plays of 270 scrobbles)."
+    "21 commits in 5 repos; busiest: nurasik14 (6)."
   ]
 }

@@ -23,6 +23,7 @@ describe('config', () => {
   test('pin order, then the archived projects', () => {
     expect(PROJECTS.map((p) => p.name)).toEqual([
       'train_dqn',
+      'cityu_job_recommender',
       'overworld-hyprland',
       'lastfm-taste-mcp',
       'apothecaries_quests',
@@ -37,7 +38,7 @@ describe('config', () => {
     for (const p of PROJECTS) {
       expect(['complete', 'running', 'archived']).toContain(p.status);
       if (p.input?.repo) expect(p.input.repo).toMatch(/^nurasik14\/[\w.-]+$/);
-      expect(typeof p.stats === 'string' ? ['dqn', 'search', 'rag'] : ['object']).toContain(
+      expect(typeof p.stats === 'string' ? ['dqn', 'jobs', 'search', 'rag'] : ['object']).toContain(
         typeof p.stats === 'string' ? p.stats : typeof p.stats,
       );
     }
@@ -51,7 +52,7 @@ describe('config', () => {
     expect(rag.result).toBe('design phase; no code or results yet');
     expect(PROJECTS.find((p) => p.name === 'overworld-hyprland').result).toBe('19 stars on GitHub');
     expect(PROJECTS.find((p) => p.name === 'lastfm-taste-mcp').result).toBe('24 read-only tools');
-    expect(NOW.length).toBe(3);
+    expect(NOW.length).toBe(4);
     for (const t of ['hermes agent', 'claude code', 'mcp', 'svelte', 'bun', 'hono', 'qml / quickshell']) {
       expect(TOOLS.map((x) => x[0])).toContain(t);
     }
@@ -158,7 +159,7 @@ describe('projects', () => {
       expect(html).toContain(`aria-controls="project-${p.id}-panel"`);
     }
     expect(html.match(/aria-expanded="false"/g)).toHaveLength(PROJECTS.length);
-    expect(html.match(/class="pinned-details"/g)).toHaveLength(6);
+    expect(html.match(/class="pinned-details"/g)).toHaveLength(7);
   });
   test('names link to their repos; status is a word, not just colour', () => {
     expect(html).toContain('href="https://github.com/nurasik14/overworld-hyprland"');

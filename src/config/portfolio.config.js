@@ -20,9 +20,9 @@ export const PROFILE = {
   location: 'Hong Kong',
   // The sidebar pill shows this with " · " in place of ", ".
   status: 'open to AI/ML internships, summer 2027',
-  focus: ['LLM agents', 'reinforcement learning', 'retrieval'],
+  focus: ['LLM agents', 'retrieval & evals', 'multilingual NLP'],
   // Sidebar bio, short like a GitHub bio (the lede, trimmed).
-  bio: 'First-year CS student at City University of Hong Kong, on a full scholarship. I build agents that call tools and train RL models.',
+  bio: 'First-year CS student at City University of Hong Kong, on a full scholarship. I build LLM systems: hybrid retrieval, agents that call tools, and the evals that measure them.',
   // The intro paragraph in the README.md panel, above the "now" list and fig. 1.
   intro:
     'I keep the training logs to prove what my models did: fig. 1 is two DQN variants learning Flappy Bird from reward alone. Every number on this page comes from a log, a repo or a certificate, and work that is not measured yet says so.',
@@ -43,6 +43,7 @@ export const NOW = [
   'Building a Kazakh retriever to beat the KazQAD baseline',
   'Building a voice layer for my agent setup: Hermes as the brain, Claude Code as the hands, streaming STT/TTS as the voice, steerable mid-task',
   'CS freshman at CityU (linear algebra, probability, algorithms)',
+  'Practicing hands-on coding and debugging 2 hours a day',
 ];
 
 /* ---- DQN training logs (FlappyBird-RL/runs/graphs/*.log) ----------
@@ -120,6 +121,26 @@ export const PROJECTS = [
     },
     statsFile: 'runs/graphs/*.log',
     stats: 'dqn',
+  },
+  {
+    id: 'jobs',
+    name: 'cityu_job_recommender',
+    status: 'complete',
+    // From the repo's eval/ README (60 test queries); keep in sync with the 'jobs' panel.
+    result: 'nDCG@10 0.641 → 0.754 (hybrid), 0.803 with reranking',
+    stack: ['python', 'fastapi', 'ollama', 'claude api'],
+    description:
+      'Recommends CityU jobs and internships from 66 companies: BM25 and bge-m3 vectors fused with RRF, an optional cross-encoder reranker, and Claude writing cover letters and skill-gap reports from the results and my CV.',
+    inputFile: 'eval.yaml',
+    input: {
+      retrieval: ['bm25', 'bge-m3', 'rrf fusion'],
+      reranker: 'bge-reranker-v2-m3 (optional)',
+      benchmark: { queries: 100, dev: 40, test: 60, listings: 5510 },
+      labels: 'llm-judged, graded 0/1/2',
+      repo: 'nurasik14/CityUHK_job_scraper',
+    },
+    statsFile: 'eval/ · test split',
+    stats: 'jobs',
   },
   {
     id: 'overworld',
@@ -235,6 +256,25 @@ export const PROJECTS = [
 /* ---- experience (newest first) ------------------------------------ */
 export const EXPERIENCE = [
   {
+    when: '2026-11 → now',
+    org: 'Part-time contract',
+    role: 'AI search & data engineer, remote',
+    note: 'Building AI search for a multi-portal marketplace.',
+    tags: ['search', 'python'],
+  },
+  {
+    when: '2026-09 → now',
+    org: 'Student Residence Office, CityUHK',
+    role: 'student helper, Ma On Shan residence',
+    note: 'Selected for the residence helper team; a paid part-time role supporting residence-life events.',
+  },
+  {
+    when: '2026 → 2027',
+    org: 'Executive Mentoring Programme, CityUHK',
+    role: 'mentee',
+    note: '1:1 mentoring by an industry executive from January 2027, with trainings in personal branding, networking and business etiquette.',
+  },
+  {
     when: '2025-10 → 2025-11',
     org: 'AuaLine',
     role: 'frontend / full-stack intern, Almaty',
@@ -259,9 +299,9 @@ export const EXPERIENCE = [
 /* ---- awards: medal is 'gold' | 'bronze' | 'merit' -----------------
  * `label` is the word shown (e.g. '2× gold'); `medal` picks the glyph. */
 export const AWARDS = [
-  { medal: 'bronze', label: 'bronze', title: 'International AI Olympiad (FAIO)', note: 'Top 7.1% of 291+ participants', year: 2025 },
+  { medal: 'bronze', label: 'bronze', title: 'International AI Olympiad (FAIO)', note: 'Top 7.1% of 291+ participants; 100,000 KZT prize', year: 2025 },
   { medal: 'gold', label: 'gold', title: 'StemCo Global Sciences, Singapore', note: 'Plus two bronze. Top 0.1% of 12,000+', year: 2025 },
-  { medal: 'merit', label: 'merit', title: 'BestYs National Merit Scholarship', note: 'Only recipient in Kazakhstan, 1,000+ applied', year: 2025 },
+  { medal: 'merit', label: 'merit', title: 'BestYs National Merit Scholarship', note: 'Only recipient in Kazakhstan, 1,000+ applied; $2,000', year: 2025 },
   { medal: 'gold', label: '2× gold', title: 'StemCo International Science Olympiad', year: 2024 },
   { medal: 'bronze', label: 'bronze', title: 'Iranian Geometry Olympiad, and AIMO', note: '1,245 in the geometry olympiad', year: 2024 },
 ];
@@ -285,7 +325,7 @@ export const EDUCATION = [
     fields: [
       ['years', '2020-2026'],
       ['gpa', '4.78/5'],
-      ['sat', '1520', 'math 800'],
+      ['sat', '1520', 'math 800, verbal 720'],
       ['ielts', '7.0'],
       ['a_levels', { physics: 'A*', cs: 'A*', math: 'A' }],
     ],

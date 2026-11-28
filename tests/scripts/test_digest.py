@@ -74,6 +74,22 @@ class Week(unittest.TestCase):
         self.assertEqual(end, datetime(2026, 11, 9, tzinfo=wd.TZ))
 
 
+class Unfinished(unittest.TestCase):
+    def test_lists_earlier_incomplete_weeks_only(self):
+        import json
+        with tempfile.TemporaryDirectory() as t:
+            out = Path(t)
+            self.assertEqual(wd.unfinished_weeks(out, "2026-W48"), [])  # no index yet
+            (out / "index.json").write_text(json.dumps({"weeks": [
+                {"week": "2026-W48", "complete": False},  # the week being written now
+                {"week": "2026-W47", "complete": False},
+                {"week": "2026-W46", "complete": False},
+                {"week": "2026-W45", "complete": True},
+                {"week": "../etc", "complete": False},
+            ]}))
+            self.assertEqual(wd.unfinished_weeks(out, "2026-W48"), ["2026-W46", "2026-W47"])
+
+
 class Git(unittest.TestCase):
     def test_counts_only_my_commits_and_skips_excluded(self):
         with tempfile.TemporaryDirectory() as tmp:
